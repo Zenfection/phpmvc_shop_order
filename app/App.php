@@ -29,6 +29,7 @@ class App{
         }
 
         $this->handleUrl();
+        
     }
 
     public function getUrl(){
@@ -42,10 +43,10 @@ class App{
     }
     public function handleUrl(){
         $url = $this->getUrl();
+        $url = $this->__routes->handleRoute($url);
+        
         $urlArr = array_filter(explode('/', $url));
         $urlArr = array_values($urlArr);
-        
-        $url = $this->__routes->handleRoute($url);
         
         // Kiểm tra nào là file
         $urlCheck = '';
@@ -61,6 +62,7 @@ class App{
                     unset($urlArr[$key - 1]);
                 }
                 if(file_exists('app/controllers/' . $fileCheck . '.php')){
+                    $urlCheck = $fileCheck;
                     break;
                 }
             }
@@ -74,12 +76,12 @@ class App{
             $this->__controller = ucfirst($this->__controller);
         }
 
-        if(empty($fileCheck)){
-            $fileCheck = $this->__controller;
+        if(empty($urlCheck)){
+            $urlCheck = $this->__controller;
         }
-
-        if(file_exists('app/controllers/' . $fileCheck . '.php')){
-            require_once 'app/controllers/' . $fileCheck . '.php';
+    
+        if(file_exists('app/controllers/' . $urlCheck . '.php')){
+            require_once 'app/controllers/' . $urlCheck . '.php';
 
             if(class_exists($this->__controller)){
                 $this->__controller = new $this->__controller();

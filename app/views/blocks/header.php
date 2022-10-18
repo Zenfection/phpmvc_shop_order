@@ -14,6 +14,7 @@
                 <div class="col-lg-5 d-none d-lg-block" data-aos="fade-in" data-aos-duration="1000">
                     <div class="main-menu">
                         <ul>
+                            <!-- render session -->
                             <li><a id="home" href="/">Trang Chủ</a></li>
                             <li><a id="about" href="/about">Giới Thiệu</a></li>
                             <li><a id="shop" href="/shop">Shop</a></li>

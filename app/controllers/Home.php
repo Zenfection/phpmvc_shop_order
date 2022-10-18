@@ -21,10 +21,7 @@ class Home extends Controller {
         $this->data['sub_content']['category'] = $category;
         $this->data['page_title'] = $title;
         $this->data['content'] = 'home/index';
-        // echo '<pre>';
-        // print_r($data);
-        // echo '</pre>';
-        
+    
         $this->render('layouts/client_layout', $this->data);
     }
 }
