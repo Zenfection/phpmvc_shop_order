@@ -1,0 +1,185 @@
+/*=======================================
+    4.07 Cart CSS
+=========================================*/
+.cart-table{
+    & .table {
+        margin: 0;
+        white-space: nowrap;
+        & thead {
+            & tr{
+                & th {
+                    border-color: $gray-100;
+                    border-bottom: 0 solid transparent;
+                    color: $dark;
+                    background: $white;
+                    font-size: 15px;
+                    font-weight: 700;
+                    padding: 15px 20px;
+                    text-align: center;
+                    text-transform: uppercase;
+                }
+            }
+        }
+        & tr{
+            border-color: $gray-100;
+            & .pro-thumbnail, & .pro-price, & .pro-quantity, & .pro-subtotal, & .pro-remove{
+                text-align: center;
+                align-items: center;
+            }
+
+            & .pro-thumbnail {
+                width: 115px;
+            }
+
+            & .pro-price {
+                width: 135px;
+            }
+
+            & .pro-title {
+                width: 270px;
+            }
+
+            & .pro-quantity {
+                width: 180px;
+
+                & .quantity {
+                    margin-right: 0px;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: row;
+
+                    & .cart-plus-minus {
+                        width: 120px;
+
+                        & .cart-plus-minus-box {
+                            width: 120px;
+                        }
+                        & .qtybutton {
+                            border: 0px;
+                        }
+
+                    }
+                }
+            }
+
+            & .pro-subtotal {
+                width: 120px;
+            }
+
+            & .pro-remove {
+                width: 150px;
+            }
+        }
+        & tbody{
+            & td {
+                border-color: $gray-100;
+                text-align: center;
+                vertical-align: middle;
+                color: $dark;
+                & a {
+                    color: $dark;
+                    text-transform: capitalize;
+                    font-size: 14px;
+                    &:hover {
+                        color: $primary;
+                    }
+                    &.btn {
+                        color: $white;
+                    }
+                    &.check-btn {
+                        color: $white;
+                    }
+                }
+                &.pro-remove{
+                    & a{
+                        & i{
+                            font-size: 18px;
+                            font-weight: 400;
+                        }
+                    }
+                }
+                &.pro-title {
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+/*-- Cart Update Option Style --*/
+.cart-button-section {
+    display: flex;
+    flex-direction: row;
+    padding: 43px 20px 30px;
+    border: 1px solid #ebebeb;
+    border-top: 0px;
+    justify-content: space-between;
+
+    @media #{$large-mobile} {
+        flex-direction: column;
+    }
+
+    & .cart-btn-lef-side {
+        display: flex;
+
+        @media #{$small-mobile} {
+            flex-direction: column;
+        }
+    }
+
+    & .btn {
+        margin-right: 20px;
+        border-radius: 5px;
+
+        &:last-child {
+            margin-right: 0px;
+        }
+
+        @media #{$small-mobile} {
+            margin-bottom: 20px;
+            margin-right: 0px;
+
+            &:last-child {
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+/*-- Cart Calculator / Cart Date style --*/
+.cart-calculator-wrapper {
+    border: 1px solid $gray-100;
+    padding: 20px;
+    & .title {
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+    & a {
+        text-align: center;
+    }
+    & .cart-calculate-items {
+        font-weight: 500;
+        & .table {
+            margin-bottom: 0;
+            & tr {
+                & td {
+                    color: $dark;
+                    padding: 15px 20px;
+                    border: 1px solid #e5e5e5;
+                    &:nth-child(2){
+                        color: $dark;
+                        text-align: right;
+                    }
+                    &.total-amount {
+                        color: $primary;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+    & .btn {
+        border-radius: 5px;
+    }
+}

@@ -1,0 +1,37 @@
+// Background Color 
+@each $color, $value in $theme-colors {
+    .bg-name-#{$color} {
+        background-color: $value;
+    }
+}
+
+// Spacing Parameter
+$spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50);
+$sides: (top, bottom, left, right, all, negative);
+
+@each $space in $spaceamounts {
+  @each $side in $sides {
+
+    @if $side == 'all' {
+      .m-#{$space} {
+        margin: #{$space}px;
+      }
+
+      .p-#{$space} {
+        padding: #{$space}px;
+      }
+    } @else {
+      .m-#{str-slice($side, 0, 1)}-#{$space} {
+        margin-#{$side}: #{$space}px;
+      }
+
+      .m-#{str-slice($side, 0, 1)}-n#{$space} {
+        margin-#{$side}: -#{$space}px;
+      }
+
+      .p-#{str-slice($side, 0, 1)}-#{$space} {
+        padding-#{$side}: #{$space}px;
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+/*=======================================
+    4.04 My Account CSS
+=========================================*/
+.myaccount-tab-menu {
+    flex-direction: column;
+    & a {
+        border: 1px solid $gray-100;
+        border-bottom: none;
+        color: $dark;
+        font-weight: 600;
+        display: block;
+        padding: 10px 15px;
+        text-transform: uppercase;
+        font-size: 15px;
+
+        &:last-child {
+            border-bottom: 1px solid $gray-100;
+        }
+        &:hover, &.active {
+            background-color: $primary;
+            border-color: $primary;
+            color: $white;
+        }
+        & i {
+            text-align: center;
+            width: 25px;
+        }
+    }
+    
+}
+@media #{$large-mobile}{
+	#myaccountContent {
+		margin-top: 30px;
+	}
+}
+.myaccount-content {
+	border: 1px solid $gray-100;
+    padding: 30px;
+    @media #{$small-mobile}{
+        padding: 20px 15px;
+    }
+    & form {
+        & .single-input-item {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            & input {
+                width: 100%;
+                padding: 12px 10px;
+                border: 1px solid $gray-100;
+                font-size: 14px;
+                &:focus {
+                    border: 1px solid $primary;
+                }
+            }
+
+            & .required {
+                font-weight: 600;
+                font-size: 14px;
+            }
+        }
+        & .single-item-button{
+            width: 25%;
+            @media #{$desktop-device}{
+                width: 30%;
+            }
+            @media #{$tablet-device}{
+                width: 45%;
+            }
+            @media #{$large-mobile}{
+                width: 100%;
+            }
+        }
+    }
+    & .title {
+        font-size: 18px;
+        font-family: $headings-font-family;
+        color: $dark;
+        border-bottom: 1px dashed $gray-100;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+        font-weight: 600;
+        @media #{$tablet-device, $large-mobile}{
+            font-size: 18px;
+        }
+    }
+    & .welcome{
+        & a{
+            color: $dark;
+            &:hover {
+                color: $primary;
+            }
+        }
+        & strong {
+            font-weight: 600;
+            color: $primary;
+        }
+    }
+    & fieldset {
+        margin-top: 20px;
+        & legend {
+            color: $dark;
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: 500;
+            border-bottom: 1px dashed $gray-100;
+            margin-bottom: 30px;
+        }
+    }
+}
+.myaccount-table {
+	white-space: nowrap;
+    font-size: 14px;
+    & table, & .table{
+        & th{
+            color: $dark;
+            padding: 10px;
+            font-weight: 500;
+            background-color: #f8f8f8;
+            border-color: $gray-100;
+            border-bottom: 0;
+        }
+        & td {
+            padding: 10px;
+            vertical-align: middle;
+            border-color: $gray-100;
+        }
+    }
+}
+.saved-message {
+	background-color: $gray-100;
+	border-top: 3px solid $primary;
+	border-radius: 5px 5px 0 0;
+	font-weight: 600;
+	font-size: 15px;
+	color: #666666;
+	padding: 20px;
+}

@@ -1,0 +1,88 @@
+/*=======================================
+    3.07 Team CSS
+=========================================*/
+.single-team-wrapper {
+    background-color: #f9f9f9;
+    box-shadow: 0 0 11px rgba(0, 0, 0, 0.15);
+    & .thumb {
+        position: relative;
+        & .social-share {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            
+
+            & a {
+                background-color: $white;
+                border-radius: 100%;
+                color: $body-color;
+                display: inline-block;
+                font-size: 13px;
+                height: 28px;
+                margin: 0 5px;
+                width: 28px;
+                visibility: hidden;
+                opacity: 0;
+                bottom: -10px;
+                position: relative;
+
+                & i {
+                    line-height: 28px;
+                }
+
+                &:hover {
+                    background: $primary;
+                    color: $white;
+                }
+
+                &:last-child {
+                    margin-right: 0px;
+                }
+                
+                &:nth-child(1) {
+                    transition-delay: 0.1s;
+                }
+                &:nth-child(2) {
+                    transition-delay: 0.2s;
+                }
+                &:nth-child(3) {
+                    transition-delay: 0.3s;
+                }
+                &:nth-child(4) {
+                    transition-delay: 0.4s;
+                }
+            }
+        }
+    }
+
+    &:hover {
+        & .thumb {
+            & .social-share {
+                & a {
+                    bottom: 20px;
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+    }
+
+    & .content {
+        text-align: center;
+        padding: 25px 10px;
+
+        & .title {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1;
+        }
+        
+        & .subtitle {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1;
+        }
+    }
+}

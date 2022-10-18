@@ -1,0 +1,84 @@
+/*=======================================
+    3.12 Modal CSS
+=========================================*/
+.modalquickview {
+    & .modal-dialog{
+        width: calc(100% - 30px);
+        max-width: 1200px;
+
+        @media #{$small-mobile} {
+            width: calc(100% - 15px);
+        }
+        & .modal-content {
+            padding: 30px;
+
+            & .close {
+                font-size: 30px;
+                font-weight: 400;
+                position: absolute;
+                top: -5px;
+                right: -6px;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                justify-content: end;
+                align-items: center;
+
+                @media #{$large-mobile} {
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
+    & .product-summery {
+        position: absolute;
+        right: 15px;
+        left: 15px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 100%;
+        @media #{$large-mobile} {
+            position: relative;
+            left: 0;
+            right: 0;
+        }
+        @media #{$tablet-device} {
+            margin-top: 0;
+        }
+    }
+}
+.modal-product-carousel {
+    & img {
+        border: 1px solid #ebebeb;
+    }
+
+    & .swiper-button-prev, & .swiper-button-next {
+        display: flex;
+        align-items: center;
+        &:focus{
+            border: 0px;
+            outline: 0px;
+        }
+        &:after{
+            display: none;
+        }
+        & i{ 
+            opacity: 1;
+            visibility: visible;
+            font-size: 14px;
+            color: $dark;
+            background: $gray-100;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100%;
+            &:hover{
+                color: $white;
+                background: $primary !important;
+                transition: .3s;
+            }
+        }
+    }
+}

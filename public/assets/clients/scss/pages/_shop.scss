@@ -1,0 +1,288 @@
+/*=======================================
+    4.02 Shop CSS
+=========================================*/
+/*-- Shop Toolbar Area Start Here --*/
+.shop_toolbar_wrapper{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    @media #{$extra-small-mobile} {
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    & .shop_toolbar_btn{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        & button{
+            border: 0px;
+            font-size: 20px;
+            text-transform: uppercase;
+            margin-right: 0px;
+            line-height: 1;
+            cursor: pointer;
+            transition: 0.4s;
+            padding: 10px;
+            color: $dark;
+            background-color: $gray-100;
+
+            &:last-child{
+                margin-right: 0px;
+            }
+            &.active{
+                color: $white;
+                background: $primary;
+            }
+            &:focus {
+                box-shadow: none;
+                outline: none;
+            }
+            &:hover {
+                color: $white;
+                background: $primary;
+                border-color: $primary;
+            }
+        }
+    }
+
+    & .shop-top-bar-right {
+        display: flex;
+        align-items: center;
+
+        & .title {
+            font-size: 14px;
+            color: $dark;
+            margin-bottom: 0;
+        }
+
+        @media #{$extra-small-mobile} {
+            & .shop-short-by {
+                margin-right: 0px;
+                margin-bottom: 0px;
+            }
+        }
+    }
+
+    & .shop-top-bar-left {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        @media #{$large-mobile} {
+            margin-bottom: 10px;
+        }
+        & .shop-top-show {
+            & span {
+                color: $dark;
+                font-size: 14px;
+            } 
+        }
+        & .shop_toolbar_btn {
+            margin-right: 60px;
+            @media #{$extra-small-mobile}{
+                margin-right: 15px;
+            }
+        }
+    }
+
+    & .shop-top-bar-right, 
+    & .shop-bottom-bar-left {
+        & .shop-short-by {
+            margin-right: 0px;
+
+            & .nice-select {
+                border-radius: 0px;
+                border-color: #ebebeb;
+                height: 32px;
+                line-height: 30px;
+                cursor: pointer;
+                width: 200px;
+                padding-left: 2px;
+                
+                @media #{$large-mobile} {
+                    width: 190px;
+                }
+                & .list {
+                    width: 200px;
+                    padding: 10px 0;
+                    border-radius: 0px;
+                    z-index: 99;
+                }
+                & li {
+                    margin: 0 10px;
+                    padding: 10px 0;
+                    background: transparent;
+                    line-height: 1;
+                    min-height: 20px;
+                    &:hover {
+                        padding-left: 5px;
+                        display: block;
+                        color: $primary;
+                    }
+                }
+                &:focus {
+                    border-color: $primary;
+                }
+                & .current {
+                    color: $dark;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+/*-- Shop Toolbar Area End Here --*/
+
+/* Shop Wrapper Start */
+.shop_wrapper {
+    &.grid_list{
+        transition: .3s;
+        animation-duration: 1s;
+        animation-name: fadeIn;
+
+        & .product-inner {
+            display: flex;
+        }
+    }
+
+    &.grid_4, &.grid_5, &.grid_3 {
+        transition: .6s;
+        animation-duration: 2s;
+        animation-name: fadeIn;
+        margin-bottom: -40px;
+
+        & .product {
+            margin-bottom: 40px;
+
+            & .thumb {
+                & img {
+                    width: 100%;
+                }
+            }
+            & .content {
+                & .price {
+                    margin-bottom: 0;
+                }
+                & .action-btn {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    & .content {
+        p {
+            display: none;
+        }
+    }
+}
+.grid_list {
+    & .product {
+        & .product-inner {
+            padding-bottom: 40px;
+
+            @media #{$small-mobile} {
+                flex-direction: column;
+            }
+
+
+        }
+        &:last-child {
+            & .product-inner {
+                padding-bottom: 0px;
+                border-bottom: 0px;
+            }
+        }
+        & .thumb {
+            width: 270px;
+
+            & img {
+                width: 100%;
+            }
+            @media #{$large-mobile} {
+                width: 220px;
+                height: 100%;
+            }
+            @media #{$small-mobile} {
+                width: 100%;
+                height: 100%;
+            }
+
+            & .action-wrapper {
+                display: none;
+            }
+        }
+        & .content {
+            width: calc(100% - 270px);
+            text-align: start;
+            padding-top: 10px;
+            padding-left: 30px;
+
+            @media #{$large-mobile} {
+                width: calc(100% - 220px);
+            }
+
+            @media #{$small-mobile} {
+                width: 100%;
+                padding-left: 10px;
+            }
+
+            & .title {
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 15px;
+
+                @media #{$small-mobile} {
+                   margin-top: 20px;
+                }
+            }
+            & .rating {
+                justify-content: flex-start;
+                margin-bottom: 10px;
+            }
+            & .price {
+                justify-content: flex-start;
+                margin-bottom: 20px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #ebebeb;
+            }
+            & p {
+                display: block;
+                font-size: 14px;
+            }
+            & .action-btn {
+                &.cart-btn {
+                    & .add-to_cart {
+                        width: 130px;
+                        margin-right: 15px;
+            
+                        & .btn {
+                            width: 100%;
+                            display: block;
+                            padding: 10px 14px
+                        }
+                    }
+                }
+                & .action {
+                    border: 1px solid #dcdcdc;
+                    color: $dark;
+                    display: inline-block;
+                    font-size: 16px;
+                    height: 36px;
+                    line-height: 40px;
+                    margin: 0 16px 0 0;
+                    text-align: center;
+                    width: 50px;
+            
+                    &:hover {
+                        background: $primary;
+                        color: $white;
+                        border-color: $primary;
+                    }
+                }
+            }
+        }
+    }
+}
+/* Shop Wrapper End */

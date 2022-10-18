@@ -1,0 +1,127 @@
+/*=======================================
+    3.13 Footer CSS
+=========================================*/
+.single-footer-widget {
+
+    & .widget-title {
+        font-size: 18px;
+        color: $dark;
+        margin-bottom: 25px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    & .desc-content {
+        color: $dark;
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 25px;
+    }
+
+    & .widget-social {
+        & a {
+            font-size: 16px;
+            color: $dark;
+            margin-right: 10px;
+            display: inline-block;
+            margin-bottom: 10px;
+
+            &:hover {
+                color: $primary;
+            }
+        }
+    }
+
+    & .widget-list {
+        & li {
+            margin-bottom: 10px;
+            & a {
+                color: $dark;
+                font-size: 14px;
+                line-height: 1;
+                &:hover {
+                    color: $primary;
+                    padding-left: 5px;
+                }
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.newsletter-form-wrap {
+    & .mc-form {
+        position: relative;
+        & .form-control {
+            border: none;
+            background: $white;
+            border-radius: 50px;
+            font-size: 12px;
+            color: $dark;
+            height: 45px;
+            padding: 0 100px 0 15px;
+
+            &::placeholder {
+                color: $dark;
+            }
+        }
+
+        & .newsletter-btn {
+            position: absolute;
+            background: $primary;
+            top: 50%;
+            transform: translateY(-50%);
+            color: $white;
+            font-weight: 700;
+            border-radius: 50px;
+            right: 5px;
+            line-height: 35px;
+            border: none;
+            padding: 0 15px;
+            text-transform: uppercase;
+
+            &:focus {
+                border: 0px;
+                outline: 0;
+                box-shadow: 0px;
+
+                &:active{
+                    border: 0px;
+                    outline: 0;
+                }
+            }
+            
+            &:hover {
+                color: $white;
+                background: $dark;
+            }
+        }
+    }
+}
+
+.copyright-content {
+    & p {
+        color: $dark;
+        font-size: 15px;
+
+        & a {
+            &:hover {
+                color: $primary;
+            }
+        }
+    }
+}
+.footer-bottom {
+    & .payment {
+        & a {
+            width: 290px;
+            margin: 0 0 0 auto;
+            display: block;
+            @media #{$large-mobile} {
+                margin: 0 auto;
+            }
+        }
+    }
+}

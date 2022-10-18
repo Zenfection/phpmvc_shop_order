@@ -1,0 +1,25 @@
+/*=======================================
+    3.03 CTA CSS
+=========================================*/
+.single-cta-wrapper {
+    background: $gray-200;
+    padding: 30px 28px 25px;
+    text-align: center;
+
+    & .cta-icon {
+        font-size: 30px;
+        color: $dark;
+        margin-bottom: 20px;
+    }
+
+    & .cta-content {
+        & .title {
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        & p {
+            font-size: 14px;
+        }
+    }
+}

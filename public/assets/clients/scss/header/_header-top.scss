@@ -1,0 +1,150 @@
+/*----------------------------------------*/
+/*  02. Header CSS
+/*----------------------------------------*/
+/*=======================================
+    2.1 Header Top CSS
+=========================================*/
+/* Message/Notification */
+.header-top-msg-wrapper{
+    position: relative;
+    line-height: 1;
+    @media #{$desktop-device} {
+        text-align: start;
+    }
+    @media #{$tablet-device, $large-mobile} {
+        text-align: center;
+    }
+
+    & .header-top-message {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 40px;
+        margin-bottom: 0;
+        color: $white;
+        display: inline-block;
+        text-transform: inherit;
+    }
+}
+/* Settings */
+.header-top-settings {
+    @media #{$tablet-device, $large-mobile} {
+        display: none;
+    }
+    & > ul {
+        align-items: center;
+        justify-content: flex-end;
+
+        & > li {
+            color: $white;
+            cursor: pointer;
+            font-size: 14px;
+            position: relative;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            & > a {
+                line-height: 40px;
+            }
+
+            & i {
+                margin-left: 5px;
+            }
+
+            & .dropdown-list {
+                top: 100%;
+                right: 0;
+                position: absolute;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(30px);
+                transition: 0.4s;
+                padding: 15px 15px 20px;
+                width: 120px;
+                z-index: 9;
+                text-align: left;
+                background-color: $white;
+                pointer-events: none;
+                border: 1px solid #efefef;
+                @media #{$small-mobile} {
+                    top: 130%;
+                    left: 50%;
+                    transform: translateX(-50%)
+                }
+
+                & li {
+                    margin-left: 0;
+                    padding: 0;
+
+                    & a {
+                        color: $dark;
+                        font-size: 13px;
+                        display: block;
+                        padding: 5px 0 3px;
+                        text-transform: capitalize;
+
+                        &:hover {
+                            color: $primary;
+                        }
+                        img {
+                            vertical-align: inherit;
+                        }
+                    }
+                    &:before {
+                        display: none;
+                    }
+                }
+
+            }
+
+            &:hover {
+                .dropdown-list {
+                    opacity: 1;
+                    visibility: visible;
+                    pointer-events: visible;
+                    transform: translateY(0);
+
+                    @media #{$small-mobile} {
+                        top: 100%;
+                        transform: translateX(-50%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Language & Currency */
+.header-top-lan-curr {
+    display: flex;
+    flex-wrap: wrap;
+    & .dropdown {
+        & .dropdown-toggle {
+            font-size: 14px;
+
+            display: flex;
+            align-items: center;
+
+            height: 26px;
+            padding: 0 15px;
+
+            transition: $transition-base;
+
+            color: $white;
+            border: none;
+            border-radius: 3px;
+            background-color: transparent;
+            &:hover {
+                background-color: #4C5847;
+            }
+            & i {
+                font-size: 10px;
+
+                margin-left: 6px;
+            }
+            &::after {
+                display: none;
+            }
+        }
+    }
+}

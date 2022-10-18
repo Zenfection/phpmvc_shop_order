@@ -1,0 +1,80 @@
+/*=======================================
+    4.2 Error 404 CSS
+=========================================*/
+.error_form{
+    text-align: center;
+    & .title{
+        font-size: 200px;
+        font-weight: 700;
+        color: $primary;
+        letter-spacing: 10px;
+        line-height: .73;
+        margin: 0 0 52px;
+        @media #{$tablet-device, $large-mobile}{
+            font-size: 130px;
+            letter-spacing: 4px;
+            margin: 0 0 40px;
+        }
+        @media #{$extra-small-mobile}{
+            font-size: 106px;
+            letter-spacing: 4px;
+            margin: 0 0 20px;
+        }
+    }
+    & .sub-title{
+        font-size: 24px;
+        text-transform: uppercase;
+        font-weight: 500;
+        line-height: 1;
+        margin-bottom: 20px;
+        @media #{$tablet-device, $large-mobile}{
+            font-size: 18px;
+            line-height: 1;
+            margin-bottom: 14px;
+        }
+    }
+    & p{
+       font-size: 17px;
+        font-weight: 400;
+        margin-bottom: 30px; 
+        @media #{$tablet-device, $large-mobile}{
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+    }
+    & .search-form-error{
+        width: 450px;
+        margin: 0 auto;
+        position: relative;
+        @media #{$large-mobile}{
+            width: 100%;
+        }
+        & .input-text{
+            padding: 0 45px 0 10px;
+            background: #f8f8f8;
+            border: 1px solid #ddd; 
+            color: $dark;
+            height: 40px;
+            width: 100%;
+            border-radius: 3px;
+            
+        }
+        & .submit-btn{
+            position: absolute;
+            right: 0;
+            height: 100%;
+            border: none;
+            background: no-repeat;
+            font-size: 20px;
+            cursor: pointer;
+            transition: .3s;
+            top: 0;
+            text-transform: uppercase;
+            padding: 0 15px;
+            font-weight: 600;
+            &:hover{
+                color: $primary;
+            }
+        }
+    }
+}

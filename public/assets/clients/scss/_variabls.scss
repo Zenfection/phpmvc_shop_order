@@ -1,0 +1,110 @@
+//=======================
+// Developer Variable
+//=======================
+// Responsive Variables
+$extraBig-device: "only screen and (min-width: 1600px)";
+$laptop-device: "only screen and (min-width: 1200px) and (max-width: 1599px)";
+$desktop-device: "only screen and (min-width: 992px) and (max-width: 1199px)";
+$tablet-device: "only screen and (min-width: 768px) and (max-width: 991px)";
+$large-mobile: "only screen and (max-width: 767px)";
+$small-mobile: "only screen and (max-width: 575px)";
+$extra-small-mobile: "only screen and (max-width: 479px)";
+
+//===============================
+// Bootstrap Variables Overright
+//===============================
+
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+// Gray Color
+$gray-100: #ebebeb;
+$gray-200: #f4f4f4;
+$gray-300: #f9f9f9;
+$gray-400: #d8d8d8;
+$gray-600: #6C757D;
+$gray-900: #383838;
+
+// Theme Color 
+$primary: #ffad42;
+$dark: #000000;
+$red: #DC3545;
+$white: #ffffff;
+$light: #ebebeb;
+$danger: #DC3545;
+$bright: #f4f4f4;
+$body-color: #555555;
+
+// scss-docs-start theme-colors-map
+$theme-colors: (
+	"primary": $primary,
+	"dark": $dark,
+	"heading-dark": $gray-900,
+	"light": $gray-100,
+	"bright": $gray-200,
+	"splashy": $gray-300,
+	"gray-deep": $gray-400,
+	"danger": $red,
+);
+// scss-docs-end theme-colors-map
+
+// scss-docs-start grid-breakpoints
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1600px,
+);
+// scss-docs-end grid-breakpoints
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+// scss-docs-start container-max-widths
+$container-max-widths: (
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	xl: 1200px,
+	xxl: 1200px,
+);
+// scss-docs-end container-max-widths
+
+// Transition
+$transition-base: all 0.3s ease 0s;
+
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+// stylelint-enable value-keyword-case
+$font-family-base: 'Raleway', sans-serif;
+
+// $font-size-root effects the value of `rem`, which is used for as well font sizes, paddings and margins
+// $font-size-base effects the font size of the body text
+$font-size-base: 1rem;
+//
+//
+$line-height-base: 1.5;
+//
+$h1-font-size: $font-size-base * 2.5;
+$h2-font-size: $font-size-base * 2;
+$h3-font-size: $font-size-base * 1.75;
+$h4-font-size: $font-size-base * 1.5;
+$h5-font-size: $font-size-base * 1.25;
+$h6-font-size: $font-size-base;
+//
+$headings-font-family: 'Raleway', sans-serif;
+$headings-font-weight: 500;
+$headings-line-height: 1.2;
+$headings-color: $gray-900;
+
+// Component 
+
+$border-color: $gray-100;
+

@@ -1,0 +1,89 @@
+/*=======================================
+    4.06 Wishlist CSS
+=========================================*/
+.wishlist-table{
+    & .table {
+        margin: 0;
+        white-space: nowrap;
+        & thead {
+            & tr{
+                & th {
+                    border-color: $gray-100;
+                    border-bottom: 0 solid transparent;
+                    color: $dark;
+                    background: $white;
+                    font-size: 15px;
+                    font-weight: 700;
+                    padding: 15px 20px;
+                    text-align: center;
+                    text-transform: uppercase;
+                }
+            }
+        }
+        & tr{
+            border-color: $gray-100;
+            & .pro-thumbnail, & .pro-price, & .pro-stock, & .pro-cart, & .pro-title, & .pro-remove{
+                text-align: center;
+                align-items: center;
+            }
+
+            & .pro-thumbnail {
+                width: 120px;
+            }
+
+            & .pro-price {
+                width: 130px;
+            }
+
+            & .pro-title {
+                width: 270px;
+            }
+
+            & .pro-stock {
+                width: 180px;
+            }
+
+            & .pro-cart {
+                width: 150px;
+            }
+
+            & .pro-remove {
+                width: 120px;
+            }
+        }
+        & tbody{
+            & td {
+                border-color: $gray-100;
+                text-align: center;
+                vertical-align: middle;
+                color: $dark;
+                & a {
+                    color: $dark;
+                    text-transform: capitalize;
+                    font-size: 14px;
+                    &:hover {
+                        color: $primary;
+                    }
+                    &.btn {
+                        color: $white;
+                    }
+                    &.check-btn {
+                        color: $white;
+                    }
+                }
+                &.pro-title {
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+                &.pro-remove{
+                    & a{
+                        & i{
+                            font-size: 18px;
+                            font-weight: 400;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
