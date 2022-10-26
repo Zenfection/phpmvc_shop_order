@@ -1,11 +1,3 @@
-//* Load Content
-function loadContent(pathUrl) {
-    window.scrollTo(0, 0);
-    $("#content").load(pathUrl, function () {
-        AOS.init();
-    });
-}
-
 //* Popup Notification
 function notify(type, icon, position, msg) {
     Lobibox.notify(type, {
@@ -30,8 +22,6 @@ var callLogin = function () {
     }
     document.querySelector('#loginForm button[type=button]').setAttribute('type', 'submit').click();
 };
-
-// Sign-in
 $(document).on('click', '#loginForm button', function () {
     callLogin();
 });
@@ -56,7 +46,6 @@ var callRegister = function () {
 
     document.querySelector('#registerForm button[type=button]').setAttribute('type', 'submit').click();
 }
-// Register
 $(document).on('click', '#registerForm button', function () {
     callRegister();
 });
@@ -78,7 +67,6 @@ var callChangeInfo = function () {
     }
     document.querySelector('#changeInfoForm button[type=button]').setAttribute('type', 'submit').click();
 }
-// Change Info Form
 $(document).on('click', '#changeInfoForm button', function () {
     callChangeInfo();
 })
@@ -103,54 +91,7 @@ var callChangePass = function () {
     }
 
     document.querySelector('#changePassForm button[type=button]').setAttribute('type', 'submit').click();
-    // if (data == 'true') {
-    //     notify('success', 'fa-duotone fa-user-check', 'center', 'Thay Đổi Thành Công');
-    // } else if (data == 'wrong_comfirm') {
-    //     notify('error', 'fa-duotone fa-badge-check', 'center', 'Mật Khẩu Xác Nhận Không Chính Xác');
-    // } else if (data = 'wrong_pwd') {
-    //     notify('error', 'fa-duotone fa-user-lock', 'center', 'Mật Khẩu Cũ Không Chính Xác');
-    // } else {
-    //     notify('error', 'fa-duotone fa-user-xmark', 'center', 'Thay Đổi Thất Bại');
-    // }
 }
-
-// *Cancel Order
-var callCancelOrder = function (id) {
-    $.ajax({
-        type: 'POST',
-        url: './backend/cancel_order.php',
-        data: { id: id },
-        async: false,
-        success: function (data) {
-            window.history.pushState('account', 'ACCOUNT', './account');
-            if (data == 'true') {
-                let msg = 'Hủy Đơn ' + id + ' Thành Công';
-                notify('success', 'fa-duotone fa-box-archive', 'center', msg);
-                loadContent('./account.php');
-            } else {
-                notify('error', 'fa-duotone fa-user-xmark', 'center', 'Hủy Đơn Hàng Thất Bại');
-            }
-        }
-    });
-}
-
-
-// Logout
-$(document).on('click', '#logout', function () {
-    $.ajax({
-        url: './backend/logout.php',
-        success: function () {
-            $('#header').load('./frontend/header.php');
-        }
-    });
-    setTimeout(function () {
-        window.history.pushState('home', 'HOME', './');
-        loadContent('./home.php');
-        notify('success', 'fa-duotone fa-right-from-bracket', 'bottom left', 'Đăng Xuất Thành Công');
-    }, 300);
-})
-
-
 
 // Change Password Form
 $(document).on('click', '#changePassForm button[name=submit]', function () {
@@ -161,9 +102,3 @@ $(document).on('keypress', '#changePassForm', function (e) {
         callChangePass()
     }
 })
-
-// Cancel Order
-$(document).on('click', '#cancelOrder', function () {
-    let id = $(this).attr('id_order');
-    callCancelOrder(id);
-});

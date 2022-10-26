@@ -133,7 +133,7 @@
                     <!-- Cart Calculate Items End -->
 
                     <!-- Cart Checktout Button Start -->
-                    <a class="load-checkout btn btn btn-gray-deep btn-hover-primary m-t-30">Tiến Hành Thanh Toán</a>
+                    <a class="btn btn btn-gray-deep btn-hover-primary m-t-30" href="/checkout">Tiến Hành Thanh Toán</a>
                     <!-- Cart Checktout Button End -->
                 </div>
                 <!-- Cart Calculation Area End -->

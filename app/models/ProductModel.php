@@ -60,7 +60,15 @@ class ProductModel extends Model {
                 AND r.username = '$user' ORDER BY r.id_recent DESC LIMIT $limit";
         $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $data;
+    }
 
+    public function searchProduct($keyword){
+        $sql = "SELECT * FROM `tb_product` 
+                WHERE LOWER(name) 
+                COLLATE UTF8_GENERAL_CI 
+                LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%')";
+        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
     }
     
     public function addRecent($user, $id){

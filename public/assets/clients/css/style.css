@@ -532,10 +532,13 @@ input[type="checkbox"]:checked + label:after {
 }
 
 .hover-style:hover img {
-  -webkit-transform: scale(1.1);
+          -webkit-transform: scale(1.1);
           transform: scale(1.1);
-  -webkit-transition: .3s;
-  transition: .3s;
+          -webkit-transition: .3s;
+          transition: .3s;
+          -moz-transform: scale(1.1);
+          -ms-transform: scale(1.1);
+          -o-transform: scale(1.1);
 }
 
 .thumb-effect {

@@ -7,7 +7,6 @@
         $discount = $data[$i]['discount'];
         $ranking = $data[$i]['ranking'];
         $image = $data[$i]['image'];
-
         ?>
         <div class="col-12 col-sm-6 col-lg-3 product-wrapper m-b-40 product">
     <div class="thumb">

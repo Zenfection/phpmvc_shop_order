@@ -5,7 +5,7 @@ class AuthMiddleWare extends MiddleWare {
         if(Session::data('user') == null){
             $response = new Response();
             $response->redirect('home');
-        }
+        } 
     }
 }
 ?>

@@ -7,6 +7,12 @@
             echo "<script>notify('success', 'fa-duotone fa-user-check', 'bottom', '$msg');</script>";
         } else if (str_contains($check, 'lỗi')) {
             echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', '$msg');</script>";
+        } else if (str_contains($check, 'đã huỷ đơn')) {
+            echo "<script>notify('success', 'fa-duotone fa-box-archive', 'center', $msg);</script>";
+        } else if (str_contains($check, 'không huỷ đơn')) {
+            echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', $msg);";
+        } else {
+            echo "<script>notify('warning', 'fa-duotone fa-user-xmark', 'center', $msg);</script>";
         }
     }
 ?>
@@ -191,7 +197,7 @@
                 $limit--;
             ?>
                 <div class="col m-b-30" data-aos="fade-in">
-                    <a href="#" class="banner hover-style">
+                    <a href="/shop/category/<?php echo $id?>" class="banner hover-style">
                         <?php
                         if ($image == "") {
                             echo "<div class='error'>Image not Available</div>";
@@ -236,21 +242,21 @@
                     <div class="tab-pane fade show active" id="top-product-ranking">
                         <div class="row m-b-n40">
                             <?php
-                            $this->render('products/list', $data['top_product_ranking']);
+                            $this->render('products/list', $data['top_product_ranking'], false);
                             ?>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="top-product-discount">
                         <div class="row m-b-n40">
                             <?php
-                            $this->render('products/list', $data['top_product_discount']);
+                            $this->render('products/list', $data['top_product_discount'], false);
                             ?>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="top-product-seller">
                         <div class="row m-b-n40">
                             <?php
-                            $this->render('products/list', $data['top_product_seller']);
+                            $this->render('products/list', $data['top_product_seller'], false);
                             ?>
                         </div>
                     </div>

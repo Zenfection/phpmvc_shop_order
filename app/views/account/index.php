@@ -39,7 +39,7 @@ if (!empty($data['msg'])) {
                                 <a href="#payment-method" data-bs-toggle="tab"><i class="fa-duotone fa-credit-card"></i> Thanh Toán</a>
                                 <a href="#account-info" data-bs-toggle="tab"><i class="fa-duotone fa-user-pen"></i> Chi Tiết</a>
                                 <a href="#address-edit" data-bs-toggle="tab"><i class="fa-duotone fa-key-skeleton"></i> Mật Khẩu</a>
-                                <a href="/account/logout" id="logout"><i class="fa-duotone fa-arrow-right-from-bracket"></i> Đăng Xuất</a>
+                                <a href="/account/logout"><i class="fa-duotone fa-arrow-right-from-bracket"></i> Đăng Xuất</a>
                             </div>
                         </div>
                         <!-- My Account Tab Menu End -->
@@ -98,7 +98,7 @@ if (!empty($data['msg'])) {
                                                                     <td><?php echo $order_date ?></td>
                                                                     <td><?php echo $status ?></td>
                                                                     <td><?php echo $total_money ?>$</td>
-                                                                    <td><a class="load-order btn btn btn-dark btn-hover-primary btn-sm rounded" id="<?php echo $id_order ?>">Xem</a></td>
+                                                                    <td><a class="btn btn btn-dark btn-hover-primary btn-sm rounded" href="/account/order/<?php echo $id_order?>">Xem</a></td>
                                                                 </tr>
                                                     <?php
                                                             }

@@ -11,7 +11,7 @@ if (!empty($data['msg'])) {
 }
 ?>
 <!-- Register Section Start -->
-<form id="registerForm" class="has-validation" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+<div  data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
     <div class="section section-margin">
         <div class="container">
             <div class="row">
@@ -70,7 +70,7 @@ if (!empty($data['msg'])) {
                         HtmlHelper::button(
                             '<div class="single-input-item single-input-item m-b-15">
                             <div class="login-reg-form-meta m-b-n15">',
-                            'submit',
+                            'button',
                             'Đăng ký',
                             'btn btn btn-gray-deep btn-hover-primary m-b-15',
                             '</div></div>'
@@ -86,7 +86,7 @@ if (!empty($data['msg'])) {
             </div>
         </div>
     </div>
-</form>
+</div>
 
 <!-- Register Section End -->
 <!-- <script type="text/javascript">

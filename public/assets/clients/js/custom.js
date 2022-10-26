@@ -1,14 +1,23 @@
 $(function () {
     /* Function
     ------------------------- */
-    //* Load Content
-    function loadContent(pathUrl) {
-        window.scrollTo(0, 0);
-        $("#content").load(pathUrl, function () {
-            AOS.init();
+
+    // *Popup Notification
+    function notify(type, icon, position, msg) {
+        Lobibox.notify(type, {
+            pauseDelayOnHover: true,
+            size: 'mini',
+            rounded: true,
+            icon: icon,
+            continueDelayOnInactiveTab: false,
+            position: position,
+            msg: msg
         });
     }
-
+    //* check Logged
+    function checkLoged() {
+        return document.querySelectorAll('#logged').length == 0;
+    }
     //* choose num page paginator page
     function choosePage(id) {
         let short_by = $("option:selected", '.nice-select').val();
@@ -46,30 +55,6 @@ $(function () {
     /*-------------------------
         Ajax Load Data Nagivation
     ---------------------------*/
-    // *Popup Notification
-    function notify(type, icon, position, msg) {
-        Lobibox.notify(type, {
-            pauseDelayOnHover: true,
-            size: 'mini',
-            rounded: true,
-            icon: icon,
-            continueDelayOnInactiveTab: false,
-            position: position,
-            msg: msg
-        });
-    }
-    $(document).on('click', '.load-checkout', function () {
-        let count_cart = parseInt($('#count-cart').text());
-        if (count_cart > 0) {
-            let id = 'checkout';
-            window.history.pushState(id, id.toUpperCase(), '/checkout');
-            loadContent('./checkout.php');
-        } else if (count_cart == 0) {
-            notify('info', 'fa-duotone fa-bags-shopping', 'right', 'Bạn chưa có sản phẩm nào trong giỏ hàng');
-        } else {
-            notify('warning', 'fa-duotone fa-right-to-bracket', 'bottom', 'Bạn chưa đăng nhập, hãy đăng nhập');
-        }
-    });
 
     $(document).on('click', '.category-filter', function () {
         let category_filter = $(this).attr('id');
@@ -92,34 +77,15 @@ $(function () {
     $(document).on("keypress", "#searchFilterProduct", function (e) {
         if (e.which == 13) {
             let search_filter = $(this).val();
-            $.ajax({
-                type: "post",
-                url: "./content/filter-shop.php",
-                data: {
-                    search_filter: search_filter
-                },
-                success: function (data) {
-                    $("#shop-content").html(data);
-                    AOS.init();
-                }
-            });
+            window.location.href=`/shop/search/${search_filter}`;
         }
     });
 
     $(document).on("click", ".search-box button", function () {
         let search_filter = $(this).siblings('input').val();
-        $.ajax({
-            type: "post",
-            url: "./content/filter-shop.php",
-            data: {
-                search_filter: search_filter
-            },
-            success: function (data) {
-                $("#shop-content").html(data);
-                AOS.init();
-            }
-        });
+        window.location.href=`/shop/search/${search_filter}`;
     });
+
     $(document).on("change", ".nice-select", function () {
         let short_by = $("option:selected", this).val();
         let total = parseInt($('.shop-top-show').text().trim().replace(/[^0-9\.]+/g, ''));
@@ -241,9 +207,6 @@ $(function () {
     /*-------------------------
         Ajax Shop Page
     ---------------------------*/
-    function checkLoged() {
-        return document.querySelectorAll('#logged').length == 0;
-    }
     $(document).on("click", ".add-to_cart", function () {
         if (!checkLoged()) {
             notify('warning', 'fa-duotone fa-cart-circle-xmark', 'right', 'Vui lòng đăng nhập để mua hàng');
@@ -251,6 +214,7 @@ $(function () {
         }
         let id = parseInt($(this).attr("id").replace("product", ""));
         let qty = parseInt($(".cart-plus-minus-box").val());
+        if(isNaN(qty)) qty = 1;
         // console.log(id, qty);
         addProduct(id, qty);
     });
@@ -366,4 +330,5 @@ $(function () {
             },
         });
     });
+    
 });

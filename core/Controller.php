@@ -15,8 +15,8 @@ class Controller {
         }
     }
 
-    public function render($view, $data = []){
-        if(!empty(View::$dataShare)){
+    public function render($view, $data = [], $merge = true){
+        if(!empty(View::$dataShare) && $merge){
             $data = array_merge($data, View::$dataShare);
         }
         

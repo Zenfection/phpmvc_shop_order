@@ -13,16 +13,8 @@
                         </div>
                         <div class="shop-top-show">
                             <?php
-                            // *bổ sung sau
-                            // if (isset($_POST['search'])) {
-                            //     $search = $_POST['search'];
-                            //     $sql = "SELECT * FROM `tb_product` 
-                            //             WHERE LOWER(name) 
-                            //             COLLATE UTF8_GENERAL_CI 
-                            //             LIKE CONCAT('%', LOWER(CONVERT('$search', BINARY)), '%')";
-                            // } 
-                            $total = count($product);
-                            echo "<span>Tổng cộng có $total sản phẩm</span>";
+                                $total = count($product);
+                                echo "<span>Tổng cộng có $total sản phẩm</span>";
                             ?>
                         </div>
                     </div>
@@ -125,8 +117,8 @@
                                         <!-- Cart Button Start -->
                                         <div class="cart-btn action-btn">
                                             <div class="action-cart-btn-wrapper d-flex">
-                                                <div class="add-to_cart">
-                                                    <a class="btn btn-primary btn-hover-dark rounded-0" href="/viewcart" style="width: 110%">Thêm Vào Giỏ</a>
+                                                <div class="add-to_cart" id="product<?php echo $id?>">
+                                                    <a class="btn btn-primary btn-hover-dark rounded-0" style="width: 110%">Thêm Vào Giỏ</a>
                                                 </div>
                                                 <a href="#" title="Wishlist" class="action"><i class="fa-regular fa-heart"></i></a>
                                             </div>
@@ -202,7 +194,7 @@
                     <div class="widget_inner">
                         <div class="widget-list m-b-50">
                             <div class="search-box">
-                                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" aria-label="Nhập tên sản phẩm" id="searchFilterProduct" style="font-size: 14px;">
+                                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" aria-label="Nhập tên sản phẩm" id="searchFilterProduct" style="font-size: 14px;" value="<?php echo $keyword ?>">
                                 <button class="search-icon" type="button">
                                     <i class="fa-duotone fa-magnifying-glass"></i>
                                 </button>

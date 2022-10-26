@@ -11,7 +11,6 @@ class Account extends Controller {
         $this->data['page_title'] = $title;
         $this->data['sub_content']['user'] = $user;
 
-
         $this->data['content'] = 'account/index';
         $this->data['sub_content']['fullname'] = $account[0]['fullname'];
         $this->data['sub_content']['email'] = $account[0]['email'];
@@ -24,12 +23,40 @@ class Account extends Controller {
         $this->render('layouts/client_layout', $this->data);
     }
 
+    public function order($id){
+        $user = Session::data('user');
+        $title = 'Chi Tiết Đơn Hàng';
+
+        $orderDetail = $this->models('AccountModel')->getDetailOrder($user, $id);
+
+        $this->data['page_title'] = $title;
+        $this->data['content'] = 'account/order';
+
+        $this->data['sub_content']['id_order'] = $id;
+        $this->data['sub_content']['order_detail'] = $orderDetail;
+
+        $this->render('layouts/client_layout', $this->data);
+    }
+
+    public function cancel_order($id){
+        $user = Session::data('user');
+
+        $result = $this->models('AccountModel')->cancelOrder($user, $id);
+        if($result){
+            Session::data('msg', 'Đã hủy đơn hàng thành công');
+        } else {
+            Session::data('msg', 'Không Hủy đơn hàng được');
+        }
+        $response = new Response();
+        $response->redirect('/account/order/'.$id);
+    }
+
     public function logout(){
         Session::delete('user');
         Session::data('msg', 'Dăng xuất thành công');
 
         $response = new Response();
-        $response->redirect('home');
+        $response->redirect('');
     }
 
     public function validate_change_info(){

@@ -34,13 +34,12 @@ class Register extends Controller {
             if(!$validate){
                 Session::data('msg', 'Đăng ký lỗi, kiểm tra lại thông tin');
                 $response = new Response();
-                $response->redirect('login');
+                $response->redirect('register');
             } else {
                 $response = new Response();
-                $this->register_user($_POST['username'], $_POST['password']);
+                $this->register_user($_POST['fullname'], $_POST['email'], $_POST['username'], $_POST['password']);
                 Session::data('msg', 'Đăng ký thành công');
-                Session::data('user', $_POST['username']);
-                $response->redirect('home');
+                $response->redirect('login');
             }
         }
     }
@@ -70,14 +69,16 @@ class Register extends Controller {
         }
     }
 
-    private function register_user($username, $password){
-        $db = new Database();
+    private function register_user($fullname, $email, $username, $password){
         $password = md5($password);
         $data = [
+            'fullname' => $fullname,
+            'email' => $email,
             'username' => $username,
             'password' => $password
         ];
-        $db->table('tb_user')->insert($data);
+        $result = $this->db->table('tb_user')->insert($data);
+        return $result;
     }
 }
 ?>
