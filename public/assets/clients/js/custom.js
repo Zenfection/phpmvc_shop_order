@@ -234,14 +234,14 @@ $(function () {
 
         $.ajax({
             type: "post",
-            url: "/product/add/" + id + "/" + qty,
+            url: "/cart/add/" + id + "/" + qty,
         });
     }
 
     /*-------------------------
         Ajax Shop Page
     ---------------------------*/
-    function checkLoged(){
+    function checkLoged() {
         return document.querySelectorAll('#logged').length == 0;
     }
     $(document).on("click", ".add-to_cart", function () {
@@ -301,6 +301,30 @@ $(function () {
     /*-------------------------
         Ajax Cart View
     ---------------------------*/
+    $(document).on('click', '.pro-remove a', function () {
+        let id = parseInt($(this).parent().attr('id').replace('product', ''));
+        let money = parseFloat($('#product_id' + id + ' .price .new').text().replace('$', ''));
+        let total = parseFloat($('#totalmoney').text().replace('$', ''));
+        let amount = parseInt($('#count-cart').text());
+        let qty = parseInt($('#quantity' + id).text().replace(/\D/g, ''));
+        console.log(money, total, amount, qty);
+        $('#view_cart_product' + id).fadeOut('normal', function () {
+            $(this).remove();
+        });
+        let totalMoney = (total - money * qty).toFixed(2);
+        console.log(totalMoney);
+        $('#totalmoney').text(totalMoney + '$');
+        $('#count-cart').text(amount - 1);
+        $('#product_id' + id).hide('normal', function () {
+            $(this).remove();
+        });
+
+        $.ajax({
+            type: "post",
+            url: "/cart/delete/" + id,
+        });
+    });
+
     $(document).on('click', '#clear-cart', function () {
         $('#table-cart').hide('normal', function () {
             $(this).remove();
@@ -314,7 +338,7 @@ $(function () {
         $('#total-bill').text('0.00$');
         $.ajax({
             type: 'post',
-            url: './backend/clear_cart.php',
+            url: '/cart/clear',
         });
     })
 
@@ -336,7 +360,7 @@ $(function () {
         });
         $.ajax({
             type: 'post',
-            url: '/product/delete/' + id,
+            url: '/cart/delete/' + id,
             data: {
                 delete_id: id
             },

@@ -44,19 +44,5 @@ class Product extends Controller{
 
         $this->render('layouts/client_layout', $this->data);
     }
-
-    public function delete($id){
-        $user = Session::data('user');
-        $id = (int)$id;
-        $data = $this->models('ProductModel')->deteleProduct($user, $id);
-        return $data;
-    }
-
-    public function add($id, $qty){
-        $user = Session::data('user');
-        $id = (int)$id;
-        $data = $this->models('ProductModel')->addProduct($user, $id, $qty);
-        return $data;
-    }
 }
 ?>

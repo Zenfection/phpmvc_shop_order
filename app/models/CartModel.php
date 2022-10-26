@@ -19,18 +19,32 @@ class CartModel extends Model{
         return $data;
     }
 
-    public function totalMoney($user){
-        /*$price = (float)$row['price'];
-                        $discount = (float)$row['discount'];
-                        $amount = (int)$row['amount'];
-                        $discount_price = $price - ($price * $discount / 100);
-                        $total += $discount_price * $amount;*/
-        $data = $this->db->table('tb_cart')->table('tb_product')->get();
-        $total = 0;
-        foreach($data as $item){
-            $total += $item['price'] * $item['quantity'];
+    public function deteleProductCart($user, $id){
+        $data = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->delete();
+        return $data;
+    }
+    public function addProductCart($user, $id, $qty){
+        $checkExist = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->get();
+
+        if(!empty($checkExist)){
+            $qty = $checkExist[0]['amount'] + $qty;
+            $data = [
+                'amount' => $qty
+            ];
+            $data = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->update($data);
+        } else {
+            $data = [
+                'username' => $user,
+                'id_product' => $id,
+                'amount' => $qty
+            ];
+            $data = $this->db->table('tb_cart')->insert($data);
         }
-        return $total;
+        return $data;
+    }
+    public function clearCart($user){
+        $data = $this->db->table('tb_cart')->where('username', '=', $user)->delete();
+        return $data;
     }
 }
 ?>

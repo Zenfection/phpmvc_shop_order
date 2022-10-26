@@ -87,7 +87,7 @@
 
         <!-- Cart Product Button Start -->
         <div class="cart-product-btn m-t-20">
-            <a id="viewcart" class="nav-content btn btn-outline-light btn-hover-primary w-100">Giỏ Hàng</a>
+            <a id="viewcart" class="btn btn-outline-light btn-hover-primary w-100" href="/viewcart">Giỏ Hàng</a>
             <a class="load-checkout btn btn-outline-light btn-hover-primary w-100 m-t-20">Thanh Toán</a>
         </div>
         <!-- Cart Product Button End -->

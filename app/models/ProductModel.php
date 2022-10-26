@@ -86,29 +86,5 @@ class ProductModel extends Model {
         $data = $this->db->table('tb_product')->where('id_category', '=', $id_category)->where('id_product', '!=', $id_category)->get();
         return $data;
     }
-
-    public function deteleProduct($user, $id){
-        $data = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->delete();
-        return $data;
-    }
-    public function addProduct($user, $id, $qty){
-        $checkExist = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->get();
-
-        if(!empty($checkExist)){
-            $qty = $checkExist[0]['amount'] + $qty;
-            $data = [
-                'amount' => $qty
-            ];
-            $data = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->update($data);
-        } else {
-            $data = [
-                'username' => $user,
-                'id_product' => $id,
-                'amount' => $qty
-            ];
-            $data = $this->db->table('tb_cart')->insert($data);
-        }
-        return $data;
-    }
 }
 ?>
