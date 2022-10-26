@@ -34,9 +34,9 @@
                                 $image = $value['image'];
                                 $discount = $value['discount'];
                                 if ($discount > 0) {
-                                    $price = $row['price'] - ($row['price'] * $discount / 100);
+                                    $price = $value['price'] - ($value['price'] * $discount / 100);
                                 } else {
-                                    $price = $row['price'];
+                                    $price = $value['price'];
                                 }
                             ?>
                                 <tr id="view_cart_product<?php echo $id ?>">
