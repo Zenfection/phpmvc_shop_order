@@ -29,13 +29,34 @@ class Product extends Controller{
 
         $title = 'Chi tiết ' . $productDetail[0]['name'];
 
+        $user = Session::data('user');
+        if(!empty($user)){
+            $addRecent = $this->models('ProductModel')->addRecent($user, $id);
+        }
+
         $this->data['page_title'] = $title;
         $this->data['sub_content']['title'] = $title;
         $this->data['sub_content']['product_detail'] = $productDetail[0];
         $this->data['sub_content']['similar_product'] = $similarProduct;
         $this->data['content'] = 'products/detail';
 
+        $this->data['sub_content']['msg'] = Session::data('msg');
+
         $this->render('layouts/client_layout', $this->data);
+    }
+
+    public function delete($id){
+        $user = Session::data('user');
+        $id = (int)$id;
+        $data = $this->models('ProductModel')->deteleProduct($user, $id);
+        return $data;
+    }
+
+    public function add($id, $qty){
+        $user = Session::data('user');
+        $id = (int)$id;
+        $data = $this->models('ProductModel')->addProduct($user, $id, $qty);
+        return $data;
     }
 }
 ?>

@@ -1,7 +1,7 @@
 //* Load Content
 function loadContent(pathUrl) {
     window.scrollTo(0, 0);
-    $("#content").load(pathUrl, function(){
+    $("#content").load(pathUrl, function () {
         AOS.init();
     });
 }
@@ -21,41 +21,18 @@ function notify(type, icon, position, msg) {
 
 // *Sign in
 var callLogin = function () {
-    let user = document.querySelector('#loginForm input[name=user]').value;
-    let pass = document.querySelector('#loginForm input[name=pass]').value;
+    let user = document.querySelector('#loginForm input[id=username]').value;
+    let pass = document.querySelector('#loginForm input[id=password').value;
 
-    let error = document.getElementsByClassName('is-invalid').length;
-    if (error > 0) return;
-    if (user == '' || pass == '') {
+    if (user == '' || user === undefined || pass == '' || pass === undefined) {
         notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập tài khoản hoặc mật khẩu');
         return;
     }
-    $.ajax({
-        type: 'POST',
-        url: './backend/login.php',
-        async: false,
-        data: {
-            user: user,
-            pass: pass,
-            submit: true,
-        },
-        success: function (data) {
-            if (data == 'true') {
-                window.history.pushState('home', 'HOME', './');
-                setTimeout(function () {
-                    loadContent('./home.php');
-                    notify('success', 'fa-duotone fa-user-check', 'bottom', 'Đăng Nhập Thành Công');
-                }, 300);
-                $('#header').load('./frontend/header.php');
-            } else {
-                notify('error', 'fa-duotone fa-user-xmark', 'center', 'Sai tài khoản & mật khẩu');
-            }
-        }
-    });
+    document.querySelector('#loginForm button[type=button]').setAttribute('type', 'submit').click();
 };
 
 // Sign-in
-$(document).on('click', '#loginForm button[name=submit]', function () {
+$(document).on('click', '#loginForm button', function () {
     callLogin();
 });
 $(document).on('keypress', '#loginForm', function (e) {
@@ -67,110 +44,74 @@ $(document).on('keypress', '#loginForm', function (e) {
 
 // *Register
 var callRegister = function () {
-    let fullname = document.querySelector('#registerForm input[name=fullname]').value;
-    let username = document.querySelector('#registerForm input[name=username]').value;
-    let email = document.querySelector('#registerForm input[name=email]').value;
-    let password = document.querySelector('#registerForm input[name=password]').value;
+    let fullname = document.querySelector('#registerForm input[id=fullname]').value;
+    let username = document.querySelector('#registerForm input[id=username]').value;
+    let email = document.querySelector('#registerForm input[id=email]').value;
+    let password = document.querySelector('#registerForm input[id=password]').value;
 
-    let error = document.getElementsByClassName('is-invalid').length;
-    if (error > 0) return;
-
-    if (fullname == '' || username == '' || email == '' || password == '') {
+    if (fullname == '' || fullname === undefined || username == '' || username === undefined || email == '' || email === undefined || password == '' || password === undefined) {
         notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
         return;
     }
-    $.ajax({
-        type: 'POST',
-        url: './backend/register.php',
-        async: false,
-        data: {
-            fullname: fullname,
-            username: username,
-            email: email,
-            password: password,
-            submit: true,
-        },
-        success: function (data) {
-            if (data == 'true') {
-                window.history.pushState('login', 'LOGIN', './login');
-                setTimeout(function () {
-                    loadContent('./login.php');
-                    notify('success', 'fa-duotone fa-user-plus', 'bottom', 'Đăng Ký Thành Công');
-                }, 300);
-                $('#header').load('./frontend/header.php');
-            } else {
-                notify('error', 'fa-duotone fa-person-walking-arrow-right', 'center', 'Tài khoản đã tồn tại');
-            }
-        }
-    });
+
+    document.querySelector('#registerForm button[type=button]').setAttribute('type', 'submit').click();
 }
+// Register
+$(document).on('click', '#registerForm button', function () {
+    callRegister();
+});
+$(document).on('keypress', '#registerForm', function (e) {
+    if (e.which == 13) {
+        callRegister()
+    }
+})
 
 // *Change Info
 var callChangeInfo = function () {
-    let fullname = document.querySelector('#changeInfoForm input[name=fullname]').value;
-    let phone = document.querySelector('#changeInfoForm input[name=phone]').value;
-    let email = document.querySelector('#changeInfoForm input[name=email]').value;
-    
-    let error = document.getElementsByClassName('is-invalid').length;
-    if (error > 0) return;
+    let fullname = document.querySelector('#changeInfoForm input[id=fullname]').value;
+    let phone = document.querySelector('#changeInfoForm input[id=phone]').value;
+    let email = document.querySelector('#changeInfoForm input[id=email]').value;
 
-    if (fullname == '' || phone == '' || email == '') {
+    if (fullname == '' || fullname === undefined || phone == '' || phone === undefined || email == '' || email === undefined) {
         notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
         return;
     }
-    $.ajax({
-        type: 'POST',
-        url: './backend/change_info.php',
-        data: {
-            fullname: fullname,
-            phone: phone,
-            email: email,
-            submit: true,
-        },
-        async: false,
-        success: function (data) {
-            if (data == 'true') {
-                notify('success', 'fa-duotone fa-user-check', 'center', 'Thay Đổi Thành Công');
-            } else {
-                notify('error', 'fa-duotone fa-user-xmark', 'center', 'Thay Đổi Thất Bại');
-            }
-        }
-    });
+    document.querySelector('#changeInfoForm button[type=button]').setAttribute('type', 'submit').click();
 }
+// Change Info Form
+$(document).on('click', '#changeInfoForm button', function () {
+    callChangeInfo();
+})
+$(document).on('keypress', '#changeInfoForm', function (e) {
+    if (e.which == 13) {
+        callChangeInfo()
+    }
+})
 
 // *Change Password
 var callChangePass = function () {
-    let current_pwd = document.querySelector('#changePassForm input[name=current_pwd]').value;
-    let new_pwd = document.querySelector('#changePassForm input[name=new_pwd]').value;
-    let confirm_pwd = document.querySelector('#changePassForm input[name=confirm_pwd]').value;
+    let current_pwd = document.querySelector('#changePassForm input[id=current_pwd]').value;
+    let new_pwd = document.querySelector('#changePassForm input[id=new_pwd]').value;
+    let confirm_pwd = document.querySelector('#changePassForm input[id=confirm_pwd]').value;
 
-    if (current_pwd == '' || new_pwd == '' || confirm_pwd == '') {
+    if (current_pwd == '' || current_pwd === undefined || new_pwd == '' || new_pwd === undefined || confirm_pwd == '' || confirm_pwd === undefined) {
         notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
         return;
     }
-    if ($('.is-invalid').length > 0) return;
-    $.ajax({
-        type: 'POST',
-        url: './backend/change_password.php',
-        data: {
-            current_pwd: current_pwd,
-            new_pwd: new_pwd,
-            confirm_pwd: confirm_pwd,
-            submit: true,
-        },
-        async: false,
-        success: function (data) {
-            if (data == 'true') {
-                notify('success', 'fa-duotone fa-user-check', 'center', 'Thay Đổi Thành Công');
-            } else if (data == 'wrong_comfirm') {
-                notify('error', 'fa-duotone fa-badge-check', 'center', 'Mật Khẩu Xác Nhận Không Chính Xác');
-            } else if (data = 'wrong_pwd') {
-                notify('error', 'fa-duotone fa-user-lock', 'center', 'Mật Khẩu Cũ Không Chính Xác');
-            } else {
-                notify('error', 'fa-duotone fa-user-xmark', 'center', 'Thay Đổi Thất Bại');
-            }
-        }
-    });
+    if (new_pwd != confirm_pwd) {
+        notify('error', 'fa-duotone fa-badge-check', 'center', 'Mật Khẩu Xác Nhận Không Chính Xác');
+    }
+
+    document.querySelector('#changePassForm button[type=button]').setAttribute('type', 'submit').click();
+    // if (data == 'true') {
+    //     notify('success', 'fa-duotone fa-user-check', 'center', 'Thay Đổi Thành Công');
+    // } else if (data == 'wrong_comfirm') {
+    //     notify('error', 'fa-duotone fa-badge-check', 'center', 'Mật Khẩu Xác Nhận Không Chính Xác');
+    // } else if (data = 'wrong_pwd') {
+    //     notify('error', 'fa-duotone fa-user-lock', 'center', 'Mật Khẩu Cũ Không Chính Xác');
+    // } else {
+    //     notify('error', 'fa-duotone fa-user-xmark', 'center', 'Thay Đổi Thất Bại');
+    // }
 }
 
 // *Cancel Order
@@ -182,7 +123,7 @@ var callCancelOrder = function (id) {
         async: false,
         success: function (data) {
             window.history.pushState('account', 'ACCOUNT', './account');
-            if(data == 'true'){
+            if (data == 'true') {
                 let msg = 'Hủy Đơn ' + id + ' Thành Công';
                 notify('success', 'fa-duotone fa-box-archive', 'center', msg);
                 loadContent('./account.php');
@@ -192,15 +133,7 @@ var callCancelOrder = function (id) {
         }
     });
 }
-// Register
-$(document).on('click', '#registerForm button[name=submit]', function () {
-    callRegister();
-});
-$(document).on('keypress', '#registerForm', function () {
-    if (e.which == 13) {
-        callRegister()
-    }
-})
+
 
 // Logout
 $(document).on('click', '#logout', function () {
@@ -217,15 +150,7 @@ $(document).on('click', '#logout', function () {
     }, 300);
 })
 
-// Change Info Form
-$(document).on('click', '#changeInfoForm button[name=submit]', function () {
-    callChangeInfo();
-})
-$(document).on('keypress', '#changeInfoForm', function (e) {
-    if (e.which == 13) {
-        callChangeInfo()
-    }
-})
+
 
 // Change Password Form
 $(document).on('click', '#changePassForm button[name=submit]', function () {
@@ -238,7 +163,6 @@ $(document).on('keypress', '#changePassForm', function (e) {
 })
 
 // Cancel Order
-
 $(document).on('click', '#cancelOrder', function () {
     let id = $(this).attr('id_order');
     callCancelOrder(id);

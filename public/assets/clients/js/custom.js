@@ -1,18 +1,6 @@
 $(function () {
     /* Function
     ------------------------- */
-    const checkImg = function() {
-        var img = document.querySelectorAll('[img]');
-        var length = img.length;
-        for (var i = 0; i < length; i++) {
-            var pic = img[i].getAttribute('img');
-            img[i].setAttribute('src', pic);
-            img[i].removeAttribute('img');
-        }
-    }
-    $(document).on('change', '[img]', function(){
-        checkImg();
-    })
     //* Load Content
     function loadContent(pathUrl) {
         window.scrollTo(0, 0);
@@ -20,52 +8,6 @@ $(function () {
             AOS.init();
         });
     }
-    //* Check loged in
-    function checkLoged() {
-        let result;
-        $.ajax({
-            url: './backend/check_logged.php',
-            async: false,
-            success: function (data) {
-                data == 'true' ? result = true : result = false;
-            }
-        });
-        return result;
-    }
-    //* Load Content when refresh page
-    const checkURL = function () {
-        let url = new URL(window.location.href);
-        let path = url.pathname;
-        let id = path.replace('/', '');
-        let loadPage = ['', 'about', 'account', `checkout`, 'contact', 'login', 'register', `shop`, 'viewcart', 'detail_product', 'order_view'];
-
-        if (!loadPage.includes(id)) {
-            loadContent('./404.php');
-            return;
-        }
-        if (id == 'detail_product' || id == 'order_view') {
-            loadContent('/' + id + '.php' + url.search);
-            return;
-        } else {
-            if (checkLoged() && (id == 'login' || id == 'register')) { //đã đăng nhập
-                id = 'account';
-            } else if (!checkLoged() && (id == 'account' || id == 'viewcart' || id == 'checkout')) {
-                id = 'login';
-            }
-        }
-        loadContent('./' + id + '.php');
-    };
-    checkURL();
-
-    //* Listen back & forward button to load content
-    window.addEventListener('popstate', function () {
-        let url = new URL(window.location.href);
-        let path = url.pathname;
-        let id = path.replace('/', '');
-
-        if (id == '') id = 'home';
-        loadContent('/' + id + '.php' + url.search);
-    });
 
     //* choose num page paginator page
     function choosePage(id) {
@@ -74,7 +16,7 @@ $(function () {
             let total = parseInt($('.shop-top-show').text().trim().replace(/[^0-9\.]+/g, ''));
             $.ajax({
                 type: 'post',
-                url: './content/short-by-shop.php',
+                url: '/shop/page/1',
                 data: {
                     page: id,
                     short_by: short_by,
@@ -85,18 +27,10 @@ $(function () {
                     AOS.init();
                 }
             });
+            // window.location.href = '/shop/shortby/';
         } else {
-            $.ajax({
-                type: "get",
-                url: './content/filter-shop.php',
-                data: {
-                    page: id
-                },
-                success: function (data) {
-                    $("#shop-content").html(data);
-                    AOS.init();
-                },
-            });
+            let category = '';
+            window.location.href = `/shop/page/${id}`;
         }
     }
 
@@ -124,20 +58,6 @@ $(function () {
             msg: msg
         });
     }
-
-    $(document).on('click', '.load-product', function () {
-        let id = 'detail_product';
-        let id_product = $(this).attr('id');
-        window.history.pushState(id, id.toUpperCase(), '/detail_product?id=' + id_product);
-        loadContent('./detail_product.php?id=' + id_product);
-    });
-    $(document).on('click', '.load-order', function () {
-        let id = 'order_view';
-        let id_order = $(this).attr('id');
-        window.history.pushState(id, id.toUpperCase(), '/order_view?id=' + id_order);
-        loadContent('./order_view.php?id=' + id_order);
-    });
-
     $(document).on('click', '.load-checkout', function () {
         let count_cart = parseInt($('#count-cart').text());
         if (count_cart > 0) {
@@ -148,28 +68,6 @@ $(function () {
             notify('info', 'fa-duotone fa-bags-shopping', 'right', 'Bạn chưa có sản phẩm nào trong giỏ hàng');
         } else {
             notify('warning', 'fa-duotone fa-right-to-bracket', 'bottom', 'Bạn chưa đăng nhập, hãy đăng nhập');
-        }
-    });
-
-    //* Listen click to load content
-    $(document).on('click', '.nav-content', function () {
-        let url = new URL(window.location.href).pathname;
-        let id = $(this).attr('id');
-        let path;
-
-        if (checkLoged() && (id == 'login' || id == 'register')) { //đã đăng nhập
-            notify('info', 'fa-duotone fa-info', 'bottom right', 'Bạn đã đăng nhập rồi');
-            return;
-        } else if (!checkLoged() && (id == 'account' || id == 'viewcart')) {
-            notify('warning', 'fa-duotone fa-right-to-bracket', 'bottom right', 'Bạn chưa đăng nhập, hãy đăng nhập');
-            return;
-        } else {
-            if (id == 'home') path = '/';
-            else path = '/' + id;
-        }
-        loadContent('./' + id + '.php');
-        if (url != path) {
-            window.history.pushState(id, id.toUpperCase(), path);
         }
     });
 
@@ -258,8 +156,6 @@ $(function () {
         }
     });
 
-
-
     function getQtyProductCart(id) {
         let amount = parseInt(
             $("#quantity" + id)
@@ -338,17 +234,16 @@ $(function () {
 
         $.ajax({
             type: "post",
-            url: "./backend/add_product_cart.php",
-            data: {
-                id: id,
-                qty: qty,
-            },
+            url: "/product/add/" + id + "/" + qty,
         });
     }
 
     /*-------------------------
         Ajax Shop Page
     ---------------------------*/
+    function checkLoged(){
+        return document.querySelectorAll('#logged').length == 0;
+    }
     $(document).on("click", ".add-to_cart", function () {
         if (!checkLoged()) {
             notify('warning', 'fa-duotone fa-cart-circle-xmark', 'right', 'Vui lòng đăng nhập để mua hàng');
@@ -356,6 +251,7 @@ $(function () {
         }
         let id = parseInt($(this).attr("id").replace("product", ""));
         let qty = parseInt($(".cart-plus-minus-box").val());
+        // console.log(id, qty);
         addProduct(id, qty);
     });
 
@@ -401,6 +297,7 @@ $(function () {
         choosePage(id);
     });
 
+
     /*-------------------------
         Ajax Cart View
     ---------------------------*/
@@ -439,7 +336,7 @@ $(function () {
         });
         $.ajax({
             type: 'post',
-            url: './backend/delete_product_cart.php',
+            url: '/product/delete/' + id,
             data: {
                 delete_id: id
             },

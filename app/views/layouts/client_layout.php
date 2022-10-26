@@ -25,12 +25,32 @@
 </head>
 
 <body>
-    <?php $this->render('blocks/header'); ?>
+    <?php $this->render('blocks/header', $sub_content); ?>
+
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/popper.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/bootstrap.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/jquery-migrate-3.4.0.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/modernizr-3.11.2.min.js"></script>
+
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/aos.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/feather.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/tiny-slider.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/anime.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/jquery-ui.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/nice-select.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/lobibox.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/notifications.min.js"></script>
+
+    <!--  -->
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/custom.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/backend.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/main.js"></script>
+
 
     <div id="content">
-        <?php $this->render($content, $sub_content)?>
+        <?php $this->render($content, $sub_content) ?>
     </div>
-    
 
     <!-- // TODO Load Javascript
     //! vendor: 
@@ -52,30 +72,10 @@
     //* 9. notifications.min.js   : 1.0.0
     -->
 
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/popper.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/bootstrap.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/jquery-migrate-3.4.0.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/modernizr-3.11.2.min.js"></script>
-
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/aos.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/feather.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/tiny-slider.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/anime.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/jquery.validate.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/jquery-ui.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/nice-select.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/lobibox.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/notifications.min.js"></script>
-
-    <!--  -->
-    <!-- <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/custom.js"></script> -->
-    <!-- <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/backend.js"></script> -->
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/main.js"></script>
 
     <?php
-        $this->render('blocks/footer');
-        $this->render('blocks/mobile');
+    $this->render('blocks/footer');
+    $this->render('blocks/mobile');
     ?>
 </body>
 

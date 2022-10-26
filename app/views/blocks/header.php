@@ -17,7 +17,7 @@
                             <!-- render session -->
                             <li><a id="home" href="/">Trang Chủ</a></li>
                             <li><a id="about" href="/about">Giới Thiệu</a></li>
-                            <li><a id="shop" href="/shop">Shop</a></li>
+                            <li><a id="shop" href="/shop/page">Shop</a></li>
                             <li><a id="contact" href="/contact">Liên Hệ</a></li>
                         </ul>
                     </div>
@@ -45,15 +45,22 @@
 
                         <!-- account login -->
                         <?php
-                        if (isset($_SESSION['user'])) {
-                            echo "<a id='account' class='nav-content cursor-pointer header-action-btn header-action-btn-wishlist'>
-                                    <i class='fa-duotone fa-user-gear fa-xl'></i></a>";
+                        if (!empty($user)) {
+                            ?>
+                            <a id='account' class='nav-content cursor-pointer header-action-btn header-action-btn-wishlist' href="/account">
+                                    <i class='fa-duotone fa-user-gear fa-xl'></i>
+                            </a>
+                            <?php
                         } else {
-                            echo "<a  id='login' class='nav-content cursor-pointer header-action-btn header-action-btn-wishlist'><i class='fa-duotone fa-user fa-xl'></i></a>";
+                            ?>
+                            <a id='logged' class='nav-content cursor-pointer header-action-btn header-action-btn-wishlist' href="/login">
+                                <i class='fa-duotone fa-user fa-xl'></i>
+                            </a>
+                            <?php
                         }
                         ?>
 
-                        <?php $this->render('blocks/cart') ?>
+                        <?php $this->render('blocks/cart', $data) ?>
 
                         <!-- Mobile Menu Hambarger Action Button Start -->
                         <a href="javascript:void(0)" class="header-action-btn header-action-btn-menu d-lg-none d-md-flex">

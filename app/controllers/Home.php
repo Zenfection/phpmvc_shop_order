@@ -1,15 +1,17 @@
 <?php
 
 class Home extends Controller {
+    public $data;
+
     public function __construct(){
         
     }
 
     public function index(){
         $product = $this->db->table('tb_product')->get();
-        $topProductRanking = $this->models('HomeModel')->topProductRanking(8);
-        $topProductDiscount = $this->models('HomeModel')->topProductDiscount(8);
-        $topProductSeller = $this->models('HomeModel')->topProductSeller(8);
+        $topProductRanking = $this->models('ProductModel')->topProductRanking(8);
+        $topProductDiscount = $this->models('ProductModel')->topProductDiscount(8);
+        $topProductSeller = $this->models('ProductModel')->topProductSeller(8);
 
         $category = $this->db->table('tb_category')->get();
         $title = 'Trang Chủ';
@@ -21,8 +23,9 @@ class Home extends Controller {
         $this->data['sub_content']['category'] = $category;
         $this->data['page_title'] = $title;
         $this->data['content'] = 'home/index';
-    
+
+        $this->data['sub_content']['msg'] = Session::flash('msg');
+
         $this->render('layouts/client_layout', $this->data);
     }
 }
-?>

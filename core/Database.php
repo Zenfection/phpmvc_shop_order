@@ -40,7 +40,11 @@ class Database{
         if(!empty($data)){
             $updateStr = '';
             foreach($data as $key => $value){
-                $updateStr .= $key . ' = :' . $value . ',';
+                if(is_string($value)){
+                    $updateStr .= $key . "='" . $value . "',";
+                } else {
+                    $updateStr .= $key . '=' . $value . ',';
+                }
             }
             $updateStr = rtrim($updateStr, ',');
 

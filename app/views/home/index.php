@@ -1,3 +1,15 @@
+<?php
+    if (!empty($data['msg'])) {
+        $msg = $data['msg'];
+        $check = strtolower($msg);
+        // check từ khoá
+        if (str_contains($check, 'thành công')) {
+            echo "<script>notify('success', 'fa-duotone fa-user-check', 'bottom', '$msg');</script>";
+        } else if (str_contains($check, 'lỗi')) {
+            echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', '$msg');</script>";
+        }
+    }
+?>
 <!-- start hero -->
 <section class="hero-1 bg-white position-relative d-flex align-items-center justify-content-center overflow-hidden">
     <div class="shapes">
@@ -29,15 +41,15 @@
 
                 <p class="text-muted mb-2 fw-hero">Sản phẩm được phát triển cả nhân nên có rất nhiều lỗi <br> nếu bạn phát hiện hãy liên hệ với tôi bên trên.</p>
                 <?php
-                if (isset($_SESSION['user'])) {
+                if (!empty($user)) {
                 ?>
-                    <a class="nav-content btn btn-primary mt-4" id="shop">Mua Hàng
+                    <a class="nav-content btn btn-primary mt-4" id="shop" href="/shop/page">Mua Hàng
                         <i class="fa-duotone fa-cart-shopping-fast fa-xl"></i>
                     </a>
                 <?php
                 } else {
                 ?>
-                    <a class="nav-content btn btn-primary mt-4" id="login">Đăng Nhập
+                    <a class="nav-content btn btn-primary mt-4" id="login" href="/login">Đăng Nhập
                         <i class="fa-duotone fa-arrow-right-to-bracket fa-xl"></i>
                     </a>
                 <?php
@@ -250,8 +262,5 @@
 </div>
 
 <!-- Product Section End -->
-
-<script src="<?php echo _WEB_ROOT?>/public/assets/clients/js/plugins/anime.min.js"></script>
-<script src="<?php echo _WEB_ROOT?>/public/assets/clients/js/plugins/tiny-slider.js"></script>
 
 <script src="<?php echo _WEB_ROOT?>/public/assets/clients/js/custom/home.js"></script>

@@ -20,6 +20,7 @@ class App{
         if(!empty($routes['default_controller'])){
             $this->__controller = $routes['default_controller'];
         }
+
         $this->__action = 'index';
         $this->__params = array();
 
@@ -29,11 +30,9 @@ class App{
         }
 
         $this->handleUrl();
-        
     }
 
     public function getUrl(){
-
         if(!empty($_SERVER["REQUEST_URI"])){
             $url = $_SERVER["REQUEST_URI"];
         } else {
@@ -43,10 +42,19 @@ class App{
     }
     public function handleUrl(){
         $url = $this->getUrl();
+
         $url = $this->__routes->handleRoute($url);
         
         $urlArr = array_filter(explode('/', $url));
         $urlArr = array_values($urlArr);
+        
+
+        // MiddleWare App
+        $this->handleGlobalMiddleWare($this->__db);
+        $this->handleRouteMiddleWare($this->__routes->getUri(), $this->__db);
+        
+        // App Service Provider
+        $this->handleAppServiceProvider($this->__db);
         
         // Kiểm tra nào là file
         $urlCheck = '';
@@ -62,7 +70,6 @@ class App{
                     unset($urlArr[$key - 1]);
                 }
                 if(file_exists('app/controllers/' . $fileCheck . '.php')){
-                    $urlCheck = $fileCheck;
                     break;
                 }
             }
@@ -76,12 +83,12 @@ class App{
             $this->__controller = ucfirst($this->__controller);
         }
 
-        if(empty($urlCheck)){
-            $urlCheck = $this->__controller;
+        if(empty($fileCheck)){
+            $fileCheck = $this->__controller;
         }
-    
-        if(file_exists('app/controllers/' . $urlCheck . '.php')){
-            require_once 'app/controllers/' . $urlCheck . '.php';
+
+        if(file_exists('app/controllers/' . $fileCheck . '.php')){
+            require_once 'app/controllers/' . $fileCheck . '.php';
 
             if(class_exists($this->__controller)){
                 $this->__controller = new $this->__controller();
@@ -116,5 +123,63 @@ class App{
     public function loadError($name = '404', $data = []){
         extract($data);
         require_once 'error/' . $name . '.php';
+    }
+    public function getCurrentController(){
+        return $this->__controller;
+    }
+
+    public function handleRouteMiddleWare($keyRoute, $db){
+        global $config;
+        $keyRoute = trim($keyRoute);
+        if(!empty($config['app']['routeMiddleWare'])){
+            $routeMiddleWare = $config['app']['routeMiddleWare'];
+            foreach($routeMiddleWare as $key => $middleware){
+                if($keyRoute == trim($key) && file_exists('app/middlewares/' . $middleware . '.php')){
+                    require_once 'app/middlewares/' . $middleware . '.php';
+                    if(class_exists($middleware)){
+                        $middleWareObject = new $middleware();
+                        if(!empty($db)){
+                            $middleWareObject->db = $db;
+                        }
+                        $middleWareObject->handle();
+                    }
+                }
+            }
+        }
+    }
+
+    public function handleGlobalMiddleWare($db){
+        global $config; 
+        if(!empty($config['app']['globalMiddleWare'])){
+            foreach($config['app']['globalMiddleWare'] as $key => $middleware){
+                if(file_exists('app/middlewares/' . $middleware . '.php')){
+                    require_once 'app/middlewares/' . $middleware . '.php';
+                    if(class_exists($middleware)){
+                        $middleWareObject = new $middleware();
+                        if(!empty($db)){
+                            $middleWareObject->db = $db;
+                        }
+                        $middleWareObject->handle();
+                    }
+                }
+            }
+        }
+    }
+    public function handleAppServiceProvider($db){
+        global $config;
+        if(!empty($config['app']['boot'])){
+            foreach($config['app']['boot'] as $key => $serviceProvider){
+                if(file_exists('app/core/' . $serviceProvider . '.php')){
+                    require_once 'app/core/' . $serviceProvider . '.php';
+                    if(class_exists($serviceProvider)){
+                        $serviceProviderObject = new $serviceProvider();
+                        if(!empty($db)){
+                            $serviceProviderObject->db = $db;
+                        }
+                        $serviceProviderObject->boot();
+                    }
+                }
+            }
+        }
     }
 }

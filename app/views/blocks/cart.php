@@ -3,10 +3,8 @@
     <a class="cart-visible" href="javascript:void(0)">
         <i class="fa-duotone fa-bag-shopping fa-xl"></i>
         <?php
-        if (isset($_SESSION['user'])) {
-            $user = $_SESSION['user'];
-            $sql = "SELECT * FROM `tb_cart` WHERE username = '$user'";
-            $countCart = mysqli_num_rows(mysqli_query($conn, $sql));
+        if (!empty($user)) {
+            $countCart = count($cart);
             echo "<span class='header-action-num' id='count-cart'>" . $countCart . "</span>";
         }
         ?>
@@ -18,63 +16,56 @@
         <!-- Cart Procut Wrapper Start  -->
         <div class="cart-product-wrapper">
             <?php
-            if (isset($_SESSION['user'])) {
-                $sql = "SELECT * 
-                        FROM `tb_cart` as c, `tb_product` as p
-                        WHERE c.username = '" . $_SESSION['user'] . "'
-                        AND c.id_product = p.id_product";
-                $result = mysqli_query($conn, $sql);
-                $count = mysqli_num_rows($result);
-                if ($count > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['id_product'];
-                        $name = $row['name'];
-                        $amount = $row['amount'];
-                        $image = $row['image'];
-                        $price = $row['price'];
-                        $discount = $row['discount'];
-                        $discount_price = $price - ($price * $discount / 100);
+            if (!empty($user)) {
+                foreach ($cart as $key => $value) {
+                    $id = $value['id_product'];
+                    $name = $value['name'];
+                    $amount = $value['amount'];
+                    $image = $value['image'];
+                    $price = $value['price'];
+                    $discount = $value['discount'];
+                    $discount_price = $price - ($price * $discount / 100);
+
             ?>
-                        <!-- Cart Product/Price Start -->
-                        <div class="cart-product-inner p-b-20 m-b-20 border-bottom product-inner">
-                            <!-- Single Cart Product Start -->
-                            <div class="single-cart-product">
-                                <div class="cart-product-thumb">
-                                    <a class="load-product cursor-pointer" id="<?php echo $id?>"><img src="./assets/images/products/<?php echo $image ?>" alt="Cart Product" class="rounded"></a>
-                                </div>
-                                <div class="cart-product-content">
-                                    <h3 class="title"><a class="load-content cursor-pointer" id="<?php echo $id?>"><?php echo $name ?></a></h3>
-                                    <div class="product-quty-price">
-                                        <span class="cart-quantity" id="quantity<?php echo $id ?>">Số lượng: <strong> <?php echo $amount ?> </strong></span>
-                                        <span class="price">
-                                            <?php
-                                            if ($discount > 0) {
-                                            ?>
-                                                <span class="new">$<?php echo $discount_price ?></span>
-                                                <span class="old" style="text-decoration: line-through;color: #DC3545;opacity: 0.5;">$<?php echo $price ?></span>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <span class='new'>$<?php echo $price ?></span>
-                                            <?php
-                                            }
-                                            ?>
-                                        </span>
-                                    </div>
+                    <!-- Cart Product/Price Start -->
+                    <div class="cart-product-inner p-b-20 m-b-20 border-bottom product-inner" id="product_id<?php echo $id?>">
+                        <!-- Single Cart Product Start -->
+                        <div class="single-cart-product">
+                            <div class="cart-product-thumb">
+                                <a href="/product/detail/<?php echo $id?>"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>" alt="Cart Product" class="rounded"></a>
+                            </div>
+                            <div class="cart-product-content">
+                                <h3 class="title"><a href="/product/detail/<?php echo $id?>"><?php echo $name ?></a></h3>
+                                <div class="product-quty-price">
+                                    <span class="cart-quantity" id="quantity<?php echo $id ?>">Số lượng: <strong> <?php echo $amount ?> </strong></span>
+                                    <span class="price">
+                                        <?php
+                                        if ($discount > 0) {
+                                        ?>
+                                            <span class="new">$<?php echo $discount_price ?></span>
+                                            <span class="old" style="text-decoration: line-through;color: #DC3545;opacity: 0.5;">$<?php echo $price ?></span>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <span class='new'>$<?php echo $price ?></span>
+                                        <?php
+                                        }
+                                        ?>
+                                    </span>
                                 </div>
                             </div>
-                            <!-- Single Cart Product End -->
-
-                            <!-- Product Remove Start -->
-                            <div class="cart-product-remove">
-                                <a class="remove-cart" id="product<?php echo $id ?>"><i class="fa-duotone fa-trash-can"></i></a>
-                            </div>
-                            <!-- Product Remove End -->
-
                         </div>
-                        <!-- Cart Product/Price End -->
+                        <!-- Single Cart Product End -->
+
+                        <!-- Product Remove Start -->
+                        <div class="cart-product-remove">
+                            <a class="remove-cart" id="product<?php echo $id ?>"><i class="fa-duotone fa-trash-can"></i></a>
+                        </div>
+                        <!-- Product Remove End -->
+
+                    </div>
+                    <!-- Cart Product/Price End -->
             <?php
-                    }
                 }
             }
             ?>
@@ -85,26 +76,10 @@
         <div class="cart-product-total p-b-20 m-b-20 border-bottom">
             <span class="value">Tổng tiền</span>
             <?php
-            if (isset($_SESSION['user'])) {
-                $sql = "SELECT * 
-                        FROM `tb_cart` as c, `tb_product` as p
-                        WHERE c.username = '" . $_SESSION['user'] . "'
-                        AND c.id_product = p.id_product";
-                $result = mysqli_query($conn, $sql);
-                $count = mysqli_num_rows($result);
-                $total = 0;
-                if ($count > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $price = (float)$row['price'];
-                        $discount = (float)$row['discount'];
-                        $amount = (int)$row['amount'];
-                        $discount_price = $price - ($price * $discount / 100);
-                        $total += $discount_price * $amount;
-                    }
-                    echo "<span class='value' id='totalmoney'>" . $total . "$</span>";
-                } else {
-                    echo "<span class='value' id='totalmoney'>0.00$</span>";
-                }
+            if(!empty($user)){
+                echo "<span class='value' id='totalmoney'>" . $total_money . "$</span>";
+            } else {
+                echo "<span class='value' id='totalmoney'>0 $</span>";
             }
             ?>
         </div>
@@ -124,10 +99,10 @@
 <div class="header-action-btn header-action-btn-cart d-flex d-sm-none">
     <a id="viewcart" class="nav-content cursor-pointer">
         <i class="fa-duotone fa-bag-shopping fa-xl"></i>
-            <?php 
-            if($user){
-                echo "<span class='header-action-num'>" . $countCart . "</span>";
-            }
-            ?>
+        <?php
+        if (!empty($user)) {
+            echo "<span class='header-action-num'>" . $countCart . "</span>";
+        }
+        ?>
     </a>
 </div>

@@ -1,14 +1,4 @@
-<?php
-$id = $_GET['id'];
-// if (isset($_SESSION['user'])) {
-//     $user = $_SESSION['user'];
-//     $check = $conn->query("SELECT * FROM `tb_recent_product` WHERE username = '$user' AND id_product = $id")->num_rows;
-//     if ($check != 0) {
-//         $conn->query("DELETE FROM `tb_recent_product` WHERE username = '$user' AND id_product  = $id");
-//     }
-//     $conn->query("INSERT INTO `tb_recent_product`(username, id_product) VALUES ('$user', $id)");
-// }
-?>
+
 <!-- Single Product Section Start -->
 <div id="content">
     <div class="section section-margin">
@@ -21,6 +11,7 @@ $id = $_GET['id'];
                         <div class="single-product-img swiper-container product-gallery-top">
                             <div class="swiper-wrapper popup-gallery">
                                 <?php
+                                $id = $product_detail['id_product'];
                                 $image = $product_detail['image'];
                                 $name = $product_detail['name'];
                                 $price = $product_detail['price'];
@@ -129,7 +120,7 @@ $id = $_GET['id'];
                                 <div class="add-to_cart" id="product<?php echo $id ?>">
                                     <a class="btn btn-primary btn-hover-dark rounded" style="width: 110%">Thêm Vào Giỏ</a>
                                 </div>
-                                <a href="#" title="Wishlist" class="action" style="padding-top: 10px;"><i class="fa-regular fa-heart"></i></a>
+                                <a href="#" title="Wishlist" class="action"><i class="fa-regular fa-heart"></i></a>
                             </div>
                         </div>
                         <!-- Cart Button End -->
@@ -235,11 +226,6 @@ $id = $_GET['id'];
                 <div class="col-lg-12">
                     <div class="feature-slider">
                         <?php
-                        // $sql = "SELECT * FROM `tb_product` 
-                        //         WHERE id_category = '$id_category'
-                        //         AND id_product != $id";
-                        // $result = mysqli_query($conn, $sql);
-                        // $count = mysqli_num_rows($result);
                         $count = count($similar_product);
                         for ($i = 0; $i < $count; $i++) {
                             $row = $similar_product[$i];
@@ -256,7 +242,7 @@ $id = $_GET['id'];
                                         <div class="product">
                                             <!-- Thumb Start  -->
                                             <div class="thumb product-inner" id="product<?php echo $id ?>">
-                                                <a class="load-product cursor-pointer image" id="<?php echo $id ?>">
+                                                <a class="image" href="/product/detail/<?php echo $id?>">
                                                     <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>" />
                                                 </a>
                                                 <?php

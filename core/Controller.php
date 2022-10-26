@@ -16,12 +16,21 @@ class Controller {
     }
 
     public function render($view, $data = []){
-        extract($data);
-        if(file_exists(_DIR_ROOT . '/app/views/' . $view . '.php')){
-            require _DIR_ROOT . '/app/views/' . $view . '.php';
-        } else {
-            die('View ' . $view . ' không tồn tại');
+        if(!empty(View::$dataShare)){
+            $data = array_merge($data, View::$dataShare);
         }
+        
+        extract($data);
+
+        // $contentView = null;
+        // if(preg_match('~^layout~', $view) && file_exists(_DIR_ROOT . '/app/views/' . $view . '.php')){
+        //     require_once _DIR_ROOT . '/app/views/' . $view . '.php';
+        // } else {
+        //     $contentView = file_get_contents(_DIR_ROOT . '/app/views/' . $view . '.php');
+        //     $template = new Template();
+        //     $template->run($contentView, $data);
+        // }
+        require _DIR_ROOT . '/app/views/' . $view . '.php';
     }
 }
 ?>
