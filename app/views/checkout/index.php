@@ -9,13 +9,13 @@
                     <!-- Checkbox Form Title Start -->
                     <h3 class="title">Hoá Đơn Chi Tiết</h3>
                     <!-- Checkbox Form Title End -->
-                    <form action="./backend/checkout.php" method="POST" id="checkoutForm"  class="form-control">
+                    <form action="/checkout/validate" method="POST" id="checkoutForm">
                         <div class="row">
                             <!-- First Name Input Start -->
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label for="fullname">Họ và tên <span class="required">*</span></label>
-                                    <input name="fullname" placeholder="Nhập họ và tên" type="text" value="<?php echo $fullname ?>" class="form-control">
+                                    <input name="fullname" id="fullname" placeholder="Nhập họ và tên" type="text" value="<?php echo $fullname ?>" class="form-control">
                                 </div>
                             </div>
                             <!-- First Name Input End -->
@@ -24,7 +24,7 @@
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label for="phone">Điện Thoại <span class="required">*</span></label>
-                                    <input name="phone" placeholder="Nhập số điện thoại" type="text" value="<?php echo $phone ?>" class="form-control">
+                                    <input name="phone" id="phone" placeholder="Nhập số điện thoại" type="text" value="<?php echo $phone ?>" class="form-control">
                                 </div>
                             </div>
                             <!-- Last Name Input End -->
@@ -33,7 +33,7 @@
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label for="address">Địa chỉ <span class="required">*</span></label>
-                                    <input name="address" placeholder="Nhập địa chỉ giao hàng" type="text" value="<?php echo $address ?>" class="form-control">
+                                    <input name="address" id="address" placeholder="Nhập địa chỉ giao hàng" type="text" value="<?php echo $address ?>" class="form-control">
                                 </div>
                             </div>
                             <!-- Address Input End -->
@@ -42,7 +42,7 @@
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label for="province">Tỉnh <span class="required">*</span></label>
-                                    <input placeholder="Nhập tỉnh thành" type="text" name="province" class="form-control">
+                                    <input placeholder="Nhập tỉnh thành" type="text" name="province" id="province" class="form-control">
                                 </div>
                             </div>
                             <!-- State or Country Input End -->
@@ -51,7 +51,7 @@
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label for="city">Thành Phố <span class="required">*</span></label>
-                                    <input name="city" type="text" placeholder="Nhập thành phố" class="form-control">
+                                    <input name="city" id="city" type="text" placeholder="Nhập thành phố" class="form-control">
                                 </div>
                             </div>
                             <!-- Town or City Name Input End -->
@@ -60,7 +60,7 @@
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label for="email">Email <span class="required">*</span></label>
-                                    <input name="email" placeholder="Nhập email nhận thông báo" type="email" value="<?php echo $email ?>" class="form-control">
+                                    <input name="email" id="email" placeholder="Nhập email nhận thông báo" type="email" value="<?php echo $email ?>" class="form-control">
                                 </div>
                             </div>
                             <!-- Email Address Input End -->
@@ -68,7 +68,7 @@
                         </div>
                         <!-- Different Address End -->
                         <div class="order-button-payment">
-                            <button class="btn btn-primary btn-hover-dark rounded-0 w-100" type="submit" name="submit">Đặt Hàng</button>
+                            <button class="btn btn-primary btn-hover-dark rounded-0 w-100" type="button">Đặt Hàng</button>
                         </div>
                 </div>
                 </form>

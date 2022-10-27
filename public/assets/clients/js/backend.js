@@ -92,8 +92,6 @@ var callChangePass = function () {
 
     document.querySelector('#changePassForm button[type=button]').setAttribute('type', 'submit').click();
 }
-
-// Change Password Form
 $(document).on('click', '#changePassForm button[name=submit]', function () {
     callChangePass();
 })
@@ -102,3 +100,29 @@ $(document).on('keypress', '#changePassForm', function (e) {
         callChangePass()
     }
 })
+
+//* Checkout Form
+var callCheckout = function () {
+    let fullname = document.querySelector('#checkoutForm input[id=fullname]').value;
+    let phone = document.querySelector('#checkoutForm input[id=phone]').value;
+    let address = document.querySelector('#checkoutForm input[id=address]').value;
+    let province = document.querySelector('#checkoutForm input[id=province]').value;
+    let city = document.querySelector('#checkoutForm input[id=city]').value;
+    let email = document.querySelector('#checkoutForm input[id=email]').value;
+
+    //console.log(fullname, phone, address, province, city, email);
+    if(fullname == '' || fullname === undefined || phone == '' || phone === undefined || address == '' || address === undefined || province == '' || province === undefined || city == '' || city === undefined || email == '' || email === undefined){
+        notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
+        return;
+    }
+    document.querySelector('#checkoutForm button[type=button]').setAttribute('type', 'submit').click();
+}
+
+$(document).on('click', '#checkoutForm button[type=button]', function(){
+    callCheckout();
+});
+$(document).on('keypress', '#checkoutForm', function (e) {
+    if (e.which == 13) {
+        callCheckout()
+    }
+});

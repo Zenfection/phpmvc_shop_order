@@ -146,7 +146,7 @@ class Account extends Controller {
             return true;
         }
     }
-    public function change_password($user){
+    private function change_password($user){
         $user = Session::data('user');
         $data = [
             'password' => md5($_POST['password'])

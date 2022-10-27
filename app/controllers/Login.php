@@ -12,10 +12,11 @@ class Login extends Controller {
 
     public function validate(){
         $request = new Request();
+        $response = new Response();
         if($request->isPost()){
             //set rule
             $request->rules([
-                'username' => 'min:5|max:50|callback_login_user',
+                'username' => 'min:5|max:50',
                 'password' => 'min:3'
             ]);
 
@@ -30,18 +31,17 @@ class Login extends Controller {
             $validate = $request->validate();
             if(!$validate){
                 Session::data('msg', 'Đăng nhập lỗi, kiểm tra tài khoản và mật khẩu');
-                $response = new Response();
                 $response->redirect('login');
             } else {
-                $response = new Response();
                 Session::data('msg', 'Đăng nhập thành công');
                 Session::data('user', $_POST['username']);
+                $this->login_user($_POST['username']);
                 $response->redirect('home');
             }
         }
     }
 
-    public function login_user($username){
+    private function login_user($username){
         $db = new Database();
         $password = md5($_POST['password']);
         $check = $db->table('tb_user')->where('username', '=', $username)->where('password', '=', $password)->count();
