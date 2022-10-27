@@ -14,7 +14,12 @@ class Checkout extends Controller{
         $cart = $this->models('CartModel')->getCartUser($user);
 
         if(!$cart){
-            Session::data('msg', 'Bạn chưa có sản phẩm nào trong giỏ hàng');
+            Session::data('msg', [
+                'type' => 'warning',
+                'icon' => 'fa-duotone fa-basket-shopping-simple',
+                'position' => 'top-right',
+                'content' => 'Giỏ hàng của bạn đang trống'
+            ]);
             $response = new Response();
             $response->redirect('');
             return;
@@ -62,12 +67,22 @@ class Checkout extends Controller{
         $validate = $request->validate();
         $response = new Response();
         if(!$validate){
-            Session::data('msg', 'Đặt hàng lỗi, vui lòng kiểm tra lại');
+            Session::data('msg', [
+                'type' => 'error',
+                'icon' => 'fa-duotone fa-circle-exclama',
+                'position' => 'center',
+                'content' => 'Đặt hàng lỗi, vui lòng kiểm tra lại'
+            ]);
             $response->redirect('checkout');
         } else {
             $id_order = $this->checkoutOrder($_POST['fullname'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['province'], $_POST['city']);
 
-            Session::data('msg', 'Đặt hàng thành công');
+            Session::data('msg', [
+                'type' => 'success',
+                'icon' => 'fa-duotone fa-cart-circle-check',
+                'position' => 'center',
+                'content' => 'Đặt hàng thành công'
+            ]);
             $response->redirect('account/order/'.$id_order);
         }
     }

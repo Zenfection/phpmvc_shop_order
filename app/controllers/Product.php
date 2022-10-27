@@ -40,8 +40,6 @@ class Product extends Controller{
         $this->data['sub_content']['similar_product'] = $similarProduct;
         $this->data['content'] = 'products/detail';
 
-        $this->data['sub_content']['msg'] = Session::data('msg');
-
         $this->render('layouts/client_layout', $this->data);
     }
 }

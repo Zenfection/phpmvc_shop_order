@@ -12,6 +12,7 @@ class Register extends Controller {
 
     public function validate(){
         $request = new Request();
+        $response = new Response();
         if($request->isPost()){
             //set rule
             $request->rules([
@@ -32,13 +33,21 @@ class Register extends Controller {
             // validate
             $validate = $request->validate();
             if(!$validate){
-                Session::data('msg', 'Đăng ký lỗi, kiểm tra lại thông tin');
-                $response = new Response();
+                Session::data('msg', [
+                    'type' => 'error',
+                    'icon' => 'fa-duotone fa-circle-exclama',
+                    'position' => 'center',
+                    'content' => 'Đăng ký thành công'
+                ]);
                 $response->redirect('register');
             } else {
-                $response = new Response();
                 $this->register_user($_POST['fullname'], $_POST['email'], $_POST['username'], $_POST['password']);
-                Session::data('msg', 'Đăng ký thành công');
+                Session::data('msg', [
+                    'type' => 'success',
+                    'icon' => 'fa-duotone fa-user-plus',
+                    'position' => 'center',
+                    'content' => 'Đăng ký thành công'
+                ]);
                 $response->redirect('login');
             }
         }

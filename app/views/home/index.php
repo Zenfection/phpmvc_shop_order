@@ -1,19 +1,10 @@
 <?php
     if (!empty($data['msg'])) {
-        $msg = $data['msg'];
-        $check = strtolower($msg);
-        // check từ khoá
-        if (str_contains($check, 'thành công')) {
-            echo "<script>notify('success', 'fa-duotone fa-user-check', 'bottom', '$msg');</script>";
-        } else if (str_contains($check, 'lỗi')) {
-            echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', '$msg');</script>";
-        } else if (str_contains($check, 'đã huỷ đơn')) {
-            echo "<script>notify('success', 'fa-duotone fa-box-archive', 'center', $msg);</script>";
-        } else if (str_contains($check, 'không huỷ đơn')) {
-            echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', $msg);";
-        } else {
-            echo "<script>notify('warning', 'fa-duotone fa-user-xmark', 'center', $msg);</script>";
-        }
+        $type_msg = $msg['type'];
+        $icon_msg = $msg['icon'];
+        $pos_msg = $msg['position'];
+        $content_msg = $msg['content'];
+        echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
     }
 ?>
 <!-- start hero -->

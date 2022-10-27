@@ -1,14 +1,11 @@
 <?php
 $statusVie = ["Đang xử lý", "Đang giao hàng", "Đã giao hàng", "Đã hủy"];
 if (!empty($data['msg'])) {
-    $msg = $data['msg'];
-    $check = strtolower($msg);
-    // check từ khoá
-    if (str_contains($check, 'đã huỷ đơn')) {
-        echo "<script>notify('success', 'fa-duotone fa-box-archive', 'center', $msg);</script>";
-    } else if (str_contains($check, 'không huỷ đơn')) {
-        echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', $msg);";
-    }
+    $type_msg = $msg['type'];
+    $icon_msg = $msg['icon'];
+    $pos_msg = $msg['position'];
+    $content_msg = $msg['content'];
+    echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
 }
 ?>
 
@@ -114,7 +111,7 @@ if (!empty($data['msg'])) {
                         </div>
                         <?php if ($status == 'pending') {
                         ?>
-                            <a href="/account/cancel_order/<?php echo $id_order?>" class="btn btn btn-gray-deep btn-hover-primary m-t-30">Huỷ Hàng</a>
+                            <a href="/account/cancel_order/<?php echo $id_order ?>" class="btn btn btn-gray-deep btn-hover-primary m-t-30">Huỷ Hàng</a>
                         <?php
                         }
                         ?>

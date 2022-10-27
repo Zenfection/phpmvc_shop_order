@@ -43,9 +43,19 @@ class Account extends Controller {
 
         $result = $this->models('AccountModel')->cancelOrder($user, $id);
         if($result){
-            Session::data('msg', 'Đã hủy đơn hàng thành công');
+            Session::data('msg', [
+                'type' => 'success',
+                'icon' => 'fa-duotone fa-check-double',
+                'position' => 'center',
+                'content' => 'Đã hủy đơn hàng thành công'
+            ]);
         } else {
-            Session::data('msg', 'Không Hủy đơn hàng được');
+            Session::data('msg', [
+                'type' => 'error',
+                'icon' => 'fa-duotone fa-shield-xmark',
+                'position' => 'center',
+                'content' => 'Không hủy đơn hàng được'
+            ]);
         }
         $response = new Response();
         $response->redirect('/account/order/'.$id);
@@ -53,7 +63,12 @@ class Account extends Controller {
 
     public function logout(){
         Session::delete('user');
-        Session::data('msg', 'Dăng xuất thành công');
+        Session::data('msg', [
+            'type' => 'success',
+            'icon' => 'fa-duotone fa-user-slash',
+            'position' => 'bottom',
+            'content' => 'Đã đăng xuất thành công'
+        ]);
 
         $response = new Response();
         $response->redirect('');

@@ -30,10 +30,20 @@ class Login extends Controller {
             // validate
             $validate = $request->validate();
             if(!$validate){
-                Session::data('msg', 'Đăng nhập lỗi, kiểm tra tài khoản và mật khẩu');
+                Session::data('msg', [
+                    'type' => 'error',
+                    'icon' => 'fa-duotone fa-user-xmark',
+                    'position' => 'bottom',
+                    'content' => 'Đăng nhập thất bại'
+                ]);
                 $response->redirect('login');
             } else {
-                Session::data('msg', 'Đăng nhập thành công');
+                Session::data('msg', [
+                    'type' => 'success',
+                    'icon' => 'fa-duotone fa-user-check',
+                    'position' => 'bottom',
+                    'content' => 'Đăng nhập thành công'
+                ]);
                 Session::data('user', $_POST['username']);
                 $this->login_user($_POST['username']);
                 $response->redirect('home');

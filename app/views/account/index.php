@@ -3,23 +3,17 @@ $fullname = $data['fullname'];
 $email = $data['email'];
 $phone = $data['phone'];
 $address = $data['address'];
+
 if (!empty($data['getOrder'])) {
     $getOrder = $data['getOrder'];
 }
 
 if (!empty($data['msg'])) {
-    $msg = $data['msg'];
-    $check = strtolower($msg);
-    // check từ khoá
-    if (str_contains($check, 'thành công')) {
-        echo "<script>notify('success', 'fa-duotone fa-user-check', 'bottom', '$msg');</script>";
-    } else if (str_contains($check, 'lỗi')) {
-        echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', '$msg');</script>";
-    } else if (str_contains($check, 'đã thay đổi')) {
-        echo "<script>notify('info', 'fa-duotone fa-user-check', 'center', '$msg');</script>";
-    } else if(str_contains($check, 'không có gì thay đổi')) {
-        echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', '$msg');;</script>";
-    }
+    $type_msg = $msg['type'];
+    $icon_msg = $msg['icon'];
+    $pos_msg = $msg['position'];
+    $content_msg = $msg['content'];
+    echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
 }
 ?>
 <!-- My Account Section Start -->
@@ -98,7 +92,7 @@ if (!empty($data['msg'])) {
                                                                     <td><?php echo $order_date ?></td>
                                                                     <td><?php echo $status ?></td>
                                                                     <td><?php echo $total_money ?>$</td>
-                                                                    <td><a class="btn btn btn-dark btn-hover-primary btn-sm rounded" href="/account/order/<?php echo $id_order?>">Xem</a></td>
+                                                                    <td><a class="btn btn btn-dark btn-hover-primary btn-sm rounded" href="/account/order/<?php echo $id_order ?>">Xem</a></td>
                                                                 </tr>
                                                     <?php
                                                             }
