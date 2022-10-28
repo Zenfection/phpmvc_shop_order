@@ -82,7 +82,7 @@
 
                     <!-- Cart Button left Side Start -->
                     <div class="cart-btn-lef-side m-b-20">
-                        <a class="btn btn btn-gray-deep btn-hover-primary" href="/shop/page/1">Tiếp tục mua</a>
+                        <a class="btn btn btn-gray-deep btn-hover-primary" href="/shop">Tiếp tục mua</a>
                     </div>
                     <!-- Cart Button left Side End -->
 

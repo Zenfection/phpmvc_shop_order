@@ -17,7 +17,7 @@
                             <!-- render session -->
                             <li><a id="home" href="/">Trang Chủ</a></li>
                             <li><a id="about" href="/about">Giới Thiệu</a></li>
-                            <li><a id="shop" href="/shop/page">Shop</a></li>
+                            <li><a id="shop" href="/shop/category">Shop</a></li>
                             <li><a id="contact" href="/contact">Liên Hệ</a></li>
                         </ul>
                     </div>

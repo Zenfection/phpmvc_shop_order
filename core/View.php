@@ -1,5 +1,4 @@
 <?php
-
 class View{
     static public $dataShare = array();
 

@@ -1,5 +1,7 @@
 <?php
 
+require_once 'vendor/autoload.php';
+
 define('_DIR_ROOT', $_SERVER["DOCUMENT_ROOT"]);
 
 // Xử lý http root

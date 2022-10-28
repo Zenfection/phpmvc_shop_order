@@ -1,7 +1,6 @@
 $(function () {
     /* Function
     ------------------------- */
-
     // *Popup Notification
     function notify(type, icon, position, msg) {
         Lobibox.notify(type, {
@@ -18,30 +17,6 @@ $(function () {
     function checkLoged() {
         return document.querySelectorAll('#logged').length == 0;
     }
-    //* choose num page paginator page
-    function choosePage(id) {
-        let short_by = $("option:selected", '.nice-select').val();
-        if (short_by != 'default') {
-            let total = parseInt($('.shop-top-show').text().trim().replace(/[^0-9\.]+/g, ''));
-            $.ajax({
-                type: 'post',
-                url: '/shop/page/1',
-                data: {
-                    page: id,
-                    short_by: short_by,
-                    total: total
-                },
-                success: function (data) {
-                    $('#product-content').html(data);
-                    AOS.init();
-                }
-            });
-            // window.location.href = '/shop/shortby/';
-        } else {
-            let category = '';
-            window.location.href = `/shop/page/${id}`;
-        }
-    }
 
     //* Check product exist or not in cart by id
     function checkProductExistCart(id) {
@@ -52,76 +27,108 @@ $(function () {
         return false;
     }
 
+    //* search Product by name, listener via Enter
+    // $(document).on("keypress", "#searchProduct", function (e) {
+    //     if (e.which == 13) {
+    //         let search = $("#searchProduct input").val();
+    //         $.ajax({
+    //             type: "post",
+    //             url: "./shop.php",
+    //             data: {
+    //                 search: search,
+    //             },
+    //             success: function (data) {
+    //                 $("#content").html(data);
+    //                 AOS.init();
+    //             },
+    //         });
+    //     }
+    // });
+
     /*-------------------------
         Ajax Load Data Nagivation
     ---------------------------*/
 
-    $(document).on('click', '.category-filter', function () {
-        let category_filter = $(this).attr('id');
-        let active = $(this).parent();
-        active.addClass('active').siblings().removeClass('active');
-        $.ajax({
-            type: "post",
-            url: "./content/filter-shop.php",
-            data: {
-                category_filter: category_filter,
-            },
-            success: function (data) {
-                $("#shop-content").html(data);
-                AOS.init();
-            },
-        });
-    });
-
     // SHOP
+    //* Search Product
+    function searchProduct(){
+        let sortby = $("option:selected", '.nice-select').val();
+        let category = $('.sidebar-list li a.active').attr('id');
+        let keyword = $('#searchFilterProduct').val(); 
+
+        if($keyword = ''){
+            window.location.href = `/shop/category/${category}/${sortby}/1`;
+        } else {
+            window.location.href = `/shop/category/${category}/${sortby}/1/${keyword}`;
+        }
+    }
     $(document).on("keypress", "#searchFilterProduct", function (e) {
         if (e.which == 13) {
-            let search_filter = $(this).val();
-            window.location.href=`/shop/search/${search_filter}`;
+            searchProduct();
         }
     });
-
     $(document).on("click", ".search-box button", function () {
-        let search_filter = $(this).siblings('input').val();
-        window.location.href=`/shop/search/${search_filter}`;
+        searchProduct();
     });
 
+    //* SortBy Product
     $(document).on("change", ".nice-select", function () {
-        let short_by = $("option:selected", this).val();
-        let total = parseInt($('.shop-top-show').text().trim().replace(/[^0-9\.]+/g, ''));
-        let category = $('.sidebar-list li.active a').attr('id');
-        $.ajax({
-            type: "post",
-            url: "./content/short-by-shop.php",
-            data: {
-                short_by: short_by,
-                total: total,
-                category: category
-            },
-            success: function (data) {
-                $("#product-content").html(data);
-                AOS.init();
-            }
-        });
-    });
-    //* search Product by name, listener via Enter
-    $(document).on("keypress", "#searchProduct", function (e) {
-        if (e.which == 13) {
-            let search = $("#searchProduct input").val();
-            $.ajax({
-                type: "post",
-                url: "./shop.php",
-                data: {
-                    search: search,
-                },
-                success: function (data) {
-                    $("#content").html(data);
-                    AOS.init();
-                },
-            });
+        let sortby = $("option:selected", this).val();
+        let category = $('.sidebar-list li a.active').attr('id');
+        let keyword = $('#searchFilterProduct').val();
+        if($keyword = ''){
+            window.location.href = `/shop/category/${category}/${sortby}/1`;
+        } else {
+            window.location.href = `/shop/category/${category}/${sortby}/1/${keyword}`;
         }
     });
 
+    //* Pagination Product
+    //* choose num page paginator page
+    function choosePage(id) {
+        let sortby = $("option:selected", '.nice-select').val();
+        let category = $('.sidebar-list li a.active').attr('id');
+        let keyword = $('.search-box button').siblings('input').val();
+        if(keyword == ''){
+            window.location.href = "/shop/category/" + category + "/" + sortby + "/" + id;
+        }else {
+            window.location.href = "/shop/category/" + category + "/" + sortby + "/" + id + "/" + keyword;
+        }
+    }
+
+    $(document).keydown('.shop_wrapper grid_4', function (e) {
+        let next = $('.page-item a[aria-label="Next"]');
+        let prev = $('.page-item a[aria-label="Prev"]');
+        switch (e.which) {
+            case 37: //left arrow key
+                if (prev.length > 0) {
+                    let id = parseInt($(prev).attr('name').split('page=')[1]);
+                    choosePage(id - 1);
+                }
+                break;
+            case 39: //right arrow key
+                if (next.length > 0) {
+                    let id = parseInt($(next).attr('name').split('page=')[1]);
+                    choosePage(id + 1);
+                }
+                break;
+        }
+    })
+
+    $(document).on('click', '.page-item a[aria-label="Next"]', function () {
+        let id = parseInt($(this).attr('name').split('page=')[1]);
+        choosePage(id + 1);
+    });
+    $(document).on('click', '.page-item a[aria-label="Prev"]', function () {
+        let id = parseInt($(this).attr('name').split('page=')[1]);
+        choosePage(id - 1);
+    });
+    $(document).on('click', '#page-choose', function () {
+        let id = parseInt($(this).attr('name').split('page=')[1]);
+        choosePage(id);
+    });
+
+    //* Add, Remove Product to Cart
     function getQtyProductCart(id) {
         let amount = parseInt(
             $("#quantity" + id)
@@ -204,9 +211,7 @@ $(function () {
         });
     }
 
-    /*-------------------------
-        Ajax Shop Page
-    ---------------------------*/
+
     $(document).on("click", ".add-to_cart", function () {
         if (!checkLoged()) {
             notify('warning', 'fa-duotone fa-cart-circle-xmark', 'right', 'Vui lòng đăng nhập để mua hàng');
@@ -229,37 +234,6 @@ $(function () {
         addProduct(id, qty);
     });
 
-    $(document).keydown('.shop_wrapper grid_4', function (e) {
-        let next = $('.page-item a[aria-label="Next"]');
-        let prev = $('.page-item a[aria-label="Prev"]');
-        switch (e.which) {
-            case 37: //left arrow key
-                if (prev.length > 0) {
-                    let id = parseInt($(prev).attr('name').split('page=')[1]);
-                    choosePage(id - 1);
-                }
-                break;
-            case 39: //right arrow key
-                if (next.length > 0) {
-                    let id = parseInt($(next).attr('name').split('page=')[1]);
-                    choosePage(id + 1);
-                }
-                break;
-        }
-    })
-
-    $(document).on('click', '.page-item a[aria-label="Next"]', function () {
-        let id = parseInt($(this).attr('name').split('page=')[1]);
-        choosePage(id + 1);
-    });
-    $(document).on('click', '.page-item a[aria-label="Prev"]', function () {
-        let id = parseInt($(this).attr('name').split('page=')[1]);
-        choosePage(id - 1);
-    });
-    $(document).on('click', '#page-choose', function () {
-        let id = parseInt($(this).attr('name').split('page=')[1]);
-        choosePage(id);
-    });
 
 
     /*-------------------------

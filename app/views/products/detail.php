@@ -312,10 +312,7 @@
 </div>
 <!-- Product Section End -->
 
-
-<script src="<?php echo _WEB_ROOT?>/public/assets/clients/js/plugins/tiny-slider.js"></script>
 <script>
-
     // feature-slidier
     if (document.getElementsByClassName('feature-slider')[0] != undefined) {
         var slider = tns({

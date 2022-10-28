@@ -7,11 +7,10 @@ class Shop extends Controller {
         
     }
 
-    public function page($id = 1){
-        $data['title'] = 'Cửa Hàng';
+    private function runFrist(){
         $product = $this->db->table('tb_product')->get();
         $category = $this->db->table('tb_category')->get();
-        
+
         //* count product category
         $countCategory = [];
         foreach($category as $key => $value){
@@ -26,82 +25,78 @@ class Shop extends Controller {
             $recentProduct = $this->models('ProductModel')->recentViewProduct($user, 5);
             $this->data['sub_content']['recent_product'] = $recentProduct;
         }
-        
+
         $this->data['sub_content']['product'] = $product;
         $this->data['sub_content']['category'] = $category;
         $this->data['sub_content']['count_category'] = $countCategory;
-        $this->data['sub_content']['page'] = $id;
-        $this->data['page_title'] = $data['title'];
-        $this->data['content'] = 'shop/index';
 
         $this->data['sub_content']['msg'] = Session::flash('msg');
-
-        $this->render('layouts/client_layout', $this->data);
     }
 
-    public function category($categoryFilter, $page = 1){
+    public function category($categoryFilter = 'all', $sortby = 'default', $page = 1, $search = ''){
+        $this->runFrist();
+        $keyword = urldecode($search);
+
         $data['title'] = 'Sản phẩm ' . ucfirst($categoryFilter);
-        $product = $this->models('ProductModel')->getProductCategory($categoryFilter);
-        $category = $this->db->table('tb_category')->get();
         
-        $countCategory = [];
-        foreach($category as $key => $value){
-            $productFilter = $this->models('ProductModel')->getProductCategory($value['id_category']);
-            $count = count($productFilter);
-            $countCategory = array_merge($countCategory, [$value['id_category'] => $count]);
+        $handle = $this->runHandle($categoryFilter, $sortby, $keyword);
+        if(!$handle){
+            $data['title'] = 'Cửa Hàng';
+            $this->data['page_title'] = $data['title'];
         }
 
-
-        //* recent view product
-        $user = Session::data('user');
-        if(!empty($user)){
-            $recentProduct = $this->models('ProductModel')->recentViewProduct($user, 5);
-            $this->data['sub_content']['recent_product'] = $recentProduct;
-        }
-
-        $this->data['sub_content']['product'] = $product;
-        $this->data['sub_content']['category'] = $category;
-        $this->data['sub_content']['count_category'] = $countCategory;
+        $this->data['sub_content']['current_category'] = $categoryFilter;
+        $this->data['sub_content']['current_sortby'] = $sortby;
+        $this->data['sub_content']['keyword'] = $keyword;
         $this->data['sub_content']['page'] = $page;
-        $this->data['page_title'] = $data['title'];
         $this->data['content'] = 'shop/index';
-
-        $this->data['sub_content']['msg'] = Session::flash('msg');
 
         $this->render('layouts/client_layout', $this->data);
     }
 
-    public function search($keyword, $page = 1){
-        $keyword = urldecode($keyword);
-        $data['title'] = 'Tìm kiếm ' . ucfirst($keyword);
-        $product = $this->models('ProductModel')->searchProduct($keyword);
-        $category = $this->db->table('tb_category')->get();
-        
-        $countCategory = [];
-        foreach($category as $key => $value){
-            $productFilter = $this->models('ProductModel')->getProductCategory($value['id_category']);
-            $count = count($productFilter);
-            $countCategory = array_merge($countCategory, [$value['id_category'] => $count]);
+    private function runHandle($category, $sortby, $keyword){
+        if($sortby == 'default'){
+            if($category == 'all'){
+                if($keyword == ''){
+                    //? category = all, sortby = default, keyword = ''
+                    return false;
+                } else {
+                    //? category = all, sortby = default, keyword = '...'
+                    $dataProduct = $this->models('ProductModel')->searchProduct($keyword);
+                    $this->data['page_title'] = 'Tìm kiếm ' . ucfirst($keyword);
+                    $this->data['sub_content']['product'] = $dataProduct;
+                }
+            } else {
+                //? category = '...', sortby = default, keyword = ''
+                $dataProduct = $this->models('ProductModel')->getProductCategory($category, $keyword);
+                $this->data['page_title'] = 'Sản phẩm ' . ucfirst($category);
+                $this->data['sub_content']['product'] = $dataProduct;
+            }
+        } else {
+            //? category = '...', sortby = '...', keyword = '...' or ''
+            if ($sortby == 'selling'){
+                $this->data['page_title'] = 'Sản phẩm bán chạy';
+                $dataProduct = $this->models('ProductModel')->sellingFilterProduct($category, $keyword);
+                $this->data['sub_content']['product'] = $dataProduct;
+    
+            } else if($sortby == 'price_asc'){
+                $this->data['page_title'] = 'Sản phẩm giá tăng dần';
+                $dataProduct = $this->models('ProductModel')->priceFilterProduct($category, 'ASC', $keyword);
+                $this->data['sub_content']['product'] = $dataProduct;
+    
+            } else if($sortby == 'price_desc'){
+                $this->data['page_title'] = 'Sản phẩm giá giảm dần';
+                $dataProduct = $this->models('ProductModel')->priceFilterProduct($category, 'DESC', $keyword);
+                $this->data['sub_content']['product'] = $dataProduct;
+    
+            } else if($sortby == 'best_discount'){
+                $this->data['page_title'] = 'Sản phẩm giảm giá nhiều nhất';
+                $dataProduct = $this->models('ProductModel')->discountFilterProduct($category, $keyword);
+                $this->data['sub_content']['product'] = $dataProduct;
+            }
         }
 
-        //* recent view product
-        $user = Session::data('user');
-        if(!empty($user)){
-            $recentProduct = $this->models('ProductModel')->recentViewProduct($user, 5);
-            $this->data['sub_content']['recent_product'] = $recentProduct;
-        }
-
-        $this->data['sub_content']['product'] = $product;
-        $this->data['sub_content']['category'] = $category;
-        $this->data['sub_content']['count_category'] = $countCategory;
-        $this->data['sub_content']['page'] = $page;
-        $this->data['sub_content']['keyword'] = $keyword;
-        $this->data['page_title'] = $data['title'];
-        $this->data['content'] = 'shop/index';
-
-        $this->data['sub_content']['msg'] = Session::flash('msg');
-
-        $this->render('layouts/client_layout', $this->data);
+        return true;
     }
 }
 ?>

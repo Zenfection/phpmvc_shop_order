@@ -33,8 +33,10 @@ class App{
     }
 
     public function getUrl(){
-        if(!empty($_SERVER["REQUEST_URI"])){
-            $url = $_SERVER["REQUEST_URI"];
+        //$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $uri = $_SERVER['REQUEST_URI'];
+        if(!empty($uri)){
+            $url = $uri;
         } else {
             $url = '/';
         }
@@ -127,6 +129,9 @@ class App{
     public function getCurrentController(){
         return $this->__controller;
     }
+    public function setCurrentParams($params){
+        $this->__params = $params;
+    }
 
     public function handleRouteMiddleWare($keyRoute, $db){
         global $config;
@@ -159,7 +164,10 @@ class App{
                         if(!empty($db)){
                             $middleWareObject->db = $db;
                         }
-                        $middleWareObject->handle();
+                        $params = $middleWareObject->handle();
+                        if(!empty($params)){
+                            $this->__params = $params;
+                        }
                     }
                 }
             }

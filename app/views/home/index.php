@@ -40,7 +40,7 @@
                 <?php
                 if (!empty($user)) {
                 ?>
-                    <a class="nav-content btn btn-primary mt-4" id="shop" href="/shop/page">Mua Hàng
+                    <a class="nav-content btn btn-primary mt-4" id="shop" href="/shop">Mua Hàng
                         <i class="fa-duotone fa-cart-shopping-fast fa-xl"></i>
                     </a>
                 <?php
