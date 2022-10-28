@@ -105,21 +105,27 @@ class ProductModel extends Model {
         return $data;
     }
 
-    public function sellingFilterProduct($category, $keyword = ''){
+    public function sellingFilterProduct($category, $keyword = '', $limit = 'all'){
+        if($limit == 'all'){
+            $limit = $this->db->table('tb_product')->count();
+        }
+
         if($keyword == ''){
             if($category == 'all'){
                 $sql = "SELECT p.*, COUNT(od.amount) as total_amount
                         FROM `tb_order_details` as od, `tb_product` as p
                         WHERE od.id_product = p.id_product
                         GROUP BY p.id_product
-                        ORDER BY total_amount DESC";
+                        ORDER BY total_amount DESC
+                        LIMIT $limit";
             } else {
                 $sql = "SELECT p.*, COUNT(od.amount) as total_amount
                         FROM `tb_order_details` as od, `tb_product` as p
                         WHERE od.id_product = p.id_product
                         AND id_category = '$category'
                         GROUP BY p.id_product
-                        ORDER BY total_amount DESC";
+                        ORDER BY total_amount DESC
+                        LIMIT $limit";
             }
         } else {
             if($category == 'all'){
@@ -131,7 +137,8 @@ class ProductModel extends Model {
                             ORDER BY total_amount DESC) as temp 
                         WHERE LOWER(temp.name) 
                         COLLATE UTF8_GENERAL_CI 
-                        LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%');";
+                        LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%');
+                        LIMIT $limit";
             } else {
                 $sql = "SELECT * FROM 
                             (SELECT p.*, COUNT(od.amount) as total_amount
@@ -140,7 +147,8 @@ class ProductModel extends Model {
                             AND p.id_category = '$category') as temp 
                         WHERE LOWER(temp.name) 
                         COLLATE UTF8_GENERAL_CI 
-                        LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%')";
+                        LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%')
+                        LIMIT $limit";
             }
         }
         

@@ -12,29 +12,29 @@
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
-        <li>
-            <a id="sidebar-dashboard" style="cursor: pointer;">
+        <li <?php echo ($current_sidebar == 'dashboard') ? 'class="mm-active"': ''?>>
+            <a id="sidebar-dashboard" href="/admin/dashboard">
                 <div class="parent-icon"><i class='bx bx-home'></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
         <li class="menu-label">Quản lí Hàng</li>
-            <li>
-                <a id="sidebar-product" style="cursor: pointer;">
+            <li <?php echo ($current_sidebar == 'product') ? 'class="mm-active"': ''?>>
+                <a id="sidebar-product" href="/admin/dashboard/product">
                     <div class="parent-icon"><i class='lni lni-gift'></i>
                     </div>
                     <div class="menu-title">Sản Phẩm</div>
                 </a>
             </li>
-            <li>
+            <li <?php echo ($current_sidebar == 'order') ? 'class="mm-active"': ''?>>
                 <a id="sidebar-order" style="cursor: pointer;">
                     <div class="parent-icon"><i class='lni lni-shopping-basket'></i>
                     </div>
                     <div class="menu-title">Đơn Hàng</div>
                 </a>
             </li>
-            <li>
+            <li <?php echo ($current_sidebar == 'customer') ? 'class="mm-active"': ''?>>
                 <a id="sidebar-customer" style="cursor: pointer;">
                     <div class="parent-icon"><i class='lni lni-users'></i>
                     </div>
