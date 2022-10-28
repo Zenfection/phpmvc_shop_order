@@ -18,7 +18,7 @@ if (!empty($user)) {
                     <div class="product">
                         <div class="thumb">
                             <a class="image" href="/product/detail/<?php echo $id ?>">
-                                <img class="fit-image first-image p-10" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>" id="img-product<?php echo $id ?>">
+                                <img class="fit-image first-image p-10" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" id="img-product<?php echo $id ?>">
                             </a>
                         </div>
                     </div>

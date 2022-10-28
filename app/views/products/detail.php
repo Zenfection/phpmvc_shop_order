@@ -22,7 +22,7 @@
                                 $id_category = $product_detail['id_category'];
                                 ?>
 
-                                <img class='w-100' id="img-product<?php echo $id ?>" src='<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>' alt='Product' style="padding-right: 25%;">
+                                <img class='w-100' id="img-product<?php echo $id ?>" src='<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>' alt='Product' style="padding-right: 25%;">
                             </div>
                         </div>
                         <!-- Single Product Image End -->
@@ -140,7 +140,7 @@
                         <div class="payment-option m-t-20 d-flex">
                             <span><strong>Thanh Toán: </strong></span>
                             <a href="#">
-                                <img class="fit-image m-l-5" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/payment/payment_large.png" alt="Payment Option Image">
+                                <img class="fit-image m-l-5" src="<?php echo _WEB_ROOT; ?>/assets/images/payment/payment_large.png" alt="Payment Option Image">
                             </a>
                         </div>
                         <!-- Payment Option End -->
@@ -243,7 +243,7 @@
                                             <!-- Thumb Start  -->
                                             <div class="thumb product-inner" id="product<?php echo $id ?>">
                                                 <a class="image" href="/product/detail/<?php echo $id?>">
-                                                    <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>" />
+                                                    <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" />
                                                 </a>
                                                 <?php
                                                 if ($discount > 0) {

@@ -1,0 +1,75 @@
+/*=======================================
+    4.05 Login Register CSS
+=========================================*/
+.login-wrapper, .register-wrapper{
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+    padding: 80px;
+    border: 1px solid $gray-100;
+    border-radius: 5px;
+    text-align: left;
+    overflow: hidden;
+    @media #{$tablet-device}{
+        padding: 40px;
+    }
+    @media #{$large-mobile}{
+        padding: 30px;
+    }
+    @media #{$extra-small-mobile}{
+        padding: 25px 10px;
+    }
+    & .title{
+        font-weight: 800;
+        font-size: 30px;
+        @media #{$large-mobile, $tablet-device}{
+            font-size: 26px;
+        }
+    }
+    & .desc-content {
+        font-size: 14px;
+    }
+    & .single-input-item{
+        & input{
+            background: $white;
+            border-radius: 5px;
+            box-shadow: none;
+            color: $dark;
+            font-size: 14px;
+            height: 50px;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 100%;
+            border: 1px solid $gray-100;
+            &:focus{
+                border: 1px solid $gray-100;
+            }
+        }
+        & .login-reg-form-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            & .btn {
+                font-weight: 600;
+            }
+
+            & .forget-pwd {
+                font-size: 14px;
+                &:hover {
+                    color: $primary;
+                }
+            }
+        }
+    }
+    & .lost-password {
+        & a{
+            font-size: 14px;
+            transition: $transition-base;
+            &:hover {
+                color: $primary;
+                transition: $transition-base;
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -7,45 +7,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo (!empty($page_title) ? $page_title : 'Trang Chủ') ?></title>
 
-    <link rel="shortcut icon" href="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/favicon.ico">
+    <link rel="shortcut icon" href="<?php echo _WEB_ROOT; ?>/assets/images/favicon.ico">
 
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/vendor/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/vendor/themify-icons-min.css" />
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/all.min.js"></script>
+    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/vendor/themify-icons-min.css" />
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/all.min.js"></script>
 
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/plugins/animate.min.css">
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/plugins/aos.min.css">
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/plugins/nice-select.min.css">
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/plugins/lobibox.min.css">
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/plugins/tiny-slider.css">
+    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/animate.min.css">
+    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/aos.min.css">
+    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/nice-select.min.css">
+    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/lobibox.min.css">
+    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/tiny-slider.css">
 
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/style.css">
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/custom.css">
+    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/custom.css">
 </head>
 
 <body>
     <?php $this->render('blocks/header', $sub_content); ?>
 
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/popper.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/bootstrap.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/jquery-migrate-3.4.0.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/vendor/modernizr-3.11.2.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/popper.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/bootstrap.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/jquery-migrate-3.4.0.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/modernizr-3.11.2.min.js"></script>
 
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/aos.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/feather.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/tiny-slider.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/anime.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/jquery-ui.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/nice-select.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/lobibox.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/plugins/notifications.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/aos.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/feather.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/tiny-slider.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/anime.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/jquery-ui.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/nice-select.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/lobibox.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/notifications.min.js"></script>
 
     <!--  -->
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/custom.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/backend.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/main.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/custom.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/backend.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/main.js"></script>
 
 
     <div id="content">

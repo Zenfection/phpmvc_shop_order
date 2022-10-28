@@ -5,7 +5,7 @@
                 <!-- Header Logo Start -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-in" data-aos-duration="1000">
                     <div class="header-logo">
-                        <a href="/"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/logo.png" alt="Site Logo" /></a>
+                        <a href="/"><img src="<?php echo _WEB_ROOT; ?>/assets/images/logo.png" alt="Site Logo" /></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->

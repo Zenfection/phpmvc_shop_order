@@ -10,14 +10,14 @@
 <!-- start hero -->
 <section class="hero-1 bg-white position-relative d-flex align-items-center justify-content-center overflow-hidden">
     <div class="shapes">
-        <div class="shape-1"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-1.svg" alt="shape"></div>
-        <div class="shape-2"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-2.svg" alt="shape"></div>
-        <div class="shape-3"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-3.svg" alt="shape"></div>
-        <div class="shape-4"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-4.svg" alt="shape"></div>
-        <div class="shape-5"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-5.svg" alt="shape"></div>
-        <div class="shape-6"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-6.svg" alt="shape"></div>
-        <div class="shape-7"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-7.svg" alt="shape"></div>
-        <div class="shape-8"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-8.svg" alt="shape"></div>
+        <div class="shape-1"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-1.svg" alt="shape"></div>
+        <div class="shape-2"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-2.svg" alt="shape"></div>
+        <div class="shape-3"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-3.svg" alt="shape"></div>
+        <div class="shape-4"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-4.svg" alt="shape"></div>
+        <div class="shape-5"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-5.svg" alt="shape"></div>
+        <div class="shape-6"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-6.svg" alt="shape"></div>
+        <div class="shape-7"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-7.svg" alt="shape"></div>
+        <div class="shape-8"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-8.svg" alt="shape"></div>
     </div>
 
     <div class="container">
@@ -54,7 +54,7 @@
                 ?>
             </div>
             <div class="col-lg-6 mt-lg-4 pt-2 mt-5 d-lg-flex d-none" data-aos="fade-left">
-                <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/home.png">
+                <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/assets/images/home.png">
             </div>
         </div>
     </div>
@@ -194,7 +194,7 @@
                             echo "<div class='error'>Image not Available</div>";
                         } else {
                         ?>
-                            <img class="fit-image p-10" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/category/<?php echo $image; ?>" alt="Banner Image" />
+                            <img class="fit-image p-10" src="<?php echo _WEB_ROOT; ?>/assets/images/category/<?php echo $image; ?>" alt="Banner Image" />
                         <?php
                         }
                         ?>
@@ -260,4 +260,4 @@
 
 <!-- Product Section End -->
 
-<script src="<?php echo _WEB_ROOT?>/public/assets/clients/js/custom/home.js"></script>
+<script src="<?php echo _WEB_ROOT?>/assets/js/custom/home.js"></script>

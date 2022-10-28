@@ -1,0 +1,103 @@
+/*=======================================
+    4.1 FAQ CSS
+=========================================*/
+.faq_content_area {
+    & .title {
+        font-size: 24px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        
+        @media #{$large-mobile}{
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+    }
+}
+.accordion {
+    & .card-header {
+        background-color: $white;
+        padding: 0px;
+        border: 0px;
+
+        & .btn {
+            padding: 0px;
+            font-size: 14px;
+            text-transform: inherit;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 20px;
+            color: $dark;
+            text-align: start;
+            line-height: 1.4;
+            width: 100%;
+            padding-right: 30px;
+
+            &:hover {
+                color: $primary;
+            }
+        }
+    }
+
+    & .card-body {
+        padding-top: 0px;
+
+        & p {
+            font-size: 14px;
+            line-height: 1.9;
+            color: $dark;
+        }
+    }
+
+    & .card_dipult {
+        border: 0px;
+        border-bottom: 1px solid #ebebeb;
+        margin-bottom: 20px;
+
+        &:last-child {
+            margin-bottom: 0;
+            border-bottom: 0;
+
+            & .card-body {
+                padding-bottom: 0px;
+            }
+
+            & .card-header {
+                & .btn{
+                    &.collapsed {
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+        }
+    }
+}
+.card-header{
+    &.card_accor {
+        position: relative;
+        & .btn-link {
+            & i{
+                position: absolute;
+                top: 50%;
+                transform: translatey(-50%);
+                right: 20px;
+                @media #{$tablet-device} {
+                    right: 10px;
+                }
+                &.ti-plus{
+                    display: none;
+                }
+            }
+            &.collapsed {
+                & i{
+                    &.ti-plus{
+                        display: block;
+                    }
+                    &.ti-minus{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -5,7 +5,7 @@
             <div class="col-md-6 pe-lg-5 p-r-15 m-b-30" data-aos="fade-right" data-aos-duration="1000">
                 <!-- About Thumb Start -->
                 <div class="about-thumb">
-                    <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/about.png">
+                    <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/assets/images/about.png">
                 </div>
                 <!-- About Thumb End -->
             </div>
@@ -38,7 +38,7 @@
                 <div class="single-team-wrapper">
                     <div class="thumb">
                         <a class="nav-content cursor-pointer" id="contact">
-                            <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/team/1.jpg" alt="Team Image" style="height: 270px;">
+                            <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/assets/images/team/1.jpg" alt="Team Image" style="height: 270px;">
                         </a>
                         <!-- Social Shear Start -->
                         <div class="social-share">

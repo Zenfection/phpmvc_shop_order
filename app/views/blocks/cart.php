@@ -32,7 +32,7 @@
                         <!-- Single Cart Product Start -->
                         <div class="single-cart-product">
                             <div class="cart-product-thumb">
-                                <a href="/product/detail/<?php echo $id?>"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>" alt="Cart Product" class="rounded"></a>
+                                <a href="/product/detail/<?php echo $id?>"><img src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Cart Product" class="rounded"></a>
                             </div>
                             <div class="cart-product-content">
                                 <h3 class="title"><a href="/product/detail/<?php echo $id?>"><?php echo $name ?></a></h3>

@@ -23,7 +23,7 @@
             <div class="col-lg-4 col-md-4 col-sm-6 product product-inner" id="product<?php echo $id ?>">
                 <div class="thumb">
                     <a class="image" href="/product/detail/<?php echo $id ?>">
-                        <img class="fit-image p-10" id="img-product<?php echo $id ?>" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>" alt="Product" />
+                        <img class="fit-image p-10" id="img-product<?php echo $id ?>" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Product" />
                     </a>
                     <?php
                     if ($discount > 0) {

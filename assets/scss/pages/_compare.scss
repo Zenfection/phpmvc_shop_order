@@ -1,0 +1,88 @@
+/*=======================================
+    4.09 Compare CSS
+=========================================*/
+.compare-table{
+    & .table{
+        & tbody{
+            & tr{
+                border-color: $gray-100;
+                & td{
+                    text-align: center;
+                    padding: 20px;
+                    vertical-align: middle;
+                    border-color: $gray-100;
+                    @media #{$large-mobile}{
+                        padding: 10px;
+                    }
+                    &.first-column{
+                        min-width: 230px;
+                        font-size: 15px;
+                        font-weight: 600;
+                        color: $dark;
+                        margin: 0;
+                        @media #{$large-mobile, $desktop-device, $tablet-device}{
+                            min-width: 150px;
+                        }
+                    }
+                    &.product-image-title{
+                        min-width: 313px;
+                        vertical-align: middle;
+                        @media #{$large-mobile, $large-mobile, $desktop-device, $tablet-device}{
+                            min-width: 260px;
+                        }
+                        & .image{
+                            clear: both;
+                            width: 100%;
+                            margin-bottom: 15px;
+                            display: block;
+                        }
+                        & .category{
+                            float: left;
+                            clear: both;
+                            color: $primary;
+                            text-transform: capitalize;
+                            letter-spacing: 0.5px;
+                        }
+                        & .title{
+                            float: left;
+                            clear: both;
+                            font-size: 16px;
+                            color: $dark;
+                            font-weight: 500;
+                            text-transform: capitalize;
+                            &:hover{
+                                color: $primary;
+                            }
+                        }
+                    }
+                    &.pro-desc{
+                        & p{
+                            text-align: left;
+                            margin: 0;
+                            font-size: 14px;
+                        }
+                    }
+                    &.pro-price, &.pro-color, &.pro-stock{
+                        font-size: 14px;
+                        font-weight: 400;
+                    }
+                    &.pro-remove{
+                        & button{
+                            border: none;
+                            background-color: transparent;
+                            padding: 0;
+                            cursor: pointer;
+                            transition: 0.4s;
+                            & i{
+                                font-size: 20px;
+                            }
+                            &:hover{
+                                color: $primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

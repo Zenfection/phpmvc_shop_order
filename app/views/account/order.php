@@ -48,7 +48,7 @@ if (!empty($data['msg'])) {
                                     <tr>
                                         <td class="pro-thumbnail">
                                             <a href="#">
-                                                <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>" alt="Product<?php echo $id_product ?>" style="width:70%" />
+                                                <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Product<?php echo $id_product ?>" style="width:70%" />
                                             </a>
                                         </td>
                                         <td class="pro-title">
