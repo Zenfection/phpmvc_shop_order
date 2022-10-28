@@ -8,6 +8,5 @@ $routes['default_controller'] = 'home';
 
 // $routes['shop/shortby/(:any)/'] = 'shop/shortby/$1';
 $routes['shop/shortby/(.+)/all/(.+)'] = 'shop/shortby/$1/$2';
-$routes['san-pham'] = 'shop/page/1';
 ?>
 

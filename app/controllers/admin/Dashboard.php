@@ -1,12 +1,13 @@
 <?php
 
-class Dashboard {
+class Dashboard extends Controller {
     public function index() {
-        echo 'Trang chủ admin';
-    }
+        
+        $this->data['page_title'] = 'Dashboard';
+        $this->data['content'] = 'admin/dashboard/index';
+        $this->data['sub_content'] = [];
 
-    public function detail($id = 0){
-        echo "Thông tin chi tiết : " . $id;
+        $this->render('layouts/admin_layout', $this->data);
     }
 }
 ?>
