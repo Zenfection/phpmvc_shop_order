@@ -118,13 +118,19 @@ class App{
         if(method_exists($this->__controller, $this->__action)){
             call_user_func_array(array($this->__controller, $this->__action), $this->__params);
         } else {
-            die('Method ' . $this->__action . ' không tồn tại');
+           // die('Method ' . $this->__action . ' không tồn tại');
         }
     }
 
     public function loadError($name = '404', $data = []){
-        extract($data);
-        require_once 'error/' . $name . '.php';
+        $data['page_title'] = 'Không tìm thấy file';
+        $data['content'] = 'error/index';
+        $data['sub_content']['number_error'] = $name;
+        
+        $tempController = new Controller();
+        $tempController->render($data['content'], $data['sub_content'], false);
+        // extract($data);
+        // require_once 'error/' . $name . '.php';
     }
     public function getCurrentController(){
         return $this->__controller;

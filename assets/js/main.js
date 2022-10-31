@@ -27,13 +27,28 @@
     }
   });
 
+  //* Auto hide click outside
+  $(document).on('click', 'body:not(.action-execute)', function (e) {
+    if ($(e.target).closest('.action-execute').length === 0) {
+      $(".action-execute, .header-search-form").removeClass("visible-execute");
+    }
+  })
+
   /*---------------------
       Header Cart Toggle
   --------------------- */
 
-  $(document).on('click', '.cart-visible', function () {
+  // $(document).on('click', '.cart-visible', function () {
+  //   $(".header-cart-content").slideToggle();
+  // });
+  $(document).on('click', '.cart-visible', function (e) {
+    e.stopPropagation();
     $(".header-cart-content").slideToggle();
   });
+
+  $(document).on('click', 'body:not(.cart-visible)', function (e) {
+    $(".header-cart-content").slideUp();
+  })
 
   /*-----------------------------------------
     Off Canvas Mobile Menu
@@ -166,6 +181,7 @@
 
 
   $('#scroll-top').removeClass('show');
+
   function scrollToTop() {
     let $scrollUp = $('#scroll-top'),
       $lastScrollTop = 0,

@@ -1,4 +1,6 @@
 $(function () {
+    // listen for body click
+    
     /* Function
     ------------------------- */
     // *Popup Notification
