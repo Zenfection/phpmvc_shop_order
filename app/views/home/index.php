@@ -4,7 +4,7 @@
         $icon_msg = $msg['icon'];
         $pos_msg = $msg['position'];
         $content_msg = $msg['content'];
-        echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
+        echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg');</script>";
     }
 ?>
 <!-- start hero -->
