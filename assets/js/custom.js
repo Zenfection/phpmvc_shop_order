@@ -1,6 +1,52 @@
 $(function () {
     // listen for body click
-    
+    // to array
+    function selectAllToArray(query) {
+        var arr = [];
+        $(query).each(function () {
+            arr.push($(this).attr('class'));
+        });
+        let temp = query.replace('*', '').replace('.', '').trim();
+        arr.push(temp);
+        return arr;
+    }
+    let outCart = selectAllToArray('.header-cart-content *');
+    let fieldSearch = selectAllToArray('.header-search-form *, .header-action-btn *');
+
+
+    $("body").click(function (e) {
+        if ($(".header-cart-content").css("display") == "block") {
+            var check = true;
+            let targetClick = e.target.className;
+            let count = outCart.length;
+            for (let i = 0; i < count; i++) {
+                if (targetClick == outCart[i]) {
+                    check = false;
+                    break;
+                }
+            }
+            if (check == true) {
+                $(".header-cart-content").slideUp();
+            }
+        }
+        // if ($('.header-search-form.visible-execute').length) {
+        //     var check = true;
+        //     let targetClick = e.target.className;
+        //     if(e.target.tagName == 'svg'){
+        //         targetClick = e.target.parentElement.className;
+        //     }
+        //     let count = fieldSearch.length;
+        //     for (let i = 0; i < count; i++) {
+        //         if (targetClick == fieldSearch[i]) {
+        //             check = false;
+        //             break;
+        //         }
+        //     }
+        //     if (check == true) {
+        //         $(".action-execute, .header-search-form").removeClass("visible-execute");
+        //     }
+        // }
+    });
     /* Function
     ------------------------- */
     // *Popup Notification
@@ -53,12 +99,12 @@ $(function () {
 
     // SHOP
     //* Search Product
-    function searchProduct(){
+    function searchProduct() {
         let sortby = $("option:selected", '.nice-select').val();
         let category = $('.sidebar-list li a.active').attr('id');
-        let keyword = $('#searchFilterProduct').val(); 
+        let keyword = $('#searchFilterProduct').val();
 
-        if($keyword = ''){
+        if ($keyword = '') {
             window.location.href = `/shop/category/${category}/${sortby}/1`;
         } else {
             window.location.href = `/shop/category/${category}/${sortby}/1/${keyword}`;
@@ -78,7 +124,7 @@ $(function () {
         let sortby = $("option:selected", this).val();
         let category = $('.sidebar-list li a.active').attr('id');
         let keyword = $('#searchFilterProduct').val();
-        if($keyword = ''){
+        if ($keyword = '') {
             window.location.href = `/shop/category/${category}/${sortby}/1`;
         } else {
             window.location.href = `/shop/category/${category}/${sortby}/1/${keyword}`;
@@ -91,9 +137,9 @@ $(function () {
         let sortby = $("option:selected", '.nice-select').val();
         let category = $('.sidebar-list li a.active').attr('id');
         let keyword = $('.search-box button').siblings('input').val();
-        if(keyword == ''){
+        if (keyword == '') {
             window.location.href = "/shop/category/" + category + "/" + sortby + "/" + id;
-        }else {
+        } else {
             window.location.href = "/shop/category/" + category + "/" + sortby + "/" + id + "/" + keyword;
         }
     }
@@ -221,7 +267,7 @@ $(function () {
         }
         let id = parseInt($(this).attr("id").replace("product", ""));
         let qty = parseInt($(".cart-plus-minus-box").val());
-        if(isNaN(qty)) qty = 1;
+        if (isNaN(qty)) qty = 1;
         // console.log(id, qty);
         addProduct(id, qty);
     });
@@ -306,5 +352,5 @@ $(function () {
             },
         });
     });
-    
+
 });

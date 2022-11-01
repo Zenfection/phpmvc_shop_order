@@ -27,13 +27,6 @@
     }
   });
 
-  //* Auto hide click outside
-  $(document).on('click', 'body:not(.action-execute)', function (e) {
-    if ($(e.target).closest('.action-execute').length === 0) {
-      $(".action-execute, .header-search-form").removeClass("visible-execute");
-    }
-  })
-
   /*---------------------
       Header Cart Toggle
   --------------------- */
@@ -45,10 +38,10 @@
     e.stopPropagation();
     $(".header-cart-content").slideToggle();
   });
-
-  $(document).on('click', 'body:not(.cart-visible)', function (e) {
-    $(".header-cart-content").slideUp();
-  })
+  
+  // $(document).on('click', 'body:not(.cart-visible)', function (e) {
+  //   $(".header-cart-content").slideUp();
+  // })
 
   /*-----------------------------------------
     Off Canvas Mobile Menu

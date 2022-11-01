@@ -81,12 +81,24 @@ $(function () {
 		$(".compose-mail-popup").hide();
 	});
 	/*switcher*/
-	$(".switcher-btn").on("click", function () {
+	$(".switcher-btn").on("click", function (e) {
+		e.stopPropagation();
 		$(".switcher-wrapper").toggleClass("switcher-toggled");
 	});
 	$(".close-switcher").on("click", function () {
 		$(".switcher-wrapper").removeClass("switcher-toggled");
 	});
+	//* ZenMod
+	// Auto hide click outside
+	let outSwitcher = document.querySelectorAll('switcher-wrapper *');
+	$('body').not(outSwitcher).on('click', function () {
+		$(".switcher-wrapper").removeClass("switcher-toggled");
+	})
+	// $(document).on('click', 'body:not(.switcher-wrapper *)', function (e) {
+	// 	console.log(outSwitcher);
+	// 	//$('.switcher-wrapper').removeClass('switcher-toggled');
+	// })
+	//* End 
 	$("#lightmode").on("click", function () {
 		$('html').attr('class', 'light-theme');
 	});
