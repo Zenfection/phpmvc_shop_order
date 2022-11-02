@@ -15,10 +15,10 @@
                     <div class="main-menu">
                         <ul>
                             <!-- render session -->
-                            <li><a id="home" href="/">Trang Chủ</a></li>
-                            <li><a id="about" href="/about">Giới Thiệu</a></li>
-                            <li><a id="shop" href="/shop/category">Shop</a></li>
-                            <li><a id="contact" href="/contact">Liên Hệ</a></li>
+                            <li><a id="home" class="cursor-pointer" onclick="loadContent('home')">Trang Chủ</a></li>
+                            <li><a id="about" class="cursor-pointer" onclick="loadContent('about')">Giới Thiệu</a></li>
+                            <li><a id="shop" class="cursor-pointer" onclick="loadContent('shop')">Shop</a></li>
+                            <li><a id="contact" class="cursor-pointer" onclick="loadContent('contact')">Liên Hệ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -46,17 +46,17 @@
                         <!-- account login -->
                         <?php
                         if (!empty($user)) {
-                            ?>
+                        ?>
                             <a id='account' class='nav-content cursor-pointer header-action-btn header-action-btn-wishlist' href="/account">
-                                    <i class='fa-duotone fa-user-gear fa-xl'></i>
+                                <i class='fa-duotone fa-user-gear fa-xl'></i>
                             </a>
-                            <?php
+                        <?php
                         } else {
-                            ?>
+                        ?>
                             <a id='logged' class='nav-content cursor-pointer header-action-btn header-action-btn-wishlist' href="/login">
                                 <i class='fa-duotone fa-user fa-xl'></i>
                             </a>
-                            <?php
+                        <?php
                         }
                         ?>
 

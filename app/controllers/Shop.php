@@ -95,7 +95,6 @@ class Shop extends Controller {
                 $this->data['sub_content']['product'] = $dataProduct;
             }
         }
-
         return true;
     }
 }

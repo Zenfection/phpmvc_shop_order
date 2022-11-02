@@ -32,10 +32,14 @@
                         <!-- Single Cart Product Start -->
                         <div class="single-cart-product">
                             <div class="cart-product-thumb">
-                                <a href="/product/detail/<?php echo $id?>"><img src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Cart Product" class="rounded"></a>
+                                <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)">
+                                    <img src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Cart Product" class="rounded">
+                                </a>
                             </div>
                             <div class="cart-product-content">
-                                <h3 class="title"><a href="/product/detail/<?php echo $id?>"><?php echo $name ?></a></h3>
+                                <h3 class="title">
+                                    <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)"></a>
+                        </h3>
                                 <div class="product-quty-price">
                                     <span class="cart-quantity" id="quantity<?php echo $id ?>">Số lượng: <strong> <?php echo $amount ?> </strong></span>
                                     <span class="price">

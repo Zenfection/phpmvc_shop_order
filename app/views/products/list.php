@@ -10,7 +10,7 @@
         ?>
         <div class="col-12 col-sm-6 col-lg-3 product-wrapper m-b-40 product">
     <div class="thumb">
-        <a href="/product/detail/<?php echo $id?>">
+        <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)">
             <img class="fit-image p-10" id="img-product<?php echo $id ?>" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Product" />
         </a>
         <?php

@@ -11,7 +11,7 @@
 <div class="section section-margin">
     <div class="container">
         <div class="row m-b-n20">
-            <div class="col-lg-6 col-12 m-b-20" data-aos="fade-right">
+            <div class="col-lg-7 col-12 m-b-20" data-aos="fade-right">
 
                 <!-- Checkbox Form Start -->
                 <div class="checkbox-form">
@@ -48,19 +48,38 @@
                             <!-- Address Input End -->
 
                             <!-- State or Country Input Start -->
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="checkout-form-list">
                                     <label for="province">Tỉnh <span class="required">*</span></label>
-                                    <input placeholder="Nhập tỉnh thành" type="text" name="province" id="province" class="form-control">
+                                    <select class="form-select" id="province" name="province">
+                                                <?php
+                                                echo "<option value=''>Chọn tỉnh</option>";
+                                                foreach ($province_data as $key => $value) {
+                                                    if ($value['name'] != $city) {
+                                                        echo "<option value='" . $value['name'] . "'>" . $value['name'] . "</option>";
+                                                    }
+                                                }
+                                                ?>
+                                    </select>
                                 </div>
                             </div>
                             <!-- State or Country Input End -->
 
                             <!-- Town or City Name Input Start -->
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="checkout-form-list">
                                     <label for="city">Thành Phố <span class="required">*</span></label>
-                                    <input name="city" id="city" type="text" placeholder="Nhập thành phố" class="form-control">
+                                    <select class="form-select" id="city" name="city" disabled>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="checkout-from-list">
+                                    <label for="ward">Phường/Xã <span class="required">*</span></label>
+                                    <select class="form-select" name="ward" id="ward" disabled>
+
+                                    </select>
                                 </div>
                             </div>
                             <!-- Town or City Name Input End -->
@@ -84,7 +103,7 @@
                 <!-- Checkbox Form End -->
             </div>
 
-            <div class="col-lg-6 col-12 m-b-20" data-aos="fade-left">
+            <div class="col-lg-5 col-12 m-b-20" data-aos="fade-left">
                 <!-- Your Order Area Start -->
                 <div class="your-order-area border">
                     <!-- Title Start -->
@@ -167,78 +186,29 @@
 </div>
 <!-- Checkout Section End -->
 
-<!-- <script type="text/javascript">
-    $(document).ready(() => {
-        $('#checkoutForm').validate({
-            rules: {
-                name: {
-                    required: true,
-                    minlength: 5
-                },
-                phone: {
-                    required: true,
-                    minlength: 10,
-                    maxlength: 11
-                },
-                address: {
-                    required: true,
-                    minlength: 5
-                },
-                province: {
-                    required: true,
-                    minlength: 5
-                },
-                city: {
-                    required: true,
-                    minlength: 5
-                },
-                email: {
-                    required: true,
-                    email: true
+<script>
+    $(document).ready(function() {
+        $("#province").change(function() {
+            let province = $(this).val();
+            $.ajax({
+                url: "/address/get_city/" + province,
+                success: function(data) {
+                    $('#city').removeAttr('disabled');
+                    $("#city").html(data);
                 }
-            },
-            messages: {
-                name: {
-                    required: "Vui lòng nhập tên",
-                    minlength: "Tên phải có ít nhất 5 ký tự"
-                },
-                phone: {
-                    required: "Vui lòng nhập SĐT",
-                    minlength: "SĐT phải có ít nhất 10 ký tự",
-                    maxlength: "SĐT phải có tối đa 11 ký tự"
-                },
-                address: {
-                    required: "Vui lòng nhập địa chỉ",
-                    minlength: "Địa chỉ phải có ít nhất 5 ký tự"
-                },
-                province: {
-                    required: "Vui lòng nhập tỉnh",
-                    minlength: "Làm gì có tỉnh nào ngắn hơn 5 ký tự"
-                },
-                city: {
-                    required: "Vui lòng nhập thành phố",
-                    minlength: "Làm gì có thành phố nào ngắn hơn 5 ký tự"
-                },
-                email: {
-                    required: "Vui lòng nhập email",
-                    email: "Email không hợp lệ"
+            });
+        });
+
+        $('#city').change(function(){
+            let city = $(this).val();
+            $.ajax({
+                url: "/address/get_ward/" + city,
+                success: function(data) {
+                    $('#ward').removeAttr('disabled');
+                    $("#ward").html(data);
                 }
-            },
-            errorElement: 'div',
-            errorPlacement: (error, element) => {
-                error.addClass('invalid-feedback');
-                if (element.prop('type') === 'checkbox') {
-                    error.insertAfter(element.siblings('label'));
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            highlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-invalid').removeClass('is-valid').show();
-            },
-            unhighlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-valid').removeClass('is-invalid').show();
-            }
-        })
+            });
+        });
     });
-</script> -->
+</script>
+

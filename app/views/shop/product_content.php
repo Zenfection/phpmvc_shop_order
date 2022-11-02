@@ -1,7 +1,7 @@
 <div class="row shop_wrapper grid_3">
     <?php
     $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 9;
-    $page = (!empty($page)) ? $page : 1;
+    $page = (!empty($page)) ? (int)$page : 1;
     $links = (isset($_GET['links'])) ? $_GET['links'] : 7;
     $paginator = new Paginator($data);
     $results = $paginator->getData($limit, $page);
@@ -22,7 +22,7 @@
     ?>
             <div class="col-lg-4 col-md-4 col-sm-6 product product-inner" id="product<?php echo $id ?>">
                 <div class="thumb">
-                    <a class="image" href="/product/detail/<?php echo $id ?>">
+                    <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)"">
                         <img class="fit-image p-10" id="img-product<?php echo $id ?>" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Product" />
                     </a>
                     <?php
@@ -43,7 +43,7 @@
                 </div>
                 <div class="content">
                     <h5 class="title">
-                        <a class="product-title" href="/product/detail/<?php echo $id ?>"><?php echo $name ?></a>
+                        <a class="product-title cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)""><?php echo $name ?></a>
                     </h5>
                     <span class="rating">
                         <?php

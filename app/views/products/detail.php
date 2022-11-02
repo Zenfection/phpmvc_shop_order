@@ -242,7 +242,7 @@
                                         <div class="product">
                                             <!-- Thumb Start  -->
                                             <div class="thumb product-inner" id="product<?php echo $id ?>">
-                                                <a class="image" href="/product/detail/<?php echo $id?>">
+                                                <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)">
                                                     <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" />
                                                 </a>
                                                 <?php

@@ -32,5 +32,9 @@ class Controller {
         // }
         require _DIR_ROOT . '/app/views/' . $view . '.php';
     }
+    public function getDataShare(){
+        $data = View::$dataShare;
+        return $data;
+    }
 }
 ?>

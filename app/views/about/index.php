@@ -19,7 +19,7 @@
                         <li><span><i class="fa-brands fa-js fa-xl"></i></span> Jquery Ajax</li>
                         <li><span><i class="fa-brands fa-php fa-xl"></i></span> PHP MVC</li>
                     </ul>
-                    <a id="contact" class="nav-content btn btn-primary btn-hover-dark">Liên Hệ</a>
+                    <a class="cursor-pointer btn btn-primary btn-hover-dark" onclick="loadContent('contact')">Liên Hệ</a>
                 </div>
                 <!-- About Content End -->
             </div>

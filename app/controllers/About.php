@@ -11,5 +11,12 @@ class About extends Controller{
 
         $this->render('layouts/client_layout', $this->data);
     }
+
+    public function content(){
+        $title = 'Giới thiệu';
+
+        $contentView = file_get_contents(_WEB_ROOT . '/app/views/' . 'about' . '.php');
+        echo $contentView;
+    }
 }
 ?>

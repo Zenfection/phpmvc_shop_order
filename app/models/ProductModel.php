@@ -103,7 +103,7 @@ class ProductModel extends Model {
 
     public function getDetail($id){
         $id = (int) $id;
-        $data = $this->db->table('tb_product')->where('id_product', '=', $id)->get();
+        $data = $this->db->table('tb_product')->where('id_product', '=', $id)->first();
         return $data;
     }
 

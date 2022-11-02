@@ -1,6 +1,5 @@
 $(function () {
-    // listen for body click
-    // to array
+
     function selectAllToArray(query) {
         var arr = [];
         $(query).each(function () {
@@ -15,20 +14,20 @@ $(function () {
 
 
     $("body").click(function (e) {
-        if ($(".header-cart-content").css("display") == "block") {
-            var check = true;
-            let targetClick = e.target.className;
-            let count = outCart.length;
-            for (let i = 0; i < count; i++) {
-                if (targetClick == outCart[i]) {
-                    check = false;
-                    break;
-                }
-            }
-            if (check == true) {
-                $(".header-cart-content").slideUp();
-            }
-        }
+        // if ($(".header-cart-content").css("display") == "block") {
+        //     var check = true;
+        //     let targetClick = e.target.className;
+        //     let count = outCart.length;
+        //     for (let i = 0; i < count; i++) {
+        //         if (targetClick == outCart[i]) {
+        //             check = false;
+        //             break;
+        //         }
+        //     }
+        //     if (check == true) {
+        //         $(".header-cart-content").slideUp();
+        //     }
+        // }
         // if ($('.header-search-form.visible-execute').length) {
         //     var check = true;
         //     let targetClick = e.target.className;
@@ -104,11 +103,7 @@ $(function () {
         let category = $('.sidebar-list li a.active').attr('id');
         let keyword = $('#searchFilterProduct').val();
 
-        if ($keyword = '') {
-            window.location.href = `/shop/category/${category}/${sortby}/1`;
-        } else {
-            window.location.href = `/shop/category/${category}/${sortby}/1/${keyword}`;
-        }
+        filterShop(category, sortby, 1, keyword);
     }
     $(document).on("keypress", "#searchFilterProduct", function (e) {
         if (e.which == 13) {
@@ -124,11 +119,8 @@ $(function () {
         let sortby = $("option:selected", this).val();
         let category = $('.sidebar-list li a.active').attr('id');
         let keyword = $('#searchFilterProduct').val();
-        if ($keyword = '') {
-            window.location.href = `/shop/category/${category}/${sortby}/1`;
-        } else {
-            window.location.href = `/shop/category/${category}/${sortby}/1/${keyword}`;
-        }
+        
+        filterShop(category, sortby, 1, keyword);
     });
 
     //* Pagination Product
@@ -137,11 +129,8 @@ $(function () {
         let sortby = $("option:selected", '.nice-select').val();
         let category = $('.sidebar-list li a.active').attr('id');
         let keyword = $('.search-box button').siblings('input').val();
-        if (keyword == '') {
-            window.location.href = "/shop/category/" + category + "/" + sortby + "/" + id;
-        } else {
-            window.location.href = "/shop/category/" + category + "/" + sortby + "/" + id + "/" + keyword;
-        }
+
+        filterShop(category, sortby, id, keyword);
     }
 
     $(document).keydown('.shop_wrapper grid_4', function (e) {

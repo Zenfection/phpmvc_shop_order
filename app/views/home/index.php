@@ -40,7 +40,7 @@
                 <?php
                 if (!empty($user)) {
                 ?>
-                    <a class="nav-content btn btn-primary mt-4" id="shop" href="/shop">Mua Hàng
+                    <a class="cursor-pointer btn btn-primary mt-4" onclick="loadContent('shop')">Mua Hàng
                         <i class="fa-duotone fa-cart-shopping-fast fa-xl"></i>
                     </a>
                 <?php
@@ -176,31 +176,21 @@
         <!-- Banners Start -->
         <div class="row row-cols-md-3 row-cols-sm-2 row-cols-1 m-b-n30">
             <?php
-            $limit = 3;
-            for ($i = 0; $limit > 0; $i++) {
-                $category = $data['category'][$i];
-                if ($category['active'] != 1) {
+            $countCategory = count($category);
+            foreach($category as $key => $value){
+                if($value['active'] != 1){
                     continue;
                 }
-                $id = $category['id_category'];
-                $title = $category['title'];
-                $image = $category['image'];
-                $limit--;
-            ?>
+                $id = $value['id_category'];
+                $title = $value['title'];
+                $image = $value['image'];
+                ?>
                 <div class="col m-b-30" data-aos="fade-in">
-                    <a href="/shop/category/<?php echo $id?>" class="banner hover-style">
-                        <?php
-                        if ($image == "") {
-                            echo "<div class='error'>Image not Available</div>";
-                        } else {
-                        ?>
-                            <img class="fit-image p-10" src="<?php echo _WEB_ROOT; ?>/assets/images/category/<?php echo $image; ?>" alt="Banner Image" />
-                        <?php
-                        }
-                        ?>
+                    <a class="cursor-pointer banner hover-style" onclick="loadContent('shop/<?php echo $id?>')">
+                        <img class="fit-image p-10" src="<?php echo _WEB_ROOT; ?>/assets/images/category/<?php echo $image?>" alt="Banner Image">
                     </a>
                 </div>
-            <?php
+                <?php
             }
             ?>
         </div>
@@ -233,21 +223,21 @@
                     <div class="tab-pane fade show active" id="top-product-ranking">
                         <div class="row m-b-n40">
                             <?php
-                            $this->render('products/list', $data['top_product_ranking'], false);
+                            $this->render('products/list', $top_product_ranking, false);
                             ?>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="top-product-discount">
                         <div class="row m-b-n40">
                             <?php
-                            $this->render('products/list', $data['top_product_discount'], false);
+                            $this->render('products/list', $top_product_discount, false);
                             ?>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="top-product-seller">
                         <div class="row m-b-n40">
                             <?php
-                            $this->render('products/list', $data['top_product_seller'], false);
+                            $this->render('products/list', $top_product_seller, false);
                             ?>
                         </div>
                     </div>
@@ -257,7 +247,78 @@
         <!-- Products Tab End -->
     </div>
 </div>
-
 <!-- Product Section End -->
 
-<script src="<?php echo _WEB_ROOT?>/assets/js/custom/home.js"></script>
+<script>
+    document.querySelector('.ml11 .letters').innerHTML = document.querySelector('.ml11 .letters').textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
+
+    //check widthLetter is delcare or not
+    if(typeof widthLetter === 'undefined'){
+        var widthLetter = document.querySelector('.ml11 .letters').getBoundingClientRect().width;
+    }
+
+
+    // clear all anime
+    var textAnimation = anime.timeline({
+        loop: true
+    })
+    .add({
+        targets: '.ml11 .line',
+        scaleY: [0, 1],
+        opacity: [0.5, 1],
+        easing: "easeOutExpo",
+        duration: 700
+    })
+    .add({
+        targets: '.ml11 .line',
+        translateX: [0, widthLetter + 10],
+        easing: "easeOutExpo",
+        duration: 700,
+        delay: 100
+    }).add({
+        targets: '.ml11 .letter',
+        opacity: [0, 1],
+        easing: "easeOutExpo",
+        duration: 600,
+        offset: '-=775',
+        delay: (el, i) => 34 * (i + 1)
+    }).add({
+        targets: '.ml11',
+        opacity: 0,
+        duration: 1000,
+        easing: "easeOutExpo",
+        delay: 1000
+    });
+
+    textAnimation;
+
+// feature-slidier
+if (document.getElementsByClassName('feature-slider')[0] != undefined) {
+    var slider = tns({
+        container: '.feature-slider',
+        loop: true,
+        navPosition: "bottom",
+        speed: 400,
+        mouseDrag: true,
+        controls: false,
+        autoplay: true,
+        autoplayButtonOutput: false,
+        responsive: {
+            640: {
+                edgePadding: 20,
+                gutter: 20,
+                items: 1
+            },
+            700: {
+                edgePadding: 20,
+                gutter: 30,
+                items: 2
+            },
+            900: {
+                edgePadding: 20,
+                items: 4
+            }
+        }
+    });
+}
+</script>

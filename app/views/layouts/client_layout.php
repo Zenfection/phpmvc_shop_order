@@ -26,6 +26,7 @@
 </head>
 
 <body>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/load-content.js"></script>
     <?php $this->render('blocks/header', $sub_content); ?>
 
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/popper.min.js"></script>
