@@ -53,5 +53,34 @@ class Dashboard extends Controller {
         
         $this->render('layouts/admin_layout', $this->data);
     }
+
+    public function add_product(){
+        $this->data['page_title'] = 'Thêm sản phẩm';
+        $this->data['content'] = 'admin/product/add';
+        $this->data['sub_content']['current_sidebar'] = 'product';
+        $this->data['sub_content']['msg'] = Session::flash('msg');
+        
+        $this->render('layouts/admin_layout', $this->data);
+    }
+
+    public function order($search = ''){
+        $keyword = urldecode($search);
+
+        $this->data['page_title'] = 'Quản lý đơn hàng';
+        $this->data['content'] = 'admin/order/index';
+
+        if($keyword == ''){
+            $this->data['sub_content']['keyword'] = $keyword;
+            $dataOrder = $this->models('OrderModel')->getOrder();
+        } else {
+            $dataOrder = $this->models('OrderModel')->getOrder($keyword);
+        }
+
+        $this->data['sub_content']['current_sidebar'] = 'order';
+        $this->data['sub_content']['msg'] = Session::flash('msg');
+        $this->data['sub_content']['order'] = $dataOrder;
+
+        $this->render('layouts/admin_layout', $this->data);
+    }
 }
 ?>

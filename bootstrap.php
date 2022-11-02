@@ -11,9 +11,6 @@ if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_
     $web_root = 'http://' . $_SERVER['HTTP_HOST'];
 }
 
-// $dirRoot = str_replace('\\', '/', _DIR_ROOT);
-// $documentRoot = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
-
 define('_WEB_ROOT', $web_root);
 
 //* Tự động Load Config

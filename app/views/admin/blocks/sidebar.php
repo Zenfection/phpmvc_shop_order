@@ -28,7 +28,7 @@
                 </a>
             </li>
             <li <?php echo ($current_sidebar == 'order') ? 'class="mm-active"': ''?>>
-                <a id="sidebar-order" style="cursor: pointer;">
+                <a id="sidebar-order" href="/admin/dashboard/order">
                     <div class="parent-icon"><i class='lni lni-shopping-basket'></i>
                     </div>
                     <div class="menu-title">Đơn Hàng</div>

@@ -45,6 +45,13 @@ class ProductModel extends Model {
         $this->db->table($this->__product)->insert($data);
     }  
 
+    public function getProductOrder($id_order){
+        $sql = "SELECT * FROM `tb_order_details` as od, `tb_product` as p
+                WHERE od.id_product = p.id_product
+                AND od.id_order = '$id_order'";
+        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
     public function getProductCategory($category, $keyword = ''){
         if($keyword == ''){
             $sql = "SELECT * FROM `tb_category` as c, `tb_product` as p

@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-lg-3 col-xl-2">
-                                <a href="#add_product" id="sidebar-add-product" class="btn btn-primary mb-3 mb-lg-0"><i class='bx bxs-plus-square'></i>Thêm Sản Phẩm Mới</a>
+                                <a href="/admin/dashboard/add_product" class="btn btn-primary mb-3 mb-lg-0"><i class='bx bxs-plus-square'></i>Thêm Sản Phẩm Mới</a>
                             </div>
                             <div class="col-lg-9 col-xl-10">
                                 <div class="float-lg-end">
