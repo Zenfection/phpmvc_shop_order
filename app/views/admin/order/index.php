@@ -87,7 +87,7 @@ if (!empty($data['msg'])) {
                                     <td><?php echo $total ?>$</td>
                                     <td><?php echo $date ?></td>
                                     <td>
-                                        <a href="/admin/order/detail/<?php echo $id?>">
+                                        <a class="cursor-pointer" onclick="loadOrderDetail('<?php echo $id?>')">
                                             <button type="button" class="btn btn-primary btn-sm radius-30 px-4">Xem</button>
                                         </a>
                                     </td>

@@ -58,6 +58,21 @@ function loadOrder() {
     })
 }
 
+function loadOrderDetail(id){
+    $.ajax({
+        url: '/admin/content/order_detail/' + id,
+        type: 'POST',
+        success: function (data) {
+            document.title = 'Chi tiết đơn hàng' + id;
+            if (window.location.pathname != '/admin/order/detail/' + id) {
+                window.history.pushState(null, null, '/admin/order/detail/' + id);
+            }
+            $('#content').html(data);
+            AOS.init();
+        }
+    })
+}
+
 //* Listen back & forward button to load content
 window.addEventListener('popstate', function () {
     let url = new URL(window.location.href);

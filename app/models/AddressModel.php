@@ -46,7 +46,7 @@ class AddressModel extends Model{
         return $data[0]['code'];
     }
     private function getCodeCity($city_name){
-        $data = $this->db->table('districts')->where('name', '=', $city_name)->get();
+        $data = $this->db->table('districts')->where('full_name', '=', $city_name)->get();
         return $data[0]['code'];
     }
 }

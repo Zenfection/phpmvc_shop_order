@@ -66,6 +66,7 @@
                                         $address = $order_detail['address_customer'];
                                         $province = $order_detail['province_customer'];
                                         $city = $order_detail['city_customer'];
+                                        $ward = $order_detail['ward_customer'];
                                         $status = $order_detail['status'];
                                         $totalMoney = $order_detail['total_money'];
                                         $statusEng = ["pending", "shipping", "delivered", "canceled"];
@@ -89,7 +90,7 @@
                                                 <?php
                                                 echo "<option value='" . $province . "'>" . $province . "</option>";
                                                 foreach ($province_data as $key => $value) {
-                                                    if ($value['name'] != $city) {
+                                                    if ($value['name'] != $province) {
                                                         echo "<option value='" . $value['name'] . "'>" . $value['name'] . "</option>";
                                                     }
                                                 }
@@ -102,7 +103,7 @@
                                                 <?php
                                                 echo "<option value='" . $city . "'>" . $city . "</option>";
                                                 foreach ($city_data as $key => $value) {
-                                                    if ($value['name'] != $city) {
+                                                    if ($value['full_name'] != $city) {
                                                         echo "<option value='" . $value['name'] . "'>" . $value['full_name'] . "</option>";
                                                     }
                                                 }
@@ -113,7 +114,7 @@
                                             <label for="ward" class="form-label">Phường/Xã</label>
                                             <select class="form-select" id="ward" name="ward">
                                                 <?php
-                                                //echo "<option value='" . $city . "'>" . $city . "</option>";
+                                                echo "<option value='" . $ward . "'>" . $ward . "</option>";
                                                 foreach ($ward_data as $key => $value) {
                                                     if ($value['name'] != $city) {
                                                         echo "<option value='" . $value['name'] . "'>" . $value['full_name'] . "</option>";

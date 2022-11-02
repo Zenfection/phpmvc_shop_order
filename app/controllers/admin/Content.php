@@ -63,5 +63,18 @@ class Content extends Controller{
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/admin/order/index.php');
         eval('?>' . $contentView . '<?php');
     }
+
+    public function order_detail($id){
+        $current_sidebar = 'order';
+        $msg = Session::flash('msg');
+
+        $order_detail = $this->models('OrderModel')->getOrderDetail($id);
+        $order_product = $this->models('ProductModel')->getProductOrder($id);
+        $province_data = $this->models('AddressModel')->getProvince();
+        $city_data = $this->models('AddressModel')->getCityInProvinceByName($order_detail['province_customer']);
+
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/admin/order/detail.php');
+        eval('?>' . $contentView . '<?php');
+    }
 }
 ?>

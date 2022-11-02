@@ -12,11 +12,13 @@ class Order extends Controller {
         $dataProduct = $this->models('ProductModel')->getProductOrder($id);
         $dataProvince = $this->models('AddressModel')->getProvince();
         $dataCity = $this->models('AddressModel')->getCityInProvinceByName($dataOrder['province_customer']);
+        $dataWard = $this->models('AddressModel')->getWardInCityByName($dataOrder['city_customer']);
 
         $this->data['sub_content']['order_detail'] = $dataOrder;
         $this->data['sub_content']['order_product'] = $dataProduct;
         $this->data['sub_content']['province_data'] = $dataProvince;
         $this->data['sub_content']['city_data'] = $dataCity;
+        $this->data['sub_content']['ward_data'] = $dataWard;
 
         $this->render('layouts/admin_layout', $this->data);
     }
