@@ -29,8 +29,8 @@ function scroolTop() {
 }
 
 function loadContent(content, check = false) {
-    //$('#content').hide();
-    //$('footer').hide();
+    $('#content').hide();
+    $('footer').hide();
 
     $.ajax({
         url: '/content/' + content,
@@ -41,8 +41,8 @@ function loadContent(content, check = false) {
                 window.history.pushState(null, null, urlArr[content]);
             }
             $('#content').html(data);
-            //$('#content').show();
-            //$('footer').show();
+            $('#content').show();
+            $('footer').show();
             AOS.init();
         }
     });
@@ -57,11 +57,10 @@ function loadDetailProduct(id) {
         type: 'POST',
         success: function (data) {
             document.title = 'Chi tiết sản phẩm';
-
             window.history.pushState(null, null, '/product/detail/' + id);
             $('#content').html(data);
             $('#content').show();
-            $('#content').show();
+            $('#footer').show();
             AOS.init();
         }
     })
@@ -69,7 +68,7 @@ function loadDetailProduct(id) {
 
 function urlShop(category, sortby, page, search) {
     let url;
-    if(category == 'all' && sortby == 'default' && page == 1 && search == ''){
+    if (category == 'all' && sortby == 'default' && page == 1 && search == '') {
         url = '/shop/category';
     } else {
         url = `/shop/category/${category}/${sortby}/${page}/${search}`;
@@ -83,9 +82,11 @@ function filterShop(category = 'all', sortby = 'default', page = 1, search = '')
         url: `/content/filter_shop/${category}/${sortby}/${page}/${search}`,
         type: 'POST',
         success: function (data) {
+
             window.history.pushState(null, null, url);
             $('#content').html(data);
             AOS.init();
+
         }
     })
 }

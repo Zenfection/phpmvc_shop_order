@@ -11,7 +11,7 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/vendor/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/vendor/themify-icons-min.css" />
+    <!-- <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/vendor/themify-icons-min.css" /> -->
     <!-- //* Font Awesome Pro 6.2.0 -->
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/all.js"></script>
 
@@ -32,8 +32,8 @@
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/popper.min.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/bootstrap.min.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/jquery-migrate-3.4.0.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/modernizr-3.11.2.min.js"></script>
+    <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/jquery-migrate-3.4.0.min.js"></script> -->
+    <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/modernizr-3.11.2.min.js"></script> -->
 
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/aos.min.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/feather.min.js"></script>

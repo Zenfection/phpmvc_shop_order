@@ -160,6 +160,7 @@
 </div>
 <!--end page wrapper -->
 
+
 <script>
     // chart4
     var options = {
@@ -233,10 +234,11 @@
             }
         }]
     };
+
     var chart = new ApexCharts(document.querySelector("#chart4"), options);
     chart.render();
 
     new PerfectScrollbar('.best-selling-products');
     new PerfectScrollbar('.recent-reviews');
-    new PerfectScrollbar('.support-list');
+    //new PerfectScrollbar('.support-list');
 </script>

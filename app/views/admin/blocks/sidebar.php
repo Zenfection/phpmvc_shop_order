@@ -13,7 +13,7 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li <?php echo ($current_sidebar == 'dashboard') ? 'class="mm-active"': ''?>>
-            <a id="sidebar-dashboard" href="/admin/dashboard">
+            <a id="sidebar-dashboard" class="cursor-pointer" onclick="loadDashboard()">
                 <div class="parent-icon"><i class='bx bx-home'></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
@@ -21,14 +21,14 @@
         </li>
         <li class="menu-label">Quản lí Hàng</li>
             <li <?php echo ($current_sidebar == 'product') ? 'class="mm-active"': ''?>>
-                <a id="sidebar-product" href="/admin/dashboard/product">
+                <a id="sidebar-product" class="cursor-pointer" onclick="loadProduct()">
                     <div class="parent-icon"><i class='lni lni-gift'></i>
                     </div>
                     <div class="menu-title">Sản Phẩm</div>
                 </a>
             </li>
             <li <?php echo ($current_sidebar == 'order') ? 'class="mm-active"': ''?>>
-                <a id="sidebar-order" href="/admin/dashboard/order">
+                <a id="sidebar-order" class="cursor-pointer" onclick="loadOrder()">
                     <div class="parent-icon"><i class='lni lni-shopping-basket'></i>
                     </div>
                     <div class="menu-title">Đơn Hàng</div>

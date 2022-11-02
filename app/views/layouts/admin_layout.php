@@ -36,6 +36,7 @@
 <html>
 
 <body>
+	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/load-content.js"></script>
 	<!-- Bootstrap JS -->
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/bootstrap.bundle.min.js"></script>
 	<!--plugins-->
@@ -45,8 +46,6 @@
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/main.js"></script>
-	
-	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/plugins/Drag-And-Drop/dist/imageuploadify.min.js"></script>
 	<!--app JS-->
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/app.js"></script>
@@ -61,7 +60,10 @@
             $this->render('admin/blocks/header');
 		?>
 	
-	<?php $this->render($content, $sub_content)?>
+	<div id="content">
+		<?php $this->render($content, $sub_content)?>
+	</div>
+
 	<!--start overlay-->
 	<div class="overlay toggle-icon"></div>
 	<!--end overlay-->

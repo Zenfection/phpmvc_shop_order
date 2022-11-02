@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-lg-3 col-xl-2">
-                                <a href="/admin/dashboard/add_product" class="btn btn-primary mb-3 mb-lg-0"><i class='bx bxs-plus-square'></i>Thêm Sản Phẩm Mới</a>
+                                <a onclick="loadAddProduct()" class="cursor-pointer btn btn-primary mb-3 mb-lg-0"><i class='bx bxs-plus-square'></i>Thêm Sản Phẩm Mới</a>
                             </div>
                             <div class="col-lg-9 col-xl-10">
                                 <div class="float-lg-end">
@@ -36,8 +36,9 @@
             </div>
         </div>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 product-grid" data-aos="zoom-in-down">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 product-grid">
             <?php
+            $speed = 100;
             foreach($product as $key => $value){
                 $id = $value['id_product'];
                 $name = $value['name'];
@@ -48,8 +49,11 @@
                 $discount = (int)$value['discount'];
                 $discount_price = $price - ($price * $discount / 100);
                 $ranking = (float)$value['ranking'];
+                
+                $speed += 100;
+                if($speed == 1000 + 100) $speed = 100; 
                 ?>
-                <div class="col">
+                <div class="col" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="<?php echo $speed?>">
                     <div class="card">
                         <?php if($quantity == 0) 
                             echo "<div class='ribbon bg-danger'>Đã bán hết</div>";
