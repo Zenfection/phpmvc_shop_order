@@ -1,6 +1,13 @@
 document.querySelector('.ml11 .letters').innerHTML = document.querySelector('.ml11 .letters').textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
 
-anime.timeline({
+//check widthLetter is delcare or not
+if (typeof widthLetter === 'undefined') {
+    var widthLetter = document.querySelector('.ml11 .letters').getBoundingClientRect().width;
+}
+
+
+// clear all anime
+var textAnimation = anime.timeline({
         loop: true
     })
     .add({
@@ -12,7 +19,7 @@ anime.timeline({
     })
     .add({
         targets: '.ml11 .line',
-        translateX: [0, document.querySelector('.ml11 .letters').getBoundingClientRect().width + 10],
+        translateX: [0, widthLetter + 10],
         easing: "easeOutExpo",
         duration: 700,
         delay: 100
@@ -31,7 +38,7 @@ anime.timeline({
         delay: 1000
     });
 
-
+textAnimation;
 
 // feature-slidier
 if (document.getElementsByClassName('feature-slider')[0] != undefined) {
@@ -62,3 +69,5 @@ if (document.getElementsByClassName('feature-slider')[0] != undefined) {
         }
     });
 }
+
+AOS.init();

@@ -235,6 +235,10 @@
                             $discount = $row['discount'];
                             $ranking = $row['ranking'];
                             $image = $row['image'];
+
+                            if($id == $product_detail['id_product']){
+                                continue;
+                            }
                         ?>
                             <div class="mt-4 pt-2">
                                 <div class="solution border rounded position-relative px-4 py-5 ">
@@ -312,34 +316,4 @@
 </div>
 <!-- Product Section End -->
 
-<script>
-    // feature-slidier
-    if (document.getElementsByClassName('feature-slider')[0] != undefined) {
-        var slider = tns({
-            container: '.feature-slider',
-            loop: true,
-            navPosition: "bottom",
-            speed: 400,
-            mouseDrag: true,
-            controls: false,
-            autoplay: true,
-            autoplayButtonOutput: false,
-            responsive: {
-                640: {
-                    edgePadding: 20,
-                    gutter: 20,
-                    items: 1
-                },
-                700: {
-                    edgePadding: 20,
-                    gutter: 30,
-                    items: 2
-                },
-                900: {
-                    edgePadding: 20,
-                    items: 4
-                }
-            }
-        });
-    }
-</script>
+<script src="<?php echo _WEB_ROOT; ?>/assets/js/custom/product_detail.js"></script>
