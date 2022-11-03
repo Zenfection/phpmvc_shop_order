@@ -132,19 +132,19 @@
                         <div id="chart4"></div>
                         <div class="d-flex align-items-center justify-content-between text-center">
                             <div>
-                                <h5 class="mb-1 font-weight-bold"><?php echo $count_order?></h5>
+                                <h5 class="mb-1 font-weight-bold" id="count_order"><?php echo $count_order?></h5>
                                 <p class="mb-0 text-secondary">Đã Đặt</p>
                             </div>
                             <div>
-                                <h5 class="mb-1 font-weight-bold"><?php echo $count_pending?></h5>
+                                <h5 class="mb-1 font-weight-bold" id="count_processing"><?php echo $count_pending?></h5>
                                 <p class="mb-0 text-secondary">Đang Xử Lý</p>
                             </div>
                             <div class="mb-1">
-                                <h5 class="mb-1 font-weight-bold"><?php echo $count_shipping?></h5>
+                                <h5 class="mb-1 font-weight-bold" id="count_shipping"><?php echo $count_shipping?></h5>
                                 <p class="mb-0 text-secondary">Đang Giao Hàng</p>
                             </div>
                             <div>
-                                <h5 class="mb-1 font-weight-bold"><?php echo $count_canceled?></h5>
+                                <h5 class="mb-1 font-weight-bold" id="count_canceled"><?php echo $count_canceled?></h5>
                                 <p class="mb-0 text-secondary">Huỷ</p>
                             </div>
                         </div>
@@ -161,84 +161,4 @@
 <!--end page wrapper -->
 
 
-<script>
-    // chart4
-    var options = {
-        series: [<?php echo ROUND(($count_delivered / $count_order)*100,2)?>],
-        chart: {
-            //foreColor: '#9a9797',
-            height: 380,
-            type: 'radialBar',
-            offsetY: -10
-        },
-        plotOptions: {
-            radialBar: {
-                startAngle: -135,
-                endAngle: 135,
-                hollow: {
-                    margin: 0,
-                    size: '70%',
-                    background: 'transparent',
-                },
-                track: {
-                    strokeWidth: '100%',
-                    dropShadow: {
-                        enabled: false,
-                        top: -3,
-                        left: 0,
-                        blur: 4,
-                        //color: 'rgba(209, 58, 223, 0.65)',
-                        opacity: 0.12
-                    }
-                },
-                dataLabels: {
-                    name: {
-                        fontSize: '16px',
-                        color: '#212529',
-                        offsetY: 5
-                    },
-                    value: {
-                        offsetY: 20,
-                        fontSize: '30px',
-                        color: '#212529',
-                        formatter: function(val) {
-                            return val + "%";
-                        }
-                    }
-                }
-            }
-        },
-        fill: {
-            type: 'gradient',
-            gradient: {
-                shade: 'dark',
-                shadeIntensity: 0.15,
-                gradientToColors: ['#4a00e0'],
-                inverseColors: false,
-                opacityFrom: 1,
-                opacityTo: 1,
-                stops: [0, 50, 65, 91]
-            },
-        },
-        colors: ["#8e2de2"],
-        stroke: {
-            dashArray: 4
-        },
-        labels: ['Đã Giao'],
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                chart: {
-                    height: 300,
-                }
-            }
-        }]
-    };
-
-    var chart = new ApexCharts(document.querySelector("#chart4"), options);
-    chart.render();
-
-    new PerfectScrollbar('.best-selling-products');
-    new PerfectScrollbar('.recent-reviews');
-    //new PerfectScrollbar('.support-list');
-</script>
+<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/custom/dashboard.js"></script>

@@ -1,76 +1,86 @@
 function loadDashboard() {
-    $.ajax({
-        url: '/admin/content/dashboard',
-        type: 'POST',
-        success: function (data) {
-            document.title = 'Trang chủ';
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.title = 'Dashboard';
             if (window.location.pathname != '/admin/dashboard') {
                 window.history.pushState(null, null, '/admin/dashboard');
             }
-            $('#content').html(data);
+            document.getElementById('content').innerHTML = this.responseText;
+            //add script
+            let script = document.createElement('script');
+            script.src = '/assets/admin/js/custom/dashboard.js';
+            document.body.appendChild(script);
+
             AOS.init();
         }
-    });
+    }
+    xhttp.open("POST", "/admin/content/dashboard", true);
+    xhttp.send();
 }
 
 function loadProduct() {
-    $.ajax({
-        url: '/admin/content/product',
-        type: 'POST',
-        success: function (data) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
             document.title = 'Quản lý sản phẩm';
             if (window.location.pathname != '/admin/dashboard/product') {
                 window.history.pushState(null, null, '/admin/dashboard/product');
             }
-            $('#content').html(data);
+            document.getElementById('content').innerHTML = this.responseText;
             AOS.init();
         }
-    })
+    }
+    xhttp.open("POST", "/admin/content/product", true);
+    xhttp.send();
 }
 
-function loadAddProduct(){
-    $.ajax({
-        url: '/admin/content/add_product',
-        type: 'POST',
-        success: function (data) {
+function loadAddProduct() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
             document.title = 'Thêm sản phẩm';
-            if (window.location.pathname != '/admin/dashboard/add_product') {
-                window.history.pushState(null, null, '/admin/dashboard/add_product');
-            }
-            $('#content').html(data);
+
+            window.history.pushState(null, null, '/admin/dashboard/product/');
+
+            document.getElementById('content').innerHTML = this.responseText;
             AOS.init();
         }
-    })
+    }
+    xhttp.open("POST", "/admin/content/add_product", true);
+    xhttp.send();
 }
 
 function loadOrder() {
-    $.ajax({
-        url: '/admin/content/order',
-        type: 'POST',
-        success: function (data) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
             document.title = 'Quản lý đơn hàng';
             if (window.location.pathname != '/admin/dashboard/order') {
                 window.history.pushState(null, null, '/admin/dashboard/order');
             }
-            $('#content').html(data);
+            document.getElementById('content').innerHTML = this.responseText;
             AOS.init();
         }
-    })
+    }
+    xhttp.open("POST", "/admin/content/order", true);
+    xhttp.send();
 }
 
-function loadOrderDetail(id){
-    $.ajax({
-        url: '/admin/content/order_detail/' + id,
-        type: 'POST',
-        success: function (data) {
+function loadOrderDetail(id) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
             document.title = 'Chi tiết đơn hàng' + id;
             if (window.location.pathname != '/admin/order/detail/' + id) {
                 window.history.pushState(null, null, '/admin/order/detail/' + id);
             }
-            $('#content').html(data);
+            document.getElementById('content').innerHTML = this.responseText;
             AOS.init();
         }
-    })
+    }
+    xhttp.open("POST", "/admin/content/order_detail/" + id, true);
+    xhttp.send();
 }
 
 //* Listen back & forward button to load content
@@ -87,4 +97,3 @@ window.addEventListener('popstate', function () {
         loadOrder();
     }
 });
-

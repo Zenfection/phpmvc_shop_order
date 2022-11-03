@@ -33,7 +33,7 @@
                     <div class="single-footer-widget">
                         <h2 class="widget-title">Tính Năng</h2>
                         <ul class="widget-list">
-                            <li><a class="cursor-pointer nav-content" id="shop">Mua Hàng</a></li>
+                            <li><a class="cursor-pointer" onclick="loadContent('shop')">Mua Hàng</a></li>
                             <li><a class="nav-content cursor-pointer" id="account">Dashboard</a></li>
                         </ul>
                     </div>

@@ -15,6 +15,9 @@
     <!-- //* Font Awesome Pro 6.2.0 -->
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/all.js"></script>
 
+    <link href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/pace.min.css" rel="stylesheet"/>
+	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/pace.min.js"></script>
+
     <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/animate.min.css">
     <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/aos.min.css">
     <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/nice-select.min.css">
