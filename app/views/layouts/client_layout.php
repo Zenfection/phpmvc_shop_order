@@ -31,22 +31,22 @@
 <body>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/load-content.js"></script>
     <?php $this->render('blocks/header', $sub_content); ?>
-
+    
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/popper.min.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/bootstrap.min.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/jquery-3.6.0.min.js"></script>
     <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/jquery-migrate-3.4.0.min.js"></script> -->
     <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/modernizr-3.11.2.min.js"></script> -->
-
+    <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/jquery-ui.min.js"></script> -->
+    
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/aos.min.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/feather.min.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/tiny-slider.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/anime.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/jquery-ui.min.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/nice-select.min.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/lobibox.min.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/notifications.min.js"></script>
-
+    
     <!--  -->
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/custom.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/backend.js"></script>

@@ -80,11 +80,7 @@
     </div>
 </div>
 <!--end page wrapper -->
-<script>
-    $(document).ready(function() {
-        $('#image-uploadify').imageuploadify();
-    })
-</script>
+<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/custom/add_product.js"></script>
 
 <!-- <script type="text/javascript">
     $(document).ready(() => {

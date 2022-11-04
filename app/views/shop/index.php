@@ -8,13 +8,17 @@
                     <!-- Shop Top Bar Left start -->
                     <div class="shop-top-bar-left">
                         <div class="shop_toolbar_btn">
-                            <button data-role="grid_3" type="button" class="active btn-grid-3" title="Grid"><i class="fa-duotone fa-grid-dividers"></i></button>
-                            <button data-role="grid_list" type="button" class="btn-list" title="List"><i class="fa-duotone fa-align-justify"></i></button>
+                            <button data-role="grid_3" type="button" class="btn-grid-3 <?php echo ($show_type_product == 'grid' ? 'active' : '') ?>" title="Grid">
+                                <i class="fa-duotone fa-grid-dividers"></i>
+                            </button>
+                            <button data-role="grid_list" type="button" class="btn-list <?php echo ($show_type_product == 'list' ? 'active' : '')?>" title="List">
+                                <i class="fa-duotone fa-align-justify"></i>
+                            </button>
                         </div>
                         <div class="shop-top-show">
                             <?php
-                                $total = count($product);
-                                echo "<span>Tổng cộng có $total sản phẩm</span>";
+                            $total = count($product);
+                            echo "<span>Tổng cộng có $total sản phẩm</span>";
                             ?>
                         </div>
                     </div>
@@ -23,11 +27,11 @@
                         <h4 class="title m-r-10">Sắp Xếp: </h4>
                         <div class="shop-short-by">
                             <select class="nice-select" aria-label=".form-select-sm example">
-                                <option <?php if($current_sortby == 'default') echo 'selected'?>  value="default">Mặc Định</option>
-                                <option <?php if($current_sortby == 'selling') echo 'selected'?> value="selling">Bán chạy</option>
-                                <option <?php if($current_sortby == 'price_asc') echo 'selected'?> value="price_asc">Giá tăng dần</option>
-                                <option <?php if($current_sortby == 'price_desc') echo 'selected'?>  value="price_desc">Giá giảm dần</option>
-                                <option <?php if($current_sortby == 'best_discount') echo 'selected'?> value="best_discount">Giảm giá nhiều</option>
+                                <option <?php if ($current_sortby == 'default') echo 'selected' ?> value="default">Mặc Định</option>
+                                <option <?php if ($current_sortby == 'selling') echo 'selected' ?> value="selling">Bán chạy</option>
+                                <option <?php if ($current_sortby == 'price_asc') echo 'selected' ?> value="price_asc">Giá tăng dần</option>
+                                <option <?php if ($current_sortby == 'price_desc') echo 'selected' ?> value="price_desc">Giá giảm dần</option>
+                                <option <?php if ($current_sortby == 'best_discount') echo 'selected' ?> value="best_discount">Giảm giá nhiều</option>
                             </select>
                         </div>
                     </div>
@@ -38,10 +42,10 @@
 
                 <!-- Shop Wrapper Start -->
                 <div id="product-content">
-                    <?php 
-                        // merge $total into $data array
-                        $data = array_merge($data, ['total' => $total]);
-                        $this->render('shop/product_content', $data)
+                    <?php
+                    // merge $total into $data array
+                    $data = array_merge($data, ['total' => $total]);
+                    $this->render('shop/product_content', $data)
                     ?>
                 </div>
                 <!-- Shop Wrapper End -->
@@ -65,40 +69,40 @@
                             <div class="sidebar-body justify-content-start">
                                 <ul class="sidebar-list product-tab-nav">
                                     <li>
-                                        <a onclick="filterShop('all', '<?php echo $current_sortby?>', 1,'<?php echo $keyword?>')" class="cursor-pointer <?php if($current_category == 'all') echo 'active'?>" id="all">
+                                        <a onclick="filterShop('all', '<?php echo $current_sortby ?>', 1,'<?php echo $keyword ?>')" class="cursor-pointer <?php if ($current_category == 'all') echo 'active' ?>" id="all">
                                             <i class="fa-duotone fa-border-all fa-xl"></i> Tất cả sản phẩm</a>
                                     </li>
-                                    <?php 
-                                        foreach ($category as $key => $value) {
-                                            $categoryFilter = $value['id_category'];
-                                            $nameCategory = $value['title'];
-                                            ?>
-                                            <li>
-                                                <a onclick="filterShop('<?php echo $categoryFilter?>','<?php echo $current_sortby?>',1,'<?php echo $keyword?>')" class="cursor-pointer <?php echo ($current_category == $categoryFilter) ? 'active' : ''?>" id="<?php echo $categoryFilter?>">
-                                                <?php 
-                                                    if($categoryFilter == 'cake')
-                                                        echo '<i class="fa-duotone fa-cake-slice fa-xl"></i>';
-                                                    else if($categoryFilter == 'candy')
-                                                        echo '<i class="fa-duotone fa-lollipop fa-xl"></i>';
-                                                    else if($categoryFilter == 'fastfood')
-                                                        echo '<i class="fa-duotone fa-burger-fries fa-xl"></i>';
-                                                    else if($categoryFilter == 'fruit')
-                                                        echo '<i class="fa-duotone fa-cherries fa-xl"></i>';
-                                                    else if($categoryFilter == 'icecream')
-                                                        echo '<i class="fa-duotone fa-ice-cream fa-xl"></i>';
+                                    <?php
+                                    foreach ($category as $key => $value) {
+                                        $categoryFilter = $value['id_category'];
+                                        $nameCategory = $value['title'];
+                                    ?>
+                                        <li>
+                                            <a onclick="filterShop('<?php echo $categoryFilter ?>','<?php echo $current_sortby ?>',1,'<?php echo $keyword ?>')" class="cursor-pointer <?php echo ($current_category == $categoryFilter) ? 'active' : '' ?>" id="<?php echo $categoryFilter ?>">
+                                                <?php
+                                                if ($categoryFilter == 'cake')
+                                                    echo '<i class="fa-duotone fa-cake-slice fa-xl"></i>';
+                                                else if ($categoryFilter == 'candy')
+                                                    echo '<i class="fa-duotone fa-lollipop fa-xl"></i>';
+                                                else if ($categoryFilter == 'fastfood')
+                                                    echo '<i class="fa-duotone fa-burger-fries fa-xl"></i>';
+                                                else if ($categoryFilter == 'fruit')
+                                                    echo '<i class="fa-duotone fa-cherries fa-xl"></i>';
+                                                else if ($categoryFilter == 'icecream')
+                                                    echo '<i class="fa-duotone fa-ice-cream fa-xl"></i>';
 
-                                                    echo $nameCategory . " ($count_category[$categoryFilter])"
+                                                echo $nameCategory . " ($count_category[$categoryFilter])"
                                                 ?>
-                                                </a>
-                                            </li>
-                                            <?php
-                                        }
+                                            </a>
+                                        </li>
+                                    <?php
+                                    }
                                     ?>
                                 </ul>
                             </div>
                         </div>
                         <!-- Recent Product User -->
-                        <?php $this->render('shop/recent_product', $data)?>
+                        <?php $this->render('shop/recent_product', $data) ?>
                     </div>
                 </aside>
                 <!-- Sidebar Widget End -->

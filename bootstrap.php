@@ -38,6 +38,7 @@ require_once 'core/Load.php'; //
 require_once 'core/MiddleWare.php'; // Load MiddleWare
 require_once 'core/Route.php'; // Xử lý route
 require_once 'core/Session.php'; // Xử lý session
+require_once 'core/Cookie.php'; //Xử lý Cookie
 
 //* Kiểm tra config và load database
 if(!empty($config['database'])){

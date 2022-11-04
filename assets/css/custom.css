@@ -406,3 +406,28 @@
     left: 10%;
     animation: up-dawn 5s infinite ease-in-out 3s;
 }
+
+@keyframes up-dawn {
+    0% {
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+
+    50% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+}
+
+
+.show-cart{
+    /* show fade in */
+    animation:  fadeIn 0.5s;
+    display: block;
+}
+

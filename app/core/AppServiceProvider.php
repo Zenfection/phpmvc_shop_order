@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider {
                 'total_money' => $totalMoney
             ];
         }
+        
         View::share($dataUser);
     }
 

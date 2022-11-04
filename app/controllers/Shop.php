@@ -26,6 +26,8 @@ class Shop extends Controller {
             $this->data['sub_content']['recent_product'] = $recentProduct;
         }
 
+        $this->data['sub_content']['show_type_product'] = 'list';
+
         $this->data['sub_content']['product'] = $product;
         $this->data['sub_content']['category'] = $category;
         $this->data['sub_content']['count_category'] = $countCategory;

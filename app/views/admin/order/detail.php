@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="province" class="form-label">Tỉnh Thành</label>
-                                            <select class="form-select" id="province" name="province">
+                                            <select class="form-select" id="province" name="province" onchange="loadCity()">
                                                 <?php
                                                 echo "<option value='" . $province . "'>" . $province . "</option>";
                                                 foreach ($province_data as $key => $value) {
@@ -99,7 +99,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="city" class="form-label">Thành phố/Quận/Huyện</label>
-                                            <select class="form-select" id="city" name="city">
+                                            <select class="form-select" id="city" name="city" onchange="loadWard()">
                                                 <?php
                                                 echo "<option value='" . $city . "'>" . $city . "</option>";
                                                 foreach ($city_data as $key => $value) {
@@ -187,29 +187,8 @@
 </div>
 <!--end page wrapper -->
 
-<script>
-    $(document).ready(function() {
-        $("#province").change(function() {
-            let province = $(this).val();
-            $.ajax({
-                url: "/address/get_city/" + province,
-                success: function(data) {
-                    $("#city").html(data);
-                }
-            });
-        });
+<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/custom/order_detail.js"></script>
 
-        $('#city').change(function(){
-            let city = $(this).val();
-            $.ajax({
-                url: "/address/get_ward/" + city,
-                success: function(data) {
-                    $("#ward").html(data);
-                }
-            });
-        });
-    });
-</script>
 
 <!-- <script>
     new PerfectScrollbar('.best-selling-products');

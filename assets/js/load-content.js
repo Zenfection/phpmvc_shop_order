@@ -33,62 +33,49 @@ function loadContent(content, check = false) {
     document.getElementById('content').style.display = 'none';
     document.getElementsByTagName('footer')[0].style.display = 'none';
 
-    let script = document.createElement('script');
-    script.src = `/assets/js/custom/${content}.js`;
+    //use fetch API 
+    fetch(`/content/${content}`)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('content').innerHTML = data;
+            document.title = titleArr[content];
 
-    // ajax load content by javascript
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('content').innerHTML = this.responseText;
-            
-            if(scriptArr[content] != undefined){
+            if (scriptArr[content] != undefined) {
                 let script = document.createElement('script');
-                script.src = scriptArr[content];
+                script.src = `/assets/js/custom/${content}.js`;
                 document.body.appendChild(script);
             }
 
+            window.history.pushState(null, null, urlArr[content]);
             document.getElementById('content').style.display = 'block';
             document.getElementsByTagName('footer')[0].style.display = 'block';
-            document.getElementsByTagName('head')[0].appendChild(script);
-
-            document.title = titleArr[content];
-            if(window.location.pathname != urlArr[content]){
-                window.history.pushState(null, null, urlArr[content]);
-            }
             AOS.init();
-        }
-    };
-    xhttp.open("POST", "/content/" + content, true);
-    xhttp.send();
+        });
 }
 
 function loadDetailProduct(id) {
     document.getElementById('content').style.display = 'none';
     document.getElementsByTagName('footer')[0].style.display = 'none';
-    
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('content').innerHTML = this.responseText;
-            document.getElementById('content').style.display = 'block';
-            document.getElementsByTagName('footer')[0].style.display = 'block';
-            
-            if(scriptArr['product/detail'] != undefined){
+
+    //fetch API
+    fetch(`/content/product_detail/${id}`)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('content').innerHTML = data;
+            document.title = titleArr['product/detail'];
+
+            if (scriptArr['product/detail'] != undefined) {
                 let script = document.createElement('script');
                 script.src = scriptArr['product/detail'];
                 document.body.appendChild(script);
             }
 
-            document.title = titleArr['Chi tiết sản phẩm'];
-            
             window.history.pushState(null, null, `/product/detail/${id}`);
 
+            document.getElementById('content').style.display = 'block';
+            document.getElementsByTagName('footer')[0].style.display = 'block';
             AOS.init();
-        }
-    }
-    xhttp.open("POST", "/content/product_detail/" + id, true);
-    xhttp.send();
+        });
 }
 
 function urlShop(category, sortby, page, search) {
@@ -104,25 +91,22 @@ function urlShop(category, sortby, page, search) {
 function filterShop(category = 'all', sortby = 'default', page = 1, search = '') {
     let url = urlShop(category, sortby, page, search);
 
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('content').innerHTML = this.responseText;
-            
-            if(scriptArr['shop'] != undefined){
+    //fetch API
+    fetch(`/content/shop/${category}/${sortby}/${page}/${search}`)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('content').innerHTML = data;
+            document.title = titleArr['shop'];
+
+            if (scriptArr['shop'] != undefined) {
                 let script = document.createElement('script');
                 script.src = scriptArr['shop'];
                 document.body.appendChild(script);
             }
 
-            document.title = titleArr['shop'];
             window.history.pushState(null, null, url);
-
             AOS.init();
-        }
-    }
-    xhttp.open("POST", "/content/shop/" + category + '/' + sortby + '/' + page + '/' + search, true);
-    xhttp.send();
+        });
 }
 
 //* Listen back & forward button to load content

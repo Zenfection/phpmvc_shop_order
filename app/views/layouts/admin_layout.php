@@ -36,7 +36,6 @@
 <html>
 
 <body>
-	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/load-content.js"></script>
 	<!-- Bootstrap JS -->
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/bootstrap.bundle.min.js"></script>
 	<!--plugins-->
@@ -80,6 +79,8 @@
 
 	<?php $this->render('admin/blocks/switcher')?>
 
+	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/load-content.js"></script>
+	
 	<script>
 		$(document).ready(function() {
 			AOS.init();
