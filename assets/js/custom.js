@@ -67,15 +67,6 @@ $(function () {
         searchProduct();
     });
 
-    //* SortBy Product
-    $(document).on("change", ".nice-select", function () {
-        let sortby = $("option:selected", this).val();
-        let category = $('.sidebar-list li a.active').attr('id');
-        let keyword = $('#searchFilterProduct').val();
-        
-        filterShop(category, sortby, 1, keyword);
-    });
-
     //* Pagination Product
     //* choose num page paginator page
     function choosePage(id) {

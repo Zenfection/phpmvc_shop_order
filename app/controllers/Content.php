@@ -133,6 +133,19 @@ class Content extends Controller{
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/shop/index.php');
         eval('?>' . $contentView . '<?php');
     }
+    public function login(){
+        $msg = Session::flash('msg');
+
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/login/index.php');
+        eval('?>' . $contentView . '<?php');
+    }
+
+    public function register(){
+        $msg = Session::flash('msg');
+
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/register/index.php');
+        eval('?>' . $contentView . '<?php');
+    }
 
     private function loadContent($content){
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/' . $content . '/index.php');

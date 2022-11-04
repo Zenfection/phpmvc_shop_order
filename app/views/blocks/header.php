@@ -53,7 +53,7 @@
                         <?php
                         } else {
                         ?>
-                            <a id='logged' class='nav-content cursor-pointer header-action-btn header-action-btn-wishlist' href="/login">
+                            <a id='logged' class='cursor-pointer header-action-btn header-action-btn-wishlist' onclick="loadContent('login')">
                                 <i class='fa-duotone fa-user fa-xl'></i>
                             </a>
                         <?php

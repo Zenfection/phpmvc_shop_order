@@ -37,7 +37,7 @@ class Register extends Controller {
                     'type' => 'error',
                     'icon' => 'fa-duotone fa-circle-exclama',
                     'position' => 'center',
-                    'content' => 'Đăng ký thành công'
+                    'content' => 'Đăng ký thất bại, vui lòng đăng ký lại'
                 ]);
                 $response->redirect('register');
             } else {

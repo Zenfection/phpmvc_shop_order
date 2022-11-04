@@ -1,4 +1,4 @@
-let Arr = [{
+var dataArr = [{
         'home': 'Trang Chủ',
         'about': 'Giới Thiệu',
         'contact': 'Liên Hệ',
@@ -8,6 +8,7 @@ let Arr = [{
         'shop/fastfood': 'Đồ Ăn Nhanh',
         'shop/fruit': 'Trái Cây',
         'shop/icecream': 'Kem',
+        'login': 'Đăng Nhập',
     },
     {
         'home': '/',
@@ -19,24 +20,44 @@ let Arr = [{
         'shop/fastfood': '/shop/category/fastfood',
         'shop/fruit': '/shop/category/fruit',
         'shop/icecream': '/shop/category/icecream',
+        'login': '/login',
     },
     {
         'home': '/assets/js/custom/home.js',
         'product/detail': '/assets/js/custom/product_detail.js',
     }
 ];
-titleArr = Arr[0];
-urlArr = Arr[1];
-scriptArr = Arr[2];
+var titleArr = dataArr[0];
+var urlArr = dataArr[1];
+var scriptArr = dataArr[2];
 
-function loadContent(content, check = false) {
+function hideContent(){
+    //* Add padding right to body when scroll bar when reload
+    let scrollBarWidth = window.innerWidth-$(document).width();
+    document.body.style.paddingRight = scrollBarWidth.toString() + 'px';
+
+    //* Hide content and footer
     document.getElementById('content').style.display = 'none';
     document.getElementsByTagName('footer')[0].style.display = 'none';
+}
+
+function showContent(){
+    //* Show content and footer
+    document.getElementById('content').style.display = 'block';
+    document.getElementsByTagName('footer')[0].style.display = 'block';
+
+    //* Remove padding right to body when scroll bar when reload
+    document.body.style.paddingRight = '0px';
+}
+
+function loadContent(content, check = false) {
+    hideContent();
 
     //use fetch API 
     fetch(`/content/${content}`)
         .then(response => response.text())
         .then(data => {
+            // add padding right to body when scroll bar appear
             document.getElementById('content').innerHTML = data;
             document.title = titleArr[content];
 
@@ -47,15 +68,15 @@ function loadContent(content, check = false) {
             }
 
             window.history.pushState(null, null, urlArr[content]);
-            document.getElementById('content').style.display = 'block';
-            document.getElementsByTagName('footer')[0].style.display = 'block';
+
+            showContent();
+
             AOS.init();
         });
 }
 
 function loadDetailProduct(id) {
-    document.getElementById('content').style.display = 'none';
-    document.getElementsByTagName('footer')[0].style.display = 'none';
+    hideContent();
 
     //fetch API
     fetch(`/content/product_detail/${id}`)
@@ -72,8 +93,8 @@ function loadDetailProduct(id) {
 
             window.history.pushState(null, null, `/product/detail/${id}`);
 
-            document.getElementById('content').style.display = 'block';
-            document.getElementsByTagName('footer')[0].style.display = 'block';
+            showContent();
+
             AOS.init();
         });
 }
@@ -89,10 +110,14 @@ function urlShop(category, sortby, page, search) {
 }
 
 function filterShop(category = 'all', sortby = 'default', page = 1, search = '') {
+    if(sortby == 'check'){
+        element = document.querySelector('.nice-select');
+        sortby = element.options[element.selectedIndex].value;
+    }
     let url = urlShop(category, sortby, page, search);
 
     //fetch API
-    fetch(`/content/shop/${category}/${sortby}/${page}/${search}`)
+    fetch(`/content/filter_shop/${category}/${sortby}/${page}/${search}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('content').innerHTML = data;
@@ -125,3 +150,5 @@ window.addEventListener('popstate', function () {
     }
     loadContent(id);
 });
+
+// Google map API fetch

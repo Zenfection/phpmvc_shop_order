@@ -1,14 +1,14 @@
 <?php
-    if (!empty($data['msg'])) {
-        $type_msg = $msg['type'];
-        $icon_msg = $msg['icon'];
-        $pos_msg = $msg['position'];
-        $content_msg = $msg['content'];
-        echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
-    }
+if (!empty($data['msg'])) {
+    $type_msg = $msg['type'];
+    $icon_msg = $msg['icon'];
+    $pos_msg = $msg['position'];
+    $content_msg = $msg['content'];
+    echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
+}
 ?>
 <!-- Register Section Start -->
-<div  data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+<div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
     <div class="section section-margin">
         <div class="container">
             <div class="row">
@@ -22,10 +22,10 @@
                         <!-- Register Title & Content End -->
 
                         <!-- Form Action Start -->
-                        <?php 
+                        <?php
                         HtmlHelper::formOpen('post', '/register/validate', 'registerForm', '');
                         HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">'.form_error('fullname', '<div class="alert-danger">', '</div>'),
+                            '<div class="single-input-item m-b-10">' . form_error('fullname', '<div class="alert-danger">', '</div>'),
                             'text',
                             'fullname',
                             'from-control',
@@ -35,7 +35,7 @@
                             '</div>'
                         );
                         HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">'.form_error('email', '<div class="alert-danger">', '</div>'),
+                            '<div class="single-input-item m-b-10">' . form_error('email', '<div class="alert-danger">', '</div>'),
                             'email',
                             'email',
                             'from-control',
@@ -45,7 +45,7 @@
                             '</div>'
                         );
                         HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">'.form_error('username', '<div class="alert-danger">', '</div>'),
+                            '<div class="single-input-item m-b-10">' . form_error('username', '<div class="alert-danger">', '</div>'),
                             'text',
                             'username',
                             'from-control',
@@ -55,7 +55,7 @@
                             '</div>'
                         );
                         HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">'.form_error('password', '<div class="alert-danger">', '</div>'),
+                            '<div class="single-input-item m-b-10">' . form_error('password', '<div class="alert-danger">', '</div>'),
                             'password',
                             'password',
                             'from-control',
@@ -72,11 +72,11 @@
                             'btn btn btn-gray-deep btn-hover-primary m-b-15',
                             '</div></div>'
                         );
-                        echo '<div>
-                        <a href="/login" class="hover-text-primary">Đăng Nhập</a>
-                    </div>';
-                        HtmlHelper::formClose();
                         ?>
+                        <div>
+                            <a class="cursor-pointer hover-text-primary" onclick="loadContent('login')">Đăng Nhập</a>
+                        </div>
+                        <?php HtmlHelper::formClose();?>
                         <!-- Form Action End -->
                     </div>
                 </div>

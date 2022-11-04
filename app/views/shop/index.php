@@ -8,10 +8,10 @@
                     <!-- Shop Top Bar Left start -->
                     <div class="shop-top-bar-left">
                         <div class="shop_toolbar_btn">
-                            <button data-role="grid_3" type="button" class="btn-grid-3 <?php echo ($show_type_product == 'grid' ? 'active' : '') ?>" title="Grid">
+                            <button data-role="grid_3" type="button" class="btn-grid-3 active" title="Grid">
                                 <i class="fa-duotone fa-grid-dividers"></i>
                             </button>
-                            <button data-role="grid_list" type="button" class="btn-list <?php echo ($show_type_product == 'list' ? 'active' : '')?>" title="List">
+                            <button data-role="grid_list" type="button" class="btn-list" title="List">
                                 <i class="fa-duotone fa-align-justify"></i>
                             </button>
                         </div>
@@ -26,7 +26,7 @@
                     <div class="shop-top-bar-right">
                         <h4 class="title m-r-10">Sắp Xếp: </h4>
                         <div class="shop-short-by">
-                            <select class="nice-select" aria-label=".form-select-sm example">
+                            <select class="nice-select" aria-label=".form-select-sm example" onchange="filterShop('<?php echo $current_category?>', 'check', 1, '<?php echo $keyword?>')">
                                 <option <?php if ($current_sortby == 'default') echo 'selected' ?> value="default">Mặc Định</option>
                                 <option <?php if ($current_sortby == 'selling') echo 'selected' ?> value="selling">Bán chạy</option>
                                 <option <?php if ($current_sortby == 'price_asc') echo 'selected' ?> value="price_asc">Giá tăng dần</option>

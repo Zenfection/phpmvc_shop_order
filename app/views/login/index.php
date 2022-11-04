@@ -52,11 +52,11 @@
                             'btn btn btn-gray-deep btn-hover-primary m-b-15',
                             '</div></div>'
                         );
-                        echo '<div class="register">
-                            <a href="register" id="register">Tạo tài khoản</a>
-                        </div>';
-                        HtmlHelper::formClose();
                     ?>
+                    <div class="register">
+                            <a class="cursor-pointer" id="register" onclick="loadContent('register')">Tạo tài khoản</a>
+                    </div>
+                    <?php HtmlHelper::formClose();?>
                 </div>
             </div>
         </div>
