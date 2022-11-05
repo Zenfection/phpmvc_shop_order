@@ -140,7 +140,7 @@
                         <div class="payment-option m-t-20 d-flex">
                             <span><strong>Thanh Toán: </strong></span>
                             <a href="#">
-                                <img class="fit-image m-l-5" src="<?php echo _WEB_ROOT; ?>/assets/images/payment/payment_large.png" alt="Payment Option Image">
+                                <img class="fit-image m-l-5" src="https://raw.githubusercontent.com/Zenfection/phpmvc_shop_order/main/assets/images/payment/payment_large.png" alt="Payment Option Image">
                             </a>
                         </div>
                         <!-- Payment Option End -->

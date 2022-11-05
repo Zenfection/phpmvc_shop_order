@@ -76,7 +76,7 @@
                 <div class="col-md-6 text-center text-md-end order-1 order-md-2 m-b-20">
                     <div class="payment">
                         <a href="#">
-                            <img src="<?php echo _WEB_ROOT; ?>/assets/images/payment/payment_large.png" alt="Payment">
+                            <img src="https://raw.githubusercontent.com/Zenfection/phpmvc_shop_order/main/assets/images/payment/payment_large.png" alt="Payment">
                         </a>
                     </div>
                 </div>
