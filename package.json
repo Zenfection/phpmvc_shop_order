@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "minify:icon": "uglifyjs-folder ./assets/js/icon -o ./cdn/icon-zen.min.js"
+    "minify:load-content": "uglifyjs ./assets/js/load-content.js -c -m -o ./cdn/js/load-content.min.js",
+    "minify:icon": "uglifyjs-folder ./assets/js/icon -o ./cdn/js/icon-zen.min.js"
   },
   "keywords": [],
   "author": "",

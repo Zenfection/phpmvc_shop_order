@@ -11,14 +11,14 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/vendor/themify-icons-min.css" />
+    <!-- <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/vendor/themify-icons-min.css" /> -->
     <!-- //* Font Awesome Pro 6.2.0 -->
     <script src="https://cdn.jsdelivr.net/gh/zenfection/phpmvc_shop_order/cdn/js/icon-zen.min.js"></script>
 
     <link href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/pace.min.css" rel="stylesheet"/>
 	<script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
 
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/animate.min.css">
+    <!-- <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/animate.min.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/css/nice-select2.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/css/lobibox.css">
@@ -29,18 +29,13 @@
 </head>
 
 <body>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/load-content.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zenfection/phpmvc_shop_order/cdn/js/load-content.min.js"></script>
     <?php $this->render('blocks/header', $sub_content); ?>
     
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-    <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/jquery-migrate-3.4.0.min.js"></script> -->
-    <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/modernizr-3.11.2.min.js"></script> -->
-    <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/jquery-ui.min.js"></script> -->
     
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/feather.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/js/nice-select2.js"></script>
