@@ -46,7 +46,7 @@
                 <?php
                 } else {
                 ?>
-                    <a class="cursor-pointer btn btn-primary mt-4" >Đăng Nhập
+                    <a class="cursor-pointer btn btn-primary mt-4" onclick="loadContent('login')">Đăng Nhập
                         <i class="fa-duotone fa-arrow-right-to-bracket fa-xl"></i>
                     </a>
                 <?php

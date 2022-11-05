@@ -25,6 +25,7 @@ var dataArr = [{
     {
         'home': '/assets/js/custom/home.js',
         'product/detail': '/assets/js/custom/product_detail.js',
+        'shop': '/assets/js/custom/shop.js',
     }
 ];
 var titleArr = dataArr[0];

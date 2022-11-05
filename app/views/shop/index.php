@@ -27,7 +27,7 @@
                         <h4 class="title m-r-10">Sắp Xếp: </h4>
                         <div class="shop-short-by">
                             <select class="nice-select" aria-label=".form-select-sm example" onchange="filterShop('<?php echo $current_category?>', 'check', 1, '<?php echo $keyword?>')">
-                                <option <?php if ($current_sortby == 'default') echo 'selected' ?> value="default">Mặc Định</option>
+                                <option <?php if ($current_sortby == 'default') echo 'selected' ?> value="default" data-display="Select">Mặc Định</option>
                                 <option <?php if ($current_sortby == 'selling') echo 'selected' ?> value="selling">Bán chạy</option>
                                 <option <?php if ($current_sortby == 'price_asc') echo 'selected' ?> value="price_asc">Giá tăng dần</option>
                                 <option <?php if ($current_sortby == 'price_desc') echo 'selected' ?> value="price_desc">Giá giảm dần</option>
@@ -111,3 +111,5 @@
     </div>
 </div>
 <!-- Shop Section End -->
+
+<script src="<?php echo _WEB_ROOT; ?>/assets/js/custom/shop.js"></script>

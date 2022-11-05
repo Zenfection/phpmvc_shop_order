@@ -10,21 +10,22 @@
     <link rel="shortcut icon" href="<?php echo _WEB_ROOT; ?>/assets/images/favicon.ico">
 
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/vendor/themify-icons-min.css" />
     <!-- //* Font Awesome Pro 6.2.0 -->
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/icon/fontawesome.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/icon/duotone-min.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/icon/brands-min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/icon/solid-min.js"></script>
 
     <link href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/pace.min.css" rel="stylesheet"/>
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/pace.min.js"></script>
 
     <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/animate.min.css">
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/aos.min.css">
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/nice-select.min.css">
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/lobibox.min.css">
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/plugins/tiny-slider.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/css/nice-select2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/css/lobibox.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.css">
 
     <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/style.css">
     <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/custom.css">
@@ -35,19 +36,19 @@
     <?php $this->render('blocks/header', $sub_content); ?>
     
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/popper.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/bootstrap.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
     <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/jquery-migrate-3.4.0.min.js"></script> -->
     <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/vendor/modernizr-3.11.2.min.js"></script> -->
     <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/jquery-ui.min.js"></script> -->
     
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/aos.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/feather.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/tiny-slider.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/anime.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/nice-select.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/lobibox.min.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/notifications.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <!-- <script src="<?php echo _WEB_ROOT; ?>/assets/js/plugins/feather.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/js/nice-select2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/lobibox.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/notifications.js"></script>
     
     <!--  -->
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/custom.js"></script>

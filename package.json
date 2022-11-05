@@ -1,0 +1,16 @@
+{
+  "name": "cloneshoporder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "minify:icon": "uglifyjs-folder ./assets/js/icon -o ./cdn/icon-zen.min.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "uglify-js": "^3.17.4",
+    "uglifyjs-folder": "^3.1.4"
+  }
+}

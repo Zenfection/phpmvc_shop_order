@@ -115,7 +115,7 @@
                     <li class="page-item">
                         <a class="page-link rounded-0 cursor-pointer" name="page=<?php echo $page ?>" aria-label="Prev">
                             <span aria-hidden="true">
-                                <i class="fa-solid fa-arrow-left" style="padding-top: 5px"></i>
+                                <i class="fa-duotone fa-arrow-left" style="padding-top: 5px"></i>
                             </span>
                         </a>
                     </li>
@@ -133,7 +133,7 @@
                     <li class="page-item">
                         <a class="page-link rounded-0 cursor-pointer" name="page=<?php echo $page ?>" aria-label="Next">
                             <span aria-hidden="true">
-                                <i class="fa-solid fa-arrow-right" style="padding-top: 5px"></i>
+                                <i class="fa-duotone fa-arrow-right" style="padding-top: 5px"></i>
                             </span>
                         </a>
                     </li>
