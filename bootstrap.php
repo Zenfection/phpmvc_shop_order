@@ -3,6 +3,7 @@
 require_once 'vendor/autoload.php';
 
 define('_DIR_ROOT', $_SERVER["DOCUMENT_ROOT"]);
+define('_GIT_SOURCE', 'https://raw.githubusercontent.com/Zenfection/phpmvc_shop_order/main');
 
 // Xử lý http root
 if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443){
