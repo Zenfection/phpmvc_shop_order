@@ -66,7 +66,7 @@
                 <div class="card radius-10 w-100">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="<?php echo _WEB_ROOT; ?>/assets/admin/images/avatars/zen.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                            <img src="<?php echo _GIT_SOURCE; ?>/assets/admin/images/avatars/zen.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
                             <div class="mt-3">
                                 <h4>Lê Tuấn Kiệt</h4>
                                 <p class="text-secondary mb-1">Full Stack Developer</p>

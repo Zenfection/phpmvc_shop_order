@@ -88,8 +88,8 @@
 <!-- Footer Section End -->
 
 <!-- Scroll Top Start -->
-<a href="#" class="scroll-top show" id="scroll-top">
-    <i class="arrow-top ti-angle-double-up"></i>
+<!-- <a href="#" class="scroll-top show" id="scroll-top">
+    <i class="arrow-top fa-duotone fa-arrow-right"></i>
     <i class="arrow-bottom ti-angle-double-up"></i>
-</a>
+</a> -->
 <!-- Scroll Top End -->

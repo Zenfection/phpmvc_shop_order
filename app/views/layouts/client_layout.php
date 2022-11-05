@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo (!empty($page_title) ? $page_title : 'Trang Chủ') ?></title>
 
-    <link rel="shortcut icon" href="<?php echo _WEB_ROOT; ?>/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?php echo _GIT_SOURCE; ?>/assets/images/favicon.ico">
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
     <!-- <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/css/vendor/themify-icons-min.css" /> -->
     <!-- //* Font Awesome Pro 6.2.0 -->
-    <script src="https://cdn.jsdelivr.net/gh/zenfection/phpmvc_shop_order/cdn/js/icon-zen.min.js"></script>
+    <script src="<?php echo _GIT_SOURCE; ?>/cdn/js/icon-zen.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/css/nice-select2.css">
@@ -25,11 +26,11 @@
     style.css
     custom.css
     -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zenfection/phpmvc_shop_order/cdn/css/style.min.css">
+    <link rel="stylesheet" href="<?php echo _GIT_SOURCE; ?>/cdn/css/style.min.css">
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/gh/zenfection/phpmvc_shop_order/cdn/js/load-content.min.js"></script>
+    <script src="<?php echo _GIT_SOURCE; ?>/cdn/js/load-content.min.js"></script>
 
     <?php $this->render('blocks/header', $sub_content); ?>
     
@@ -45,9 +46,9 @@
     <script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/notifications.js"></script>
     
     <!--  -->
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/custom.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/backend.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/main.js"></script>
+    <script src="<?php echo _GIT_SOURCE; ?>/assets/js/custom.js"></script>
+    <script src="<?php echo _GIT_SOURCE; ?>/assets/js/backend.js"></script>
+    <script src="<?php echo _GIT_SOURCE; ?>/assets/js/main.js"></script>
 
 
     <div id="content">

@@ -10,14 +10,14 @@
 <!-- start hero -->
 <section class="hero-1 bg-white position-relative d-flex align-items-center justify-content-center overflow-hidden">
     <div class="shapes">
-        <div class="shape-1"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-1.svg" alt="shape"></div>
-        <div class="shape-2"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-2.svg" alt="shape"></div>
-        <div class="shape-3"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-3.svg" alt="shape"></div>
-        <div class="shape-4"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-4.svg" alt="shape"></div>
-        <div class="shape-5"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-5.svg" alt="shape"></div>
-        <div class="shape-6"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-6.svg" alt="shape"></div>
-        <div class="shape-7"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-7.svg" alt="shape"></div>
-        <div class="shape-8"><img src="<?php echo _WEB_ROOT; ?>/assets/images/shapes/shape-8.svg" alt="shape"></div>
+        <div class="shape-1"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-1.svg" alt="shape"></div>
+        <div class="shape-2"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-2.svg" alt="shape"></div>
+        <div class="shape-3"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-3.svg" alt="shape"></div>
+        <div class="shape-4"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-4.svg" alt="shape"></div>
+        <div class="shape-5"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-5.svg" alt="shape"></div>
+        <div class="shape-6"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-6.svg" alt="shape"></div>
+        <div class="shape-7"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-7.svg" alt="shape"></div>
+        <div class="shape-8"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-8.svg" alt="shape"></div>
     </div>
 
     <div class="container">
@@ -187,7 +187,7 @@
                 ?>
                 <div class="col m-b-30" data-aos="fade-in">
                     <a class="cursor-pointer banner hover-style" onclick="loadContent('shop/<?php echo $id?>')">
-                        <img class="fit-image p-10" src="<?php echo _WEB_ROOT; ?>/assets/images/category/<?php echo $image?>" alt="Banner Image">
+                        <img class="fit-image p-10" src="<?php echo _GIT_SOURCE; ?>/assets/images/category/<?php echo $image?>" alt="Banner Image">
                     </a>
                 </div>
                 <?php

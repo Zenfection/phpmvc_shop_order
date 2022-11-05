@@ -37,11 +37,13 @@
   const headerCart = document.querySelector('.header-cart-content');
   cartIcon.forEach((item) => {
     item.addEventListener('click', () => {
-      // add aniamtion show
-      if (headerCart.classList.contains('show-cart')) {
-        headerCart.classList.remove('show-cart');
+      headerCart.style.display = 'block';
+      if(headerCart.classList.contains('animate__fadeIn')){
+        headerCart.classList.remove('animate__fadeIn');
+        headerCart.classList.add('animate__fadeOut');
       } else {
-        headerCart.classList.add('show-cart');
+        headerCart.classList.remove('animate__fadeOut');
+        headerCart.classList.add('animate__fadeIn');
       }
     });
   });

@@ -11,7 +11,7 @@
     </a>
 
     <!-- Header Cart Content Start -->
-    <div class="header-cart-content">
+    <div class="header-cart-content animate__animated">
 
         <!-- Cart Procut Wrapper Start  -->
         <div class="cart-product-wrapper">

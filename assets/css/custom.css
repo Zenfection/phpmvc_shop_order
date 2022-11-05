@@ -424,13 +424,6 @@
     }
 }
 
-
-.show-cart{
-    /* show fade in */
-    animation:  fadeIn 0.5s;
-    display: block;
-}
-
 .heart {
     display: inline-block;
     height: 36px;
