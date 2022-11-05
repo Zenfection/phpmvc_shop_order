@@ -431,3 +431,11 @@
     display: block;
 }
 
+.heart {
+    display: inline-block;
+    height: 36px;
+    width: 50px;
+    margin: 0 16px 0 0;
+    text-align: center;
+    cursor: pointer;
+}

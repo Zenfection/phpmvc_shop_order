@@ -24,9 +24,9 @@
         }
         ?>
         <div class="action-wrapper" id="wrapper<?php echo $id ?>">
-            <a class="action" id="plus_product" title="Thêm sản phẩm"><i class="fa-regular fa-plus-large"></i></a>
-            <a class="action wishlist" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
-            <a class="nav-content cursor-pointer action cart" id="viewcart" title="Cart"><i class="fa-regular fa-cart-circle-plus"></i></a>
+            <a class="action" id="plus_product" title="Thêm sản phẩm"><i class="fa-duotone fa-plus-large"></i></a>
+            <a class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
+            <a class="nav-content cursor-pointer action cart" id="viewcart" title="Cart"><i class="fa-duotone fa-cart-circle-plus"></i></a>
         </div>
     </div>
     <div class="content">

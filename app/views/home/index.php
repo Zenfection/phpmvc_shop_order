@@ -46,7 +46,7 @@
                 <?php
                 } else {
                 ?>
-                    <a class="nav-content btn btn-primary mt-4" id="login" href="/login">Đăng Nhập
+                    <a class="cursor-pointer btn btn-primary mt-4" >Đăng Nhập
                         <i class="fa-duotone fa-arrow-right-to-bracket fa-xl"></i>
                     </a>
                 <?php
@@ -54,7 +54,7 @@
                 ?>
             </div>
             <div class="col-lg-6 mt-lg-4 pt-2 mt-5 d-lg-flex d-none" data-aos="fade-left">
-                <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/assets/images/home.png">
+                <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/assets/images/home.png" alt="Home Image">
             </div>
         </div>
     </div>
