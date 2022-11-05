@@ -35,7 +35,7 @@ class Register extends Controller {
             if(!$validate){
                 Session::data('msg', [
                     'type' => 'error',
-                    'icon' => 'fa-duotone fa-circle-exclama',
+                    'icon' => 'fa-duotone fa-circle-exclamation',
                     'position' => 'center',
                     'content' => 'Đăng ký thất bại, vui lòng đăng ký lại'
                 ]);

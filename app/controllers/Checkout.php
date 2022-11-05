@@ -73,7 +73,7 @@ class Checkout extends Controller{
         if(!$validate){
             Session::data('msg', [
                 'type' => 'error',
-                'icon' => 'fa-duotone fa-circle-exclama',
+                'icon' => 'fa-duotone fa-circle-exclamation',
                 'position' => 'center',
                 'content' => 'Đặt hàng lỗi, vui lòng kiểm tra lại'
             ]);
