@@ -14,9 +14,9 @@
             $id = $results->data[$i]['id_product'];
             $name = $results->data[$i]['name'];
             $description = $results->data[$i]['description'];
-            $price = (float)$results->data[$i]['price'];
+            $price = $results->data[$i]['price'];
             $image = $results->data[$i]['image'];
-            $discount = (int)$results->data[$i]['discount'];
+            $discount = $results->data[$i]['discount'];
             $ranking = (int)$results->data[$i]['ranking'];
             $quantity = (int)$results->data[$i]['quantity'];
     ?>
@@ -28,6 +28,8 @@
                     <?php
                     if ($discount > 0) {
                         $discount_price = $price - ($price * $discount / 100);
+                        // format vietnamdong
+                        $discount_price = number_format($discount_price, 0, ',', '.');
                     ?>
                         <span class="badges">
                             <span class="sale"><?php echo (int)$discount ?> %</span>
@@ -63,12 +65,12 @@
                         <?php
                         if ($discount > 0) {
                         ?>
-                            <span class="new"><i class="fa-duotone fa-dollar-sign"></i><?php echo $discount_price ?></span>
-                            <span class="old"><i class="fa-duotone fa-dollar-sign"></i><?php echo $price ?></span>
+                            <span class="new"></i><?php echo $discount_price . 'đ'?></span>
+                            <span class="old"></i><?php echo $price . 'đ' ?></span>
                         <?php
                         } else {
                         ?>
-                            <span class='new'><i class="fa-duotone fa-dollar-sign"></i><?php echo $price ?></span>
+                            <span class='new'></i><?php echo $price . 'đ'?></span>
                         <?php
                         }
                         ?>

@@ -12,6 +12,9 @@ if (!empty($user)) {
                 $image = $value['image'];
                 $discount = (int)$value['discount'];
                 $new_price = $price - ($price * $discount) / 100;
+
+                $price = number_format($price, 0, ',', '.') . 'đ';
+                $new_price = number_format($new_price, 0, ',', '.') . 'đ';
             ?>
                 <div class="single-product-list m-b-30">
                     <!-- Product List Thumb Start -->
@@ -29,8 +32,10 @@ if (!empty($user)) {
                             <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)"><?php echo $name ?></a>
                         </h6>
                         <span class="price">
-                            <span class="new"><i class="fa-duotone fa-dollar-sign"></i><?php echo $new_price ?></span>
-                            <span class="old"><i class="fa-duotone fa-dollar-sign"></i><?php echo $price ?></span>
+                            <span class="new"><?php echo $new_price?></span>
+                            <?php if($new_price != $price) {
+                                echo "<span class='old'>$price</span>";
+                            } ?>
                         </span>
                     </div>
                     <!-- Product List Content End -->

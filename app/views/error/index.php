@@ -1,11 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo (!empty($page_title) ? $page_title : 'Trang Chủ') ?></title>
-	<link rel="stylesheet" href="https://repack.me/templates/Great/css/bootstrap.css">
+    <title><?php echo (!empty($page_title) ? $page_title : 'Không tìm thấy trang') ?></title>
+    <link rel="stylesheet" href="https://repack.me/templates/Great/css/bootstrap.css">
     <link href="<?php echo _GIT_SOURCE; ?>/assets/css/errors.css" rel="stylesheet">
 </head>
 <body class="blue-bg">
@@ -49,7 +50,7 @@
                 <div class="cat-tail"></div>
                 <div class="cat-tail-end"></div>
             </div>
-            <h1><?php echo $number_error?></h1>
+            <h1><?php echo $number_error ?></h1>
         </div>
     </div>
     <div class="col-md-12">
@@ -62,6 +63,6 @@
             </div>
         </div>
     </div>
-
 </body>
+
 </html>

@@ -36,7 +36,7 @@
                 </h1>
                 <h5 class="my-4 fw-hero"><i class="fa-duotone fa-phone-volume"></i> Liên hệ với tôi nếu bạn có ý tưởng</h5>
 
-                <p class="text-muted mb-2 fw-hero">Sản phẩm được phát triển cả nhân nên có rất nhiều lỗi <br> nếu bạn phát hiện hãy liên hệ với tôi bên trên.</p>
+                <p class="text-danger mb-2 fw-hero">Sản phẩm được phát triển cả nhân nên có rất nhiều lỗi <br> nếu bạn phát hiện hãy liên hệ với tôi bên trên.</p>
                 <?php
                 if (!empty($user)) {
                 ?>
@@ -68,7 +68,7 @@
         <div class="row justify-content-center text-center">
             <div class="col-12 mb-4">
                 <h4 class="fw-semibold mb-3 fw-hero">Chức Năng Nổi Bật</h4>
-                <h5 class="text-muted fw-normal fw-hero">Liệt kê các nổi bật trong trang web </h5>
+                <h5 class="text-secondary fw-normal fw-hero">Liệt kê các nổi bật trong trang web </h5>
             </div>
         </div>
         <div class="row text-center">
@@ -81,7 +81,7 @@
                                     <i class="fa-duotone fa-rabbit-running fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Tốc độ ưu việt</h5>
-                                <a class="text-muted">Không cần phải <span class="fw-semibold fs-15 text-dark">refresh</span> lại trang khi sử dụng</a>
+                                <a class="text-secondary">Không cần phải <span class="fw-semibold fs-15 text-dark">refresh</span> lại trang khi sử dụng</a>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                                     <i class="fa-duotone fa-users-viewfinder fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Sử dụng đơn giản</h5>
-                                <a class="text-muted">Thiết kế sử dụng dựa trên<span class="fw-semibold fs-15 text-dark"> trải nghiệm thực tế</span></a>
+                                <a class="text-secondary">Thiết kế sử dụng dựa trên<span class="fw-semibold fs-15 text-dark"> trải nghiệm thực tế</span></a>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                                     <i class="fa-duotone fa-binary-lock fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Mã hóa mật khẩu</h5>
-                                <a class="text-muted">Sử dụng <span class="fw-semibold fs-15 text-dark"> SHA516</span> để mã hóa mật khẩu của người dùng</a>
+                                <a class="text-secondary">Sử dụng <span class="fw-semibold fs-15 text-dark"> SHA516</span> để mã hóa mật khẩu của người dùng</a>
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                                     <i class="fa-duotone fa-fork-knife fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Hàng hóa đa dạng</h5>
-                                <a class="text-muted">Mua bán nhiều sản phẩm và có thể<span class="fw-semibold fs-15 text-dark"> thêm mới</span></a>
+                                <a class="text-secondary">Mua bán nhiều sản phẩm và có thể<span class="fw-semibold fs-15 text-dark"> thêm mới</span></a>
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                                     <i class="fa-duotone fa-filters fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Bộ lọc thông minh</h5>
-                                <a class="text-muted">Bộ lọc sản phẩm do chính <span class="fw-semibold fs-15 text-dark"> Zen</span> phát triển</a>
+                                <a class="text-secondary">Bộ lọc sản phẩm do chính <span class="fw-semibold fs-15 text-dark"> Zen</span> phát triển</a>
                             </div>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                                     <i class="fa-duotone fa-box-circle-check fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Xem lại đơn hàng</h5>
-                                <a class="text-muted">Theo dõi <span class="fw-semibold fs-15 text-dark"> đơn hàng</span> cá nhân vừa đặt dễ dàng</a>
+                                <a class="text-secondary">Theo dõi <span class="fw-semibold fs-15 text-dark"> đơn hàng</span> cá nhân vừa đặt dễ dàng</a>
                             </div>
                         </div>
                     </div>
@@ -147,7 +147,7 @@
                                     <i class="fa-duotone fa-basket-shopping fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Giỏ hàng thông minh</h5>
-                                <a class="text-muted"><span class="fw-semibold fs-15 text-dark">Thêm, sửa, xóa</span> sản phẩm với hiệu suất nhanh chóng</a>
+                                <a class="text-secondary"><span class="fw-semibold fs-15 text-dark">Thêm, sửa, xóa</span> sản phẩm với hiệu suất nhanh chóng</a>
                             </div>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                                     <i class="fa-duotone fa-eye-low-vision fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Không lấy dữ diệu</h5>
-                                <a class="text-muted">Cam kết không lấy bất cứ<span class="fw-semibold fs-15 text-dark"> dữ liệu</span> của người dùng</a>
+                                <a class="text-secondary">Cam kết không lấy bất cứ<span class="fw-semibold fs-15 text-dark"> dữ liệu</span> của người dùng</a>
                             </div>
                         </div>
                     </div>

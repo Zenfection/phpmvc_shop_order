@@ -30,7 +30,8 @@
 </head>
 
 <body>
-    <script src="<?php echo _GIT_SOURCE; ?>/cdn/js/load-content.min.js"></script>
+    <!-- <script src="<?php echo _GIT_SOURCE; ?>/cdn/js/load-content.min.js"></script> -->
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/load-content.js"></script>
 
     <?php $this->render('blocks/header', $sub_content); ?>
     

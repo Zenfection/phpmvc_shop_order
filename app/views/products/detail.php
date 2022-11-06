@@ -20,6 +20,7 @@
                                 $description = $product_detail['description'];
                                 $quantity = $product_detail['quantity'];
                                 $id_category = $product_detail['id_category'];
+
                                 ?>
 
                                 <img class='w-100' id="img-product<?php echo $id ?>" src='<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>' alt='Product' style="padding-right: 25%;">
@@ -75,13 +76,15 @@
                             <?php
                             if ($discount > 0) {
                                 $discount_price = $price - ($price * $discount / 100);
+                                $discount_price = number_format($discount_price, 0, ',', '.') . 'đ';
+                                $price = number_format($price, 0, ',', '.') . 'đ';
                             ?>
-                                <span class="regular-price">$<?php echo $discount_price ?></span>
-                                <span class="old-price">$<?php echo $price ?></span>
+                                <span class="regular-price"><?php echo $discount_price ?></span>
+                                <span class="old-price"><?php echo $price ?></span>
                             <?php
                             } else {
                             ?>
-                                <span class='regular-price'>$<?php echo $price ?></span>
+                                <span class='regular-price'><?php echo $price ?></span>
                             <?php
                             }
                             ?>

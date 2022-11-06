@@ -143,13 +143,24 @@ window.addEventListener('popstate', function () {
 
     if (path == '' || path == '/') {
         id = 'home';
-    } else if (path == '/shop/category') {
-        id = 'shop';
+    } else if (path.includes('/shop/category')) {
+        let temp = path.replace('/shop/category', '');
+        if(temp == ''){
+            id = 'shop';
+        } else {
+            let arr = temp.split('/');
+            let category = arr[1];
+            let sortby = arr[2];
+            let page = arr[3];
+            let search = arr[4];
+            filterShop(category, sortby, page, search);
+        }
     } else if (path.includes('/product/detail/')) {
         loadDetailProduct(path.replace('/product/detail/', ''));
         return;
+    } else {
+        loadContent(id);
     }
-    loadContent(id);
 });
 
 // Google map API fetch
