@@ -5,7 +5,7 @@
             <div class="col-md-6 pe-lg-5 p-r-15 m-b-30" data-aos="fade-right" data-aos-duration="1000">
                 <!-- About Thumb Start -->
                 <div class="about-thumb">
-                    <img class="fit-image" src="<?php echo _GIT_SOURCE; ?>/assets/images/about.png">
+                    <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/assets/images/about.svg">
                 </div>
                 <!-- About Thumb End -->
             </div>

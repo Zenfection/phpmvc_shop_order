@@ -66,9 +66,13 @@ function loadOrderDetail(id) {
         .then(response => response.text())
         .then(data => {
             document.title = 'Chi tiết đơn hàng';
-
             window.history.pushState(null, null, `/admin/order/detail/${id}`);
             document.getElementById('content').innerHTML = data;
+
+            let sciprt = document.createElement('script');
+            sciprt.src = window.location.origin + '/assets/admin/js/custom/order_detail.js';
+            document.body.appendChild(sciprt);
+
             AOS.init();
         })
 }
@@ -87,6 +91,8 @@ window.addEventListener('popstate', function () {
     }
 });
 
+
+
 function loadCity() {
     let element = document.getElementById('province');
     let province = element.options[element.selectedIndex].text;
@@ -94,8 +100,15 @@ function loadCity() {
     fetch(`/address/get_city/${province}`)
         .then(response => response.text())
         .then(data => {
-            console.log(data);
             document.getElementById('city').innerHTML = data;
+            document.getElementById('city').nextSibling.remove();
+
+
+            let options = { searchable: true };
+            NiceSelect.bind(city, options).update();
+
+            //* Change text "Select as option" to "Chọn quận / huyện"
+            document.getElementById('city').nextElementSibling.childNodes[1].textContent = 'Chọn quận / huyện';
         })
 }
 
@@ -108,5 +121,11 @@ function loadWard() {
         .then(response => response.text())
         .then(data => {
             document.getElementById('ward').innerHTML = data;
+            document.querySelector('#ward').nextSibling.remove();
+            let options = { searchable: true };
+            NiceSelect.bind(ward, options).update();
+
+            //* Change text "Select as option" to "Chọn phường / xã "
+            document.querySelector('#ward').nextElementSibling.childNodes[1].textContent = 'Chọn phường / xã';
         });
 }

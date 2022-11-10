@@ -11,7 +11,8 @@ class Response {
     }
     public function json($data){
         header('Content-Type: application/json');
-        echo json_encode($data);
+        // format utf8
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
         exit();
     }
     public function view($view, $data = array()){

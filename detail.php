@@ -129,7 +129,7 @@
                                         </div>
                                         <div class="col-12">
                                             <label for="status" class="form-label">Cập Nhật Trạng Thái</label>
-                                            <select class="nice-select" id="status" name="status">
+                                            <select class="form-select" id="status" name="status">
                                                 <?php
                                                 for ($i = 0; $i < count($statusEng); $i++) {
                                                     if ($status == $statusEng[$i]) {

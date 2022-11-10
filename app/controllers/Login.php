@@ -50,8 +50,7 @@ class Login extends Controller {
             }
         }
     }
-
-    static private function login_user($username){
+    static public function login_user($username){
         $db = new Database();
         $password = md5($_POST['password']);
         $check = $db->table('tb_user')->where('username', '=', $username)->where('password', '=', $password)->count();
