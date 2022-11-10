@@ -19,17 +19,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/css/lobibox.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.css"> -->
     
-    <script src="<?php echo _GIT_SOURCE; ?>/cdn/js/icon-zen.min.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/cdn/js/icon-zen.min.js"></script>
     <!-- Custom main style: 
     pace.min.css
     style.css
     custom.css
 -->
-    <link rel="stylesheet" href="<?php echo _GIT_SOURCE; ?>/cdn/css/style.min.css">
+    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/cdn/css/style.min.css">
 </head>
 
 <body>
-    <!-- <script src="<?php echo _GIT_SOURCE; ?>/cdn/js/load-content.min.js"></script> -->
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/load-content.js"></script>
 
     <?php $this->render('blocks/header', $sub_content); ?>
@@ -48,9 +47,9 @@
     <script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/notifications.js"></script> -->
     
     <!--  -->
-    <script src="<?php echo _GIT_SOURCE; ?>/assets/js/custom.js"></script>
-    <script src="<?php echo _GIT_SOURCE; ?>/assets/js/backend.js"></script>
-    <script src="<?php echo _GIT_SOURCE; ?>/assets/js/main.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/custom.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/backend.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/main.js"></script>
 
 
     <div id="content">

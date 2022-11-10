@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo (!empty($page_title) ? $page_title : 'Không tìm thấy trang') ?></title>
     <link rel="stylesheet" href="https://repack.me/templates/Great/css/bootstrap.css">
-    <link href="<?php echo _GIT_SOURCE; ?>/assets/css/errors.css" rel="stylesheet">
+    <link href="<?php echo _WEB_ROOT; ?>/assets/css/errors.css" rel="stylesheet">
 </head>
 <body class="blue-bg">
     <div class="col-md-12" style="top:48vmin">

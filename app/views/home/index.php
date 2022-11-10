@@ -54,7 +54,7 @@
                 ?>
             </div>
             <div class="col-lg-6 mt-lg-4 pt-2 mt-5 d-lg-flex d-none" data-aos="fade-left">
-                <img class="fit-image" src="<?php echo _GIT_SOURCE; ?>/assets/images/home.png" alt="home Image">
+                <img class="fit-image" src="<?php echo _GIT_SOURCE; ?>/assets/images/home.svg" alt="home Image">
             </div>
         </div>
     </div>
