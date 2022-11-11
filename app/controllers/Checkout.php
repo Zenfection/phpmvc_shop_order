@@ -49,8 +49,6 @@ class Checkout extends Controller{
             'email' => 'email',
             'phone' => 'min:10|max:11',
             'address' => 'min:5|max:255',
-            'province' => 'min:5|max:50',
-            'city' => 'min:5|max:50',
         ]);
         //set message 
         $request->message([
@@ -61,10 +59,6 @@ class Checkout extends Controller{
             'phone.max' => 'Số điện thoại không được quá 11 ký tự',
             'address.min' => 'Địa chỉ phải có ít nhất 5 ký tự',
             'address.max' => 'Địa chỉ không được quá 255 ký tự',
-            'province.min' => 'Tỉnh/Thành phố phải có ít nhất 5 ký tự',
-            'province.max' => 'Tỉnh/Thành phố không được quá 50 ký tự',
-            'city.min' => 'Quận/Huyện phải có ít nhất 5 ký tự',
-            'city.max' => 'Quận/Huyện không được quá 50 ký tự',
         ]);
 
         //validate
@@ -79,7 +73,7 @@ class Checkout extends Controller{
             ]);
             $response->redirect('checkout');
         } else {
-            $id_order = $this->checkoutOrder($_POST['fullname'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['province'], $_POST['city']);
+            $id_order = $this->checkoutOrder($_POST['fullname'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['province'], $_POST['city'], $_POST['ward']);
 
             Session::data('msg', [
                 'type' => 'success',
@@ -91,7 +85,7 @@ class Checkout extends Controller{
         }
     }
 
-    private function checkoutOrder($fullname, $email, $phone, $address, $province, $city){
+    private function checkoutOrder($fullname, $email, $phone, $address, $province, $city, $ward){
         $order_date = date('Y-m-d');
         $status = 'pending';
         $user = Session::data('user');
@@ -106,6 +100,7 @@ class Checkout extends Controller{
             'address_customer' => $address,
             'email_customer' => $email,
             'city_customer' => $city,
+            'ward_customer' => $ward,
             'province_customer' => $province,
             'status' => $status,
             'order_date' => $order_date,

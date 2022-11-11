@@ -1,5 +1,5 @@
 <?php
-    if (!empty($data['msg'])) {
+    if (!empty($msg)) {
         $type_msg = $msg['type'];
         $icon_msg = $msg['icon'];
         $pos_msg = $msg['position'];
@@ -11,7 +11,7 @@
 <div class="section section-margin">
     <div class="container">
         <div class="row m-b-n20">
-            <div class="col-lg-7 col-12 m-b-20" data-aos="fade-right">
+            <div class="col-lg-6 col-12 m-b-20" data-aos="fade-right">
 
                 <!-- Checkbox Form Start -->
                 <div class="checkbox-form">
@@ -51,9 +51,8 @@
                             <div class="col-md-4">
                                 <div class="checkout-form-list">
                                     <label for="province">Tỉnh <span class="required">*</span></label>
-                                    <select class="form-select" id="province" name="province">
+                                    <select class="nice-select" id="province" name="province" onchange="loadCity()">
                                                 <?php
-                                                echo "<option value=''>Chọn tỉnh</option>";
                                                 foreach ($province_data as $key => $value) {
                                                     if ($value['name'] != $city) {
                                                         echo "<option value='" . $value['name'] . "'>" . $value['name'] . "</option>";
@@ -68,16 +67,20 @@
                             <!-- Town or City Name Input Start -->
                             <div class="col-md-4">
                                 <div class="checkout-form-list">
-                                    <label for="city">Thành Phố <span class="required">*</span></label>
-                                    <select class="form-select" id="city" name="city" disabled>
-
+                                    <label for="city">Thành Phố 
+                                        <span class="required">*</span>
+                                    </label>
+                                    <select class="nice-select" id="city" name="city" onchange="loadWard()">
+                                        
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="checkout-from-list">
-                                    <label for="ward">Phường/Xã <span class="required">*</span></label>
-                                    <select class="form-select" name="ward" id="ward" disabled>
+                                <div class="checkout-form-list">
+                                    <label for="ward">Phường Xã 
+                                        <span class="required">*</span>
+                                    </label>
+                                    <select class="nice-select" name="ward" id="ward">
 
                                     </select>
                                 </div>
@@ -103,7 +106,7 @@
                 <!-- Checkbox Form End -->
             </div>
 
-            <div class="col-lg-5 col-12 m-b-20" data-aos="fade-left">
+            <div class="col-lg-6 col-12 m-b-20" data-aos="fade-left">
                 <!-- Your Order Area Start -->
                 <div class="your-order-area border">
                     <!-- Title Start -->
@@ -131,17 +134,24 @@
                                     $price = (float)$value['price'];
                                     $amount = (int)$value['amount'];
                                     $discout_price = $price * (100 - (int)$value['discount']) / 100;
+
+                                    //format price
+                                    $total = number_format($discout_price * $amount, 0, ',', '.') . 'đ';
+                                    
                                     ?>
                                     <tr class="cart_item">
                                         <td class="cart-product-name text-start ps-0"> <?php echo $name ?>
                                             <strong class="product-quantity"> × <?php echo $amount ?></strong>
                                         </td>
                                         <td class="cart-product-total text-end pe-0">
-                                            <span class="amount"><?php echo $total ?>$</span>
+                                            <span class="amount"><?php echo $total ?></span>
                                         </td>
                                     </tr>
                                     <?php
                                 }
+                                
+                                // format total money
+                                $totalMoney = number_format($totalMoney, 0, ',', '.') . 'đ';
                                 ?>
                             </tbody>
                             <!-- Table Body End -->
@@ -150,7 +160,7 @@
                             <tfoot>
                                 <tr class="cart-subtotal">
                                     <th class="text-start ps-0">Tổng đơn hàng</th>
-                                    <td class="text-end pe-0"><strong><span class="amount"><?php echo $totalMoney ?>$</span></strong></td>
+                                    <td class="text-end pe-0"><strong><span class="amount"><?php echo $totalMoney ?></span></strong></td>
                                 </tr>
                             </tfoot>
                             <!-- Table Footer End -->
@@ -186,29 +196,28 @@
 </div>
 <!-- Checkout Section End -->
 
-<script>
-    $(document).ready(function() {
-        $("#province").change(function() {
-            let province = $(this).val();
-            $.ajax({
-                url: "/address/get_city/" + province,
-                success: function(data) {
-                    $('#city').removeAttr('disabled');
-                    $("#city").html(data);
-                }
-            });
-        });
+<script src="<?php echo _WEB_ROOT; ?>/assets/js/custom/checkout.js"></script>
 
-        $('#city').change(function(){
-            let city = $(this).val();
-            $.ajax({
-                url: "/address/get_ward/" + city,
-                success: function(data) {
-                    $('#ward').removeAttr('disabled');
-                    $("#ward").html(data);
-                }
-            });
-        });
-    });
-</script>
-
+<style>
+    
+    select.nice-select{
+        display: none !important;
+    }
+    .nice-select{
+        display: block !important;
+        width: 100% !important;
+        padding: 0.375rem 2.25rem 0.375rem 0.75rem !important;
+        font-size: 1rem !important;
+        font-weight: 400 !important;
+        line-height: 1.5 !important;
+        color: #212529 !important;
+        border: 1px solid #ced4da !important;
+        background-color: #fff !important;
+        border-radius: 0.375rem !important;
+    }
+    .nice-select:focus{
+        border-color: #80bdff !important;
+        outline: 0 !important;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+    }
+</style>

@@ -1,14 +1,5 @@
 <?php
-$fullname = $data['fullname'];
-$email = $data['email'];
-$phone = $data['phone'];
-$address = $data['address'];
-
-if (!empty($data['getOrder'])) {
-    $getOrder = $data['getOrder'];
-}
-
-if (!empty($data['msg'])) {
+if (!empty($msg)) {
     $type_msg = $msg['type'];
     $icon_msg = $msg['icon'];
     $pos_msg = $msg['position'];
@@ -86,12 +77,14 @@ if (!empty($data['msg'])) {
                                                                 $status = $getOrder[$i]['status'];
                                                                 $total_money = $getOrder[$i]['total_money'];
 
+                                                                //number format
+                                                                $total_money = number_format($total_money, 0, ',', '.') . 'đ';
                                                     ?>
                                                                 <tr id="id_order<?php echo $id_order ?>">
                                                                     <td><?php echo $id_order ?></td>
                                                                     <td><?php echo $order_date ?></td>
                                                                     <td><?php echo $status ?></td>
-                                                                    <td><?php echo $total_money ?>$</td>
+                                                                    <td><?php echo $total_money ?></td>
                                                                     <td><a class="btn btn btn-dark btn-hover-primary btn-sm rounded" href="/account/order/<?php echo $id_order ?>">Xem</a></td>
                                                                 </tr>
                                                     <?php

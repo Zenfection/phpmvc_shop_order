@@ -19,6 +19,7 @@
             <div class="best-selling-products p-3 mb-3">
                 <?php
                 foreach($top_product_selling as $key => $value){
+                    $id = $value['id_product'];
                     $name = $value['name'];
                     $description = $value['description'];
                     $price = (float)$value['price'];
@@ -27,12 +28,12 @@
                     $total_amount = (int)$value['total_amount'];
                     $discount_price = $price - ($price * $discount / 100);
                 ?>
-                    <div class="d-flex align-items-center">
-                        <div class="product-img">
+                    <div class="d-flex align-items-center p-2">
+                        <div class="product-img cursor-pointer" onclick="loadProductDetail(<?php echo $id?>)">
                             <img src="/assets/images/products/<?php echo $image ?>" class="p-1" />
                         </div>
                         <div class="ps-3">
-                            <h6 class="mb-0 font-weight-bold"><?php echo $name ?></h6>
+                            <h6 class="mb-0 font-weight-bold cursor-pointer" onclick="loadProductDetail(<?php echo $id?>)"><?php echo $name ?></h6>
                             <p class="mb-0 text-secondary"><?php echo $discount_price ?>$ / mua <?php echo $total_amount ?> cái</p>
                         </div>
                         <p class="ms-auto mb-0 text-purple" style="font-weight: bold;"><?php echo $discount_price * $total_amount ?>$</p>
@@ -60,16 +61,17 @@
             <div class="recent-reviews p-3 mb-3">
                 <?php
                 foreach($top_product_ranking as $key => $value){
+                    $id = $value['id_product'];
                     $name = $value['name'];
                     $image = $value['image'];
                     $ranking = (int)$value['ranking'];
                     ?>
-                    <div class="d-flex align-items-center">
-                        <div class="product-img">
+                    <div class="d-flex align-items-center p-2">
+                        <div class="product-img cursor-pointer" onclick="loadProductDetail(<?php echo $id?>)">
                             <img src="/assets/images/products/<?php echo $image ?>" class="p-1" alt="" />
                         </div>
                         <div class="ps-3">
-                            <h6 class="mb-0 font-weight-bold"><?php echo $name ?></h6>
+                            <h6 class="mb-0 font-weight-bold cursor-pointer" onclick="loadProductDetail(<?php echo $id?>)"><?php echo $name ?></h6>
                         </div>
                         <p class="ms-auto mb-0">
                             <?php

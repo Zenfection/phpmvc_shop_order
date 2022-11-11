@@ -3,25 +3,11 @@
 class Content extends Controller{
     public $data;
 
-    public function about(){
-        $this->loadContent('about');
-    }
 
-    public function home(){
-        $category = $this->db->table('tb_category')->get();
-        $user = Session::data('user');
-
-        $top_product_ranking = $this->models('ProductModel')->topProductRanking(8);
-        $top_product_discount = $this->models('ProductModel')->topProductDiscount(8);
-        $top_product_seller = $this->models('ProductModel')->topProductSeller(8);
-
-        $contentView = file_get_contents(_DIR_ROOT . '/app/views/' . 'home' . '/index.php');
-        
-        // add array into eval code
+    //! Chỉ load những trang không có data
+    private function loadContent($content){
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/' . $content . '/index.php');
         eval('?>' . $contentView . '<?php');
-    }
-    public function contact(){
-        $this->loadContent('contact');
     }
     
     private function dataShop(){
@@ -44,6 +30,34 @@ class Content extends Controller{
             $this->data['recent_product'] = $this->models('ProductModel')->recentViewProduct($user, 5);
         }
     }
+
+    /* -----------------------------
+        //* LoadContent các trang
+    -------------------------------*/
+    public function about(){
+        $this->loadContent('about');
+    }
+
+    public function contact(){
+        $this->loadContent('contact');
+    }
+
+    public function home(){
+        $category = $this->db->table('tb_category')->get();
+        $user = Session::data('user');
+
+        $top_product_ranking = $this->models('ProductModel')->topProductRanking(8);
+        $top_product_discount = $this->models('ProductModel')->topProductDiscount(8);
+        $top_product_seller = $this->models('ProductModel')->topProductSeller(8);
+
+        if($this->data['msg']){
+            $msg = $this->data['msg'];
+        }
+
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/home/index.php');
+        eval('?>' . $contentView . '<?php');
+    }
+    
 
     public function shop($categoryFilter = 'all'){
         $this->dataShop();
@@ -80,7 +94,6 @@ class Content extends Controller{
         if(!empty($dataShare)){
             $data = array_merge($data, $dataShare);
         }
-
 
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/shop/index.php');
         eval('?>' . $contentView . '<?php');
@@ -133,24 +146,106 @@ class Content extends Controller{
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/shop/index.php');
         eval('?>' . $contentView . '<?php');
     }
-    public function login(){
+
+    public function account(){
+        $user = Session::data('user');
+        $account = $this->db->table('tb_user')->where('username', '=', $user)->first();
+        $getOrder = $this->models('AccountModel')->getOrder($user);
+    
+        $fullname = $account['fullname'];
+        $email = $account['email'];
+        $phone = $account['phone'];
+        $address = $account['address'];
+
         $msg = Session::flash('msg');
+        $this->data['sub_content']['msg'] = Session::flash('msg');
+
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/account/index.php');
+        eval('?>' . $contentView . '<?php');
+    }
+
+    public function login(){
+        $this->data['msg'] = Session::flash('msg');
+
+        if($this->data['msg']){
+            $msg = $this->data['msg'];
+        }
 
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/login/index.php');
         eval('?>' . $contentView . '<?php');
     }
 
     public function register(){
-        $msg = Session::flash('msg');
+        $this->data['msg'] = Session::flash('msg');
+
+        if($this->data['msg']){
+            $msg = $this->data['msg'];
+        }
 
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/register/index.php');
         eval('?>' . $contentView . '<?php');
     }
 
-    private function loadContent($content){
-        $contentView = file_get_contents(_DIR_ROOT . '/app/views/' . $content . '/index.php');
+    public function viewcart(){
+        $user = Session::data('user');
+        $cart = $this->models('CartModel')->getCartUser($user);
+        if(!$cart){
+            echo json_encode([
+                'status' => 'false',
+                'msg' => [
+                    'type' => 'warning',
+                    'icon' => 'fa-duotone fa-basket-shopping-simple',
+                    'position' => 'top',
+                    'content' => 'Giỏ hàng của bạn đang trống' 
+                ],
+            ]);
+            exit();
+        }
         
-        //add variable to view
+        $dataShare = $this->getDataShare();
+        $cart = $dataShare['cart'];
+        $total_money = $dataShare['total_money'];
+        
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/viewcart/index.php');
+        eval('?>' . $contentView . '<?php');
+    }
+
+    public function checkout(){
+        $user = Session::data('user');
+        if(!$user){
+            echo json_encode([
+                'msg' => [
+                    'type' => 'info',
+                    'icon' => 'fa-duotone fa-user-xmark',
+                    'position' => 'top',
+                    'content' => 'Đăng nhập để sử dụng chức năng này' 
+                ],
+            ]);
+            exit();
+        }
+        $account = $this->db->table('tb_user')->where('username', '=', $user)->get();
+        $fullname = $account[0]['fullname'];
+        $phone = $account[0]['phone'];
+        $email = $account[0]['email'];
+        $address = $account[0]['address'];
+
+        $dataShare = $this->getDataShare();
+        $total_money = $dataShare['total_money'];
+        $province_data = $this->models('AddressModel')->getProvince();
+        $cart = $dataShare['cart'];
+
+        if(!$cart){
+            echo json_encode([
+                'msg' => [
+                    'type' => 'warning',
+                    'icon' => 'fa-duotone fa-basket-shopping-simple',
+                    'position' => 'top',
+                    'content' => 'Giỏ hàng của bạn đang trống' 
+                ],
+            ]);
+            exit();
+        }
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/checkout/index.php');
         eval('?>' . $contentView . '<?php');
     }
 
@@ -198,4 +293,3 @@ class Content extends Controller{
         return true;
     }
 }
-?>

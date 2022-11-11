@@ -47,7 +47,7 @@
                         <?php
                         if (!empty($user)) {
                         ?>
-                            <a id='account' class='nav-content cursor-pointer header-action-btn header-action-btn-wishlist' href="/account">
+                            <a id='account' class='cursor-pointer header-action-btn header-action-btn-wishlist' onclick="loadContent('account')">
                                 <i class='fa-duotone fa-user-gear fa-xl'></i>
                             </a>
                         <?php

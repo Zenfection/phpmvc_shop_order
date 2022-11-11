@@ -1,4 +1,3 @@
-
 <!-- Single Product Section Start -->
 <div id="content">
     <div class="section section-margin">
@@ -49,7 +48,7 @@
                         <!-- Product Head Start -->
                         <div class="product-head m-b-15">
                             <?php
-                                echo "<h2 class='product-title'>$name</h2>";
+                            echo "<h2 class='product-title'>$name</h2>";
                             ?>
                         </div>
                         <!-- Product Head End -->
@@ -83,7 +82,9 @@
                                 <span class="old-price"><?php echo $price ?></span>
                             <?php
                             } else {
+                                $price = number_format($price, 0, ',', '.') . 'đ';
                             ?>
+
                                 <span class='regular-price'><?php echo $price ?></span>
                             <?php
                             }
@@ -102,7 +103,7 @@
 
                         <!-- Description Start -->
                         <?php
-                            echo "<p class='desc-content m-b-25'>$description.</p>";
+                        echo "<p class='desc-content m-b-25'>$description.</p>";
                         ?>
                         <!-- Description End -->
 
@@ -120,7 +121,7 @@
                         <!-- Cart Button Start -->
                         <div class="cart-btn action-btn m-b-30">
                             <div class="action-cart-btn-wrapper d-flex">
-                                <div class="add-to_cart" id="product<?php echo $id ?>">
+                                <div class="add-to-cart" id="product<?php echo $id ?>">
                                     <a class="btn btn-primary btn-hover-dark rounded" style="width: 110%">Thêm Vào Giỏ</a>
                                 </div>
                                 <!-- <a href="#" title="Wishlist" class="heart"><i class="fa-duotone fa-heart fa-xl"></i></a> -->
@@ -239,7 +240,7 @@
                             $ranking = $row['ranking'];
                             $image = $row['image'];
 
-                            if($id == $product_detail['id_product']){
+                            if ($id == $product_detail['id_product']) {
                                 continue;
                             }
                         ?>
@@ -249,7 +250,7 @@
                                         <div class="product">
                                             <!-- Thumb Start  -->
                                             <div class="thumb product-inner" id="product<?php echo $id ?>">
-                                                <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)">
+                                                <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)">
                                                     <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" />
                                                 </a>
                                                 <?php
@@ -290,13 +291,18 @@
                                                 <span class="price">
                                                     <?php
                                                     if ($discount > 0) {
+                                                        // number format
+                                                        $discount_price = number_format($discount_price, 0, ',', '.') . 'đ';
+                                                        $price = number_format($price, 0, ',', '.') . 'đ';
                                                     ?>
-                                                        <span class="new">$<?php echo $discount_price ?></span>
-                                                        <span class="old">$<?php echo $price ?></span>
+                                                        <span class="new"><?php echo $discount_price ?></span>
+                                                        <span class="old"><?php echo $price ?></span>
                                                     <?php
                                                     } else {
+                                                        //number format
+                                                        $price = number_format($price, 0, ',', '.') . 'đ';
                                                     ?>
-                                                        <span class='new'>$<?php echo $price ?></span>
+                                                        <span class='new'><?php echo $price ?></span>
                                                     <?php
                                                     }
                                                     ?>

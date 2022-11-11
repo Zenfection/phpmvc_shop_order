@@ -120,99 +120,61 @@ $(function () {
     };
 
     function addProduct(id, qty) {
-        if (checkProductExistCart(id)) {
-            // có hàng trong giỏ chỉ cần tăng số lượng
-            let add_qty = getQtyProductCart(id);
-            let money = parseFloat(
-                $("#product_id" + id + " .price .new")
-                .text()
-                .replace("$", "")
-            );
-            let total_qty = add_qty + qty;
-            let total = parseFloat($("#totalmoney").text().replace("$", ""));
-            let totalMoney = parseFloat(total + money * qty).toFixed(2);
-            $("#quantity" + id + " > strong").text(total_qty);
-            $("#totalmoney").text(totalMoney + "$");
-        } else {
-            // không có hàng trong giỏ thì thêm mới
-            let amount = $("#count-cart").text();
-            $("#count-cart").text(parseInt(amount) + 1);
+        let insert = true;
+        fetch('/cart/add/' + id + '/' + qty)
+            .then((response) => response.text())
+            .then((data) => {
+                try {
+                    data = JSON.parse(data);
+                    if (data.status == 'update') {
+                        insert = false;
+                        document.querySelector('#quantity' + id + " > strong").textContent = data.total_qty;
+                        document.querySelector('#totalmoney').textContent = data.total_money;
+                    }
+                } catch (e) {}
 
-            let image = $("#img-product" + id).attr("src");
-            let name = $("#product" + id + " .product-title").text();
-            if (name == '') name = $(".product-title").text();
-            let newprice = $("#product" + id + " .price .new").text();
-            if (newprice == '') newprice = $(".regular-price").text();
-            let oldprice = $("#product" + id + " .price .old").text();
-            if (oldprice == '') oldprice = $(".old-price").text();
-            let total = parseFloat($("#totalmoney").text().replace("$", ""));
-            let totalMoney = parseFloat(newprice.replace("$", "")) * qty + total;
+                if (insert) {
+                    let total_money = document.querySelector('#totalmoney').textContent.replace(/\D/g, '');
+                    total_money = parseInt(total_money);
 
-            let html = `<div class="cart-product-inner p-b-20 m-b-20 border-bottom" id="product_id${id}">
-                    <div class="single-cart-product">
-                  <div class="cart-product-thumb">
-                      <a href="./frontend/detail_product.php"><img src="${image}" alt="Cart Product" class="rounded"></a>
-                  </div>
-                  <div class="cart-product-content">
-                      <h3 class="title"><a href="./frontend/detail_product.php">${name}</a></h3>
-                      <div class="product-quty-price">
-                          <span class="cart-quantity" id="quantity${id}">Số lượng: <strong> ${qty} </strong></span>
-                          <span class="price">
-                            `;
+                    $(".cart-product-wrapper").prepend(data);
 
-            if (oldprice != "") {
-                html += `
-              <span class="new">${newprice}</span>
-              <span class="old" style="text-decoration: line-through;color: #DC3545;opacity: 0.5;">${oldprice}</span>
-              </span>
-            `;
-            } else {
-                html += `<span class='new'>${newprice}</span>
-            </span>`;
-            }
-            html += `
-                      </div>
-                  </div>
-              </div>
-              <div class="cart-product-remove">
-                  <a class="remove-cart" id="product${id}">
-                    <i class="fa-duotone fa-trash-can"></i>
-                  </a>
-              </div>
-          </div>`;
+                    let newprice = document.querySelector('#product_id' + id + ' span.new').textContent.replace(/\D/g, '');
 
-            $(".cart-product-wrapper").prepend(html);
-            $("#product_id" + id).hide().fadeIn();
-            $("#totalmoney").text(parseFloat(totalMoney).toFixed(2) + "$");
-        }
+                    total_money += (qty * parseInt(newprice));
+                    //number format
+                    total_money = total_money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                    document.querySelector('#totalmoney').textContent = total_money + 'đ';
 
-        $.ajax({
-            type: "post",
-            url: "/cart/add/" + id + "/" + qty,
-        });
+                    $("#product_id" + id).hide().fadeIn();
+                }
+            })
     }
 
+    document.querySelectorAll(".add-to-cart").forEach((item) => {
+        item.addEventListener("click", function () {
+            if (!checkLoged()) {
+                notify('warning', 'fa-duotone fa-cart-circle-xmark', 'right', 'Vui lòng đăng nhập để mua hàng');
+                return;
+            }
+            let id = parseInt(this.getAttribute('id').replace('product', ''));
+            let qty = parseInt(document.querySelector('.cart-plus-minus-box').value);
+            if (isNaN(qty)) qty = 1;
+            addProduct(id, qty);
+        });
 
-    $(document).on("click", ".add-to_cart", function () {
-        if (!checkLoged()) {
-            notify('warning', 'fa-duotone fa-cart-circle-xmark', 'right', 'Vui lòng đăng nhập để mua hàng');
-            return;
-        }
-        let id = parseInt($(this).attr("id").replace("product", ""));
-        let qty = parseInt($(".cart-plus-minus-box").val());
-        if (isNaN(qty)) qty = 1;
-        // console.log(id, qty);
-        addProduct(id, qty);
     });
 
-    $(document).on('click', 'a#plus_product', function () {
-        if (!checkLoged()) {
-            notify('warning', 'fa-duotone fa-cart-circle-xmark', 'right', 'Vui lòng đăng nhập để mua hàng');
-            return;
-        }
-        let id = parseInt($(this).parent().attr('id').replace('wrapper', ''));
-        let qty = 1;
-        addProduct(id, qty);
+    document.querySelectorAll('a#plus_product').forEach((item) => {
+        item.addEventListener('click', function () {
+            if (!checkLoged()) {
+                notify('warning', 'fa-duotone fa-cart-circle-xmark', 'right', 'Vui lòng đăng nhập để mua hàng');
+                return;
+            }
+            let id = parseInt(this.parentElement.getAttribute('id').replace('wrapper', ''));
+            let qty = 1;
+            addProduct(id, qty);
+        })
     });
 
 

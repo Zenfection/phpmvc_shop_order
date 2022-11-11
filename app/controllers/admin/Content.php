@@ -76,5 +76,16 @@ class Content extends Controller{
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/admin/order/detail.php');
         eval('?>' . $contentView . '<?php');
     }
+
+    public function product_detail($id){
+        $current_sidebar = 'product';
+        $msg = Session::flash('msg');
+
+        $product_detail = $this->models('ProductModel')->getDetail($id);
+        $similar_product = $this->models('ProductModel')->similarProduct($product_detail['id_category']);
+
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/admin/product/detail.php');
+        eval('?>' . $contentView . '<?php');
+    }
 }
 ?>

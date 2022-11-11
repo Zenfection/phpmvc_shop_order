@@ -16,6 +16,7 @@
 	<!-- loader-->
 	<link href="<?php echo _WEB_ROOT; ?>/assets/admin/css/pace.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.css"> 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
@@ -23,6 +24,8 @@
 	<link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/admin/css/app.min.css">
 	<link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/admin/css/icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+	<script src="<?php echo _WEB_ROOT; ?>/cdn/js/icon-zen.min.js"></script>
+
 	<!-- Theme Style CSS -->
 	<link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/admin/css/dark-theme.min.css" />
 	<link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/admin/css/semi-dark.min.css" />
@@ -47,11 +50,13 @@
 	<script src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.36.1/dist/apexcharts.min.js"></script>
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/plugins/Drag-And-Drop/dist/imageuploadify.min.js"></script>
 	<!--app JS-->
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/tinymce@6.2.0/tinymce.min.js"></script>
+		
 	<div class="wrapper">
 		<?php 
 			$sidebar = [
@@ -64,7 +69,8 @@
 	<div id="content">
 		<?php $this->render($content, $sub_content)?>
 	</div>
-
+		
+	
 	<!--start overlay-->
 	<div class="overlay toggle-icon"></div>
 	<!--end overlay-->
@@ -82,6 +88,7 @@
 	<?php $this->render('admin/blocks/switcher')?>
 
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/load-content.js"></script>
+	
 	
 	<script>
 		$(document).ready(function() {

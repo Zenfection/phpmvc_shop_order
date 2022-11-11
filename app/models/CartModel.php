@@ -1,37 +1,52 @@
 <?php
-class CartModel extends Model{
+class CartModel extends Model
+{
     private $__cart = 'tb_cart';
 
-    function __construct(){
+    function __construct()
+    {
         parent::__construct();
     }
 
-    function tableFill(){
+    function tableFill()
+    {
         return 'tb_product';
     }
 
-    function fieldFill(){
+    function fieldFill()
+    {
         return '*';
     }
 
-    public function getCartUser($user){
-        $data = $this->db->table('tb_cart')->where('username','=', $user)->get();
+    public function getCartUser($user)
+    {
+        $data = $this->db->table('tb_cart')->where('username', '=', $user)->get();
         return $data;
     }
 
-    public function deteleProductCart($user, $id){
+    public function deteleProductCart($user, $id)
+    {
         $data = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->delete();
         return $data;
     }
-    public function addProductCart($user, $id, $qty){
-        $checkExist = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->get();
+    public function addProductCart($user, $id, $qty)
+    {
+        $checkExist = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->first();
+        $productInfo = $this->db->table('tb_product')->where('id_product', '=', $id)->first();
 
-        if(!empty($checkExist)){
-            $qty = $checkExist[0]['amount'] + $qty;
+        if (!empty($checkExist)) {
+            $qty = $checkExist['amount'] + $qty;
             $data = [
-                'amount' => $qty
+                'amount' => $qty,
             ];
-            $data = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->update($data);
+            $update = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->update($data);
+
+            $discount_price = $productInfo['price'] - ($productInfo['price'] * $productInfo['discount'] / 100);
+            return [
+                'status' => 'update',
+                'total_qty' => $qty,
+                'discount_price' => $discount_price
+            ];
         } else {
             $data = [
                 'username' => $user,
@@ -39,20 +54,35 @@ class CartModel extends Model{
                 'amount' => $qty
             ];
             $data = $this->db->table('tb_cart')->insert($data);
+
+            $price = $productInfo['price'];
+            $discount = $productInfo['discount'];
+            $discount_price = $price - ($price * $discount / 100);
+            
+            return [
+                'status' => 'insert',
+                'name' => $productInfo['name'],
+                'amount' => $qty,
+                'image' => $productInfo['image'],
+                'price' => $price,
+                'discount' => $discount,
+                'discount_price' => $discount_price,
+            ];
         }
-        return $data;
     }
-    public function clearCart($user){
+    public function clearCart($user)
+    {
         $data = $this->db->table('tb_cart')->where('username', '=', $user)->delete();
         return $data;
     }
-    public function totalMoneyCartUser($user){
+    public function totalMoneyCartUser($user)
+    {
         $sql = "SELECT * FROM `tb_cart` as c, `tb_product` as p
                 WHERE c.id_product = p.id_product
                 AND c.username = '$user'";
         $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         $total = 0;
-        foreach($data as $item){
+        foreach ($data as $item) {
             $price = (float)$item['price'];
             $discount = (float)$item['discount'];
             $amount = (int)$item['amount'];
@@ -62,4 +92,3 @@ class CartModel extends Model{
         return $total;
     }
 }
-?>

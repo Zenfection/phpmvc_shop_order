@@ -26,7 +26,7 @@ class Product extends Controller{
     public function detail($id){
         $productDetail = $this->models('ProductModel')->getDetail($id);
         $similarProduct = $this->models('ProductModel')->similarProduct($productDetail['id_category']);
-
+        
         $title = 'Chi tiết ' . $productDetail[0]['name'];
 
         $user = Session::data('user');

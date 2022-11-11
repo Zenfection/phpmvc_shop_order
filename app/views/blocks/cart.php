@@ -25,49 +25,23 @@
                     $price = $value['price'];
                     $discount = $value['discount'];
                     $discount_price = $price - ($price * $discount / 100);
+                    
+                    //number format
+                    $price = number_format($price, 0, ',', '.') . 'đ';
+                    $discount_price = number_format($discount_price, 0, ',', '.') . 'đ';
 
+                    $cart_product = [
+                        'id' => $id,
+                        'name' => $name,
+                        'amount' => $amount,
+                        'image' => $image,
+                        'price' => $price,
+                        'discount' => $discount,
+                        'discount_price' => $discount_price,
+                    ];
             ?>
                     <!-- Cart Product/Price Start -->
-                    <div class="cart-product-inner p-b-20 m-b-20 border-bottom product-inner" id="product_id<?php echo $id?>">
-                        <!-- Single Cart Product Start -->
-                        <div class="single-cart-product">
-                            <div class="cart-product-thumb">
-                                <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)">
-                                    <img src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Cart Product" class="rounded">
-                                </a>
-                            </div>
-                            <div class="cart-product-content">
-                                <h3 class="title">
-                                    <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)"></a>
-                        </h3>
-                                <div class="product-quty-price">
-                                    <span class="cart-quantity" id="quantity<?php echo $id ?>">Số lượng: <strong> <?php echo $amount ?> </strong></span>
-                                    <span class="price">
-                                        <?php
-                                        if ($discount > 0) {
-                                        ?>
-                                            <span class="new">$<?php echo $discount_price ?></span>
-                                            <span class="old" style="text-decoration: line-through;color: #DC3545;opacity: 0.5;">$<?php echo $price ?></span>
-                                        <?php
-                                        } else {
-                                        ?>
-                                            <span class='new'>$<?php echo $price ?></span>
-                                        <?php
-                                        }
-                                        ?>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Cart Product End -->
-
-                        <!-- Product Remove Start -->
-                        <div class="cart-product-remove">
-                            <a class="remove-cart" id="product<?php echo $id ?>"><i class="fa-duotone fa-trash-can"></i></a>
-                        </div>
-                        <!-- Product Remove End -->
-
-                    </div>
+                    <?php $this->render('blocks/cart_product', $cart_product)?>
                     <!-- Cart Product/Price End -->
             <?php
                 }
@@ -81,9 +55,11 @@
             <span class="value">Tổng tiền</span>
             <?php
             if(!empty($user)){
-                echo "<span class='value' id='totalmoney'>" . $total_money . "$</span>";
+                //number format
+                $total_money = number_format($total_money, 0, ',', '.') . 'đ';
+                echo "<span class='value' id='totalmoney'>" . $total_money . "</span>";
             } else {
-                echo "<span class='value' id='totalmoney'>0 $</span>";
+                echo "<span class='value' id='totalmoney'>0 </span>";
             }
             ?>
         </div>
@@ -91,8 +67,8 @@
 
         <!-- Cart Product Button Start -->
         <div class="cart-product-btn m-t-20">
-            <a id="viewcart" class="btn btn-outline-light btn-hover-primary w-100" href="/viewcart">Giỏ Hàng</a>
-            <a class="btn btn-outline-light btn-hover-primary w-100 m-t-20" href="/checkout">Thanh Toán</a>
+            <a class="btn btn-outline-light btn-hover-primary w-100 cursor-pointer" onclick="loadContent('viewcart')">Giỏ Hàng</a>
+            <a class="btn btn-outline-light btn-hover-primary w-100 m-t-20 cursor-pointer" onclick="loadContent('checkout')">Thanh Toán</a>
         </div>
         <!-- Cart Product Button End -->
     </div>
@@ -101,7 +77,7 @@
 
 <!-- Mobile -->
 <div class="header-action-btn header-action-btn-cart d-flex d-sm-none">
-    <a id="viewcart" class="nav-content cursor-pointer">
+    <a class="nav-content cursor-pointer" onclick="loadContent('viewcart')">
         <i class="fa-duotone fa-bag-shopping fa-xl"></i>
         <?php
         if (!empty($user)) {

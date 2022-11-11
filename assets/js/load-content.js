@@ -1,40 +1,47 @@
 var dataArr = [{
-        'home': 'Trang Chủ',
-        'about': 'Giới Thiệu',
-        'contact': 'Liên Hệ',
-        'shop': 'Cửa Hàng',
-        'shop/cake': 'Bánh',
-        'shop/candy': 'Kẹo',
-        'shop/fastfood': 'Đồ Ăn Nhanh',
-        'shop/fruit': 'Trái Cây',
-        'shop/icecream': 'Kem',
-        'login': 'Đăng Nhập',
-    },
-    {
-        'home': '/',
-        'about': '/about',
-        'contact': '/contact',
-        'shop': '/shop/category',
-        'shop/cake': '/shop/category/cake',
-        'shop/candy': '/shop/category/candy',
-        'shop/fastfood': '/shop/category/fastfood',
-        'shop/fruit': '/shop/category/fruit',
-        'shop/icecream': '/shop/category/icecream',
-        'login': '/login',
-    },
-    {
-        'home': '/assets/js/custom/home.js',
-        'product/detail': '/assets/js/custom/product_detail.js',
-        'shop': '/assets/js/custom/shop.js',
-    }
+    'home': 'Trang Chủ',
+    'about': 'Giới Thiệu',
+    'contact': 'Liên Hệ',
+    'shop': 'Cửa Hàng',
+    'shop/cake': 'Bánh',
+    'shop/candy': 'Kẹo',
+    'shop/fastfood': 'Đồ Ăn Nhanh',
+    'shop/fruit': 'Trái Cây',
+    'shop/icecream': 'Kem',
+    'login': 'Đăng Nhập',
+    'viewcart': 'Xem Giỏ Hàng',
+    'checkout': 'Thanh Toán',
+    'account': 'Tài Khoản',
+},
+{
+    'home': '/',
+    'about': '/about',
+    'contact': '/contact',
+    'shop': '/shop/category',
+    'shop/cake': '/shop/category/cake',
+    'shop/candy': '/shop/category/candy',
+    'shop/fastfood': '/shop/category/fastfood',
+    'shop/fruit': '/shop/category/fruit',
+    'shop/icecream': '/shop/category/icecream',
+    'login': '/login',
+    'viewcart': '/viewcart',
+    'checkout': '/checkout',
+    'account': '/account',
+},
+{
+    'home': '/assets/js/custom/home.js',
+    'product/detail': '/assets/js/custom/product_detail.js',
+    'shop': '/assets/js/custom/shop.js',
+    'checkout': '/assets/js/custom/checkout.js',
+}
 ];
 var titleArr = dataArr[0];
 var urlArr = dataArr[1];
 var scriptArr = dataArr[2];
 
-function hideContent(){
+function hideContent() {
     //* Add padding right to body when scroll bar when reload
-    let scrollBarWidth = window.innerWidth-$(document).width();
+    let scrollBarWidth = window.innerWidth - $(document).width();
     document.body.style.paddingRight = scrollBarWidth.toString() + 'px';
 
     //* Hide content and footer
@@ -42,7 +49,7 @@ function hideContent(){
     document.getElementsByTagName('footer')[0].style.display = 'none';
 }
 
-function showContent(){
+function showContent() {
     //* Show content and footer
     document.getElementById('content').style.display = 'block';
     document.getElementsByTagName('footer')[0].style.display = 'block';
@@ -51,28 +58,51 @@ function showContent(){
     document.body.style.paddingRight = '0px';
 }
 
-function loadContent(content, check = false) {
-    hideContent();
+function loadSript(content) {
+    if (scriptArr[content] != undefined) {
+        let script = document.createElement('script');
+        script.src = scriptArr[content];
+        document.body.appendChild(script);
+    }
+}
 
+function loadContent(content, check = false) {
+    let sucess = true;
     //use fetch API 
     fetch(`/content/${content}`)
         .then(response => response.text())
         .then(data => {
-            // add padding right to body when scroll bar appear
-            document.getElementById('content').innerHTML = data;
-            document.title = titleArr[content];
+            try {
+                //* Trường hợp có lỗi logic
+                data = JSON.parse(data);
+                let type = data['msg'].type;
+                let icon = data['msg'].icon;
+                let position = data['msg'].position;
+                let content = data['msg'].content;
 
-            if (scriptArr[content] != undefined) {
-                let script = document.createElement('script');
-                script.src = `/assets/js/custom/${content}.js`;
-                document.body.appendChild(script);
+                notify(type, icon, position, content);
+                sucess = false;
+            } catch (e) {}
+            
+            if (sucess) {
+                hideContent();
+                // add padding right to body when scroll bar appear
+                document.getElementById('content').innerHTML = data;
+                document.title = titleArr[content];
+
+                if (scriptArr[content] != undefined) {
+                    let script = document.createElement('script');
+                    script.src = `/assets/js/custom/${content}.js`;
+                    document.body.appendChild(script);
+                }
+
+                let newURL = window.location.href + '/' + urlArr[content];
+                window.history.replaceState({path: newURL}, "", urlArr[content]);
+
+                showContent();
+
+                AOS.init();
             }
-
-            window.history.pushState(null, null, urlArr[content]);
-
-            showContent();
-
-            AOS.init();
         });
 }
 
@@ -92,7 +122,8 @@ function loadDetailProduct(id) {
                 document.body.appendChild(script);
             }
 
-            window.history.pushState(null, null, `/product/detail/${id}`);
+            let newURL = window.location.href + '/product_detail/' + id;
+            window.history.replaceState({path:newURL}, "", `/product/detail/${id}`);
 
             showContent();
 
@@ -111,7 +142,7 @@ function urlShop(category, sortby, page, search) {
 }
 
 function filterShop(category = 'all', sortby = 'default', page = 1, search = '') {
-    if(sortby == 'check'){
+    if (sortby == 'check') {
         element = document.querySelector('.nice-select');
         sortby = element.options[element.selectedIndex].value;
     }
@@ -130,7 +161,8 @@ function filterShop(category = 'all', sortby = 'default', page = 1, search = '')
                 document.body.appendChild(script);
             }
 
-            window.history.pushState(null, null, url);
+            let newURL = window.location.href + url;
+            window.history.replaceState({path: newURL}, "", url);
             AOS.init();
         });
 }
@@ -145,7 +177,7 @@ window.addEventListener('popstate', function () {
         id = 'home';
     } else if (path.includes('/shop/category')) {
         let temp = path.replace('/shop/category', '');
-        if(temp == ''){
+        if (temp == '') {
             id = 'shop';
         } else {
             let arr = temp.split('/');
@@ -156,11 +188,12 @@ window.addEventListener('popstate', function () {
             filterShop(category, sortby, page, search);
         }
     } else if (path.includes('/product/detail/')) {
-        loadDetailProduct(path.replace('/product/detail/', ''));
+        let content = path.replace('/product/detail/', '');
+        loadDetailProduct(content);
         return;
-    } else {
-        loadContent(id);
     }
+
+    loadContent(id);
 });
 
 // Google map API fetch

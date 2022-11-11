@@ -106,12 +106,14 @@ var callCheckout = function () {
     let fullname = document.querySelector('#checkoutForm input[id=fullname]').value;
     let phone = document.querySelector('#checkoutForm input[id=phone]').value;
     let address = document.querySelector('#checkoutForm input[id=address]').value;
-    let province = document.querySelector('#checkoutForm input[id=province]').value;
-    let city = document.querySelector('#checkoutForm input[id=city]').value;
     let email = document.querySelector('#checkoutForm input[id=email]').value;
 
+    let province = document.querySelector('select#province').nextSibling.querySelector('.current').textContent
+    let city = document.querySelector('select#city').nextSibling.querySelector('.current').textContent
+    let ward = document.querySelector('select#ward').nextSibling.querySelector('.current').textContent
+    
     //console.log(fullname, phone, address, province, city, email);
-    if(fullname == '' || fullname === undefined || phone == '' || phone === undefined || address == '' || address === undefined || province == '' || province === undefined || city == '' || city === undefined || email == '' || email === undefined){
+    if(fullname == '' || fullname === undefined || phone == '' || phone === undefined || address == '' || address === undefined || province == '' || province === undefined || city == '' || city === undefined || ward == '' || ward === undefined || email == '' || email === undefined){
         notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
         return;
     }

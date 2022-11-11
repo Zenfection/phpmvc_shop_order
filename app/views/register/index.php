@@ -1,5 +1,5 @@
 <?php
-if (!empty($data['msg'])) {
+if (!empty($msg)) {
     $type_msg = $msg['type'];
     $icon_msg = $msg['icon'];
     $pos_msg = $msg['position'];

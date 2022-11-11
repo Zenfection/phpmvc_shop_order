@@ -54,7 +54,7 @@ function loadContent(content) {
                 script.src = scriptArr[content];
                 document.body.appendChild(script);
             }
-
+            
             AOS.init();
         });
 }
@@ -71,6 +71,23 @@ function loadOrderDetail(id) {
 
             let sciprt = document.createElement('script');
             sciprt.src = window.location.origin + '/assets/admin/js/custom/order_detail.js';
+            document.body.appendChild(sciprt);
+            AOS.init();
+
+        })
+}
+
+function loadProductDetail(id){
+    //fetch API
+    fetch(`/admin/content/product_detail/${id}`)
+        .then(response => response.text())
+        .then(data => {
+            document.title = 'Chi tiết sản phẩm';
+            window.history.pushState(null, null, `/admin/product/detail/${id}`);
+            document.getElementById('content').innerHTML = data;
+
+            let sciprt = document.createElement('script');
+            sciprt.src = window.location.origin + '/assets/admin/js/custom/product_detail.js';
             document.body.appendChild(sciprt);
 
             AOS.init();

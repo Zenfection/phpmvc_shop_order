@@ -2890,12 +2890,12 @@ input[type="checkbox"]:checked + label:after {
   transition: .3s;
 }
 
-.product-summery .cart-btn .add-to_cart {
+.product-summery .cart-btn .add-to-cart {
   width: 130px;
   margin-right: 20px;
 }
 
-.product-summery .cart-btn .add-to_cart .btn {
+.product-summery .cart-btn .add-to-cart .btn {
   width: 100%;
   display: block;
   padding: 10px 15px;
@@ -4706,12 +4706,12 @@ input[type="checkbox"]:checked + label:after {
   font-size: 14px;
 }
 
-.grid_list .product .content .action-btn.cart-btn .add-to_cart {
+.grid_list .product .content .action-btn.cart-btn .add-to-cart {
   width: 130px;
   margin-right: 15px;
 }
 
-.grid_list .product .content .action-btn.cart-btn .add-to_cart .btn {
+.grid_list .product .content .action-btn.cart-btn .add-to-cart .btn {
   width: 100%;
   display: block;
   padding: 10px 14px;

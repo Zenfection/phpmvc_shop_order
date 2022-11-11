@@ -1,19 +1,15 @@
+(function ($) {
+  "use strict";
   /*----------------------------------------
     Sticky Menu Activation
   ------------------------------------------*/
-  // const header = document.getElementsByTagName("header")[0];
-  // const sticky = header.offsetTop;
-  // const addSticky = () => {
-  //   if (window.pageYOffset > sticky) {
-  //     header.classList.add("sticky");
-  //   } else {
-  //     header.classList.remove("sticky");
-  //   }
-  // }
-  // window.onscroll = () => {
-  //   addSticky();
-  // }
-
+  window.addEventListener('scroll', function () {
+    if (window.pageYOffset > 150) {
+      document.querySelector('.header-sticky').classList.add('sticky');
+    } else {
+      document.querySelector('.header-sticky').classList.remove('sticky');
+    }
+  })
 
   /*---------------------
         Header Search Action
@@ -38,7 +34,7 @@
   cartIcon.forEach((item) => {
     item.addEventListener('click', () => {
       headerCart.style.display = 'block';
-      if(headerCart.classList.contains('animate__fadeIn')){
+      if (headerCart.classList.contains('animate__fadeIn')) {
         headerCart.classList.remove('animate__fadeIn');
         headerCart.classList.add('animate__fadeOut');
       } else {
@@ -48,173 +44,170 @@
     });
   });
 
-  (function ($) {
-    "use strict";
+  /*-----------------------------------------
+    Off Canvas Mobile Menu
+  -------------------------------------------*/
 
-    /*-----------------------------------------
-      Off Canvas Mobile Menu
-    -------------------------------------------*/
+  $(document).on('click', '.header-action-btn-menu', function () {
+    $("body").addClass('fix');
+    $(".mobile-menu-wrapper").addClass('open');
+  });
 
-    $(document).on('click', '.header-action-btn-menu', function () {
-      $("body").addClass('fix');
-      $(".mobile-menu-wrapper").addClass('open');
-    });
-
-    $(document).on('click', '.offcanvas-btn-close,.offcanvas-overlay', function () {
-      $("body").removeClass('fix');
-      $(".mobile-menu-wrapper").removeClass('open');
-    });
+  $(document).on('click', '.offcanvas-btn-close,.offcanvas-overlay', function () {
+    $("body").removeClass('fix');
+    $(".mobile-menu-wrapper").removeClass('open');
+  });
 
 
-    /*----------------------------------------*/
-    /* Toggle Function Active
-    /*----------------------------------------*/
+  /*----------------------------------------*/
+  /* Toggle Function Active
+  /*----------------------------------------*/
 
-    // showlogin toggle
-    $(document).on('click', '#showlogin', function () {
-      $('#checkout-login').slideToggle(500);
-    });
-    // showlogin toggle
-    $(document).on('click', '#showcoupon', function () {
-      $('#checkout_coupon').slideToggle(500);
-    });
-    // showlogin toggle
-    $(document).on('click', '#cbox', function () {
-      $('#cbox-info').slideToggle(500);
-    });
+  // showlogin toggle
+  $(document).on('click', '#showlogin', function () {
+    $('#checkout-login').slideToggle(500);
+  });
+  // showlogin toggle
+  $(document).on('click', '#showcoupon', function () {
+    $('#checkout_coupon').slideToggle(500);
+  });
+  // showlogin toggle
+  $(document).on('click', '#cbox', function () {
+    $('#cbox-info').slideToggle(500);
+  });
 
-    // Ship box toggle
-    $(document).on('click', '#ship-box', function () {
-      $('#ship-box-info').slideToggle(1000);
-    });
+  // Ship box toggle
+  $(document).on('click', '#ship-box', function () {
+    $('#ship-box-info').slideToggle(1000);
+  });
 
-    $(document).on('click', '#incQtyProduct', function () {
-      let id = $(this).parents('tr').attr('id').replace('view_cart_product', '');
-      addProduct(parseInt(id), 1);
-    });
-    /*----------------------------------------
-      Responsive Mobile Menu
-    ------------------------------------------*/
+  $(document).on('click', '#incQtyProduct', function () {
+    let id = $(this).parents('tr').attr('id').replace('view_cart_product', '');
+    addProduct(parseInt(id), 1);
+  });
+  /*----------------------------------------
+    Responsive Mobile Menu
+  ------------------------------------------*/
 
-    //Variables
-    var $offCanvasNav = $('.mobile-menu, .category-menu'),
-      $offCanvasNavSubMenu = $offCanvasNav.find('.dropdown');
+  //Variables
+  var $offCanvasNav = $('.mobile-menu, .category-menu'),
+    $offCanvasNavSubMenu = $offCanvasNav.find('.dropdown');
 
-    //Close Off Canvas Sub Menu
-    $offCanvasNavSubMenu.slideUp();
+  //Close Off Canvas Sub Menu
+  $offCanvasNavSubMenu.slideUp();
 
-    //Category Sub Menu Toggle
-    $offCanvasNav.on('click', 'li a, li .menu-expand', function (e) {
-      var $this = $(this);
-      if (($this.parent().attr('class').match(/\b(menu-item-has-children|has-children|has-sub-menu)\b/)) && ($this.attr('href') === '#' || $this.hasClass('menu-expand'))) {
-        e.preventDefault();
-        if ($this.siblings('ul:visible').length) {
-          $this.parent('li').removeClass('active');
-          $this.siblings('ul').slideUp();
-        } else {
-          $this.parent('li').addClass('active');
-          $this.closest('li').siblings('li').removeClass('active').find('li').removeClass('active');
-          $this.closest('li').siblings('li').find('ul:visible').slideUp();
-          $this.siblings('ul').slideDown();
-        }
-      }
-    });
-
-    /*----------------------------------------*/
-    /*  Shop Grid Activation
-    /*----------------------------------------*/
-
-    $(document).on('click', '.shop_toolbar_btn > button', function (e) {
-
+  //Category Sub Menu Toggle
+  $offCanvasNav.on('click', 'li a, li .menu-expand', function (e) {
+    var $this = $(this);
+    if (($this.parent().attr('class').match(/\b(menu-item-has-children|has-children|has-sub-menu)\b/)) && ($this.attr('href') === '#' || $this.hasClass('menu-expand'))) {
       e.preventDefault();
-
-      $('.shop_toolbar_btn > button').removeClass('active');
-      $(this).addClass('active');
-
-      var parentsDiv = $('.shop_wrapper');
-      var viewMode = $(this).data('role');
-
-
-      parentsDiv.removeClass('grid_3 grid_4 grid_5 grid_list').addClass(viewMode);
-
-      if (viewMode == 'grid_3') {
-        parentsDiv.children().addClass('col-lg-4 col-md-4 col-sm-6').removeClass('col-lg-3 col-cust-5 col-12');
-
-      }
-
-      if (viewMode == 'grid_4') {
-        parentsDiv.children().addClass('col-xl-3 col-lg-4 col-md-4 col-sm-6').removeClass('col-lg-4 col-cust-5 col-12');
-      }
-
-      if (viewMode == 'grid_list') {
-        parentsDiv.children().addClass('col-12').removeClass('col-xl-3 col-lg-3 col-lg-4 col-md-6 col-md-4 col-sm-6 col-cust-5');
-      }
-
-    });
-
-    /*----------------------------------------*/
-    /*  Cart Plus Minus Button
-    /*----------------------------------------*/
-
-    $('.cart-plus-minus').append(
-      '<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>'
-    );
-    $(document).on('click', '.qtybutton', function () {
-      var $button = $(this);
-      var oldValue = $button.parent().find('input').val();
-      if ($button.hasClass('inc')) {
-        var newVal = parseFloat(oldValue) + 1;
+      if ($this.siblings('ul:visible').length) {
+        $this.parent('li').removeClass('active');
+        $this.siblings('ul').slideUp();
       } else {
-        // Don't allow decrementing below zero
-        if (oldValue > 1) {
-          var newVal = parseFloat(oldValue) - 1;
+        $this.parent('li').addClass('active');
+        $this.closest('li').siblings('li').removeClass('active').find('li').removeClass('active');
+        $this.closest('li').siblings('li').find('ul:visible').slideUp();
+        $this.siblings('ul').slideDown();
+      }
+    }
+  });
+
+  /*----------------------------------------*/
+  /*  Shop Grid Activation
+  /*----------------------------------------*/
+
+  $(document).on('click', '.shop_toolbar_btn > button', function (e) {
+
+    e.preventDefault();
+
+    $('.shop_toolbar_btn > button').removeClass('active');
+    $(this).addClass('active');
+
+    var parentsDiv = $('.shop_wrapper');
+    var viewMode = $(this).data('role');
+
+
+    parentsDiv.removeClass('grid_3 grid_4 grid_5 grid_list').addClass(viewMode);
+
+    if (viewMode == 'grid_3') {
+      parentsDiv.children().addClass('col-lg-4 col-md-4 col-sm-6').removeClass('col-lg-3 col-cust-5 col-12');
+
+    }
+
+    if (viewMode == 'grid_4') {
+      parentsDiv.children().addClass('col-xl-3 col-lg-4 col-md-4 col-sm-6').removeClass('col-lg-4 col-cust-5 col-12');
+    }
+
+    if (viewMode == 'grid_list') {
+      parentsDiv.children().addClass('col-12').removeClass('col-xl-3 col-lg-3 col-lg-4 col-md-6 col-md-4 col-sm-6 col-cust-5');
+    }
+
+  });
+
+  /*----------------------------------------*/
+  /*  Cart Plus Minus Button
+  /*----------------------------------------*/
+
+  $('.cart-plus-minus').append(
+    '<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>'
+  );
+  $(document).on('click', '.qtybutton', function () {
+    var $button = $(this);
+    var oldValue = $button.parent().find('input').val();
+    if ($button.hasClass('inc')) {
+      var newVal = parseFloat(oldValue) + 1;
+    } else {
+      // Don't allow decrementing below zero
+      if (oldValue > 1) {
+        var newVal = parseFloat(oldValue) - 1;
+      } else {
+        newVal = 1;
+      }
+    }
+    $button.parent().find('input').val(newVal);
+  });
+
+
+  /*----------------------------------------*/
+  /*  Scroll to top
+  /*----------------------------------------*/
+
+
+  $('#scroll-top').removeClass('show');
+
+  function scrollToTop() {
+    let $scrollUp = $('#scroll-top'),
+      $lastScrollTop = 0,
+      $window = $(window);
+    $window.on('scroll', function () {
+      let st = $(this).scrollTop();
+      if (st > $lastScrollTop) {
+        $scrollUp.removeClass('show');
+      } else {
+        if ($window.scrollTop() > 200) {
+          $scrollUp.addClass('show');
         } else {
-          newVal = 1;
+          $scrollUp.removeClass('show');
         }
       }
-      $button.parent().find('input').val(newVal);
+      $lastScrollTop = st;
     });
 
-
-    /*----------------------------------------*/
-    /*  Scroll to top
-    /*----------------------------------------*/
-
-
-    $('#scroll-top').removeClass('show');
-
-    function scrollToTop() {
-      let $scrollUp = $('#scroll-top'),
-        $lastScrollTop = 0,
-        $window = $(window);
-      $window.on('scroll', function () {
-        let st = $(this).scrollTop();
-        if (st > $lastScrollTop) {
-          $scrollUp.removeClass('show');
-        } else {
-          if ($window.scrollTop() > 200) {
-            $scrollUp.addClass('show');
-          } else {
-            $scrollUp.removeClass('show');
-          }
-        }
-        $lastScrollTop = st;
-      });
-
-      $scrollUp.on('click', function (evt) {
-        window.scrollTo(0, 0);
-      });
-    }
-    scrollToTop();
-
-    /*----------------------------------------*/
-    /*  When document is loading, do
-    /*----------------------------------------*/
-    var varWindow = $(window);
-    varWindow.on('load', function () {
-      AOS.init({
-        once: true,
-      });
+    $scrollUp.on('click', function (evt) {
+      window.scrollTo(0, 0);
     });
+  }
+  scrollToTop();
 
-  })(jQuery);
+  /*----------------------------------------*/
+  /*  When document is loading, do
+  /*----------------------------------------*/
+  var varWindow = $(window);
+  varWindow.on('load', function () {
+    AOS.init({
+      once: true,
+    });
+  });
+
+})(jQuery);

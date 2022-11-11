@@ -5,17 +5,17 @@ class Account extends Controller {
         $user = Session::data('user');
         $title = 'Tài Khoản';
 
-        $account = $this->db->table('tb_user')->where('username', '=', $user)->get();
+        $account = $this->db->table('tb_user')->where('username', '=', $user)->first();
         $getOrder = $this->models('AccountModel')->getOrder($user);
     
         $this->data['page_title'] = $title;
         $this->data['sub_content']['user'] = $user;
 
         $this->data['content'] = 'account/index';
-        $this->data['sub_content']['fullname'] = $account[0]['fullname'];
-        $this->data['sub_content']['email'] = $account[0]['email'];
-        $this->data['sub_content']['phone'] = $account[0]['phone'];
-        $this->data['sub_content']['address'] = $account[0]['address'];
+        $this->data['sub_content']['fullname'] = $account['fullname'];
+        $this->data['sub_content']['email'] = $account['email'];
+        $this->data['sub_content']['phone'] = $account['phone'];
+        $this->data['sub_content']['address'] = $account['address'];
         $this->data['sub_content']['getOrder'] = $getOrder; 
         
         $this->data['sub_content']['msg'] = Session::flash('msg');

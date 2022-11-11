@@ -1,6 +1,6 @@
 <?php
 $statusVie = ["Đang xử lý", "Đang giao hàng", "Đã giao hàng", "Đã hủy"];
-if (!empty($data['msg'])) {
+if (!empty($msg)) {
     $type_msg = $msg['type'];
     $icon_msg = $msg['icon'];
     $pos_msg = $msg['position'];
@@ -39,11 +39,19 @@ if (!empty($data['msg'])) {
                                     $price = (float)$value['price'];
                                     $image = $value['image'];
                                     $amount = (int)$value['amount'];
-                                    $total_price = $price * $amount;
-                                    $total_money = (float)$value['total_money'];
                                     $order_date = $value['order_date'];
                                     $status = $value['status'];
+                                    $total_money = (float)$value['total_money'];
+                                    $disocunt = $value['discount'];
 
+                                    if($disocunt > 0){
+                                        $price = $price - ($price * $disocunt / 100);
+                                    }
+                                    $total_price = $price * $amount;
+
+                                    //number format
+                                    $price = number_format($price, 0, ',', '.') . 'đ';
+                                    $total_price = number_format($total_price, 0, ',', '.') . 'đ';
                                 ?>
                                     <tr>
                                         <td class="pro-thumbnail">
@@ -55,12 +63,13 @@ if (!empty($data['msg'])) {
                                             <a href="#"><?php echo $name ?></a>
                                         </td>
                                         <td class="pro-price">
-                                            <span><?php echo $price ?>$ x <?php echo $amount ?></span>
+                                            <span><?php echo $price ?> x <?php echo $amount ?></span>
                                         </td>
-                                        <td class="pro-subtotal"><span><?php echo $total_price ?>$</span></td>
+                                        <td class="pro-subtotal"><span><?php echo $total_price ?></span></td>
                                     </tr>
                                 <?php
                                 }
+                                $total_money = number_format($total_money, 0, ',', '.') . 'đ';
                                 ?>
                             </tbody>
                             <!-- Table Body End -->
@@ -102,7 +111,7 @@ if (!empty($data['msg'])) {
                                     </tr>
                                     <tr class="total">
                                         <td>Tổng tiền</td>
-                                        <td class="total-amount"><?php echo $total_money ?>$</td>
+                                        <td class="total-amount"><?php echo $total_money ?></td>
                                     </tr>
                                 </table>
                             </div>

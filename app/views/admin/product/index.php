@@ -1,5 +1,5 @@
 <?php 
-    if (!empty($data['msg'])) {
+    if (!empty($msg)) {
         $type_msg = $msg['type'];
         $icon_msg = $msg['icon'];
         $pos_msg = $msg['position'];
@@ -57,8 +57,10 @@
                     <div class="card">
                         <?php if($quantity == 0) 
                             echo "<div class='ribbon bg-danger'>Đã bán hết</div>";
-                            ?>
-                        <img src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" class="card-img-top p-20" style="padding: 1.5rem">
+                        ?>
+                        <div class="cursor-pointer" onclick="loadProductDetail(<?php echo $id?>)">
+                            <img src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" class="card-img-top p-20" style="padding: 1.5rem">
+                        </div>
                         <?php
                         if ($discount > 0) {
                             echo "<div class='position-absolute top-0 end-0 m-3 product-discount text-danger bg-light.bg-gradient fw-bold'>
