@@ -3,7 +3,7 @@
     <div class="single-cart-product">
         <div class="cart-product-thumb">
             <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)">
-                <img src="<?php echo _FOOD_IMAGE; ?>/assets/images/products/<?php echo $image ?>" alt="Cart Product" class="rounded">
+                <img src="<?php echo _CDN_IMAGE_100 . '/products/' . $image ?>" alt="Cart Product" class="rounded">
             </a>
         </div>
         <div class="cart-product-content">

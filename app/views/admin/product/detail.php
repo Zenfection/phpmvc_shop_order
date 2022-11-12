@@ -18,7 +18,7 @@
                 $discount = (int) $discount;
                 ?>
                 <div class="col-md-4 border-end" data-aos="fade-right">
-                    <img src="<?php echo _FOOD_IMAGE; ?>/assets/images/products/<?php echo $image ?>" class="img-fluid" style="padding: 5%" alt="...">
+                    <img src="<?php echo _CDN_IMAGE_500 . '/products/' . $image ?>" class="img-fluid" style="padding: 5%" alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -120,7 +120,7 @@
                     <div class="card">
                         <div class="row g-0">
                             <div class="col-md-4 cursor-pointer" onclick="loadProductDetail(<?php echo $id ?>)">
-                                <img src="<?php echo _FOOD_IMAGE; ?>/assets/images/products/<?php echo $image ?>" class="img-fluid" alt="..." style="padding: 5%">
+                                <img src="<?php echo _CDN_IMAGE_150 . '/products/' . $image ?>" class="img-fluid" alt="..." style="padding: 5%">
                             </div>
                             <div class="position-absolute top-0 end-0 m-3 product-discount text-danger bg-light.bg-gradient fw-bold">
                                 <span style="font-size: 1.2rem;">-<?php echo $discount?>%</span>

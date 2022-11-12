@@ -54,7 +54,7 @@
                 ?>
             </div>
             <div class="col-lg-6 mt-lg-4 pt-2 mt-5 d-lg-flex d-none" data-aos="fade-left">
-                <img class="fit-image" src="<?php echo _GIT_SOURCE; ?>/assets/images/home.png" alt="home Image">
+                <img class="fit-image" src="<?php echo _CDN_IMAGE_600 . '/home.png' ?>" alt="home Image">
             </div>
         </div>
     </div>
@@ -187,7 +187,7 @@
                 ?>
                 <div class="col m-b-30" data-aos="fade-in">
                     <a class="cursor-pointer banner hover-style" onclick="loadContent('shop/<?php echo $id?>')">
-                        <img class="fit-image p-10" src="<?php echo _GIT_SOURCE; ?>/assets/images/category/<?php echo $image?>" alt="Banner Image">
+                        <img class="fit-image p-10" src="<?php echo _CDN_IMAGE_450 . '/category/' . $image ?>" alt="Banner Image">
                     </a>
                 </div>
                 <?php

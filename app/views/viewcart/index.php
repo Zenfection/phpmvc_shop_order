@@ -46,7 +46,7 @@
                             ?>
                                 <tr id="view_cart_product<?php echo $id ?>">
                                     <td class="pro-thumbnail">
-                                        <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Product" />
+                                        <img class="fit-image rounded" src="<?php echo _CDN_IMAGE_300 . '/products/' . $image ?>" alt="Product" />
                                     </td>
                                     <td class="pro-title">
                                         <a><?php echo $name ?></a>

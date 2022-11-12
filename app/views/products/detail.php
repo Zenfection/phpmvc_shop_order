@@ -22,7 +22,7 @@
 
                                 ?>
 
-                                <img class='w-100' id="img-product<?php echo $id ?>" src='<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>' alt='Product' style="padding-right: 25%;">
+                                <img class='w-100' src="<?php echo _CDN_IMAGE_500 . '/products/' . $image ?>" alt='Product' style="padding-right: 25%;">
                             </div>
                         </div>
                         <!-- Single Product Image End -->
@@ -251,7 +251,7 @@
                                             <!-- Thumb Start  -->
                                             <div class="thumb product-inner" id="product<?php echo $id ?>">
                                                 <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)">
-                                                    <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" />
+                                                    <img class="fit-image rounded" src="<?php echo _CDN_IMAGE_250 . '/products/' . $image ?>" />
                                                 </a>
                                                 <?php
                                                 if ($discount > 0) {

@@ -59,7 +59,7 @@
                             echo "<div class='ribbon bg-danger'>Đã bán hết</div>";
                         ?>
                         <div class="cursor-pointer" onclick="loadProductDetail(<?php echo $id?>)">
-                            <img src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" class="card-img-top p-20" style="padding: 1.5rem">
+                            <img src="<?php echo _CDN_IMAGE_300 . '/products/' . $image ?>" class="card-img-top p-20" style="padding: 1.5rem">
                         </div>
                         <?php
                         if ($discount > 0) {

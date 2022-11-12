@@ -21,7 +21,7 @@ if (!empty($user)) {
                     <div class="product">
                         <div class="thumb">
                             <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)">
-                                <img class="fit-image first-image p-10" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" id="img-product<?php echo $id ?>">
+                                <img class="fit-image first-image p-10" src="<?php echo _CDN_IMAGE_100 . '/products/' . $image ?>"
                             </a>
                         </div>
                     </div>

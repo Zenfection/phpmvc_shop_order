@@ -36,7 +36,7 @@
                                     ?>
                                         <div class="d-flex align-items-center p-2">
                                             <div class="product-img">
-                                                <img src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" class="p-1" />
+                                                <img src="<?php echo _CDN_IMAGE_50 . '/products/' . $image ?>" class="p-1" />
                                             </div>
                                             <div class="ps-3">
                                                 <h6 class="mb-0 font-weight-bold"><?php echo $name ?></h6>

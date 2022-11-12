@@ -11,7 +11,7 @@
         <div class="col-12 col-sm-6 col-lg-3 product-wrapper m-b-40 product">
     <div class="thumb">
         <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)">
-            <img class="fit-image p-10" id="img-product<?php echo $id ?>" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Product" />
+            <img class="fit-image p-10" src="<?php echo _CDN_IMAGE_300 . '/products/' . $image ?>" alt="Product" />
         </a>
         <?php
         if ($discount > 0) {
