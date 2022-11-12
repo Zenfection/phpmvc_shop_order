@@ -28,7 +28,7 @@
         $price = number_format($price, 0, ',', '.') . 'đ';
         ?>
         <div class="action-wrapper" id="wrapper<?php echo $id ?>">
-            <a class="action" id="plus_product" title="Thêm sản phẩm"><i class="fa-duotone fa-plus-large"></i></a>
+            <a class="action cursor-pointer" title="Thêm sản phẩm" onclick="addProductCart('<?php echo $id?>', 1)"><i class="fa-duotone fa-plus-large"></i></a>
             <a class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
             <a class="nav-content cursor-pointer action cart" onclick="loadContent('viewcart')">
                 <i class="fa-duotone fa-cart-circle-plus"></i>

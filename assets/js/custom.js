@@ -1,32 +1,97 @@
+function addProductCart(id, qty) {
+    let insert = true;
+    if (qty == "qty") {
+        qty = parseInt(document.querySelector('.cart-plus-minus-box').value);
+    }
+    fetch('/cart/add/' + id + '/' + qty)
+        .then((response) => response.text())
+        .then((data) => {
+            try {
+                data = JSON.parse(data);
+                if (data.status == 'update') {
+                    insert = false;
+                    document.querySelector('#quantity' + id + " > strong").textContent = data.total_qty;
+                    document.querySelector('#totalmoney').textContent = data.total_money;
+                }
+            } catch (e) {}
+
+            if (insert) {
+                let total_money = document.querySelector('#totalmoney').textContent.replace(/\D/g, '');
+                total_money = parseInt(total_money);
+
+                $(".cart-product-wrapper").prepend(data);
+
+                let newprice = document.querySelector('#product_id' + id + ' span.new').textContent.replace(/\D/g, '');
+
+                total_money += (qty * parseInt(newprice));
+                //number format
+                total_money = total_money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                document.querySelector('#totalmoney').textContent = total_money + 'đ';
+
+                let count_cart = document.querySelector('#count-cart').textContent;
+                document.querySelector('#count-cart').textContent = parseInt(count_cart) + 1;
+                $("#product_id" + id).hide().fadeIn();
+            }
+        })
+}
+
+
+function deleteProductCart(id) {
+    fetch('/cart/delete/' + id)
+        .then((response) => response.text())
+        .then((data) => {
+            try {
+                data = JSON.parse(data);
+                if (data.status == 'delete') {
+                    $('#product_id' + id).hide('normal', function () {
+                        $(this).remove();
+                    });
+                    document.querySelector('#totalmoney').textContent = data.total_money;
+                    document.querySelector('#count-cart').textContent = data.total_qty;
+
+                    if(window.location.pathname == "/viewcart"){
+                        document.querySelector('#total-money').textContent = data.total_money;
+                        document.querySelector('#total-bill').textContent = data.total_money;
+                        $('#view_cart_product' + id).hide('normal', function () {
+                            $(this).remove();
+                        })
+                    }
+                }
+            } catch (e) {}
+        })
+}
+
+function clearProductCart(){
+    fetch('/cart/clear')
+        .then((response) => response.text())
+        .then((data) => {
+            try {
+                data = JSON.parse(data);
+                if(data.status == 'clear'){
+                    $('#table-cart').hide('normal', function () {
+                        $(this).remove();
+                    });
+                    $('.cart-product-wrapper').children().hide('normal', function () {
+                        $(this).remove();
+                    });
+                    document.querySelector('#count-cart').textContent = 0;
+                    document.querySelector('#totalmoney').textContent = '0đ';
+                    document.querySelector('#total-money').textContent = '0đ';
+                    document.querySelector('#total-bill').textContent = '0đ';
+                }
+            } catch (e) {}
+        })
+}
+
+
 $(function () {
     /* Function
     ------------------------- */
-    // *Popup Notification
-    function notify(type, icon, position, msg) {
-        Lobibox.notify(type, {
-            pauseDelayOnHover: true,
-            size: 'mini',
-            rounded: true,
-            icon: icon,
-            continueDelayOnInactiveTab: false,
-            position: position,
-            msg: msg
-        });
-    }
     //* check Logged
     function checkLoged() {
         return document.querySelectorAll('#logged').length == 0;
     }
-
-    //* Check product exist or not in cart by id
-    function checkProductExistCart(id) {
-        let check = $(".cart-product-wrapper .cart-product-inner");
-        for (let i = 0; i < check.length; i++) {
-            if (check[i].id == "product_id" + id) return true;
-        }
-        return false;
-    }
-
+    
     //* search Product by name, listener via Enter
     // $(document).on("keypress", "#searchProduct", function (e) {
     //     if (e.which == 13) {
@@ -108,144 +173,4 @@ $(function () {
         let id = parseInt($(this).attr('name').split('page=')[1]);
         choosePage(id);
     });
-
-    //* Add, Remove Product to Cart
-    function getQtyProductCart(id) {
-        let amount = parseInt(
-            $("#quantity" + id)
-            .text()
-            .replace(/\D/g, "")
-        );
-        return amount;
-    };
-
-    function addProduct(id, qty) {
-        let insert = true;
-        fetch('/cart/add/' + id + '/' + qty)
-            .then((response) => response.text())
-            .then((data) => {
-                try {
-                    data = JSON.parse(data);
-                    if (data.status == 'update') {
-                        insert = false;
-                        document.querySelector('#quantity' + id + " > strong").textContent = data.total_qty;
-                        document.querySelector('#totalmoney').textContent = data.total_money;
-                    }
-                } catch (e) {}
-
-                if (insert) {
-                    let total_money = document.querySelector('#totalmoney').textContent.replace(/\D/g, '');
-                    total_money = parseInt(total_money);
-
-                    $(".cart-product-wrapper").prepend(data);
-
-                    let newprice = document.querySelector('#product_id' + id + ' span.new').textContent.replace(/\D/g, '');
-
-                    total_money += (qty * parseInt(newprice));
-                    //number format
-                    total_money = total_money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                    document.querySelector('#totalmoney').textContent = total_money + 'đ';
-
-                    $("#product_id" + id).hide().fadeIn();
-                }
-            })
-    }
-
-    document.querySelectorAll(".add-to-cart").forEach((item) => {
-        item.addEventListener("click", function () {
-            if (!checkLoged()) {
-                notify('warning', 'fa-duotone fa-cart-circle-xmark', 'right', 'Vui lòng đăng nhập để mua hàng');
-                return;
-            }
-            let id = parseInt(this.getAttribute('id').replace('product', ''));
-            let qty = parseInt(document.querySelector('.cart-plus-minus-box').value);
-            if (isNaN(qty)) qty = 1;
-            addProduct(id, qty);
-        });
-
-    });
-
-    document.querySelectorAll('a#plus_product').forEach((item) => {
-        item.addEventListener('click', function () {
-            if (!checkLoged()) {
-                notify('warning', 'fa-duotone fa-cart-circle-xmark', 'right', 'Vui lòng đăng nhập để mua hàng');
-                return;
-            }
-            let id = parseInt(this.parentElement.getAttribute('id').replace('wrapper', ''));
-            let qty = 1;
-            addProduct(id, qty);
-        })
-    });
-
-
-
-    /*-------------------------
-        Ajax Cart View
-    ---------------------------*/
-    $(document).on('click', '.pro-remove a', function () {
-        let id = parseInt($(this).parent().attr('id').replace('product', ''));
-        let money = parseFloat($('#product_id' + id + ' .price .new').text().replace('$', ''));
-        let total = parseFloat($('#totalmoney').text().replace('$', ''));
-        let amount = parseInt($('#count-cart').text());
-        let qty = parseInt($('#quantity' + id).text().replace(/\D/g, ''));
-        console.log(money, total, amount, qty);
-        $('#view_cart_product' + id).fadeOut('normal', function () {
-            $(this).remove();
-        });
-        let totalMoney = (total - money * qty).toFixed(2);
-        console.log(totalMoney);
-        $('#totalmoney').text(totalMoney + '$');
-        $('#count-cart').text(amount - 1);
-        $('#product_id' + id).hide('normal', function () {
-            $(this).remove();
-        });
-
-        $.ajax({
-            type: "post",
-            url: "/cart/delete/" + id,
-        });
-    });
-
-    $(document).on('click', '#clear-cart', function () {
-        $('#table-cart').hide('normal', function () {
-            $(this).remove();
-        });
-        $('.cart-product-wrapper').children().hide('normal', function () {
-            $(this).remove();
-        });
-        $('#count-cart').text('0');
-        $('#totalmoney').text('0.00$');
-        $('#total-money').text('0.00$');
-        $('#total-bill').text('0.00$');
-        $.ajax({
-            type: 'post',
-            url: '/cart/clear',
-        });
-    })
-
-
-    /*-------------------------
-        Ajax Remove Product Cart 
-    ---------------------------*/
-    $(document).on('click', '.remove-cart', function () {
-        let id = $(this).attr('id').replace('product', '');
-        $('#product_id' + id).fadeOut('normal', function () {
-            let amount = parseInt($('#count-cart').text());
-            $('#count-cart').text(amount - 1);
-            let money = parseFloat($('#product_id' + id + " .price .new").text().replace('$', ''));
-            let total = parseFloat($('#totalmoney').text().replace('$', ''));
-            let qty = parseInt($('#quantity' + id).text().replace(/\D/g, ''));
-            let totalMoney = (total - money * qty).toFixed(2);
-            $('#totalmoney').text(totalMoney + '$');
-            $(this).remove();
-        });
-        $.ajax({
-            type: 'post',
-            url: '/cart/delete/' + id,
-            data: {
-                delete_id: id
-            },
-        });
-    });
-
 });

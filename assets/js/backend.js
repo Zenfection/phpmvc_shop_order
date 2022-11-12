@@ -1,16 +1,3 @@
-//* Popup Notification
-function notify(type, icon, position, msg) {
-    Lobibox.notify(type, {
-        pauseDelayOnHover: true,
-        size: 'mini',
-        rounded: true,
-        icon: icon,
-        continueDelayOnInactiveTab: false,
-        position: position,
-        msg: msg
-    });
-}
-
 // *Sign in
 var callLogin = function () {
     let user = document.querySelector('#loginForm input[id=username]').value;

@@ -1,3 +1,16 @@
+// *Popup Notification
+function notify(type, icon, position, msg) {
+  Lobibox.notify(type, {
+      pauseDelayOnHover: true,
+      size: 'mini',
+      rounded: true,
+      icon: icon,
+      continueDelayOnInactiveTab: false,
+      position: position,
+      msg: msg
+  });
+}
+
 (function ($) {
   "use strict";
   /*----------------------------------------

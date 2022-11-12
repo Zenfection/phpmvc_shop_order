@@ -58,7 +58,7 @@ class CartModel extends Model
             $price = $productInfo['price'];
             $discount = $productInfo['discount'];
             $discount_price = $price - ($price * $discount / 100);
-            
+
             return [
                 'status' => 'insert',
                 'name' => $productInfo['name'],
@@ -73,6 +73,11 @@ class CartModel extends Model
     public function clearCart($user)
     {
         $data = $this->db->table('tb_cart')->where('username', '=', $user)->delete();
+        return $data;
+    }
+    public function countCart($user)
+    {
+        $data = $this->db->table('tb_cart')->where('username', '=', $user)->count();
         return $data;
     }
     public function totalMoneyCartUser($user)

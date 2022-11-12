@@ -33,7 +33,7 @@
 
     <!-- Product Remove Start -->
     <div class="cart-product-remove">
-        <a class="remove-cart" id="product<?php echo $id ?>"><i class="fa-duotone fa-trash-can"></i></a>
+        <a class="remove-cart cursor-pointer" onclick="deleteProductCart('<?php echo $id?>')"><i class="fa-duotone fa-trash-can"></i></a>
     </div>
     <!-- Product Remove End -->
 

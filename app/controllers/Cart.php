@@ -3,13 +3,6 @@
 class Cart extends Controller {
     public $data;
 
-    public function delete($id){
-        $user = Session::data('user');
-        $id = (int)$id;
-        $data = $this->models('CartModel')->deteleProductCart($user, $id);
-        return $data;
-    }
-
     public function add($id, $qty){
         $user = Session::data('user');
         $id = (int)$id;
@@ -50,9 +43,37 @@ class Cart extends Controller {
         }
     }
 
+    public function delete($id){
+        $user = Session::data('user');
+        $total_money = $this->models('CartModel')->totalMoneyCartUser($user); // tổng tiền trước khi xoá
+        $count_cart = $this->models('CartModel')->countCart($user); // số lượng sản phẩm trước khi xoá
+        
+        $id = (int)$id;
+        $data = $this->models('CartModel')->deteleProductCart($user, $id);
+
+        $product_info = $this->models('ProductModel')->getDetail($id);
+        $price = $product_info['price'];
+        $discount = $product_info['discount'];
+        $discount_price = $price - ($price * $discount / 100); // giá tiền sản phẩm
+
+        $total_money = $total_money - $discount_price; // tổng tiền sau khi xoá
+        // number format
+        $total_money = number_format($total_money, 0, ',', '.') . 'đ';
+        $data = [
+            'status' => 'delete',
+            'total_money' => $total_money,
+            'total_qty' => $count_cart - 1
+        ];
+        echo json_encode($data);
+    }
+
     public function clear(){
         $user = Session::data('user');
         $data = $this->models('CartModel')->clearCart($user);
-        return $data;
+        
+        $data = [
+            'status' => 'clear',
+        ];
+        echo json_encode($data);
     }
 }

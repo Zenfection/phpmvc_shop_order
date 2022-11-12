@@ -64,7 +64,7 @@
                                     <td class="pro-subtotal">
                                         <span><?php echo $total_price ?></span>
                                     </td>
-                                    <td class="pro-remove" id="product<?php echo $id?>">
+                                    <td class="pro-remove" id="product<?php echo $id ?>" onclick="deleteProductCart('<?php echo $id ?>')">
                                         <a>
                                             <i class="fa-duotone fa-trash-xmark fa-2xl"></i>
                                         </a>
@@ -92,7 +92,7 @@
                     <!-- Cart Button left Side End -->
 
                     <!-- Cart Button Right Side Start -->
-                    <div class="cart-btn-right-right m-b-20" id="clear-cart">
+                    <div class="cart-btn-right-right m-b-20 cursor-pointer" onclick="clearProductCart()">
                         <a class="btn btn btn-gray-deep btn-hover-primary">Xoá Hết Giỏ Hàng</a>
                     </div>
                     <!-- Cart Button Right Side End -->

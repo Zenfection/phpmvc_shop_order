@@ -111,7 +111,7 @@
                         <div class="quantity d-flex align-items-center m-b-25">
                             <span class="m-r-10"><strong>Số lượng: </strong></span>
                             <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" value="1" type="text">
+                                <input class="cart-plus-minus-box" value="1" type="text" id="qty">
                                 <div class="dec qtybutton">-</div>
                                 <div class="inc qtybutton">+</div>
                             </div>
@@ -121,7 +121,7 @@
                         <!-- Cart Button Start -->
                         <div class="cart-btn action-btn m-b-30">
                             <div class="action-cart-btn-wrapper d-flex">
-                                <div class="add-to-cart" id="product<?php echo $id ?>">
+                                <div class="add-to-cart cursor-pointer" onclick="addProductCart('<?php echo $id?>', 'qty')">
                                     <a class="btn btn-primary btn-hover-dark rounded" style="width: 110%">Thêm Vào Giỏ</a>
                                 </div>
                                 <!-- <a href="#" title="Wishlist" class="heart"><i class="fa-duotone fa-heart fa-xl"></i></a> -->
@@ -264,7 +264,7 @@
                                                 }
                                                 ?>
                                                 <div class="action-wrapper" id="wrapper<?php echo $id ?>">
-                                                    <a class="action" id="plus_product" title="Thêm sản phẩm"><i class="fa-duotone fa-plus-large"></i></a>
+                                                    <a class="action cursor-pointer" title="Thêm sản phẩm"><i class="fa-duotone fa-plus-large" onclick="addProductCart('<?php echo $id?>', 1)"></i></a>
                                                     <a class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
                                                     <a class="nav-content cursor-pointer action cart" id="viewcart" title="Cart"><i class="fa-duotone fa-cart-circle-plus"></i></a>
                                                 </div>

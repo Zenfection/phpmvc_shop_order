@@ -42,9 +42,9 @@
 
     <!--  -->
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/main.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/custom.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/backend.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/assets/js/load-content.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/custom.js"></script>
 
     <div id="content">
         <?php $this->render($content, $sub_content) ?>
