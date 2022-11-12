@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "minify:css": "uglifycss ./assets/css/pace.min.css ./assets/css/style.css ./assets/css/custom.css > cdn/css/style.min.css",
-    "minify:main": "uglifyjs ./assets/js/load-content.js ./assets/js/main.js ./assets/js/custom.js ./assets/js/backend.js -c -m -o ./cdn/js/main.min.js",
+    "minify:main": "uglifyjs ./assets/js/main.js ./assets/js/load-content.js ./assets/js/backend.js ./assets/js/custom.js -c -m -o ./cdn/js/main.min.js",
     "minify:load-content": "uglifyjs ./assets/js/load-content.js -c -m -o ./cdn/js/load-content.min.js",
     "minify:icon": "uglifyjs-folder ./assets/js/icon -o ./cdn/js/icon-zen.min.js"
   },
