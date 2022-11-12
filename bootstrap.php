@@ -4,6 +4,7 @@ require_once 'vendor/autoload.php';
 
 define('_DIR_ROOT', $_SERVER["DOCUMENT_ROOT"]);
 define('_GIT_SOURCE', 'https://raw.githubusercontent.com/Zenfection/phpmvc_shop_order/main');
+define('_CDN_JSDelivr', 'https://cdn.jsdelivr.net/gh/Zenfection/phpmvc_shop_order@main');
 
 // for($i = 50; $i < 600; $i += 50){
 //     define('_CDN_IMAGE_' . $i, 'https://ik.imagekit.io/zenfection/shoporder/tr:w-' . $i);
