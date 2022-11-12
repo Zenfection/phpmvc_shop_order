@@ -29,11 +29,13 @@ class Login extends Controller {
 
             // validate
             $validate = $request->validate();
-            if(!$validate){
+            $check = $this->login_user($_POST['username']);
+            
+            if(!$validate || !$check){
                 Session::data('msg', [
                     'type' => 'error',
                     'icon' => 'fa-duotone fa-user-xmark',
-                    'position' => 'bottom',
+                    'position' => 'center',
                     'content' => 'Đăng nhập thất bại'
                 ]);
                 $response->redirect('login');
@@ -43,9 +45,8 @@ class Login extends Controller {
                     'icon' => 'fa-duotone fa-user-check',
                     'position' => 'bottom',
                     'content' => 'Đăng nhập thành công'
-                ]);
+                    ]);
                 Session::data('user', $_POST['username']);
-                $this->login_user($_POST['username']);
                 $response->redirect('home');
             }
         }

@@ -32,7 +32,8 @@ class Register extends Controller {
 
             // validate
             $validate = $request->validate();
-            if(!$validate){
+            $check = $this->register_user($_POST['fullname'], $_POST['email'], $_POST['username'], $_POST['password']);
+            if(!$validate || !$check){
                 Session::data('msg', [
                     'type' => 'error',
                     'icon' => 'fa-duotone fa-circle-exclamation',
@@ -41,7 +42,6 @@ class Register extends Controller {
                 ]);
                 $response->redirect('register');
             } else {
-                $this->register_user($_POST['fullname'], $_POST['email'], $_POST['username'], $_POST['password']);
                 Session::data('msg', [
                     'type' => 'success',
                     'icon' => 'fa-duotone fa-user-plus',

@@ -22,8 +22,8 @@
     ?>
             <div class="col-lg-4 col-md-4 col-sm-6 product product-inner" id="product<?php echo $id ?>">
                 <div class="thumb">
-                    <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)"">
-                        <img class="fit-image p-10" id="img-product<?php echo $id ?>" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Product" />
+                    <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)"">
+                        <img class=" fit-image p-10" id="img-product<?php echo $id ?>" src="<?php echo _WEB_ROOT; ?>/assets/images/products/<?php echo $image ?>" alt="Product" />
                     </a>
                     <?php
                     if ($discount > 0) {
@@ -38,63 +38,60 @@
                     }
                     ?>
                     <div class="action-wrapper" id="wrapper<?php echo $id ?>">
-                        <a class="action" title="Thêm sản phẩm" onclick="addProductCart('<?php echo $id?>', 1)"><i class="fa-duotone fa-plus-large"></i></a>
+                        <a class="action" title="Thêm sản phẩm" onclick="addProductCart('<?php echo $id ?>', 1)"><i class="fa-duotone fa-plus-large"></i></a>
                         <a class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
                         <a class="nav-content cursor-pointer action cart" title="Cart" onclick="loadContent('viewcart')"><i class="fa-duotone fa-cart-circle-plus"></i></a>
                     </div>
                 </div>
                 <div class="content">
                     <h5 class="title">
-                        <a class="product-title cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)""><?php echo $name ?></a>
+                        <a class="product-title cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)""><?php echo $name ?></a>
                     </h5>
-                    <span class="rating">
-                        <?php
-                        $temp = $ranking;
-                        for ($j = 0; $j < 5; $j++) {
-                            if ($temp > 2) {
-                                echo "<i class='fa-solid fa-star' style='color: #ffad42'></i>";
-                                $temp -= 2;
-                            } else if ($temp > 0) {
-                                echo "<i class='fa-solid fa-star-half' style='color: #ffad42'></i>";
-                                $temp = 0;
+                    <span class=" rating">
+                            <?php
+                            $temp = $ranking;
+                            for ($j = 0; $j < 5; $j++) {
+                                if ($temp > 2) {
+                                    echo "<i class='fa-solid fa-star' style='color: #ffad42'></i>";
+                                    $temp -= 2;
+                                } else if ($temp > 0) {
+                                    echo "<i class='fa-solid fa-star-half' style='color: #ffad42'></i>";
+                                    $temp = 0;
+                                }
                             }
-                        }
-                        ?>
-                    </span>
-                    <span class="price">
-                        <?php
-                        if ($discount > 0) {
-                        ?>
-                            <span class="new"></i><?php echo $discount_price . 'đ'?></span>
-                            <span class="old"></i><?php echo $price . 'đ' ?></span>
-                        <?php
-                        } else {
-                        ?>
-                            <span class='new'></i><?php echo $price . 'đ'?></span>
-                        <?php
-                        }
-                        ?>
-                    </span>
-                    <?php echo "<p>$description</p>" ?>
-                    <!-- Cart Button Start -->
-                    <div class="cart-btn action-btn">
-                        <div class="action-cart-btn-wrapper d-flex">
-                            <div class="add-to-cart" id="product<?php echo $id ?>">
-                                <a class="btn btn-primary btn-hover-dark rounded-0" style="width: 110%">Thêm Vào Giỏ</a>
+                            ?>
+                            </span>
+                            <span class="price">
+                                <?php
+                                if ($discount > 0) {
+                                ?>
+                                    <span class="new"></i><?php echo $discount_price . 'đ' ?></span>
+                                    <span class="old"></i><?php echo $price . 'đ' ?></span>
+                                <?php
+                                } else {
+                                ?>
+                                    <span class='new'></i><?php echo $price . 'đ' ?></span>
+                                <?php
+                                }
+                                ?>
+                            </span>
+                            <?php echo "<p>$description</p>" ?>
+                            <!-- Cart Button Start -->
+                            <div class="cart-btn action-btn">
+                                <div class="action-cart-btn-wrapper d-flex">
+                                    <div class="add-to-cart" id="product<?php echo $id ?>">
+                                        <a class="btn btn-primary btn-hover-dark rounded-0" style="width: 110%">Thêm Vào Giỏ</a>
+                                    </div>
+                                    <a href="#" title="Wishlist" class="action"><i class="fa-duotone fa-heart"></i></a>
+                                </div>
                             </div>
-                            <a href="#" title="Wishlist" class="action"><i class="fa-duotone fa-heart"></i></a>
-                        </div>
-                    </div>
-                    <!-- Cart Button End -->
-                    <?php if ($quantity == 0) {
-                        echo "<div class='ribbon bg-danger' style='top: -20px'>Đã Bán Hết</div>";
-                        echo "<script>
-                                        $('.ribbon').parents('.product-inner').css('opacity', '0.5');
-                                        $('.ribbon').parents('.product-inner').find('.action-wrapper').remove();
-                                        $('.ribbon').parents('.product-inner').find('a.image').removeAttr('href');
-                                        </script>";
-                    }
-                    ?>
+                            <!-- Cart Button End -->
+                            <?php if ($quantity == 0) {
+                            ?>
+                                <div class='ribbon bg-danger' style='top: -20px' onload="soldOutRibbon()">Đã Bán Hết</div>;
+                            <?php
+                            }
+                            ?>
                 </div>
             </div>
     <?php
@@ -115,7 +112,7 @@
                 if ($page > 1) {
                 ?>
                     <li class="page-item">
-                        <a class="page-link rounded-0 cursor-pointer" name="page=<?php echo $page ?>" aria-label="Prev">
+                        <a class="page-link rounded-0 cursor-pointer" name="page=<?php echo $page ?>" aria-label="Prev" onclick="choosePage(<?php echo $page - 1 ?>)">
                             <span aria-hidden="true">
                                 <i class="fa-duotone fa-arrow-left" style="padding-top: 5px"></i>
                             </span>
@@ -128,12 +125,16 @@
                         echo "<li class='page-item'><a class='page-link active'>$i</a></li>";
                         continue;
                     }
-                    echo "<li class='page-item'><a class='page-link cursor-pointer' id='page-choose' name='page=$i' >$i</a></li>'";
+                ?>
+                    <li class='page-item'>
+                        <a class='page-link cursor-pointer' onclick="choosePage(<?php echo $i ?>)"><?php echo $i ?></a>
+                    </li>
+                <?php
                 }
                 if ($page < $numPage) {
                 ?>
                     <li class="page-item">
-                        <a class="page-link rounded-0 cursor-pointer" name="page=<?php echo $page ?>" aria-label="Next">
+                        <a class="page-link rounded-0 cursor-pointer" name="page=<?php echo $page ?>" aria-label="Next" onclick="choosePage(<?php echo $page + 1 ?>)">
                             <span aria-hidden="true">
                                 <i class="fa-duotone fa-arrow-right" style="padding-top: 5px"></i>
                             </span>
@@ -147,3 +148,10 @@
     </div>
     <!-- Shopt Top Bar Right End -->
 </div>
+
+
+<script>
+    $('.ribbon').parents('.product-inner').css('opacity', '0.5');
+    $('.ribbon').parents('.product-inner').find('.action-wrapper').remove();
+    $('.ribbon').parents('.product-inner').find('a.image').removeAttr('href');
+</script>

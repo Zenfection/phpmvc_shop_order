@@ -1,5 +1,5 @@
 // *Sign in
-var callLogin = function () {
+function loginAccount() {
     let user = document.querySelector('#loginForm input[id=username]').value;
     let pass = document.querySelector('#loginForm input[id=password').value;
 
@@ -7,14 +7,14 @@ var callLogin = function () {
         notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập tài khoản hoặc mật khẩu');
         return;
     }
+    //fetch post method
+    document.querySelector('#loginForm button[type=button]').removeAttribute('onclick');
     document.querySelector('#loginForm button[type=button]').setAttribute('type', 'submit').click();
 };
-$(document).on('click', '#loginForm button', function () {
-    callLogin();
-});
+
 $(document).on('keypress', '#loginForm', function (e) {
     if (e.which == 13) {
-        callLogin()
+        loginAccount();
     }
 });
 
@@ -98,16 +98,16 @@ var callCheckout = function () {
     let province = document.querySelector('select#province').nextSibling.querySelector('.current').textContent
     let city = document.querySelector('select#city').nextSibling.querySelector('.current').textContent
     let ward = document.querySelector('select#ward').nextSibling.querySelector('.current').textContent
-    
+
     //console.log(fullname, phone, address, province, city, email);
-    if(fullname == '' || fullname === undefined || phone == '' || phone === undefined || address == '' || address === undefined || province == '' || province === undefined || city == '' || city === undefined || ward == '' || ward === undefined || email == '' || email === undefined){
+    if (fullname == '' || fullname === undefined || phone == '' || phone === undefined || address == '' || address === undefined || province == '' || province === undefined || city == '' || city === undefined || ward == '' || ward === undefined || email == '' || email === undefined) {
         notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
         return;
     }
     document.querySelector('#checkoutForm button[type=button]').setAttribute('type', 'submit').click();
 }
 
-$(document).on('click', '#checkoutForm button[type=button]', function(){
+$(document).on('click', '#checkoutForm button[type=button]', function () {
     callCheckout();
 });
 $(document).on('keypress', '#checkoutForm', function (e) {

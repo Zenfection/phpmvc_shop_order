@@ -12,6 +12,9 @@ function addProductCart(id, qty) {
                     insert = false;
                     document.querySelector('#quantity' + id + " > strong").textContent = data.total_qty;
                     document.querySelector('#totalmoney').textContent = data.total_money;
+                } else if(data.status == 'soldout'){
+                    insert = false;
+                    alert('Số lượng sản phẩm trong kho không đủ!');
                 }
             } catch (e) {}
 
@@ -49,7 +52,7 @@ function deleteProductCart(id) {
                     document.querySelector('#totalmoney').textContent = data.total_money;
                     document.querySelector('#count-cart').textContent = data.total_qty;
 
-                    if(window.location.pathname == "/viewcart"){
+                    if (window.location.pathname == "/viewcart") {
                         document.querySelector('#total-money').textContent = data.total_money;
                         document.querySelector('#total-bill').textContent = data.total_money;
                         $('#view_cart_product' + id).hide('normal', function () {
@@ -61,13 +64,13 @@ function deleteProductCart(id) {
         })
 }
 
-function clearProductCart(){
+function clearProductCart() {
     fetch('/cart/clear')
         .then((response) => response.text())
         .then((data) => {
             try {
                 data = JSON.parse(data);
-                if(data.status == 'clear'){
+                if (data.status == 'clear') {
                     $('#table-cart').hide('normal', function () {
                         $(this).remove();
                     });
@@ -83,15 +86,33 @@ function clearProductCart(){
         })
 }
 
+//* Search Product
+function searchProduct() {
+    let sortby = $("option:selected", '.nice-select').val();
+    let category = $('.sidebar-list li a.active').attr('id');
+    let keyword = $('#searchFilterProduct').val();
+
+    filterShop(category, sortby, 1, keyword);
+}
+
+
+//* Pagination Product
+function choosePage(id) {
+    let sortby = $("option:selected", '.nice-select').val();
+    let category = $('.sidebar-list li a.active').attr('id');
+    let keyword = $('.search-box button').siblings('input').val();
+
+    filterShop(category, sortby, id, keyword);
+}
+
+
+function soldOutRibbon() {
+    $('.ribbon').parents('.product-inner').css('opacity', '0.5');
+    $('.ribbon').parents('.prsoduct-inner').find('.action-wrapper').remove();
+    $('.ribbon').parents('.product-inner').find('a.image').removeAttr('onclick');
+}
 
 $(function () {
-    /* Function
-    ------------------------- */
-    //* check Logged
-    function checkLoged() {
-        return document.querySelectorAll('#logged').length == 0;
-    }
-    
     //* search Product by name, listener via Enter
     // $(document).on("keypress", "#searchProduct", function (e) {
     //     if (e.which == 13) {
@@ -113,36 +134,7 @@ $(function () {
     /*-------------------------
         Ajax Load Data Nagivation
     ---------------------------*/
-
-    // SHOP
-    //* Search Product
-    function searchProduct() {
-        let sortby = $("option:selected", '.nice-select').val();
-        let category = $('.sidebar-list li a.active').attr('id');
-        let keyword = $('#searchFilterProduct').val();
-
-        filterShop(category, sortby, 1, keyword);
-    }
-    $(document).on("keypress", "#searchFilterProduct", function (e) {
-        if (e.which == 13) {
-            searchProduct();
-        }
-    });
-    $(document).on("click", ".search-box button", function () {
-        searchProduct();
-    });
-
-    //* Pagination Product
-    //* choose num page paginator page
-    function choosePage(id) {
-        let sortby = $("option:selected", '.nice-select').val();
-        let category = $('.sidebar-list li a.active').attr('id');
-        let keyword = $('.search-box button').siblings('input').val();
-
-        filterShop(category, sortby, id, keyword);
-    }
-
-    $(document).keydown('.shop_wrapper grid_4', function (e) {
+    $(document).keydown('.shop_wrapp', function (e) {
         let next = $('.page-item a[aria-label="Next"]');
         let prev = $('.page-item a[aria-label="Prev"]');
         switch (e.which) {
@@ -160,17 +152,4 @@ $(function () {
                 break;
         }
     })
-
-    $(document).on('click', '.page-item a[aria-label="Next"]', function () {
-        let id = parseInt($(this).attr('name').split('page=')[1]);
-        choosePage(id + 1);
-    });
-    $(document).on('click', '.page-item a[aria-label="Prev"]', function () {
-        let id = parseInt($(this).attr('name').split('page=')[1]);
-        choosePage(id - 1);
-    });
-    $(document).on('click', '#page-choose', function () {
-        let id = parseInt($(this).attr('name').split('page=')[1]);
-        choosePage(id);
-    });
 });

@@ -94,12 +94,34 @@ class Account extends Controller {
         ]);
         // validate
         $validate = $request->validate();
-        if(!$validate){
-            Session::flash('msg', 'Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+        $check = $this->change_info($_POST['fullname'], $_POST['phone'], $_POST['email'], $_POST['address']);
+        if(!$validate || $check == 'false'){
+            Session::data('msg', [
+                'type' => 'error',
+                'icon' => 'fa-duotone fa-shield-xmark',
+                'position' => 'center',
+                'content' => 'Cập nhật thông tin không thành công'
+            ]);
             $response = new Response();
             $response->redirect('account');
         } else {
-            $this->change_info($_POST['fullname'], $_POST['phone'], $_POST['email'], $_POST['address']);
+            if($check == 'nochange'){
+                Session::data('msg', [
+                    'type' => 'info',
+                    'icon' => 'fa-duotone fa-circle-info',
+                    'position' => 'center',
+                    'content' => 'Không có gì thay đổi'
+                ]);
+            } else if($check){
+                Session::data('msg', [
+                    'type' => 'success',
+                    'icon' => 'fa-duotone fa-check-double',
+                    'position' => 'center',
+                    'content' => 'Đã thay đổi thông tin thành công'
+                ]);
+            }
+            $response = new Response();
+            $response->redirect('account');
         }
     }
     public function validate_change_password(){
@@ -118,12 +140,25 @@ class Account extends Controller {
         ]);
         // validate
         $validate = $request->validate();
-        if(!$validate){
-            Session::flash('msg', 'Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+        $check = $this->change_password($_POST['old_password'], $_POST['new_password'], $_POST['confirm_password']);
+        if(!$validate || !$check){
+            Session::data('msg', [
+                'type' => 'error',
+                'icon' => 'fa-duotone fa-shield-xmark',
+                'position' => 'center',
+                'content' => 'Đổi mật khẩu không thành công'
+            ]);
             $response = new Response();
             $response->redirect('account');
         } else {
-            $this->change_password($_POST['old_password'], $_POST['new_password'], $_POST['confirm_password']);
+            Session::data('msg', [
+                'type' => 'success',
+                'icon' => 'fa-duotone fa-key-skeleton',
+                'position' => 'center',
+                'content' => 'Đã thay đổi mật khẩu thành công'
+            ]);
+            $response = new Response();
+            $response->redirect('account');
         }
     }
 
@@ -142,14 +177,12 @@ class Account extends Controller {
                 $dataChange[$key] = $value;
             }
         }
-        if(empty($dataChange)){
-            Session::flash('msg', 'Không có gì thay đổi');
-        } else {
+        if(!empty($dataChange)){
             $update = $this->db->table('tb_user')->where('username', '=', $user)->update($dataChange);
-            Session::flash('msg', 'Đã thay đổi thông tin');
+            return ($update) ? 'true' : 'false';
+        } else {
+            return 'nochange';
         }
-        $response = new Response();
-        $response->redirect('account');
     }
 
     private function check_password($password){
@@ -167,7 +200,7 @@ class Account extends Controller {
             'password' => md5($_POST['password'])
         ];
         $update = $this->db->table('tb_user')->where('username', '=', $user)->update($data);
-        Session::flash('msg', 'Đã thay đổi mật khẩu');
+        return ($update) ? true : false;
     }
 }
 ?>

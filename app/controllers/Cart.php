@@ -4,11 +4,22 @@ class Cart extends Controller {
     public $data;
 
     public function add($id, $qty){
+        // Nếu không đủ hàng thì không bán
+        $product_info = $this->models('ProductModel')->getDetail($id);
+        $product_detail_cart = $this->models('CartModel')->getProductDetailCart($id);
+        $total_qty = $product_detail_cart['amount'] + (int)$qty;
+        if($product_info['quantity'] < (int)$total_qty){
+            $data = [
+                'status' => 'soldout'
+            ];
+            echo json_encode($data);
+            return;
+        }
+
+        $dataShare = $this->getDataShare();
         $user = Session::data('user');
         $id = (int)$id;
         $data = $this->models('CartModel')->addProductCart($user, $id, $qty);
-        
-        $dataShare = $this->getDataShare();
 
         //* Chia ra 2 trường hợp: 
             //? 1 là update (đã có chỉ cần thêm) 

@@ -58,8 +58,8 @@
                     <div class="widget_inner">
                         <div class="widget-list m-b-50">
                             <div class="search-box">
-                                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" aria-label="Nhập tên sản phẩm" id="searchFilterProduct" style="font-size: 14px;" value="<?php echo $keyword ?>">
-                                <button class="search-icon" type="button">
+                                <input type="text" class="form-control" id="searchFilterProduct" placeholder="Nhập tên sản phẩm" aria-label="Nhập tên sản phẩm" style="font-size: 14px;" value="<?php echo $keyword ?>" onkeypress="if(event.keyCode == 13) searchProduct()">
+                                <button class="search-icon" type="button" onclick="searchProduct()">
                                     <i class="fa-duotone fa-magnifying-glass"></i>
                                 </button>
                             </div>

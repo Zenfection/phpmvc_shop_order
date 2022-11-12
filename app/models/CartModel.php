@@ -96,4 +96,11 @@ class CartModel extends Model
         }
         return $total;
     }
+    public function getProductDetailCart($id){
+        $sql = "SELECT * FROM `tb_cart` as c, `tb_product` as p
+                WHERE c.id_product = p.id_product
+                AND c.id_product = '$id'";
+        $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    }
 }
