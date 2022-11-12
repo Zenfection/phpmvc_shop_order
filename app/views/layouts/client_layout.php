@@ -38,13 +38,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/css/lobibox.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.css"> -->
 
-    <script src="<?php echo _WEB_ROOT; ?>/cdn/js/icon-zen.min.js"></script>
+    <script src="<?php echo _CDN_JSDelivr; ?>/cdn/js/icon-zen-v2.min.js"></script>
     <!-- Custom main style: 
     pace.min.css
     style.css
     custom.css
 -->
-    <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/cdn/css/style.min.css">
+    <link rel="stylesheet" href="<?php echo _CDN_JSDelivr; ?>/cdn/css/style-v2.min.css">
 </head>
 
 <body>
