@@ -2,7 +2,7 @@
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
         <div>
-            <img src="<?php echo _WEB_ROOT; ?>/assets/admin/images/logo-icon.png" class="logo-icon" alt="logo icon">
+            <img src="<?php echo _GIT_SOURCE; ?>/assets/admin/images/logo-icon.png" class="logo-icon" alt="logo icon">
         </div>
         <div>
             <h4 class="logo-text">ZenAdmin</h4>
