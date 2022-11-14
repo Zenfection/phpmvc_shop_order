@@ -12,21 +12,18 @@ var dataArr = [{
     'viewcart': 'Xem Giỏ Hàng',
     'checkout': 'Thanh Toán',
     'account': 'Tài Khoản',
+    'product/detail': 'Chi Tiết Sản Phẩm',
 },
 {
     'home': '/',
     'about': '/about',
     'contact': '/contact',
     'shop': '/shop/category',
-    'shop/cake': '/shop/category/cake',
-    'shop/candy': '/shop/category/candy',
-    'shop/fastfood': '/shop/category/fastfood',
-    'shop/fruit': '/shop/category/fruit',
-    'shop/icecream': '/shop/category/icecream',
     'login': '/login',
     'viewcart': '/viewcart',
     'checkout': '/checkout',
     'account': '/account',
+    'product/detail': '/product/detail',
 },
 {
     'home': '/assets/js/custom/home.js',
@@ -38,9 +35,6 @@ var dataArr = [{
 var titleArr = dataArr[0];
 var urlArr = dataArr[1];
 var scriptArr = dataArr[2];
-
-// list history url when click back button
-var historyURL = [];
 
 function hideContent() {
     //* Add padding right to body when scroll bar when reload
@@ -71,7 +65,6 @@ function loadSript(content) {
 
 function loadContent(content, check = false) {
     let sucess = true;
-    historyURL.push(window.location.href);
     //use fetch API 
     fetch(`/content/${content}`)
         .then(response => response.text())
@@ -100,8 +93,9 @@ function loadContent(content, check = false) {
                     document.body.appendChild(script);
                 }
 
-                let newURL = window.location.href + '/' + urlArr[content];
-                window.history.pushState({path: newURL}, "", urlArr[content]);
+                if(window.location.pathname != urlArr[content]) {
+                    window.history.pushState(null, "", urlArr[content]);
+                }
 
                 showContent();
 
@@ -126,8 +120,10 @@ function loadDetailProduct(id) {
                 document.body.appendChild(script);
             }
 
-            let newURL = window.location.href + '/product_detail/' + id;
-            window.history.pushState({path:newURL}, "", `/product/detail/${id}`);
+            let newUrl = `/product/detail/${id}`;
+            if(window.location.pathname != newUrl) {
+                window.history.pushState(null, "", newUrl);
+            }
 
             showContent();
 
@@ -150,7 +146,6 @@ function filterShop(category = 'all', sortby = 'default', page = 1, search = '')
         element = document.querySelector('.nice-select');
         sortby = element.options[element.selectedIndex].value;
     }
-    let url = urlShop(category, sortby, page, search);
 
     //fetch API
     fetch(`/content/filter_shop/${category}/${sortby}/${page}/${search}`)
@@ -159,22 +154,24 @@ function filterShop(category = 'all', sortby = 'default', page = 1, search = '')
             document.getElementById('content').innerHTML = data;
             document.title = titleArr['shop'];
 
+            let newUrl = urlShop(category, sortby, page, search);
+            if(window.location.pathname != newUrl) {
+                window.history.pushState(null, "", newUrl);
+            }
+
             if (scriptArr['shop'] != undefined) {
                 let script = document.createElement('script');
                 script.src = scriptArr['shop'];
                 document.body.appendChild(script);
             }
-
-            let newURL = window.location.href + url;
-            window.history.pushState({path: newURL}, "", url);
             AOS.init();
         });
 }
 
 //* Listen back & forward button to load content
 window.addEventListener('popstate', function () {
-    let url = historyURL[historyURL.length - 1];
-    let path = url.pathname;
+    let url = window.location.href;
+    let path = url.replace(window.location.origin, '');
     let id = path.replace('/', '');
 
     if (path == '' || path == '/') {

@@ -61,22 +61,21 @@
     <script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/js/nice-select2.js"></script> -->
 
+    <!--  Zen Script -->
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/main.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/backend.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/load-content.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/assets/js/custom.js"></script>
 
     <div id="content">
         <?php $this->render($content, $sub_content) ?>
     </div>
 
-    
+
     <?php
     $this->render('blocks/footer');
     $this->render('blocks/mobile');
     ?>
-
-<!--  Zen Script -->
-<script src="<?php echo _WEB_ROOT; ?>/assets/js/main.js"></script>
-<script src="<?php echo _WEB_ROOT; ?>/assets/js/backend.js"></script>
-<script src="<?php echo _WEB_ROOT; ?>/assets/js/load-content.js"></script>
-<script src="<?php echo _WEB_ROOT; ?>/assets/js/custom.js"></script>
 
     <!-- <script src="<?php echo _WEB_ROOT; ?>/cdn/js/main.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>

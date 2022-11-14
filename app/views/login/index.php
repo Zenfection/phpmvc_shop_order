@@ -26,7 +26,7 @@ if (!empty($msg)) {
                         
                         <div class="single-input-item m-b-10">
                             <label for="description" class="form-label">Mật khẩu</label>
-                            <input type="text" name="password" class="form-control" id="password" placeholder="Nhập mật khẩu..." value="<?php echo oldValue('password')?>">
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Nhập mật khẩu..." value="<?php echo oldValue('password')?>">
                         </div>
                         <div class="single-input-item m-b-15">
                             <div class="login-reg-form-meta m-b-n15">

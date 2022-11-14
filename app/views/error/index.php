@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo (!empty($page_title) ? $page_title : 'Không tìm thấy trang') ?></title>
+    
     <link rel="stylesheet" href="https://repack.me/templates/Great/css/bootstrap.css">
     <link href="<?php echo _WEB_ROOT; ?>/assets/css/errors.css" rel="stylesheet">
 </head>
