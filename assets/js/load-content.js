@@ -1,3 +1,45 @@
+/**
+    //! Đây là hàm để load content sử dụng công nghệ fetch API của Javascript
+    //* Cách bước để loadContent:
+        //? 1. Ẩn content và footer
+        //? 2. Fetch API để lấy dữ liệu từ server
+        //? 3. Nếu có lỗi logic thì hiển thị thông báo
+        //? 4. Nếu không có lỗi logic thì thực hiện các bước tiếp theo
+            //? 4.1. Thay đổi url trong thanh địa chỉ
+            //? 4.2. Thay đổi nội dung content
+            //? 4.3. Thay đổi title của trang
+            //? 4.4. Load script tương ứng với content
+            //? 4.5. Hiển thị content và footer
+
+    //* Các hàm: 
+        // TODO 1. loadContent(content, check = false)
+            // content: tên của content cần load
+            // check: kiểm tra xem có cần load script hay không
+        // TODO 2. loadDetailProduct(id):
+            // id: id của sản phẩm cần load
+        // TODO 3. urlShop(category, sortby, page, search):
+            // category: loại sản phẩm
+            // sortby: cách sắp xếp sản phẩm
+            // page: số trang
+            // search: từ khóa cần tìm kiếm
+        // TODO 4. filterShop(category = 'all', sortby = 'default', page = 1, search = ''):
+            // category: tên của danh mục sản phẩm
+            // sortby: cách sắp xếp sản phẩm
+            // page: số trang
+            // search: từ khóa tìm kiếm
+
+        // TODO 5. popstate event listener để xử lý khi người dùng click vào nút back/forward của trình duyệt
+        // TODO Các hàm bổ trợ 
+            // 1. hideContent(): Ẩn content và footer
+            // 2. showContent(): Hiển thị content và footer
+            // 3. changeURL(url): Thay đổi url trong thanh địa chỉ
+            // 4. loadSript(content): Load script tương ứng với content
+*/
+
+/* -------------------------- 
+    DỮ LIỆU CHO CÁC TRANG
+-----------------------------*/
+
 var dataArr = [{
         'home': 'Trang Chủ',
         'about': 'Giới Thiệu',
@@ -31,39 +73,11 @@ var titleArr = dataArr[0];
 var urlArr = dataArr[1];
 var scriptArr = dataArr[2];
 
-function hideContent() {
-    //* Add padding right to body when scroll bar when reload
-    let scrollBarWidth = window.innerWidth - $(document).width();
-    document.body.style.paddingRight = scrollBarWidth.toString() + 'px';
 
-    //* Hide content and footer
-    document.getElementById('content').style.display = 'none';
-    document.getElementsByTagName('footer')[0].style.display = 'none';
-}
+/* -------------------  
+    HÀM CHÍNH XỬ LÝ LOAD CONTENT        
+----------------------*/
 
-function showContent() {
-    //* Show content and footer
-    document.getElementById('content').style.display = 'block';
-    document.getElementsByTagName('footer')[0].style.display = 'block';
-
-    //* Remove padding right to body when scroll bar when reload
-    document.body.style.paddingRight = '0px';
-}
-
-function loadSript(content) {
-    if (scriptArr[content] != undefined) {
-        let script = document.createElement('script');
-        script.src = scriptArr[content];
-        document.getElementById('content').appendChild(script);
-        // document.body.appendChild(script);
-    }
-}
-
-function changeURL(newUrl) {
-    if (window.location.pathname != newUrl) {
-        window.history.pushState(null, "", newUrl);
-    }
-}
 
 function loadContent(content, check = false) {
     hideContent(); // hide content and footer
@@ -178,4 +192,40 @@ window.addEventListener('popstate', function () {
     loadContent(id);
 });
 
-// Google map API fetch
+
+/* -----------------------------
+    CÁC HÀM BỔ TRỢ
+--------------------------------*/
+
+function hideContent() {
+    //* Add padding right to body when scroll bar when reload
+    let scrollBarWidth = window.innerWidth - $(document).width();
+    document.body.style.paddingRight = scrollBarWidth.toString() + 'px';
+
+    //* Hide content and footer
+    document.getElementById('content').style.display = 'none';
+    document.getElementsByTagName('footer')[0].style.display = 'none';
+}
+
+function showContent() {
+    //* Show content and footer
+    document.getElementById('content').style.display = 'block';
+    document.getElementsByTagName('footer')[0].style.display = 'block';
+
+    //* Remove padding right to body when scroll bar when reload
+    document.body.style.paddingRight = '0px';
+}
+
+function loadSript(content) {
+    if (scriptArr[content] != undefined) {
+        let script = document.createElement('script');
+        script.src = scriptArr[content];
+        document.getElementById('content').appendChild(script);
+    }
+}
+
+function changeURL(newUrl) {
+    if (window.location.pathname != newUrl) {
+        window.history.pushState(null, "", newUrl);
+    }
+}
