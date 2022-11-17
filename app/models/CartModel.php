@@ -29,6 +29,10 @@ class CartModel extends Model
         $data = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->delete();
         return $data;
     }
+    public function updateProductCart($user, $id, $amount){
+        $data = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->update(['amount' => $amount]);
+        return $data;
+    }
     public function addProductCart($user, $id, $qty)
     {
         $checkExist = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->first();
@@ -79,6 +83,14 @@ class CartModel extends Model
     {
         $data = $this->db->table('tb_cart')->where('username', '=', $user)->count();
         return $data;
+    }
+    public function countAmountProductCart($user, $id){
+        $sql = "SELECT amount FROM `tb_cart` WHERE username = '$user' AND id_product = '$id'";
+        $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        if(!empty($data)){
+            return $data['amount'];
+        }
+        return 0;
     }
     public function totalMoneyCartUser($user)
     {

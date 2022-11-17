@@ -33,5 +33,10 @@ class OrderModel extends Model{
         $data = $this->db->table('tb_order')->where('id_order', '=', $id)->first();
         return $data;
     }
+
+    public function getOrderStatus($user, $status){
+        $data = $this->db->table('tb_order')->where('username', '=', $user)->where('status', '=', $status)->get();
+        return $data;
+    }
 }
 ?>
