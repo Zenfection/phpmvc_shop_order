@@ -226,14 +226,20 @@ class Api extends Controller
         }
     }
 
-    public function checkout($user)
+    public function checkout()
     {
         $response = new Response();
+
+        if(!$this->check_user($_POST['username'], $_POST['password'])){
+            $response->json(['status' => 'failed', 'message' => 'Tài khoản không tồn tại']);
+            return;
+        }
         
         $db = new Database();
-        $sql = "SELECT * FROM `tb_user` WHERE username = '$user'";
+        $username = $_POST['username'];
+        $sql = "SELECT * FROM `tb_user` WHERE username = '$username'";
         $user_info = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        $count_cart = $this->models('CartModel')->countCart($user);
+        $count_cart = $this->models('CartModel')->countCart($username);
         if ($count_cart == 0) {
             $data = [
                 'status' => 'error',
@@ -254,7 +260,7 @@ class Api extends Controller
 
         $order_date = date('Y-m-d');
         $status = 'pending';
-        $totalMoney = $this->models('CartModel')->totalMoneyCartUser($user);
+        $totalMoney = $this->models('CartModel')->totalMoneyCartUser($username);
 
         // Tạo id order
         $str = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
@@ -262,7 +268,7 @@ class Api extends Controller
 
         $data = [
             'id_order' => $id_order,
-            'username' => $user,
+            'username' => $username,
             'name_customer' => $fullname,
             'phone_customer' => $phone,
             'address_customer' => $address,
@@ -279,7 +285,7 @@ class Api extends Controller
             $response->json(['status' => 'error', 'data' => 'Đặt hàng thất bại']);
         } else {
             //* thêm vào bảng tb_order_detail
-            $cartProduct = $this->models('CartModel')->getCartUser($user);
+            $cartProduct = $this->models('CartModel')->getCartUser($username);
             foreach ($cartProduct as $item) {
                 $dataCart = [
                     'id_order' => $id_order,
@@ -292,7 +298,7 @@ class Api extends Controller
                 }
             }
             //* xoá giỏ hàng
-            $this->models('CartModel')->clearCart($user);
+            $this->models('CartModel')->clearCart($username);
             $response->json(['status' => 'success', 'data' => $id_order]);
         }
     }
