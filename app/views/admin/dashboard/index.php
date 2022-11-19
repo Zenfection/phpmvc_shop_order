@@ -1,3 +1,9 @@
+<?php 
+    //format number
+    function formatNumber($number) {
+        return number_format($number, 0, ',', '.');
+    }
+?>
 <!--start page wrapper -->
 <div class="page-wrapper">
     <div class="page-content">
@@ -22,9 +28,9 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-white">Thu Nhập</p>
-                                <h4 class="my-1 text-white"><?php echo $total_money_order ?>$</h4>
+                                <h4 class="my-1 text-white"><?php echo number_format($total_money_order) ?></h4>
                             </div>
-                            <div class="text-white ms-auto font-35"><i class='bx bx-dollar'></i>
+                            <div class="text-white ms-auto font-35">đ
                             </div>
                         </div>
                     </div>

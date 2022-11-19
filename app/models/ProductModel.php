@@ -15,35 +15,56 @@ class ProductModel extends Model {
     function fieldFill(){
         return '*';
     }
+
+    /**
+     *  TODO: Hàm liên quan tới sản phẩm 
+     *  * 1. topProductRanking($limit)      // top sản phẩm bán chạy
+     *  *    topProductDiscount($limit)     // top sản phẩm giảm giá
+     *  *    topProductSeller($limit)       // top sản phẩm bán chạy
+     *      ? $limit: số lượng sản phẩm cần lấy
+     *  
+     *  * 2. getProduct()                   // lấy tất cả sản phẩm
+     *  *    insertProduct($data)           // thêm sản phẩm
+     *  *    updateProduct($id, $data)      // cập nhật sản phẩm
+     *  *    deleteProduct($id)             // xóa sản phẩm
+     *     ? $data: mảng dữ liệu cần thêm, sửa, xóa
+     *     ? $id: id sản phẩm cần sửa, xóa
+    */
     
-    //* top sản phẩm có đánh giá cao
-    public function topProductRanking($id){
-        $data = $this->db->table($this->__product)->orderBy('ranking', 'DESC')->limit($id)->get();
+    //! 1 ---------------------------------------- //
+    public function topProductRanking($limit){
+        $data = $this->db->table($this->__product)->orderBy('ranking', 'DESC')->limit($limit)->get();
         return $data;
     }
-    //* top sản phẩm có giảm giá nhiều
-    public function topProductDiscount($id){
-        $data = $this->db->table($this->__product)->orderBy('discount', 'DESC')->limit($id)->get();
+    public function topProductDiscount($limit){
+        $data = $this->db->table($this->__product)->orderBy('discount', 'DESC')->limit($limit)->get();
         return $data;
     }
-    //* top sản phẩm bán chạy
-    public function topProductSeller($id){
+    public function topProductSeller($limit){
         $sql = "SELECT p.*, COUNT(od.amount) as total_amount
                 FROM `tb_order_details` as od, `tb_product` as p
                 WHERE od.id_product = p.id_product
                 GROUP BY p.id_product
                 ORDER BY total_amount DESC
-                LIMIT $id";
+                LIMIT $limit";
         $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
+
+    //! 2 ---------------------------------------- //
     public function getProduct(){
-        $data = $this->db->table($this->__product)->get();
-        return $data;
+        return $this->db->table($this->__product)->get();
     }
     public function insertProduct($data){
-        $this->db->table($this->__product)->insert($data);
+        return $this->db->table($this->__product)->insert($data);
     }  
+    public function updateProduct($id, $data){
+        return $this->db->table($this->__product)->where('id_product','=', $id)->update($data);
+    }
+    public function deleteProduct($id){
+        return $this->db->table($this->__product)->where('id_product', '=', $id)->delete();
+    }
+
 
     public function getProductOrder($id_order){
         $sql = "SELECT * FROM `tb_order_details` as od, `tb_product` as p

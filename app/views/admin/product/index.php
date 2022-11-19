@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-lg-3 col-xl-2">
-                                <a onclick="loadContent('add-product')" class="cursor-pointer btn btn-primary mb-3 mb-lg-0"><i class='bx bxs-plus-square'></i>Thêm Sản Phẩm Mới</a>
+                                <a onclick="loadContent('add-product')" class="cursor-pointer btn btn-primary mb-3 mb-lg-0"><i class='bx bxs-plus-square'></i>Thêm Sản Phẩm</a>
                             </div>
                             <div class="col-lg-9 col-xl-10">
                                 <div class="float-lg-end">

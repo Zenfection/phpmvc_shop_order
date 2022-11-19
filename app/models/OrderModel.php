@@ -38,5 +38,13 @@ class OrderModel extends Model{
         $data = $this->db->table('tb_order')->where('username', '=', $user)->where('status', '=', $status)->get();
         return $data;
     }
+
+    public function totalProductOrder($id_product){
+        $sql = "SELECT SUM(amount) as total  
+                FROM `tb_order_details` 
+                WHERE id_product = $id_product";
+        $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        return $data['total'];
+    }
 }
 ?>

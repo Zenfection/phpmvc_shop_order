@@ -83,6 +83,7 @@ class Content extends Controller{
 
         $product_detail = $this->models('ProductModel')->getDetail($id);
         $similar_product = $this->models('ProductModel')->similarProduct($product_detail['id_category']);
+        $total_product_order = (int) $this->models('OrderModel')->totalProductOrder($id);
 
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/admin/product/detail.php');
         eval('?>' . $contentView . '<?php');
