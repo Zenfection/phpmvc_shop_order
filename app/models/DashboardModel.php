@@ -1,6 +1,10 @@
 <?php
 
 class DashboardModel extends Model{
+    private $__user = 'tb_user';
+    private $__product = 'tb_product';
+    private $__order = 'tb_order';
+
     function __construct(){
         parent::__construct();
     }
@@ -13,12 +17,20 @@ class DashboardModel extends Model{
         return '*';
     }
 
-    // Tổng đơn hàng, tổng số tiền hàng, tổng số sản phẩm, tổng số khách hàng
+    /** @param TRẢ_VỀ_CÁC_THÔNG_TIN_DASHBOARD
+     * 
+     * * 1.  getSumOrder($status = 'all')       =>  tổng đơn hàng theo trạng thái
+     * *     getSumMoneyOrder()                 =>  tổng số tiền hàng (//! chỉ tính delivered)
+     * *     getSumProduct()                    =>  tổng số sản phẩm
+     * *     getSumUser()                       =>  tổng số người dùng
+    */
+
+    //! 1 ---------------------------------------- //
     public function getSumOrder($status = 'all'){
         if($status == 'all'){
-            $count = $this->db->table('tb_order')->count();
+            $count = $this->db->table($this->__order)->count();
         } else {
-            $count = $this->db->table('tb_order')->where('status', '=', $status)->count();
+            $count = $this->db->table($this->__order)->where('status', '=', $status)->count();
         }
         return $count;
     }
@@ -33,11 +45,11 @@ class DashboardModel extends Model{
         }
     }
     public function getSumProduct(){
-        $count = $this->db->table('tb_product')->count();
+        $count = $this->db->table($this->__product)->count();
         return $count;
     }
     public function getSumCustomer(){
-        $count = $this->db->table('tb_user')->count();
+        $count = $this->db->table($this->__user)->count();
         return $count;
     }
 }

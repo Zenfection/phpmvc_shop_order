@@ -75,17 +75,13 @@
                             <?php
                             if ($discount > 0) {
                                 $discount_price = $price - ($price * $discount / 100);
-                                $discount_price = number_format($discount_price, 0, ',', '.') . 'đ';
-                                $price = number_format($price, 0, ',', '.') . 'đ';
                             ?>
-                                <span class="regular-price"><?php echo $discount_price ?></span>
-                                <span class="old-price"><?php echo $price ?></span>
+                                <span class="regular-price"><?php echo number_price($discount_price) ?></span>
+                                <span class="old-price"><?php echo number_price($price) ?></span>
                             <?php
                             } else {
-                                $price = number_format($price, 0, ',', '.') . 'đ';
                             ?>
-
-                                <span class='regular-price'><?php echo $price ?></span>
+                                <span class='regular-price'><?php echo number_price($price) ?></span>
                             <?php
                             }
                             ?>
@@ -291,18 +287,13 @@
                                                 <span class="price">
                                                     <?php
                                                     if ($discount > 0) {
-                                                        // number format
-                                                        $discount_price = number_format($discount_price, 0, ',', '.') . 'đ';
-                                                        $price = number_format($price, 0, ',', '.') . 'đ';
                                                     ?>
-                                                        <span class="new"><?php echo $discount_price ?></span>
-                                                        <span class="old"><?php echo $price ?></span>
+                                                        <span class="new"><?php echo number_price($discount_price) ?></span>
+                                                        <span class="old"><?php echo number_price($price) ?></span>
                                                     <?php
                                                     } else {
-                                                        //number format
-                                                        $price = number_format($price, 0, ',', '.') . 'đ';
                                                     ?>
-                                                        <span class='new'><?php echo $price ?></span>
+                                                        <span class='new'><?php echo number_price($price) ?></span>
                                                     <?php
                                                     }
                                                     ?>

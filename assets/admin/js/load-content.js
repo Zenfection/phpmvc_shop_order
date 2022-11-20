@@ -22,7 +22,7 @@ var dataArr = [{
         'dashboard': '/admin/dashboard',
         'product': '/admin/dashboard/product',
         'order': '/admin/dashboard/order',
-        'add-product': '/admin/dashboard/add_product',
+        'add-product': '/admin/product/add',
     },
     {
         'dashboard': window.location.origin + '/assets/admin/js/custom/dashboard.js',

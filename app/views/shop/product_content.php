@@ -28,8 +28,6 @@
                     <?php
                     if ($discount > 0) {
                         $discount_price = $price - ($price * $discount / 100);
-                        // format vietnamdong
-                        $discount_price = number_format($discount_price, 0, ',', '.');
                     ?>
                         <span class="badges">
                             <span class="sale"><?php echo (int)$discount ?> %</span>
@@ -65,12 +63,12 @@
                                 <?php
                                 if ($discount > 0) {
                                 ?>
-                                    <span class="new"></i><?php echo $discount_price . 'đ' ?></span>
-                                    <span class="old"></i><?php echo $price . 'đ' ?></span>
+                                    <span class="new"></i><?php echo number_price($discount_price) ?></span>
+                                    <span class="old"></i><?php echo number_price($price) ?></span>
                                 <?php
                                 } else {
                                 ?>
-                                    <span class='new'></i><?php echo $price . 'đ' ?></span>
+                                    <span class='new'></i><?php echo number_price($price) ?></span>
                                 <?php
                                 }
                                 ?>

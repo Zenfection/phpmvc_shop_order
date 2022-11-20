@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/admin/css/app.min.css">
 	<link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/admin/css/icons.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/css/lobibox.css">
 	<script src="<?php echo _WEB_ROOT; ?>/cdn/js/icon-zen.min.js"></script>
 
 	<!-- //? Theme Style CSS -->
@@ -55,6 +56,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/tinymce@6.2.0/tinymce.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/lobibox.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/notifications.js"></script>
+	
 
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/plugins/Drag-And-Drop/dist/imageuploadify.min.js"></script>
 	<!--app JS-->
@@ -101,7 +105,6 @@
 	<?php $this->render('admin/blocks/switcher') ?>
 
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/load-content.js"></script>
-
 
 	<script>
 		$(document).ready(function() {

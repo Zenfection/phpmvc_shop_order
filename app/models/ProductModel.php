@@ -2,7 +2,7 @@
 
 class ProductModel extends Model {
     private $__product = 'tb_product';
-    private $__category = 'tb_category';
+    private $__review_product = 'tb_recent_product';
     
     function __construct(){
         parent::__construct();
@@ -16,20 +16,42 @@ class ProductModel extends Model {
         return '*';
     }
 
-    /**
-     *  TODO: Hàm liên quan tới sản phẩm 
-     *  * 1. topProductRanking($limit)      // top sản phẩm bán chạy
-     *  *    topProductDiscount($limit)     // top sản phẩm giảm giá
-     *  *    topProductSeller($limit)       // top sản phẩm bán chạy
-     *      ? $limit: số lượng sản phẩm cần lấy
-     *  
-     *  * 2. getProduct()                   // lấy tất cả sản phẩm
-     *  *    insertProduct($data)           // thêm sản phẩm
-     *  *    updateProduct($id, $data)      // cập nhật sản phẩm
-     *  *    deleteProduct($id)             // xóa sản phẩm
-     *     ? $data: mảng dữ liệu cần thêm, sửa, xóa
-     *     ? $id: id sản phẩm cần sửa, xóa
-    */
+    /** @param TRẢ_VỀ_CÁC_DANH_SÁCH_SẢN_PHẨM
+*  * 1. topProductRanking($limit)          => top sản phẩm bán chạy
+*  *    topProductDiscount($limit)         => top sản phẩm giảm giá
+*  *    topProductSeller($limit)           => top sản phẩm bán chạy
+*      ? $limit: số lượng sản phẩm cần lấy
+*
+*  * 2. getProduct()                       => lấy tất cả sản phẩm
+*  *    getDetail($id)                     => lấy sản phẩm theo id
+*  *    insertProduct($data)               => thêm sản phẩm            //! True & False
+*  *    updateProduct($id, $data)          => cập nhật sản phẩm        //! True & False
+*  *    deleteProduct($id)                 => xóa sản phẩm             //! True & False
+*      ? $data: mảng dữ liệu cần thêm, sửa, xóa
+*      ? $id: id sản phẩm cần sửa, xóa
+*
+*  * 3. similarProduct($id_category)       => lấy sản phẩm tương tự
+*  *    getProductOrder($id_order)         => lấy sản phẩm theo id_order
+*      ? $id_category: id danh mục sản phẩm
+*      ? $id_order: id đơn hàng
+*
+*  * 4. recentViewProduct($user, $limit)   => lấy sản phẩm đã xem gần đây
+*  *    addRecent($user, $id_product)      => thêm sản phẩm đã xem     //! True & False
+*      ? $user: id người dùng
+*      ? $id_product: id sản phẩm
+*      ? $limit: số lượng sản phẩm cần lấy
+*
+*  * 5. searchProduct($keyword)                                         => tìm kiếm sản phẩm
+*  *    getProductCategory($category, $keyword = '')                    => lấy sản phẩm theo danh mục
+*  *    sellingFilterProduct($category, $keyword = '', $limit = 'all')  => lọc sản phẩm theo bán chạy
+*  *    priceFilterProduct($category, $sort, $keyword = '')             => lọc sản phẩm theo giá
+*  *    discountFilterProduct($category, $keyword = '', $limit = 'all') => lọc sản phẩm theo giảm giá
+*      ? $category: id danh mục sản phẩm
+*      ? $keyword: từ khóa tìm kiếm
+*      ? $sort: sắp xếp theo giá
+*      ? $limit: số lượng sản phẩm cần lấy
+*
+*/
     
     //! 1 ---------------------------------------- //
     public function topProductRanking($limit){
@@ -53,23 +75,67 @@ class ProductModel extends Model {
 
     //! 2 ---------------------------------------- //
     public function getProduct(){
-        return $this->db->table($this->__product)->get();
+        $data = $this->db->table($this->__product)->get();
+        return $data;
+    }
+    public function getDetail($id){
+        $data = $this->db->table($this->__product)->where('id_product', '=', $id)->first();
+        return $data;
     }
     public function insertProduct($data){
-        return $this->db->table($this->__product)->insert($data);
+        $data = $this->db->table($this->__product)->insert($data);
+        return $data;
     }  
     public function updateProduct($id, $data){
-        return $this->db->table($this->__product)->where('id_product','=', $id)->update($data);
+        $data = $this->db->table($this->__product)->where('id_product','=', $id)->update($data);
+        return $data;
     }
     public function deleteProduct($id){
-        return $this->db->table($this->__product)->where('id_product', '=', $id)->delete();
+        $data = $this->db->table($this->__product)->where('id_product', '=', $id)->delete();
+        return $data;
     }
 
-
+    //! 3 ---------------------------------------- //
+    public function similarProduct($id_category){
+        $data = $this->db->table($this->__product)->where('id_category', '=', $id_category)->where('id_product', '!=', $id_category)->get();
+        return $data;
+    }
     public function getProductOrder($id_order){
         $sql = "SELECT * FROM `tb_order_details` as od, `tb_product` as p
                 WHERE od.id_product = p.id_product
                 AND od.id_order = '$id_order'";
+        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    //! 4 ---------------------------------------- //
+    public function recentViewProduct($user, $limit){
+        $sql = "SELECT * 
+                FROM `tb_recent_product` as r, `tb_product` as p
+                WHERE r.id_product = p.id_product 
+                AND r.username = '$user' ORDER BY r.id_recent DESC LIMIT $limit";
+        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+    public function addRecent($user, $id){
+        $checkExist = $this->db->table($this->__review_product)->where('username', '=', $user)->where('id_product', '=', $id)->get();
+        $data = [
+            'username' => $user,
+            'id_product' => $id
+        ];
+        if(!empty($checkExist)){
+            $this->db->table($this->__review_product)->where('id_product', '=', $id)->delete();
+        }
+        $result = $this->db->table($this->__review_product)->insert($data);
+        return $result;
+    }
+
+    //! 5 ---------------------------------------- //
+    public function searchProduct($keyword){
+        $sql = "SELECT * FROM `tb_product` 
+                WHERE LOWER(name) 
+                COLLATE UTF8_GENERAL_CI 
+                LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%')";
         $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
@@ -90,52 +156,9 @@ class ProductModel extends Model {
         $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
-
-    public function recentViewProduct($user, $limit){
-        $sql = "SELECT * 
-                FROM `tb_recent_product` as r, `tb_product` as p
-                WHERE r.id_product = p.id_product 
-                AND r.username = '$user' ORDER BY r.id_recent DESC LIMIT $limit";
-        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
-    }
-
-    public function searchProduct($keyword){
-        $sql = "SELECT * FROM `tb_product` 
-                WHERE LOWER(name) 
-                COLLATE UTF8_GENERAL_CI 
-                LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%')";
-        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
-    }
-    
-    public function addRecent($user, $id){
-        $checkExist = $this->db->table('tb_recent_product')->where('username', '=', $user)->where('id_product', '=', $id)->get();
-        $data = [
-            'username' => $user,
-            'id_product' => $id
-        ];
-        if(!empty($checkExist)){
-            $this->db->table('tb_recent_product')->where('id_product', '=', $id)->delete();
-        }
-        $result = $this->db->table('tb_recent_product')->insert($data);
-        return $result;
-    }
-
-    public function getDetail($id){
-        $id = (int) $id;
-        $data = $this->db->table('tb_product')->where('id_product', '=', $id)->first();
-        return $data;
-    }
-
-    public function similarProduct($id_category){
-        $data = $this->db->table('tb_product')->where('id_category', '=', $id_category)->where('id_product', '!=', $id_category)->get();
-        return $data;
-    }
-
     public function sellingFilterProduct($category, $keyword = '', $limit = 'all'){
         if($limit == 'all'){
-            $limit = $this->db->table('tb_product')->count();
+            $limit = $this->db->table($this->__product)->count();
         }
 
         if($keyword == ''){
@@ -251,7 +274,6 @@ class ProductModel extends Model {
                         ORDER BY discount DESC";
             } 
         }
-        
         $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }

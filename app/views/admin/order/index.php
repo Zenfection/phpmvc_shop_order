@@ -84,7 +84,7 @@ if (!empty($msg)) {
                                         }
                                         ?>
                                     </td>
-                                    <td><?php echo $total ?>$</td>
+                                    <td><?php echo number_price($total) ?></td>
                                     <td><?php echo $date ?></td>
                                     <td>
                                         <a class="cursor-pointer" onclick="loadOrderDetail('<?php echo $id?>')">

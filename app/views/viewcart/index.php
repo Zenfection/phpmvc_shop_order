@@ -39,10 +39,6 @@
                                     $price = $value['price'];
                                 }
                                 $total_price = $price * $quantity;
-
-                                //number format
-                                $price = number_format($price, 0, ',', '.') . 'đ';
-                                $total_price = number_format($total_price, 0, ',', '.') . 'đ';
                             ?>
                                 <tr id="view_cart_product<?php echo $id ?>">
                                     <td class="pro-thumbnail">
@@ -51,7 +47,7 @@
                                     <td class="pro-title">
                                         <a><?php echo $name ?></a>
                                     </td>
-                                    <td class="pro-price"><span><?php echo $price ?>s</span></td>
+                                    <td class="pro-price"><span><?php echo number_price($price) ?>s</span></td>
                                     <td class="pro-quantity">
                                         <div class="quantity">
                                             <div class="cart-plus-minus">
@@ -62,7 +58,7 @@
                                         </div>
                                     </td>
                                     <td class="pro-subtotal">
-                                        <span><?php echo $total_price ?></span>
+                                        <span><?php echo number_price($total_price) ?></span>
                                     </td>
                                     <td class="pro-remove" id="product<?php echo $id ?>" onclick="deleteProductCart('<?php echo $id ?>')">
                                         <a>
@@ -72,8 +68,6 @@
                                 </tr>
                             <?php
                             }
-                            //number format
-                            $totalMoney = number_format($totalMoney, 0, ',', '.') . 'đ';
                             ?>
                         </tbody>
                         <!-- Table Body End -->
@@ -121,7 +115,7 @@
                             <table class="table">
                                 <tr>
                                     <td>Tổng Tiền</td>
-                                    <td id="total-money"><?php echo $totalMoney ?></td>
+                                    <td id="total-money"><?php echo number_price($totalMoney) ?></td>
                                 </tr>
                                 <tr>
                                     <td>Phí Ship</td>
@@ -129,7 +123,7 @@
                                 </tr>
                                 <tr class="total">
                                     <td>Tổng</td>
-                                    <td id="total-bill"><?php echo $totalMoney ?></td>
+                                    <td id="total-bill"><?php echo number_price($totalMoney) ?></td>
                                 </tr>
                             </table>
                         </div>

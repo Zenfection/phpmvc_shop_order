@@ -14,23 +14,21 @@ if ((int)$total_product_order > 0) {
                 $id = $product_detail['id_product'];
                 $image = $product_detail['image'];
                 $name = $product_detail['name'];
-                $price = $product_detail['price'];
-                $discount = $product_detail['discount'];
+                $price = (int)$product_detail['price'];
+                $discount = (int)$product_detail['discount'];
                 $ranking = $product_detail['ranking'];
                 $description = $product_detail['description'];
                 $quantity = $product_detail['quantity'];
                 $id_category = $product_detail['id_category'];
 
-                $price = number_format($price, 0, ',', '.');
-                $discount = (int) $discount;
                 ?>
                 <div class="col-md-4 border-end" data-aos="fade-right">
                     <img src="<?php echo _CDN_IMAGE_500 . '/products/' . $image ?>" class="img-fluid" style="padding: 5%" alt="...">
                 </div>
-                <div class="col-md-8">
-                    <form class="card-body" id="editProductForm" method="post" action="/admin/product/edit_product">
+                <div class="col-md-8 card">
+                    <form class="card-body" id="editProductForm" novalidate>
                         <div class="input-group input-group-lg">
-                            <input type="text" class="form-control" id="name" name="name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="<?php echo $name ?>">
+                            <input type="text" class="form-control" id="name" name="name" value="<?php echo $name ?>" require>
                         </div>
                         <div class="d-flex gap-3 py-3" data-aos="fade-down">
                             <div class="cursor-pointer">
@@ -57,7 +55,7 @@ if ((int)$total_product_order > 0) {
                                 <div class="col-md-4">
                                     <div class="input-group">
                                         <span class="input-group-text price">Giá Tiền</span>
-                                        <input type="text" class="form-control" id="price" name="price" value="<?php echo $price ?>">
+                                        <input type="text" class="form-control" id="price" name="price" value="<?php echo number_price($price) ?>">
                                         <span class="input-group-text">đ</span>
                                     </div>
                                 </div>
@@ -87,7 +85,7 @@ if ((int)$total_product_order > 0) {
                         <hr>
                         <div class="row">
                             <div class="col-md-4 mx-auto">
-                                <button class="btn btn-primary px-5 hover-style" id="submitEditProduct" type="button" onclick="editProduct()">
+                                <button class="btn btn-primary px-5 hover-style" id="submitEditProduct" type="button" onclick="editProduct(<?php echo $id_product ?>)">
                                     <i class='bx bxs-edit'></i>
                                     Cập Nhật
                                 </button>
@@ -115,10 +113,7 @@ if ((int)$total_product_order > 0) {
                 $discount = (int) $discount;
                 if ($discount > 0) {
                     $discount_price = $price - ($price * $discount / 100);
-                    $discount_price = number_format($discount_price, 0, ',', '.') . 'đ';
                 }
-
-                $price = number_format($price, 0, ',', '.') . 'đ';
 
                 if ($id == $product_detail['id_product']) {
                     continue;
@@ -155,7 +150,7 @@ if ((int)$total_product_order > 0) {
                                         ?>
                                     </div>
                                     <div class="clearfix">
-                                        <p class="mb-0 float-start fw-bold"><span class="me-2 text-decoration-line-through text-secondary"><?php echo $price ?></span><span><?php echo $discount_price ?></span></p>
+                                        <p class="mb-0 float-start fw-bold"><span class="me-2 text-decoration-line-through text-secondary"><?php echo number_price($price) ?></span><span><?php echo number_price($discount_price) ?></span></p>
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +160,6 @@ if ((int)$total_product_order > 0) {
             <?php
             }
             ?>
-
         </div>
     </div>
 </div>

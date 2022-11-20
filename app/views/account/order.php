@@ -48,10 +48,6 @@ if (!empty($msg)) {
                                         $price = $price - ($price * $disocunt / 100);
                                     }
                                     $total_price = $price * $amount;
-
-                                    //number format
-                                    $price = number_format($price, 0, ',', '.') . 'đ';
-                                    $total_price = number_format($total_price, 0, ',', '.') . 'đ';
                                 ?>
                                     <tr>
                                         <td class="pro-thumbnail">
@@ -63,13 +59,12 @@ if (!empty($msg)) {
                                             <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)"><?php echo $name ?></a>
                                         </td>
                                         <td class="pro-price">
-                                            <span><?php echo $price ?> x <?php echo $amount ?></span>
+                                            <span><?php echo number_price($price) ?> x <?php echo $amount ?></span>
                                         </td>
-                                        <td class="pro-subtotal"><span><?php echo $total_price ?></span></td>
+                                        <td class="pro-subtotal"><span><?php echo number_price($total_price) ?></span></td>
                                     </tr>
                                 <?php
                                 }
-                                $total_money = number_format($total_money, 0, ',', '.') . 'đ';
                                 ?>
                             </tbody>
                             <!-- Table Body End -->
@@ -111,7 +106,7 @@ if (!empty($msg)) {
                                     </tr>
                                     <tr class="total">
                                         <td>Tổng tiền</td>
-                                        <td class="total-amount"><?php echo $total_money ?></td>
+                                        <td class="total-amount"><?php echo number_price($total_money) ?></td>
                                     </tr>
                                 </table>
                             </div>

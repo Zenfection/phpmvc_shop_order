@@ -1,10 +1,29 @@
 <?php
 
 class Product extends Controller {
-    public function index(){
-        
-    }
+    /**
+     * @param TRANG_QUẢN_LÝ_SẢN_PHẨM
+     * 
+     * ! PAGE: 
+     *   * index()                          => Trang quản lý sản phẩm   
+     *   * add()                            => Trang thêm sản phẩm
+     *   * detail($id)                      => Trang chi tiết sản phẩm  //? $id của sản phẩm
+     * 
+     * 
+     * ! POST: 
+     *   * 1.edit($id)                      =>  sửa sản phẩm
+     *     ? success:   thành công
+     *     ? error:     thất bại
+     *     ? no_change: không có gì thay đổi
+     * 
+     * ! FUNCTION: 
+     *   * checkDiff($oldData, $newData)    => Trả về array các trường đã thay đổi
+    */
 
+    public function index(){
+
+    }
+    
     public function add(){
         $this->data['page_title'] = 'Thêm sản phẩm';
         $this->data['content'] = 'admin/product/add';
@@ -27,6 +46,7 @@ class Product extends Controller {
         $this->data['sub_content']['product_detail'] = $productDetail;
         $this->data['sub_content']['similar_product'] = $similarProduct;
         $this->data['sub_content']['total_product_order'] = (int)$totalProductOrder;
+        $this->data['sub_content']['id_product'] = $id; 
         $this->data['sub_content']['msg'] = Session::flash('msg');
         
         $this->render('layouts/admin_layout', $this->data);
@@ -40,7 +60,7 @@ class Product extends Controller {
         $quantity = (int)$_POST['quantity'];
         $description = $_POST["description"];
 
-        $data = [
+        $newData = [
             'name' => $name,
             'price' => $price,
             'discount' => $discount,
@@ -48,8 +68,53 @@ class Product extends Controller {
             'description' => $description
         ];
 
-        $data = $this->models('ProductModel')->updateProduct($id, $data);
-        echo json_encode($data);
+        $temp = $this->models('ProductModel')->getDetail($id);
+        $oldData = [
+            'name' => $temp['name'],
+            'price' => $temp['price'],
+            'discount' => $temp['discount'],
+            'quantity' => $temp['quantity'],
+            'description' => $temp['description']
+        ];
+
+        $data = $this->checkDiff($oldData, $newData);
+        if(!$data){
+            echo json_encode(['status' => 'no_change', 'msg' => [
+                'type' => 'info',
+                'icon' => 'fa-duotone fa-pen-slash',
+                'position' => 'center top',
+                'content' => 'Không có gì thay đổi' 
+            ]]);
+        } else {
+            $update = $this->models('ProductModel')->updateProduct($id, $data);
+            if($update){
+                echo json_encode(['status' => 'success', 'msg' => [
+                    'type' => 'success',
+                    'icon' => 'fa-duotone fa-circle-check',
+                    'position' => 'center top',
+                    'content' => 'Thay đổi thông tin sản phẩm thành công' 
+                ]]);
+            } else {
+                echo json_encode(['status' => 'error', 'msg' => [
+                    'type' => 'error',
+                    'icon' => 'fa-duotone fa-circle-xmark',
+                    'position' => 'center top',
+                    'content' => 'Thay đổi thông tin sản phẩm thất bại' 
+                ]]);
+            }
+        }
+    }
+
+    private function checkDiff($oldData, $newData){
+        $diff = [];
+        foreach($oldData as $key => $value){
+            if($value != $newData[$key]){
+                $diff[$key] = $newData[$key];
+            }
+        }
+        if(count($diff) == 0){
+            return false;
+        }
+        return $diff;
     }
 }
-?>

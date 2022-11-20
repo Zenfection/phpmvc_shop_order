@@ -25,19 +25,15 @@
                     $price = $value['price'];
                     $discount = $value['discount'];
                     $discount_price = $price - ($price * $discount / 100);
-                    
-                    //number format
-                    $price = number_format($price, 0, ',', '.') . 'đ';
-                    $discount_price = number_format($discount_price, 0, ',', '.') . 'đ';
 
                     $cart_product = [
                         'id' => $id,
                         'name' => $name,
                         'amount' => $amount,
                         'image' => $image,
-                        'price' => $price,
+                        'price' => number_price($price),
                         'discount' => $discount,
-                        'discount_price' => $discount_price,
+                        'discount_price' => number_price($discount_price),
                     ];
             ?>
                     <!-- Cart Product/Price Start -->
@@ -56,8 +52,7 @@
             <?php
             if(!empty($user)){
                 //number format
-                $total_money = number_format($total_money, 0, ',', '.') . 'đ';
-                echo "<span class='value' id='totalmoney'>" . $total_money . "</span>";
+                echo "<span class='value' id='totalmoney'>" . number_price($total_money) . "</span>";
             } else {
                 echo "<span class='value' id='totalmoney'>0 </span>";
             }

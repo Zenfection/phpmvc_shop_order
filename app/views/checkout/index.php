@@ -135,23 +135,17 @@
                                     $amount = (int)$value['amount'];
                                     $discout_price = $price * (100 - (int)$value['discount']) / 100;
 
-                                    //format price
-                                    $total = number_format($discout_price * $amount, 0, ',', '.') . 'đ';
-                                    
                                     ?>
                                     <tr class="cart_item">
                                         <td class="cart-product-name text-start ps-0"> <?php echo $name ?>
                                             <strong class="product-quantity"> × <?php echo $amount ?></strong>
                                         </td>
                                         <td class="cart-product-total text-end pe-0">
-                                            <span class="amount"><?php echo $total ?></span>
+                                            <span class="amount"><?php echo number_price($total) ?></span>
                                         </td>
                                     </tr>
                                     <?php
                                 }
-                                
-                                // format total money
-                                $totalMoney = number_format($totalMoney, 0, ',', '.') . 'đ';
                                 ?>
                             </tbody>
                             <!-- Table Body End -->
@@ -160,7 +154,7 @@
                             <tfoot>
                                 <tr class="cart-subtotal">
                                     <th class="text-start ps-0">Tổng đơn hàng</th>
-                                    <td class="text-end pe-0"><strong><span class="amount"><?php echo $totalMoney ?></span></strong></td>
+                                    <td class="text-end pe-0"><strong><span class="amount"><?php echo number_price($totalMoney) ?></span></strong></td>
                                 </tr>
                             </tfoot>
                             <!-- Table Footer End -->

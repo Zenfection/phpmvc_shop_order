@@ -40,9 +40,9 @@
                                             </div>
                                             <div class="ps-3">
                                                 <h6 class="mb-0 font-weight-bold"><?php echo $name ?></h6>
-                                                <p class="mb-0 text-secondary"><?php echo $discount_price ?>$ / Mua <?php echo $amount ?> cái</p>
+                                                <p class="mb-0 text-secondary"><?php echo number_price($discount_price) ?> / Mua <?php echo $amount ?> cái</p>
                                             </div>
-                                            <p class="ms-auto mb-0 text-purple"><?php echo $total ?>$</p>
+                                            <p class="ms-auto mb-0 text-purple"><?php echo number_price($total) ?></p>
                                             <hr>
                                         </div>
                                     <?php
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="col-lg-8">
-                            <form action="backend/change_order_info.php?id=<?php echo $id_order ?>" method="post" id="changeOrderForm" novalidate>
+                            <form id="editOrderForm" novalidate>
                                 <div class="border border-3 p-4 rounded">
                                     <div class="row g-3">
                                         <?php
@@ -171,7 +171,7 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">
-                                                <button type="submit" id="<?php echo $id_order ?>" class="btn btn-primary" name="submit">Lưu Thay Đổi</button>
+                                                <button type="button" class="btn btn-primary" onclick="editOrder('<?php echo $order_detail['id_order'];?>')">Lưu Thay Đổi</button>
                                             </div>
                                         </div>
                                     </div>
@@ -214,74 +214,3 @@
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
     }
 </style>
-
-<!-- <script>
-    new PerfectScrollbar('.best-selling-products');
-    $(document).ready(() => {
-        $('#changeOrderForm').validate({
-            rules: {
-                name_customer: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 50
-                },
-                email_customer: {
-                    required: true,
-                    email: true,
-                },
-                phone_customer: {
-                    required: true,
-                    minlength: 10,
-                    maxlength: 11
-                },
-                city: {
-                    required: true,
-                    minlength: 3,
-                },
-                address: {
-                    required: true,
-                    minlength: 10,
-                },
-            },
-            messages: {
-                name_customer: {
-                    required: "Vui lòng nhập tên khách hàng",
-                    minlength: "Tên khách hàng phải có ít nhất 3 ký tự",
-                    maxlength: "Tên khách hàng phải có tối đa 50 ký tự"
-                },
-                email_customer: {
-                    required: "Vui lòng nhập email khách hàng",
-                    email: "Email không đúng định dạng"
-                },
-                phone_customer: {
-                    required: "Vui lòng nhập số điện thoại khách hàng",
-                    minlength: "Số điện thoại phải có ít nhất 10 số",
-                    maxlength: "Số điện thoại phải có tối đa 11 số"
-                },
-                city: {
-                    required: "Vui lòng nhập thành phố",
-                    minlength: "Thành phố phải có ít nhất 3 ký tự",
-                },
-                address: {
-                    required: "Vui lòng nhập địa chỉ giao hàng",
-                    minlength: "Địa chỉ giao hàng phải có ít nhất 10 ký tự",
-                }
-            },
-            errorElement: 'div',
-            errorPlacement: (error, element) => {
-                error.addClass('invalid-feedback');
-                if (element.prop('type') === 'checkbox') {
-                    error.insertAfter(element.siblings('label'));
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            highlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-invalid').removeClass('is-valid').show();
-            },
-            unhighlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-valid').removeClass('is-invalid').show();
-            }
-        })
-    });
-</script> -->

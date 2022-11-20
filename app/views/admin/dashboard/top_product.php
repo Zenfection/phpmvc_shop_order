@@ -27,6 +27,7 @@
                     $image = $value['image'];
                     $total_amount = (int)$value['total_amount'];
                     $discount_price = $price - ($price * $discount / 100);
+
                 ?>
                     <div class="d-flex align-items-center p-2">
                         <div class="product-img cursor-pointer" onclick="loadProductDetail(<?php echo $id?>)">
@@ -34,9 +35,9 @@
                         </div>
                         <div class="ps-3">
                             <h6 class="mb-0 font-weight-bold cursor-pointer" onclick="loadProductDetail(<?php echo $id?>)"><?php echo $name ?></h6>
-                            <p class="mb-0 text-secondary"><?php echo $discount_price ?>$ / mua <?php echo $total_amount ?> cái</p>
+                            <p class="mb-0 text-secondary"><?php echo number_price($discount_price) ?> / mua <?php echo $total_amount ?> cái</p>
                         </div>
-                        <p class="ms-auto mb-0 text-purple" style="font-weight: bold;"><?php echo $discount_price * $total_amount ?>$</p>
+                        <p class="ms-auto mb-0 text-purple" style="font-weight: bold;"><?php echo number_price($discount_price * $total_amount) ?></p>
                     </div>
                 <?php
                 }

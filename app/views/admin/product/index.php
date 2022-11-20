@@ -1,11 +1,11 @@
-<?php 
-    if (!empty($msg)) {
-        $type_msg = $msg['type'];
-        $icon_msg = $msg['icon'];
-        $pos_msg = $msg['position'];
-        $content_msg = $msg['content'];
-        echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
-    }
+<?php
+if (!empty($msg)) {
+    $type_msg = $msg['type'];
+    $icon_msg = $msg['icon'];
+    $pos_msg = $msg['position'];
+    $content_msg = $msg['content'];
+    echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
+}
 ?>
 <!--start page wrapper -->
 <div class="page-wrapper">
@@ -23,7 +23,7 @@
                                     <div class="row row-cols-lg-auto g-2">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="text" id="searchProduct" class="form-control ps-5" placeholder="Tìm Sản Phẩm..." value="<?php echo $keyword?>"> 
+                                                <input type="text" id="searchProduct" class="form-control ps-5" placeholder="Tìm Sản Phẩm..." value="<?php echo $keyword ?>">
                                                 <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
                                             </div>
                                         </div>
@@ -39,7 +39,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 product-grid">
             <?php
             $speed = 100;
-            foreach($product as $key => $value){
+            foreach ($product as $key => $value) {
                 $id = $value['id_product'];
                 $name = $value['name'];
                 $price = (float)$value['price'];
@@ -49,16 +49,16 @@
                 $discount = (int)$value['discount'];
                 $discount_price = $price - ($price * $discount / 100);
                 $ranking = (float)$value['ranking'];
-                
+
                 $speed += 100;
-                if($speed == 1000 + 200) $speed = 100; 
-                ?>
-                <div class="col" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="<?php echo $speed?>">
+                if ($speed == 1000 + 200) $speed = 100;
+            ?>
+                <div class="col" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="<?php echo $speed ?>">
                     <div class="card">
-                        <?php if($quantity == 0) 
+                        <?php if ($quantity == 0)
                             echo "<div class='ribbon bg-danger'>Đã bán hết</div>";
                         ?>
-                        <div class="cursor-pointer" onclick="loadProductDetail(<?php echo $id?>)">
+                        <div class="cursor-pointer" onclick="loadProductDetail(<?php echo $id ?>)">
                             <img src="<?php echo _CDN_IMAGE_300 . '/products/' . $image ?>" class="card-img-top p-20" style="padding: 1.5rem">
                         </div>
                         <?php
@@ -75,10 +75,12 @@
                                 <p class="mb-0 float-end fw-bold">
                                     <?php
                                     if ($discount > 0) {
-                                        echo "<span class='me-2 text-decoration-line-through text-secondary'>$price$</span>";
-                                    }
                                     ?>
-                                    <span class="text-primary"><?php echo $discount_price ?>$</span>
+                                        <span class='me-2 text-decoration-line-through text-secondary'> <?php echo number_price($price); ?> </span>
+                                        <?php
+                                    }
+                                        ?>
+                                        <span class="text-primary"><?php echo number_price($discount_price) ?></span>
                                 </p>
                             </div>
                             <div class="d-flex align-items-center mt-3 fs-6">
@@ -103,7 +105,7 @@
                         </div>
                     </div>
                 </div>
-                <?php
+            <?php
             }
             ?>
         </div>

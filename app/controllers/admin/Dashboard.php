@@ -1,6 +1,19 @@
 <?php
 
 class Dashboard extends Controller {
+    /**
+     * @param TRANG_DASHBOARD
+     * 
+     * * 1. index()                         => Trang dashboard
+     * 
+     * * 2. product($search = '')           => Trang quản lý sản phẩm
+     * ?        $id của sản phẩm
+     * 
+     * * 3. order($search = '')             => Trang quản lý đơn hàng
+     * ?        $search: từ khoá tìm kiếm
+    */
+
+    //! 1 ---------------------------------------- //
     public function index() {
         // Tổng đơn hàng, tổng số tiền hàng, tổng số sản phẩm, tổng số khách hàng
         $countOrder = $this->models('DashboardModel')->getSumOrder();
@@ -33,6 +46,8 @@ class Dashboard extends Controller {
         $this->render('layouts/admin_layout', $this->data);
     }
 
+
+    //! 2 ---------------------------------------- //
     public function product($search = ''){
         $keyword = urldecode($search);
 
@@ -54,15 +69,7 @@ class Dashboard extends Controller {
         $this->render('layouts/admin_layout', $this->data);
     }
 
-    public function add_product(){
-        $this->data['page_title'] = 'Thêm sản phẩm';
-        $this->data['content'] = 'admin/product/add';
-        $this->data['sub_content']['current_sidebar'] = 'product';
-        $this->data['sub_content']['msg'] = Session::flash('msg');
-        
-        $this->render('layouts/admin_layout', $this->data);
-    }
-
+    //! 3 ---------------------------------------- //
     public function order($search = ''){
         $keyword = urldecode($search);
 
