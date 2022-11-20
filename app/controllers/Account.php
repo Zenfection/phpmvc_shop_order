@@ -74,133 +74,64 @@ class Account extends Controller {
         $response->redirect('');
     }
 
-    public function validate_change_info(){
-        $request = new Request();
-        // set rule
-        $request->rules([
-            'fullname' => 'min:5|max:50',
-            'phone' => 'min:10|max:11',
-            'email' => 'email',
-            'address' => 'min:5|max:100'
-        ]);
-        $request->message([
-            'fullname.min' => 'Họ tên phải có ít nhất 5 ký tự',
-            'fullname.max' => 'Họ tên không được quá 50 ký tự',
-            'phone.min' => 'Số điện thoại phải có ít nhất 10 ký tự',
-            'phone.max' => 'Số điện thoại không được quá 11 ký tự',
-            'email.email' => 'Email không đúng định dạng',
-            'address.min' => 'Địa chỉ phải có ít nhất 5 ký tự',
-            'address.max' => 'Địa chỉ không được quá 100 ký tự'
-        ]);
-        // validate
-        $validate = $request->validate();
-        $check = $this->change_info($_POST['fullname'], $_POST['phone'], $_POST['email'], $_POST['address']);
-        if(!$validate || $check == 'false'){
-            Session::data('msg', [
-                'type' => 'error',
-                'icon' => 'fa-duotone fa-shield-xmark',
-                'position' => 'center',
-                'content' => 'Cập nhật thông tin không thành công'
-            ]);
-            $response = new Response();
-            $response->redirect('account');
-        } else {
-            if($check == 'nochange'){
-                Session::data('msg', [
-                    'type' => 'info',
-                    'icon' => 'fa-duotone fa-circle-info',
-                    'position' => 'center',
-                    'content' => 'Không có gì thay đổi'
-                ]);
-            } else if($check){
-                Session::data('msg', [
-                    'type' => 'success',
-                    'icon' => 'fa-duotone fa-check-double',
-                    'position' => 'center',
-                    'content' => 'Đã thay đổi thông tin thành công'
-                ]);
+    public function change_user_info(){
+        if(isset($_POST['fullname']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['address'])){
+            $fullname = $_POST['fullname'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            $address = $_POST['address'];
+
+            $newData = [
+                'fullname' => $fullname,
+                'email' => $email,
+                'phone' => $phone,
+                'address' => $address
+            ];
+
+            $user = Session::data('user');
+            $userInfo = $this->models('AccountModel')->getAccount($user);
+            $oldData = [
+                'fullname' => $userInfo['fullname'],
+                'email' => $userInfo['email'],
+                'phone' => $userInfo['phone'],
+                'address' => $userInfo['address']
+            ];
+
+            $data = $this->checkDiff($oldData, $newData);
+            if(!$data){
+                $this->fetchNoChange('Bạn có thay đổi gì thông tin cá nhân đâu');
+            } else {
+                $this->models('AccountModel')->changeInfo($user, $data);
+                $this->fetchSuccess('Đã thay đổi thông tin thành công');
             }
-            $response = new Response();
-            $response->redirect('account');
-        }
-    }
-    public function validate_change_password(){
-        $request = new Request();
-        // set rule
-        $request->rules([
-            'old_password' => 'min:6:callback_check_password',
-            'new_password' => 'min:6',
-            'confirm_password' => 'min:6'
-        ]);
-        $request->message([
-            'old_password.min' => 'Mật khẩu phải có ít nhất 6 ký tự',
-            'new_password.min' => 'Mật khẩu phải có ít nhất 6 ký tự',
-            'confirm_password.min' => 'Mật khẩu phải có ít nhất 6 ký tự',
-            'old_password.callback_check_password' => 'Mật khẩu cũ không đúng'
-        ]);
-        // validate
-        $validate = $request->validate();
-        $check = $this->change_password($_POST['old_password'], $_POST['new_password'], $_POST['confirm_password']);
-        if(!$validate || !$check){
-            Session::data('msg', [
-                'type' => 'error',
-                'icon' => 'fa-duotone fa-shield-xmark',
-                'position' => 'center',
-                'content' => 'Đổi mật khẩu không thành công'
-            ]);
-            $response = new Response();
-            $response->redirect('account');
         } else {
-            Session::data('msg', [
-                'type' => 'success',
-                'icon' => 'fa-duotone fa-key-skeleton',
-                'position' => 'center',
-                'content' => 'Đã thay đổi mật khẩu thành công'
-            ]);
-            $response = new Response();
-            $response->redirect('account');
+            $this->fetchServerError('Không nhận được dữ liệu');
         }
     }
 
-    private function change_info($fullname, $phone, $email, $address){
-        $user = Session::data('user');
-        $data = [
-            'fullname' => $fullname,
-            'phone' => $phone,
-            'email' => $email,
-            'address' => $address
-        ];
-        $dataChange = [];
-        foreach($data as $key => $value){
-            $checkChange = $this->db->table('tb_user')->where('username', '=', $user)->where($key, '=', $value)->get();
-            if(!$checkChange){
-                $dataChange[$key] = $value;
-            }
-        }
-        if(!empty($dataChange)){
-            $update = $this->db->table('tb_user')->where('username', '=', $user)->update($dataChange);
-            return ($update) ? 'true' : 'false';
-        } else {
-            return 'nochange';
-        }
-    }
+    public function change_user_password(){
+        if(isset($_POST['old_password']) && isset($_POST['new_password']) && isset($_POST['confirm_password'])){
+            $old_password = md5($_POST['old_password']);
+            $new_password = md5($_POST['new_password']);
+            $confirm_password = md5($_POST['confirm_password']);
 
-    private function check_password($password){
-        $user = Session::data('user');
-        $checkPassword = $this->db->table('tb_user')->where('username', '=', $user)->where('password', '=', md5($password))->get();
-        if(!$checkPassword){
-            return false;
+            if($new_password != $confirm_password){
+                $this->fetchError('Mật khẩu mới không khớp');
+            } else {
+                $user = Session::data('user');
+                $userInfo = $this->models('AccountModel')->getAccount($user);
+                if($userInfo['password'] === $old_password){
+                    $data = [
+                        'password' => $new_password
+                    ];
+                    $this->models('AccountModel')->changePassword($user, $old_password, $data);
+                    $this->fetchSuccess('Đã thay đổi mật khẩu thành công');
+                } else {
+                    $this->fetchError('Mật khẩu cũ không đúng');
+                }
+            }
         } else {
-            return true;
+            $this->fetchServerError('Không nhận được dữ liệu');
         }
-    }
-    private function change_password($user){
-        $user = Session::data('user');
-        $data = [
-            'password' => md5($_POST['password'])
-        ];
-        $update = $this->db->table('tb_user')->where('username', '=', $user)->update($data);
-        return ($update) ? true : false;
     }
 }
-?>

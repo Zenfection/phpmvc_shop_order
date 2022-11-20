@@ -18,7 +18,7 @@ if (!empty($msg)) {
                         <h2 class="title m-b-10">Đăng nhập</h2>
                     </div>
                     <!-- Form Action  -->
-                    <form method="post" action="/login/validate" id="loginForm" class="has-validate">
+                    <form id="loginForm" novalidate>
                         <div class="single-input-item m-b-10">
                             <label for="description" class="form-label">Tài Khoản</label>
                             <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?php echo oldValue('username')?>">
@@ -34,14 +34,6 @@ if (!empty($msg)) {
                             </div>
                         </div>
                     </form>
-                    <?php echo form_error('username', 
-                        '<div class="alert alert-danger d-flex align-items-center">
-                        <i class="fa-duotone fa-xmark fa-2xl bi flex-shrink-0 me-2"></i>', '</div>')?>
-                    <?php echo form_error('password', 
-                        '<div class="alert alert-danger d-flex align-items-center">
-                        <i class="fa-duotone fa-xmark fa-2xl bi flex-shrink-0 me-2"></i>', 
-                        '</div>')?>
-                    
                     <div class="register">
                         <a class="cursor-pointer" id="register" onclick="loadContent('register')">Tạo tài khoản</a>
                     </div>

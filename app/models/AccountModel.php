@@ -26,11 +26,14 @@ class AccountModel extends Model{
 *   *    public function cancelOrder($user, $id)    => hủy đơn hàng
 *       ? $username: tên tài khoản
 *       ? $id: id của đơn hàng
+* 
+* //* 3. changeInfo($user, $data)                   => thay đổi thông tin tài khoản
+*   *    changePassword($user, $pass, $data)               => thay đổi mật khẩu
 */
 
     //! 1 ---------------------------------------- //
     public function getAccount($user){
-        $data = $this->db->table($this->__user)->where('username', '=', $user)->get();
+        $data = $this->db->table($this->__user)->where('username', '=', $user)->first();
         return $data;
     }
 
@@ -54,5 +57,16 @@ class AccountModel extends Model{
         $data = $this->db->table($this->__order)->where('id_order', '=', $id)->where('username', '=',$user)->update(['status' => 'canceled']);
         return $data;
     }
+
+    //! 3 ---------------------------------------- //
+    public function changeInfo($user, $data){
+        $data = $this->db->table($this->__user)->where('username', '=', $user)->update($data);
+        return $data;
+    }
+    public function changePassword($user,$pass, $data){
+        $data = $this->db->table($this->__user)->where('username', '=', $user)->where('password', '=', $pass)->update($data);
+        return $data;
+    }
+
 }
 ?>

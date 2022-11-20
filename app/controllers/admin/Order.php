@@ -102,18 +102,5 @@ class Order extends Controller {
             }
         }
     }
-
-    private function checkDiff($oldData, $newData){
-        $diff = [];
-        foreach($oldData as $key => $value){
-            if($value != $newData[$key]){
-                $diff[$key] = $newData[$key];
-            }
-        }
-        if(count($diff) == 0){
-            return false;
-        }
-        return $diff;
-    }
 }
 ?>

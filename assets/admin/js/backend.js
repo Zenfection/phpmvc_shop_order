@@ -7,6 +7,7 @@
     * 1. nofity(type, icon, position, msg): Thông báo
     * 2. checkText(content, text, min, max): Kiểm tra độ dài của text
     * 3. checkNumber(content, number, min, max): Kiểm tra giá trị của number
+    * 4. checkEmail(content, text): Kiểm tra định dạng email
 
     !----FUNCTION CHÍNH-----
     * 1. editProduct(id): Sửa sản phẩm

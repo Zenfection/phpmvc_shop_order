@@ -1,16 +1,93 @@
-// *Sign in
+/*
+    Author: Zenfection
+    Created: 2021-07-10 10:00:00
+    Description: Xử lý các Form trong SHOP, fetch API
+
+    !----FUNCTION BỔ TRỢ-----
+    * 1. checkText(content, text, min, max): Kiểm tra độ dài của text
+    * 2. checkNumber(content, number, min, max): Kiểm tra giá trị của number
+    * 3. checkEmail(content, text): Kiểm tra định dạng email
+
+    !----FUNCTION CHÍNH-----
+    * 1. loginAccout(): Xử lý đăng nhập
+    * 2. callRegister(): Xử lý đăng ký
+    * 3. callChangeInfo(): Xử lý thay đổi thông tin
+    * 4. callChangePassword(): Xử lý thay đổi mật khẩu
+*/
+
+function checkText(content, text, min, max) {
+    if (text.length < min) {
+        notify('error', 'fa-duotone fa-input-text', 'center top', content + ' phải có ít nhất ' + min + ' ký tự');
+        return false;
+    } else if (text.length > max) {
+        notify('error', 'fa-duotone fa-input-text', 'center top', content + ' phải có nhiều nhất ' + max + ' ký tự');
+        return false;
+    }
+    return true;
+}
+
+function checkNumber(content, number, min, max) {
+    if (number < min) {
+        notify('error', 'fa-duotone fa-input-numeric', 'center top', content + 'phải lớn hơn ' + min);
+        return false;
+    } else if (number > max) {
+        notify('error', 'fa-duotone fa-input-numeric', 'center top', content + 'phải nhỏ hơn ' + max);
+        return false;
+    }
+    return true;
+}
+
+function checkEmail(content, text) {
+    let regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    if (!regex.test(text)) {
+        notify('error', 'fa-duotone fa-input-text', 'center top', content + ' không đúng định dạng');
+        return false;
+    }
+    return true;
+}
+
 function loginAccount() {
+    //* Lấy dữ liệu từ form
     let user = document.querySelector('#loginForm input[id=username]').value;
     let pass = document.querySelector('#loginForm input[id=password').value;
 
-    if (user == '' || user === undefined || pass == '' || pass === undefined) {
+    //* Kiểm tra dữ liệu
+    if (user == '' || pass == '') {
         notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập tài khoản hoặc mật khẩu');
         return;
     }
-    //fetch post method
-    document.querySelector('#loginForm button[type=button]').removeAttribute('onclick');
-    document.querySelector('#loginForm button[type=button]').setAttribute('type', 'submit').click();
-};
+    if(!checkText('Tài khoản', user, 4, 32)) return;
+    if(!checkText('Mật khẩu', pass, 6, 32)) return;
+
+    //* Tạo data post
+    var data = new FormData();
+    data.append('username', user);
+    data.append('password', pass);
+
+    //* Fetch post
+    fetch('/login/validate', {
+        method: 'POST',
+        body: data
+    })
+    .then(res => res.text())
+    .then(data => {
+        try{
+            data = JSON.parse(data);
+            msg = data['msg'];
+            notify(msg['type'], msg['icon'], msg['position'], msg['content']);
+            if(data.status == 'success'){
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 2000);
+            } 
+        } catch (err) {
+            notify('error', 'fa-duotone fa-server', 'center top', "API Server không nhận dữ liệu");
+        }
+    })
+    .catch(err => {
+        notify('error', 'fa-duotone fa-server', 'center top', err);
+    })
+}
 
 $(document).on('keypress', '#loginForm', function (e) {
     if (e.which == 13) {
@@ -44,16 +121,50 @@ $(document).on('keypress', '#registerForm', function (e) {
 
 // *Change Info
 var callChangeInfo = function () {
+    //* Lấy dữ liệu
     let fullname = document.querySelector('#changeInfoForm input[id=fullname]').value;
     let phone = document.querySelector('#changeInfoForm input[id=phone]').value;
     let email = document.querySelector('#changeInfoForm input[id=email]').value;
+    let address = document.querySelector('#changeInfoForm input[id=address]').value;
 
-    if (fullname == '' || fullname === undefined || phone == '' || phone === undefined || email == '' || email === undefined) {
+    //* Kiểm tra dữ liệu
+    if (fullname == ''  || phone == '' || email == '') {
         notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
         return;
     }
-    document.querySelector('#changeInfoForm button[type=button]').setAttribute('type', 'submit').click();
+    if(!checkText('Họ tên', fullname, 4, 32)) return;
+    if(!checkText('Số điện thoại', phone, 10, 11)) return;
+    if(!checkEmail('Email', email)) return;
+    if(!checkText('Địa chỉ', address, 4, 255)) return;
+
+
+    //* Tạo data post
+    var data = new FormData();
+    data.append('fullname', fullname);
+    data.append('phone', phone);
+    data.append('email', email);
+    data.append('address', address);
+
+    //* Fetch post
+    fetch('/account/change_user_info', {
+        method: 'POST',
+        body: data
+    })
+    .then(res => res.text())
+    .then(data => {
+        try{
+            data = JSON.parse(data);
+            msg = data['msg'];
+            notify(msg['type'], msg['icon'], msg['position'], msg['content']);
+        } catch (err) {
+            notify('error', 'fa-duotone fa-server', 'center top', "API Server không nhận dữ liệu");
+        }
+    })
+    .catch(err => {
+        notify('error', 'fa-duotone fa-server', 'center top', err);
+    })
 }
+
 $(document).on('click', '#changeInfoForm button', function () {
     callChangeInfo();
 })
@@ -65,21 +176,49 @@ $(document).on('keypress', '#changeInfoForm', function (e) {
 
 // *Change Password
 var callChangePass = function () {
+    //* Lấy dữ liệu
     let current_pwd = document.querySelector('#changePassForm input[id=current_pwd]').value;
     let new_pwd = document.querySelector('#changePassForm input[id=new_pwd]').value;
     let confirm_pwd = document.querySelector('#changePassForm input[id=confirm_pwd]').value;
 
-    if (current_pwd == '' || current_pwd === undefined || new_pwd == '' || new_pwd === undefined || confirm_pwd == '' || confirm_pwd === undefined) {
+    //* Kiểm tra dữ liệu
+    if (current_pwd == '' || new_pwd == '' || confirm_pwd == '') {
         notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
         return;
     }
     if (new_pwd != confirm_pwd) {
         notify('error', 'fa-duotone fa-badge-check', 'center', 'Mật Khẩu Xác Nhận Không Chính Xác');
     }
+    if(!checkText('Mật khẩu cũ', current_pwd, 6, 255)) return;
+    if(!checkText('Mật khẩu mới', new_pwd, 6, 255)) return;
+    if(!checkText('Xác nhận mật khẩu', confirm_pwd, 6, 255)) return;
 
-    document.querySelector('#changePassForm button[type=button]').setAttribute('type', 'submit').click();
+    //* Tạo data post
+    var data = new FormData();
+    data.append('old_password', current_pwd);
+    data.append('new_password', new_pwd);
+    data.append('confirm_password', confirm_pwd);
+
+    //* Fetch post
+    fetch('/account/change_user_password', {
+        method: 'POST',
+        body: data
+    })
+    .then(res => res.text())
+    .then(data => {
+        try{
+            data = JSON.parse(data);
+            msg = data['msg'];
+            notify(msg['type'], msg['icon'], msg['position'], msg['content']);
+        } catch (err) {
+            notify('error', 'fa-duotone fa-server', 'center top', "API Server không nhận dữ liệu");
+        }
+    })
+    .catch(err => {
+        notify('error', 'fa-duotone fa-server', 'center top', err);
+    })
 }
-$(document).on('click', '#changePassForm button[name=submit]', function () {
+$(document).on('click', '#changePassForm button', function () {
     callChangePass();
 })
 $(document).on('keypress', '#changePassForm', function (e) {
