@@ -17,25 +17,51 @@ class CartModel extends Model
     {
         return '*';
     }
+    
+    /** @param XỬ_LÝ_VỀ_TRANG_CART
+     *
+     * //* 1. getCartUser($user)                    => lấy thông tin giỏ hàng của user
+     *   * 2. countCart($user)                      => đếm số lượng sản phẩm trong giỏ hàng
+     *   ?      - $user: tên user
+     * //* 3. deleteProductCart($user, $id)         => xóa sản phẩm khỏi giỏ hàng
+     *   *    updateProductCart($user, $id, $amount)   => cập nhật số lượng sản phẩm trong giỏ hàng
+     *   *    addProductCart($user, $id, $qty)      => thêm sản phẩm vào giỏ hàng
+     *   *    clearCart($user)                      => xoá toàn bộ giỏ hàng
+     *   ?      - $user: tên user
+     *   ?      - $id: id sản phẩm
+     * 
+     * //* 4. countAmountProductCart($user, $id)   => đếm số lượng sản phẩm trong giỏ hàng
+     *   *    totalMoneyCartUser($user)            => tính tổng tiền giỏ hàng của user
+     *   *    getProductDetailCart($id)            => lấy thông tin chi tiết sản phẩm trong giỏ hàng
+     * 
+     */
 
+    //! 1 ---------------------------------------- //
     public function getCartUser($user)
     {
-        $data = $this->db->table('tb_cart')->where('username', '=', $user)->get();
+        $data = $this->db->table($this->__cart)->where('username', '=', $user)->get();
+        return $data;
+    }
+    public function countCart($user)
+    {
+        $data = $this->db->table($this->__cart)->where('username', '=', $user)->count();
         return $data;
     }
 
-    public function deteleProductCart($user, $id)
+    //! 2 ---------------------------------------- //
+    public function deleteProductCart($user, $id)
     {
-        $data = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->delete();
+        $data = $this->db->table($this->__cart)->where('username', '=', $user)->where('id_product', '=', $id)->delete();
         return $data;
     }
-    public function updateProductCart($user, $id, $amount){
-        $data = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->update(['amount' => $amount]);
+    public function updateProductCart($user, $id, $amount)
+    {
+        $data = $this->db->table($this->__cart)->where('username', '=', $user)->where('id_product', '=', $id)->update(['amount' => $amount]);
         return $data;
     }
     public function addProductCart($user, $id, $qty)
     {
-        $checkExist = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->first();
+        $checkExist = $this->db->table($this->__cart)->where('username', '=', $user)->where('id_product', '=', $id)->first();
         $productInfo = $this->db->table('tb_product')->where('id_product', '=', $id)->first();
 
         if (!empty($checkExist)) {
@@ -43,7 +69,7 @@ class CartModel extends Model
             $data = [
                 'amount' => $qty,
             ];
-            $update = $this->db->table('tb_cart')->where('username', '=', $user)->where('id_product', '=', $id)->update($data);
+            $update = $this->db->table($this->__cart)->where('username', '=', $user)->where('id_product', '=', $id)->update($data);
 
             $discount_price = $productInfo['price'] - ($productInfo['price'] * $productInfo['discount'] / 100);
             return [
@@ -57,7 +83,7 @@ class CartModel extends Model
                 'id_product' => $id,
                 'amount' => $qty
             ];
-            $data = $this->db->table('tb_cart')->insert($data);
+            $data = $this->db->table($this->__cart)->insert($data);
 
             $price = $productInfo['price'];
             $discount = $productInfo['discount'];
@@ -76,18 +102,16 @@ class CartModel extends Model
     }
     public function clearCart($user)
     {
-        $data = $this->db->table('tb_cart')->where('username', '=', $user)->delete();
+        $data = $this->db->table($this->__cart)->where('username', '=', $user)->delete();
         return $data;
     }
-    public function countCart($user)
+    
+    //! 3 ---------------------------------------- //
+    public function countAmountProductCart($user, $id)
     {
-        $data = $this->db->table('tb_cart')->where('username', '=', $user)->count();
-        return $data;
-    }
-    public function countAmountProductCart($user, $id){
         $sql = "SELECT amount FROM `tb_cart` WHERE username = '$user' AND id_product = '$id'";
         $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        if(!empty($data)){
+        if (!empty($data)) {
             return $data['amount'];
         }
         return 0;
@@ -108,7 +132,8 @@ class CartModel extends Model
         }
         return $total;
     }
-    public function getProductDetailCart($id){
+    public function getProductDetailCart($id)
+    {
         $sql = "SELECT * FROM `tb_cart` as c, `tb_product` as p
                 WHERE c.id_product = p.id_product
                 AND c.id_product = '$id'";

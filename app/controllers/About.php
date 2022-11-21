@@ -13,7 +13,7 @@ class About extends Controller{
     }
 
     public function content(){
-        $title = 'Giới thiệu';
+        $page_tittle = 'Giới thiệu';
 
         $contentView = file_get_contents(_WEB_ROOT . '/app/views/' . 'about' . '.php');
         echo $contentView;

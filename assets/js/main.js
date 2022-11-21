@@ -94,10 +94,6 @@ function notify(type, icon, position, msg) {
     $('#ship-box-info').slideToggle(1000);
   });
 
-  $(document).on('click', '#incQtyProduct', function () {
-    let id = $(this).parents('tr').attr('id').replace('view_cart_product', '');
-    addProduct(parseInt(id), 1);
-  });
   /*----------------------------------------
     Responsive Mobile Menu
   ------------------------------------------*/

@@ -81,9 +81,9 @@ class Order extends Controller {
         } else {
             $update = $this->models('OrderModel')->updateOrder($id, $data);
             if($update){
-                $this->fetchSuccess('Thay đổi thông tin đơn ' + $id + ' thành công');
+                $this->fetchSuccess('Thay đổi thông tin thành công');
             } else {
-                $this->fetchError('Thay đổi thông tin đơn ' + $id + ' thất bại');
+                $this->fetchError('Thay đổi thông tin đơn thất bại');
             }
         }
     }

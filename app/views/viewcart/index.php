@@ -51,9 +51,9 @@
                                     <td class="pro-quantity">
                                         <div class="quantity">
                                             <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="<?php echo $quantity ?>" type="text">
-                                                <div class="dec qtybutton" id="decQtyProduct">-</div>
-                                                <div class="inc qtybutton" id="incQtyProduct">+</div>
+                                                <input class="cart-plus-minus-box" value="<?php echo $quantity ?>" type="text" disabled>
+                                                <div class="dec qtybutton" id="decQtyProduct" onclick="deleteProductCart('<?php echo $id?>', 1)">-</div>
+                                                <div class="inc qtybutton" id="incQtyProduct" onclick="addProductCart('<?php echo $id?>', 1)">+</div>
                                             </div>
                                         </div>
                                     </td>

@@ -3,7 +3,16 @@ function addProductCart(id, qty) {
     if (qty == "qty") {
         qty = parseInt(document.querySelector('.cart-plus-minus-box').value);
     }
-    fetch('/cart/add/' + id + '/' + qty)
+
+    //* Tạo dữ liệu post
+    let data = new FormData();
+    data.append('id', id);
+    data.append('qty', qty);
+
+    fetch('/cart/add_product', {
+            body: data,
+            method: 'POST'
+        })
         .then((response) => response.text())
         .then((data) => {
             try {
@@ -12,9 +21,6 @@ function addProductCart(id, qty) {
                     insert = false;
                     document.querySelector('#quantity' + id + " > strong").textContent = data.total_qty;
                     document.querySelector('#totalmoney').textContent = data.total_money;
-                } else if(data.status == 'soldout'){
-                    insert = false;
-                    alert('Số lượng sản phẩm trong kho không đủ!');
                 }
             } catch (e) {}
 
@@ -36,11 +42,25 @@ function addProductCart(id, qty) {
                 $("#product_id" + id).hide().fadeIn();
             }
         })
+        .catch((err) => {
+            notify('error', 'fa-duotone fa-server', 'center top', err);
+        });
 }
 
+function deleteProductCart(id, qty = 'all') {
+    //* Tạo dữ liệu post
+    let data = new FormData();
+    if (qty == 'all') {
+        data.append('id', id);
+    } else {
+        data.append('id', id);
+        data.append('qty', qty);
+    }
 
-function deleteProductCart(id) {
-    fetch('/cart/delete/' + id)
+    fetch('/cart/delete_product/', {
+            body: data,
+            method: 'POST'
+        })
         .then((response) => response.text())
         .then((data) => {
             try {
@@ -59,9 +79,21 @@ function deleteProductCart(id) {
                             $(this).remove();
                         })
                     }
+                } else if(data.status == 'update'){
+                    document.querySelector('#totalmoney').textContent = data.total_money;
+                    document.querySelector('#quantity' + id + " > strong").textContent = data.total_qty;
+                    if (window.location.pathname == "/viewcart") {
+                        document.querySelector('#total-money').textContent = data.total_money;
+                        document.querySelector('#total-bill').textContent = data.total_money;
+                    }
                 }
-            } catch (e) {}
+            } catch (e) {
+                notify('error', 'fa-duotone fa-server', 'center top', e);
+            }
         })
+        .catch((err) => {
+            notify('error', 'fa-duotone fa-server', 'center top', err);
+        });
 }
 
 function clearProductCart() {
