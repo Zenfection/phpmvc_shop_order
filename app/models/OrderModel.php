@@ -28,6 +28,7 @@ class OrderModel extends Model{
      *          ? $id_product: id của sản phẩm
      * 
      *  * 3. updateOrder($id_order)                 => cập nhật order
+     * 
     */
 
     //! 1 ---------------------------------------- //

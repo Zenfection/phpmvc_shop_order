@@ -79,28 +79,13 @@ class Product extends Controller {
 
         $data = $this->checkDiff($oldData, $newData);
         if(!$data){
-            echo json_encode(['status' => 'no_change', 'msg' => [
-                'type' => 'info',
-                'icon' => 'fa-duotone fa-pen-slash',
-                'position' => 'center top',
-                'content' => 'Không có gì thay đổi' 
-            ]]);
+            $this->fetchNoChange('Không có gì thay đổi');
         } else {
             $update = $this->models('ProductModel')->updateProduct($id, $data);
             if($update){
-                echo json_encode(['status' => 'success', 'msg' => [
-                    'type' => 'success',
-                    'icon' => 'fa-duotone fa-circle-check',
-                    'position' => 'center top',
-                    'content' => 'Thay đổi thông tin sản phẩm thành công' 
-                ]]);
+                $this->fetchSuccess('Sửa thông tin' + $name + 'thành công');
             } else {
-                echo json_encode(['status' => 'error', 'msg' => [
-                    'type' => 'error',
-                    'icon' => 'fa-duotone fa-circle-xmark',
-                    'position' => 'center top',
-                    'content' => 'Thay đổi thông tin sản phẩm thất bại' 
-                ]]);
+                $this->fetchError('Sửa thông tin' + $name + 'thất bại');
             }
         }
     }

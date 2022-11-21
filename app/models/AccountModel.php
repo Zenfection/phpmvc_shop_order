@@ -19,6 +19,7 @@ class AccountModel extends Model{
 /** @param TRẢ_VỀ_CÁC_DANH_SÁCH_SẢN_PHẨM
 *
 * //* 1. getAccount($username)                      =>  trả về thông tin tài khoản
+* *      getAllUser()                               =>  trả về tất cả thông tin tài khoản
 *       ? $username: tên tài khoản
 *
 * //* 2. getOrder($username)                        => trả về danh sách đơn hàng
@@ -28,12 +29,18 @@ class AccountModel extends Model{
 *       ? $id: id của đơn hàng
 * 
 * //* 3. changeInfo($user, $data)                   => thay đổi thông tin tài khoản
-*   *    changePassword($user, $pass, $data)               => thay đổi mật khẩu
+*   *    changePassword($user, $pass, $data)        => thay đổi mật khẩu
+*
+* //* 4. addUser($data)                            => thêm tài khoản    
 */
 
     //! 1 ---------------------------------------- //
     public function getAccount($user){
         $data = $this->db->table($this->__user)->where('username', '=', $user)->first();
+        return $data;
+    }
+    public function getAllUser(){
+        $data = $this->db->table($this->__user)->get();
         return $data;
     }
 
@@ -68,5 +75,10 @@ class AccountModel extends Model{
         return $data;
     }
 
+    //! 4 ---------------------------------------- //
+    public function addUser($data){
+        $data = $this->db->table($this->__user)->insert($data);
+        return $data;
+    }
 }
 ?>

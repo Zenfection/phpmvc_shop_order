@@ -7,6 +7,7 @@
     * 1. checkText(content, text, min, max): Kiểm tra độ dài của text
     * 2. checkNumber(content, number, min, max): Kiểm tra giá trị của number
     * 3. checkEmail(content, text): Kiểm tra định dạng email
+    * 4. checkData(array): Kiểm tra dữ liệu có bị thiếu không
 
     !----FUNCTION CHÍNH-----
     * 1. loginAccout(): Xử lý đăng nhập
@@ -46,47 +47,53 @@ function checkEmail(content, text) {
     return true;
 }
 
+function checkData(array) {
+    $check = true;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == '' || array[i] === undefined) {
+            $check = false;
+            break;
+        }
+    }
+    if (!$check) notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
+    return $check;
+}
+
+//! Login
 function loginAccount() {
-    //* Lấy dữ liệu từ form
     let user = document.querySelector('#loginForm input[id=username]').value;
     let pass = document.querySelector('#loginForm input[id=password').value;
 
-    //* Kiểm tra dữ liệu
-    if (user == '' || pass == '') {
-        notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập tài khoản hoặc mật khẩu');
-        return;
-    }
-    if(!checkText('Tài khoản', user, 4, 32)) return;
-    if(!checkText('Mật khẩu', pass, 6, 32)) return;
+    if (!checkData([user, pass])) return;
+    if (!checkText('Tài khoản', user, 4, 32)) return;
+    if (!checkText('Mật khẩu', pass, 6, 32)) return;
 
-    //* Tạo data post
     var data = new FormData();
     data.append('username', user);
     data.append('password', pass);
 
-    //* Fetch post
     fetch('/login/validate', {
-        method: 'POST',
-        body: data
-    })
-    .then(res => res.text())
-    .then(data => {
-        try{
-            data = JSON.parse(data);
-            msg = data['msg'];
-            notify(msg['type'], msg['icon'], msg['position'], msg['content']);
-            if(data.status == 'success'){
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 2000);
-            } 
-        } catch (err) {
-            notify('error', 'fa-duotone fa-server', 'center top', "API Server không nhận dữ liệu");
-        }
-    })
-    .catch(err => {
-        notify('error', 'fa-duotone fa-server', 'center top', err);
-    })
+            method: 'POST',
+            body: data
+        })
+        .then(res => res.text())
+        .then(data => {
+            try {
+                data = JSON.parse(data);
+                msg = data['msg'];
+                notify(msg['type'], msg['icon'], msg['position'], msg['content']);
+                if (data.status == 'success') {
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1000);
+                }
+            } catch (err) {
+                notify('error', 'fa-duotone fa-server', 'center top', "API Server không nhận dữ liệu");
+            }
+        })
+        .catch(err => {
+            notify('error', 'fa-duotone fa-server', 'center top', err);
+        })
 }
 
 $(document).on('keypress', '#loginForm', function (e) {
@@ -96,19 +103,47 @@ $(document).on('keypress', '#loginForm', function (e) {
 });
 
 
-// *Register
+//! Register
 var callRegister = function () {
     let fullname = document.querySelector('#registerForm input[id=fullname]').value;
     let username = document.querySelector('#registerForm input[id=username]').value;
     let email = document.querySelector('#registerForm input[id=email]').value;
     let password = document.querySelector('#registerForm input[id=password]').value;
 
-    if (fullname == '' || fullname === undefined || username == '' || username === undefined || email == '' || email === undefined || password == '' || password === undefined) {
-        notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
-        return;
-    }
+    if (!checkData([fullname, username, email, password])) return;
+    if (!checkText('Họ và tên', fullname, 4, 255)) return;
+    if (!checkText('Tài khoản', username, 4, 255)) return;
+    if (!checkEmail('Email', email)) return;
+    if (!checkText('Mật khẩu', password, 6, 255)) return;
 
-    document.querySelector('#registerForm button[type=button]').setAttribute('type', 'submit').click();
+    var data = new FormData();
+    data.append('fullname', fullname);
+    data.append('username', username);
+    data.append('email', email);
+    data.append('password', password);
+
+    fetch('/register/validate', {
+            method: 'POST',
+            body: data
+        })
+        .then(res => res.text())
+        .then(data => {
+            try {
+                data = JSON.parse(data);
+                msg = data['msg'];
+                notify(msg['type'], msg['icon'], msg['position'], msg['content']);
+                if (data.status == 'success') {
+                    setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 1000);
+                }
+            } catch (err) {
+                notify('error', 'fa-duotone fa-server', 'center top', "API Server không nhận dữ liệu");
+            }
+        })
+        .catch(err => {
+            notify('error', 'fa-duotone fa-server', 'center top', err);
+        })
 }
 $(document).on('click', '#registerForm button', function () {
     callRegister();
@@ -119,7 +154,7 @@ $(document).on('keypress', '#registerForm', function (e) {
     }
 })
 
-// *Change Info
+//! Change User Info
 var callChangeInfo = function () {
     //* Lấy dữ liệu
     let fullname = document.querySelector('#changeInfoForm input[id=fullname]').value;
@@ -128,14 +163,11 @@ var callChangeInfo = function () {
     let address = document.querySelector('#changeInfoForm input[id=address]').value;
 
     //* Kiểm tra dữ liệu
-    if (fullname == ''  || phone == '' || email == '') {
-        notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
-        return;
-    }
-    if(!checkText('Họ tên', fullname, 4, 32)) return;
-    if(!checkText('Số điện thoại', phone, 10, 11)) return;
-    if(!checkEmail('Email', email)) return;
-    if(!checkText('Địa chỉ', address, 4, 255)) return;
+    if (!checkData([fullname, phone, email, address])) return;
+    if (!checkText('Họ tên', fullname, 4, 32)) return;
+    if (!checkText('Số điện thoại', phone, 10, 11)) return;
+    if (!checkEmail('Email', email)) return;
+    if (!checkText('Địa chỉ', address, 4, 255)) return;
 
 
     //* Tạo data post
@@ -147,24 +179,23 @@ var callChangeInfo = function () {
 
     //* Fetch post
     fetch('/account/change_user_info', {
-        method: 'POST',
-        body: data
-    })
-    .then(res => res.text())
-    .then(data => {
-        try{
-            data = JSON.parse(data);
-            msg = data['msg'];
-            notify(msg['type'], msg['icon'], msg['position'], msg['content']);
-        } catch (err) {
-            notify('error', 'fa-duotone fa-server', 'center top', "API Server không nhận dữ liệu");
-        }
-    })
-    .catch(err => {
-        notify('error', 'fa-duotone fa-server', 'center top', err);
-    })
+            method: 'POST',
+            body: data
+        })
+        .then(res => res.text())
+        .then(data => {
+            try {
+                data = JSON.parse(data);
+                msg = data['msg'];
+                notify(msg['type'], msg['icon'], msg['position'], msg['content']);
+            } catch (err) {
+                notify('error', 'fa-duotone fa-server', 'center top', "API Server không nhận dữ liệu");
+            }
+        })
+        .catch(err => {
+            notify('error', 'fa-duotone fa-server', 'center top', err);
+        })
 }
-
 $(document).on('click', '#changeInfoForm button', function () {
     callChangeInfo();
 })
@@ -174,7 +205,7 @@ $(document).on('keypress', '#changeInfoForm', function (e) {
     }
 })
 
-// *Change Password
+//! Change Password
 var callChangePass = function () {
     //* Lấy dữ liệu
     let current_pwd = document.querySelector('#changePassForm input[id=current_pwd]').value;
@@ -182,41 +213,39 @@ var callChangePass = function () {
     let confirm_pwd = document.querySelector('#changePassForm input[id=confirm_pwd]').value;
 
     //* Kiểm tra dữ liệu
-    if (current_pwd == '' || new_pwd == '' || confirm_pwd == '') {
-        notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
-        return;
-    }
+    if (!checkData([current_pwd, new_pwd, confirm_pwd])) return;
     if (new_pwd != confirm_pwd) {
         notify('error', 'fa-duotone fa-badge-check', 'center', 'Mật Khẩu Xác Nhận Không Chính Xác');
+        return;
     }
-    if(!checkText('Mật khẩu cũ', current_pwd, 6, 255)) return;
-    if(!checkText('Mật khẩu mới', new_pwd, 6, 255)) return;
-    if(!checkText('Xác nhận mật khẩu', confirm_pwd, 6, 255)) return;
+    if (!checkText('Mật khẩu cũ', current_pwd, 6, 255)) return;
+    if (!checkText('Mật khẩu mới', new_pwd, 6, 255)) return;
+    if (!checkText('Xác nhận mật khẩu', confirm_pwd, 6, 255)) return;
 
     //* Tạo data post
     var data = new FormData();
-    data.append('old_password', current_pwd);
-    data.append('new_password', new_pwd);
-    data.append('confirm_password', confirm_pwd);
+    data.append('current_pwd', current_pwd);
+    data.append('new_pwd', new_pwd);
+    data.append('confirm_pwd', confirm_pwd);
 
     //* Fetch post
     fetch('/account/change_user_password', {
-        method: 'POST',
-        body: data
-    })
-    .then(res => res.text())
-    .then(data => {
-        try{
-            data = JSON.parse(data);
-            msg = data['msg'];
-            notify(msg['type'], msg['icon'], msg['position'], msg['content']);
-        } catch (err) {
-            notify('error', 'fa-duotone fa-server', 'center top', "API Server không nhận dữ liệu");
-        }
-    })
-    .catch(err => {
-        notify('error', 'fa-duotone fa-server', 'center top', err);
-    })
+            method: 'POST',
+            body: data
+        })
+        .then(res => res.text())
+        .then(data => {
+            try {
+                data = JSON.parse(data);
+                msg = data['msg'];
+                notify(msg['type'], msg['icon'], msg['position'], msg['content']);
+            } catch (err) {
+                notify('error', 'fa-duotone fa-server', 'center top', "API Server không nhận dữ liệu");
+            }
+        })
+        .catch(err => {
+            notify('error', 'fa-duotone fa-server', 'center top', err);
+        })
 }
 $(document).on('click', '#changePassForm button', function () {
     callChangePass();
@@ -229,6 +258,7 @@ $(document).on('keypress', '#changePassForm', function (e) {
 
 //* Checkout Form
 var callCheckout = function () {
+    //* Lấy dữ liệu
     let fullname = document.querySelector('#checkoutForm input[id=fullname]').value;
     let phone = document.querySelector('#checkoutForm input[id=phone]').value;
     let address = document.querySelector('#checkoutForm input[id=address]').value;
@@ -238,12 +268,47 @@ var callCheckout = function () {
     let city = document.querySelector('select#city').nextSibling.querySelector('.current').textContent
     let ward = document.querySelector('select#ward').nextSibling.querySelector('.current').textContent
 
-    //console.log(fullname, phone, address, province, city, email);
-    if (fullname == '' || fullname === undefined || phone == '' || phone === undefined || address == '' || address === undefined || province == '' || province === undefined || city == '' || city === undefined || ward == '' || ward === undefined || email == '' || email === undefined) {
-        notify('warning', 'fa-duotone fa-pen-field', 'center', 'Bạn chưa nhập đầy đủ thông tin');
-        return;
-    }
-    document.querySelector('#checkoutForm button[type=button]').setAttribute('type', 'submit').click();
+    //* Kiểm tra dữ liệu
+    if (!checkData([fullname, phone, address, email])) return;
+    if (!checkText('Họ tên', fullname, 4, 255)) return;
+    if (!checkText('Số điện thoại', phone, 10, 11)) return;
+    if (!checkEmail('Email', email)) return;
+    if (!checkText('Địa chỉ', address, 4, 255)) return;
+
+    //* Tạo data post
+    var data = new FormData();
+    data.append('fullname', fullname);
+    data.append('phone', phone);
+    data.append('address', address);
+    data.append('email', email);
+    data.append('province', province);
+    data.append('city', city);
+    data.append('ward', ward);
+
+    //* Fetch post
+    fetch('/checkout/validate', {
+            method: 'POST',
+            body: data
+        })
+        .then(res => res.text())
+        .then(data => {
+            try {
+                data = JSON.parse(data);
+                msg = data['msg'];
+                notify(msg['type'], msg['icon'], msg['position'], msg['content']);
+                if (data['status'] == 'success') {
+                    let id_order = data['id_order'];
+                    setTimeout(() => {
+                        window.location.href = '/account/order/' + data['id_order'];
+                    }, 1000);
+                }
+            } catch (err) {
+                notify('error', 'fa-duotone fa-server', 'center top', "API Server không nhận dữ liệu");
+            }
+        })
+        .catch(err => {
+            notify('error', 'fa-duotone fa-server', 'center top', err);
+        })
 }
 
 $(document).on('click', '#checkoutForm button[type=button]', function () {

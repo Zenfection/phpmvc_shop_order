@@ -77,28 +77,13 @@ class Order extends Controller {
 
         $data = $this->checkDiff($oldData, $newData);
         if(!$data){
-            echo json_encode(['status' => 'no_change', 'msg' => [
-                'type' => 'info',
-                'icon' => 'fa-duotone fa-pen-slash',
-                'position' => 'center top',
-                'content' => 'Không có gì thay đổi' 
-            ]]);
+            $this->fetchNoChange('Không có gì thay đổi');
         } else {
             $update = $this->models('OrderModel')->updateOrder($id, $data);
             if($update){
-                echo json_encode(['status' => 'success', 'msg' => [
-                    'type' => 'success',
-                    'icon' => 'fa-duotone fa-circle-check',
-                    'position' => 'center top',
-                    'content' => 'Thay đổi thông tin đơn hàng thành công' 
-                ]]);
+                $this->fetchSuccess('Thay đổi thông tin đơn ' + $id + ' thành công');
             } else {
-                echo json_encode(['status' => 'error', 'msg' => [
-                    'type' => 'error',
-                    'icon' => 'fa-duotone fa-circle-xmark',
-                    'position' => 'center top',
-                    'content' => 'Thay đổi thông tin đơn hàng thất bại' 
-                ]]);
+                $this->fetchError('Thay đổi thông tin đơn ' + $id + ' thất bại');
             }
         }
     }

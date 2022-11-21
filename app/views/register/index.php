@@ -22,61 +22,28 @@ if (!empty($msg)) {
                         <!-- Register Title & Content End -->
 
                         <!-- Form Action Start -->
-                        <?php
-                        HtmlHelper::formOpen('post', '/register/validate', 'registerForm', '');
-                        HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">' . form_error('fullname', '<div class="alert-danger">', '</div>'),
-                            'text',
-                            'fullname',
-                            'from-control',
-                            'fullname', //? id  
-                            'Họ và tên',
-                            oldValue('fullname'),
-                            '</div>'
-                        );
-                        HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">' . form_error('email', '<div class="alert-danger">', '</div>'),
-                            'email',
-                            'email',
-                            'from-control',
-                            'email', //? id
-                            'Email',
-                            oldValue('email'),
-                            '</div>'
-                        );
-                        HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">' . form_error('username', '<div class="alert-danger">', '</div>'),
-                            'text',
-                            'username',
-                            'from-control',
-                            'username', //? id
-                            'Tên đăng nhập',
-                            oldValue('username'),
-                            '</div>'
-                        );
-                        HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">' . form_error('password', '<div class="alert-danger">', '</div>'),
-                            'password',
-                            'password',
-                            'from-control',
-                            'password', //? id
-                            'Mật khẩu',
-                            '', //? oldValue
-                            '</div>'
-                        );
-                        HtmlHelper::button(
-                            '<div class="single-input-item single-input-item m-b-15">
-                            <div class="login-reg-form-meta m-b-n15">',
-                            'button',
-                            'Đăng ký',
-                            'btn btn btn-gray-deep btn-hover-primary m-b-15',
-                            '</div></div>'
-                        );
-                        ?>
+                        <form id="registerForm" novalidate>
+                            <div class="single-input-item m-b-10">
+                                <input type="text" name="fullname" id="fullname" class="from-control" value="<?php oldValue('fullname') ?>" placeholder="Họ và Tên">
+                            </div>
+                            <div class="single-input-item m-b-10">
+                                <input type="email" name="email" id="email" class="form-control" value="<?php oldValue('email') ?>" placeholder="Email">
+                            </div>
+                            <div class="single-input-item m-b-10">
+                                <input type="text" name="username" id="username" class="form-control" value="<?php oldValue('username')?>" placeholder="Tài khoản">
+                            </div>
+                            <div class="single-input-item m-b-10">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Mật khẩu">
+                            </div>
+                            <div class="single-input-item single-input-item m-b-15">
+                            <div class="login-reg-form-meta m-b-n15">
+                                <button type="button" class="btn btn btn-gray-deep btn-hover-primary m-b-15">Đăng Ký</button>
+                            </div>
+                            </div>
+                        </form>
                         <div>
                             <a class="cursor-pointer hover-text-primary" onclick="loadContent('login')">Đăng Nhập</a>
                         </div>
-                        <?php HtmlHelper::formClose();?>
                         <!-- Form Action End -->
                     </div>
                 </div>

@@ -2,6 +2,19 @@
 
 class Api extends Controller
 {
+    /** @param API_RIÊNG_CHO_APP_MOBILE
+     *  
+     *  ! GET: 
+     *  * top_discount($amount): lấy top $amount sản phẩm giảm giá nhiều nhất
+     *  * top_ranking($amount): lấy top $amount sản phẩm được xem nhiều nhất
+     *  * category_product($category): lấy tất cả sản phẩm thuộc danh mục $category
+     * 
+     *  ! POST:
+     *  * 1. login(): đăng nhập
+     *  ?       success, failed, error
+     *  *    register(): đăng ký
+     *  ?       success, failed, error
+     */
 
     //* TỔNG HỢP GET */
     public function top_discount($amount = 8)
@@ -24,6 +37,23 @@ class Api extends Controller
         $response = new Response();
         $response->json(['status' => 'success', 'data' => $categoryProduct]);
     }
+    public function get_user()
+    {
+        $user = $this->models('AccountModel')->getAllUser();
+        $response = new Response();
+        $response->json(['status' => 'success', 'data' => $user]);
+    }
+    public function check_user_exist($user)
+    {
+        $data = $this->models('AccountModel')->getAccount($user);
+        if ($data) {
+            $response = new Response();
+            $response->json(['status' => 'exist', 'message' => 'Tài khoản đã tồn tại']);
+        } else {
+            $response = new Response();
+            $response->json(['status' => 'noexist', 'message' => 'Không tìm thấy tài khoản']);
+        }
+    }
 
 
     //* TỔNG HỢP POST*/
@@ -42,6 +72,40 @@ class Api extends Controller
             }
         } else {
             $response->json(['status' => 'error', 'message' => 'API không nhận được password']);
+        }
+    }
+
+    public function register()
+    {
+        $response = new Response();
+        if (isset($_POST['email']) && isset($_POST['fullname']) && isset($_POST['username']) && isset($_POST['phone']) && isset($_POST['password'])) {
+            $email = $_POST['email'];
+            $fullname = $_POST['fullname'];
+            $username = $_POST['username'];
+            $phone = $_POST['phone'];
+            $password = $_POST['password'];
+
+            //* check user
+            $checkUser = $this->models('AccountModel')->getAccount($username);
+            if ($checkUser) {
+                $response->json(['status' => 'failed', 'message' => 'Tài khoản đã tồn tại']);
+            } else {
+                $data = [
+                    'email' => $email,
+                    'fullname' => $fullname,
+                    'username' => $username,
+                    'phone' => $phone,
+                    'password' => $password
+                ];
+                $check = $this->models('AccountModel')->addUser($data);
+                if ($check) {
+                    $response->json(['status' => 'success', 'message' => 'Đăng ký thành công']);
+                } else {
+                    $response->json(['status' => 'failed', 'message' => 'Đăng ký thất bại']);
+                }
+            }
+        } else {
+            $response->json(['status' => 'error', 'message' => 'API không nhận được dữ liệu']);
         }
     }
     public function get_user_info()
@@ -90,7 +154,7 @@ class Api extends Controller
     public function add_product_cart()
     {
         $response = new Response();
-        if(!$this->check_user($_POST['username'], $_POST['password'])){
+        if (!$this->check_user($_POST['username'], $_POST['password'])) {
             $response->json(['status' => 'failed', 'message' => 'Tài khoản không tồn tại']);
             return;
         }
@@ -133,19 +197,19 @@ class Api extends Controller
     public function delete_product_cart()
     {
         $response = new Response();
-        if(!$this->check_user($_POST['username'], $_POST['password'])){
+        if (!$this->check_user($_POST['username'], $_POST['password'])) {
             $response->json(['status' => 'failed', 'message' => 'Tài khoản không tồn tại']);
             return;
         }
-        if(isset($_POST['id']) && isset($_POST['qty'])){
+        if (isset($_POST['id']) && isset($_POST['qty'])) {
             $username = $_POST['username'];
             $id = (int)$_POST['id'];
             $qty = (int)$_POST['qty'];
 
             $count_cart = $this->models('CartModel')->countAmountProductCart($username, $id);
-            if($count_cart <= $qty){
+            if ($count_cart <= $qty) {
                 $data = $this->models('CartModel')->deleteProductCart($username, $id);
-                if($data){
+                if ($data) {
                     $response->json(['status' => 'success', 'message' => 'Đã bớt ' + $qty + ' sản phẩm khỏi giỏ hàng']);
                 } else {
                     $response->json(['status' => 'failed', 'message' => 'Bớt sản phẩm thất bại']);
@@ -153,14 +217,13 @@ class Api extends Controller
             } else {
                 $amount = $count_cart - $qty;
                 $data = $this->models('CartModel')->updateProductCart($username, $id, $amount);
-                if($data){
+                if ($data) {
                     $response->json(['status' => 'success', 'message' => 'Đã xoá sản phẩm ra giỏ hàng']);
                 } else {
                     $response->json(['status' => 'failed', 'message' => 'Xoá sản phẩm ra giỏi hàng thất bại']);
                 }
             }
-
-        } else{
+        } else {
             $response->json(['status' => 'error', 'message' => 'API không nhận được thông tin']);
         }
     }
@@ -168,12 +231,12 @@ class Api extends Controller
     public function get_order_status()
     {
         $response = new Response();
-        if(!$this->check_user($_POST['username'], $_POST['password'])){
+        if (!$this->check_user($_POST['username'], $_POST['password'])) {
             $response->json(['status' => 'failed', 'message' => 'Tài khoản không tồn tại']);
             return;
         }
-        
-        if(isset($_POST['status'])){
+
+        if (isset($_POST['status'])) {
 
             $status = $_POST['status'];
 
@@ -185,12 +248,12 @@ class Api extends Controller
             GROUP BY id_order";
 
             $data = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            if($data){
+            if ($data) {
                 $response->json(['status' => 'success', 'data' => $data]);
             } else {
                 $response->json(['status' => 'failed', 'message' => 'Không có đơn hàng nào']);
             }
-        } else{
+        } else {
             $response->json(['status' => 'error', 'message' => 'API không nhận được thông tin']);
         }
     }
@@ -198,13 +261,13 @@ class Api extends Controller
     public function get_order_product()
     {
         $response = new Response();
-        if(!$this->check_user($_POST['username'], $_POST['password'])){
+        if (!$this->check_user($_POST['username'], $_POST['password'])) {
             $response->json(['status' => 'failed', 'message' => 'Tài khoản không tồn tại']);
             return;
         }
-        if(isset($_POST['id_order'])){
+        if (isset($_POST['id_order'])) {
             $id_order = $_POST['id_order'];
-            if($id_order == ''){
+            if ($id_order == '') {
                 $response->json(['status' => 'failed', 'message' => 'Không có đơn hàng nào']);
                 return;
             }
@@ -216,7 +279,7 @@ class Api extends Controller
                     AND o.id_order = '$id_order';";
 
             $data = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            if($data){
+            if ($data) {
                 $response->json(['status' => 'success', 'data' => $data]);
             } else {
                 $response->json(['status' => 'failed', 'message' => 'Không có sản phẩm nào']);
@@ -229,77 +292,72 @@ class Api extends Controller
     public function checkout()
     {
         $response = new Response();
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
 
-        if(!$this->check_user($_POST['username'], $_POST['password'])){
-            $response->json(['status' => 'failed', 'message' => 'Tài khoản không tồn tại']);
-            return;
-        }
-        
-        $db = new Database();
-        $username = $_POST['username'];
-        $sql = "SELECT * FROM `tb_user` WHERE username = '$username'";
-        $user_info = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        $count_cart = $this->models('CartModel')->countCart($username);
-        if ($count_cart == 0) {
-            $data = [
-                'status' => 'error',
-                'data' => 'Giỏ hàng trống'
-            ];
-            $response->json($data);
-            return;
-        }
+            $user_info = $this->models('AccountModel')->getAccount($username);
+            $count_cart = $this->models('CartModel')->countCart($username);
 
-        $fullname = $user_info['fullname'];
-        $phone = $user_info['phone'];
-        $address = $user_info['address'];
-        $email = $user_info['email'];
-        $province = 'Cần Thơ';
-        $city = 'Quận Ninh Kiều';
-        $ward = 'Phường Hưng Lợi';
+            if ($count_cart <= 0) {
+                $response->json(['status' => 'failed', 'message' => 'Giỏ hàng trống']);
+                return;
+            } else {
+                $fullname = $user_info['fullname'];
+                $phone = $user_info['phone'];
+                $address = $user_info['address'];
+                $email = $user_info['email'];
+                $province = 'Cần Thơ';
+                $city = 'Quận Ninh Kiều';
+                $ward = 'Phường Hưng Lợi';
 
+                $order_date = date('Y-m-d');
+                $status = 'pending';
+                $totalMoney = $this->models('CartModel')->totalMoneyCartUser($username);
 
-        $order_date = date('Y-m-d');
-        $status = 'pending';
-        $totalMoney = $this->models('CartModel')->totalMoneyCartUser($username);
+                // Tạo id order
+                $str = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
+                $id_order = strtoupper(substr(str_shuffle($str), 0, 10));
 
-        // Tạo id order
-        $str = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
-        $id_order = strtoupper(substr(str_shuffle($str), 0, 10));
-
-        $data = [
-            'id_order' => $id_order,
-            'username' => $username,
-            'name_customer' => $fullname,
-            'phone_customer' => $phone,
-            'address_customer' => $address,
-            'email_customer' => $email,
-            'city_customer' => $city,
-            'ward_customer' => $ward,
-            'province_customer' => $province,
-            'status' => $status,
-            'order_date' => $order_date,
-            'total_money' => $totalMoney
-        ];
-        $result = $this->db->table('tb_order')->insert($data);
-        if (!$result) {
-            $response->json(['status' => 'error', 'data' => 'Đặt hàng thất bại']);
-        } else {
-            //* thêm vào bảng tb_order_detail
-            $cartProduct = $this->models('CartModel')->getCartUser($username);
-            foreach ($cartProduct as $item) {
-                $dataCart = [
+                $data = [
                     'id_order' => $id_order,
-                    'id_product' => (int)$item['id_product'],
-                    'amount' => (int)$item['amount'],
+                    'username' => $username,
+                    'name_customer' => $fullname,
+                    'phone_customer' => $phone,
+                    'address_customer' => $address,
+                    'email_customer' => $email,
+                    'city_customer' => $city,
+                    'ward_customer' => $ward,
+                    'province_customer' => $province,
+                    'status' => $status,
+                    'order_date' => $order_date,
+                    'total_money' => $totalMoney
                 ];
-                $this->db->table('tb_order_details')->insert($dataCart);
+
+                $result = $this->db->table('tb_order')->insert($data);
                 if (!$result) {
                     $response->json(['status' => 'error', 'data' => 'Đặt hàng thất bại']);
+                } else {
+                    //* thêm vào bảng tb_order_detail
+                    $cartProduct = $this->models('CartModel')->getCartUser($username);
+                    foreach ($cartProduct as $item) {
+                        $dataCart = [
+                            'id_order' => $id_order,
+                            'id_product' => (int)$item['id_product'],
+                            'amount' => (int)$item['amount'],
+                        ];
+                        $this->db->table('tb_order_details')->insert($dataCart);
+                        if (!$result) {
+                            $response->json(['status' => 'error', 'data' => 'Đặt hàng thất bại']);
+                        }
+                    }
+                    //* xoá giỏ hàng
+                    $this->models('CartModel')->clearCart($username);
+                    $response->json(['status' => 'success', 'message' => 'Mã đơn hàng là ' . $id_order]);
                 }
             }
-            //* xoá giỏ hàng
-            $this->models('CartModel')->clearCart($username);
-            $response->json(['status' => 'success', 'data' => $id_order]);
+        } else {
+            $response->json(['status' => 'error', 'message' => 'API không nhận được thông tin']);
         }
     }
 

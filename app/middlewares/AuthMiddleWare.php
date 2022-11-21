@@ -6,7 +6,7 @@ class AuthMiddleWare extends MiddleWare {
             Session::data('msg', [
                 'type' => 'warning',
                 'icon' => 'fa-duotone fa-right-to-bracket',
-                'position' => 'top',
+                'position' => 'center top',
                 'content' => 'Bạn cần phải đăng nhập'
             ]);
             $response = new Response();
