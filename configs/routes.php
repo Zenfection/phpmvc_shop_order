@@ -6,9 +6,7 @@ $routes['default_controller'] = 'home';
  * 
 */
 
-$routes['san-pham'] = 'product/detail/1';
-$routes['tai-khoan'] = 'account';
-$routes['trang-chu'] = 'home';
-
+// $routes['shop/shortby/(:any)/'] = 'shop/shortby/$1';
+$routes['shop/shortby/(.+)/all/(.+)'] = 'shop/shortby/$1/$2';
 ?>
 

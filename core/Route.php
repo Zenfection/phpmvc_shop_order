@@ -23,7 +23,6 @@ class Route{
                 }
             }
             $this->__keyRoute = $handleUrl;
-
         } 
         return $handleUrl;
     }
@@ -32,8 +31,9 @@ class Route{
         return $this->__keyRoute;
     }
 
-    static public function getFullUrl(){
-        $uri = App::$app->getUrl();
+    static public function getFullUrl($params){
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        App::$app->setCurrentParams($params);
         $url = _WEB_ROOT . $uri;
         return $url;
     }

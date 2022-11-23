@@ -1,3 +1,12 @@
+<?php
+    if (!empty($msg)) {
+        $type_msg = $msg['type'];
+        $icon_msg = $msg['icon'];
+        $pos_msg = $msg['position'];
+        $content_msg = $msg['content'];
+        echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
+    }
+?>
 <!-- Checkout Section Start -->
 <div class="section section-margin">
     <div class="container">
@@ -9,13 +18,13 @@
                     <!-- Checkbox Form Title Start -->
                     <h3 class="title">Hoá Đơn Chi Tiết</h3>
                     <!-- Checkbox Form Title End -->
-                    <form action="./backend/checkout.php" method="POST" id="checkoutForm"  class="form-control">
+                    <form action="/checkout/validate" method="POST" id="checkoutForm">
                         <div class="row">
                             <!-- First Name Input Start -->
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label for="fullname">Họ và tên <span class="required">*</span></label>
-                                    <input name="fullname" placeholder="Nhập họ và tên" type="text" value="<?php echo $fullname ?>" class="form-control">
+                                    <input name="fullname" id="fullname" placeholder="Nhập họ và tên" type="text" value="<?php echo $fullname ?>" class="form-control">
                                 </div>
                             </div>
                             <!-- First Name Input End -->
@@ -24,7 +33,7 @@
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label for="phone">Điện Thoại <span class="required">*</span></label>
-                                    <input name="phone" placeholder="Nhập số điện thoại" type="text" value="<?php echo $phone ?>" class="form-control">
+                                    <input name="phone" id="phone" placeholder="Nhập số điện thoại" type="text" value="<?php echo $phone ?>" class="form-control">
                                 </div>
                             </div>
                             <!-- Last Name Input End -->
@@ -33,25 +42,47 @@
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label for="address">Địa chỉ <span class="required">*</span></label>
-                                    <input name="address" placeholder="Nhập địa chỉ giao hàng" type="text" value="<?php echo $address ?>" class="form-control">
+                                    <input name="address" id="address" placeholder="Nhập địa chỉ giao hàng" type="text" value="<?php echo $address ?>" class="form-control">
                                 </div>
                             </div>
                             <!-- Address Input End -->
 
                             <!-- State or Country Input Start -->
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="checkout-form-list">
                                     <label for="province">Tỉnh <span class="required">*</span></label>
-                                    <input placeholder="Nhập tỉnh thành" type="text" name="province" class="form-control">
+                                    <select class="nice-select" id="province" name="province" onchange="loadCity()">
+                                                <?php
+                                                foreach ($province_data as $key => $value) {
+                                                    if ($value['name'] != $city) {
+                                                        echo "<option value='" . $value['name'] . "'>" . $value['name'] . "</option>";
+                                                    }
+                                                }
+                                                ?>
+                                    </select>
                                 </div>
                             </div>
                             <!-- State or Country Input End -->
 
                             <!-- Town or City Name Input Start -->
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="checkout-form-list">
-                                    <label for="city">Thành Phố <span class="required">*</span></label>
-                                    <input name="city" type="text" placeholder="Nhập thành phố" class="form-control">
+                                    <label for="city">Thành Phố 
+                                        <span class="required">*</span>
+                                    </label>
+                                    <select class="nice-select" id="city" name="city" onchange="loadWard()">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="checkout-form-list">
+                                    <label for="ward">Phường Xã 
+                                        <span class="required">*</span>
+                                    </label>
+                                    <select class="nice-select" name="ward" id="ward">
+
+                                    </select>
                                 </div>
                             </div>
                             <!-- Town or City Name Input End -->
@@ -60,7 +91,7 @@
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label for="email">Email <span class="required">*</span></label>
-                                    <input name="email" placeholder="Nhập email nhận thông báo" type="email" value="<?php echo $email ?>" class="form-control">
+                                    <input name="email" id="email" placeholder="Nhập email nhận thông báo" type="email" value="<?php echo $email ?>" class="form-control">
                                 </div>
                             </div>
                             <!-- Email Address Input End -->
@@ -68,7 +99,7 @@
                         </div>
                         <!-- Different Address End -->
                         <div class="order-button-payment">
-                            <button class="btn btn-primary btn-hover-dark rounded-0 w-100" type="submit" name="submit">Đặt Hàng</button>
+                            <button class="btn btn-primary btn-hover-dark rounded-0 w-100" type="button">Đặt Hàng</button>
                         </div>
                 </div>
                 </form>
@@ -103,13 +134,14 @@
                                     $price = (float)$value['price'];
                                     $amount = (int)$value['amount'];
                                     $discout_price = $price * (100 - (int)$value['discount']) / 100;
+
                                     ?>
                                     <tr class="cart_item">
                                         <td class="cart-product-name text-start ps-0"> <?php echo $name ?>
                                             <strong class="product-quantity"> × <?php echo $amount ?></strong>
                                         </td>
                                         <td class="cart-product-total text-end pe-0">
-                                            <span class="amount"><?php echo $total ?>$</span>
+                                            <span class="amount"><?php echo number_price($total) ?></span>
                                         </td>
                                     </tr>
                                     <?php
@@ -122,7 +154,7 @@
                             <tfoot>
                                 <tr class="cart-subtotal">
                                     <th class="text-start ps-0">Tổng đơn hàng</th>
-                                    <td class="text-end pe-0"><strong><span class="amount"><?php echo $totalMoney ?>$</span></strong></td>
+                                    <td class="text-end pe-0"><strong><span class="amount"><?php echo number_price($totalMoney) ?></span></strong></td>
                                 </tr>
                             </tfoot>
                             <!-- Table Footer End -->
@@ -158,78 +190,28 @@
 </div>
 <!-- Checkout Section End -->
 
-<!-- <script type="text/javascript">
-    $(document).ready(() => {
-        $('#checkoutForm').validate({
-            rules: {
-                name: {
-                    required: true,
-                    minlength: 5
-                },
-                phone: {
-                    required: true,
-                    minlength: 10,
-                    maxlength: 11
-                },
-                address: {
-                    required: true,
-                    minlength: 5
-                },
-                province: {
-                    required: true,
-                    minlength: 5
-                },
-                city: {
-                    required: true,
-                    minlength: 5
-                },
-                email: {
-                    required: true,
-                    email: true
-                }
-            },
-            messages: {
-                name: {
-                    required: "Vui lòng nhập tên",
-                    minlength: "Tên phải có ít nhất 5 ký tự"
-                },
-                phone: {
-                    required: "Vui lòng nhập SĐT",
-                    minlength: "SĐT phải có ít nhất 10 ký tự",
-                    maxlength: "SĐT phải có tối đa 11 ký tự"
-                },
-                address: {
-                    required: "Vui lòng nhập địa chỉ",
-                    minlength: "Địa chỉ phải có ít nhất 5 ký tự"
-                },
-                province: {
-                    required: "Vui lòng nhập tỉnh",
-                    minlength: "Làm gì có tỉnh nào ngắn hơn 5 ký tự"
-                },
-                city: {
-                    required: "Vui lòng nhập thành phố",
-                    minlength: "Làm gì có thành phố nào ngắn hơn 5 ký tự"
-                },
-                email: {
-                    required: "Vui lòng nhập email",
-                    email: "Email không hợp lệ"
-                }
-            },
-            errorElement: 'div',
-            errorPlacement: (error, element) => {
-                error.addClass('invalid-feedback');
-                if (element.prop('type') === 'checkbox') {
-                    error.insertAfter(element.siblings('label'));
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            highlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-invalid').removeClass('is-valid').show();
-            },
-            unhighlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-valid').removeClass('is-invalid').show();
-            }
-        })
-    });
-</script> -->
+<script src="<?php echo _WEB_ROOT; ?>/assets/js/custom/checkout.js"></script>
+
+<style>
+    
+    select.nice-select{
+        display: none !important;
+    }
+    .nice-select{
+        display: block !important;
+        width: 100% !important;
+        padding: 0.375rem 2.25rem 0.375rem 0.75rem !important;
+        font-size: 1rem !important;
+        font-weight: 400 !important;
+        line-height: 1.5 !important;
+        color: #212529 !important;
+        border: 1px solid #ced4da !important;
+        background-color: #fff !important;
+        border-radius: 0.375rem !important;
+    }
+    .nice-select:focus{
+        border-color: #80bdff !important;
+        outline: 0 !important;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+    }
+</style>

@@ -1,17 +1,14 @@
 <?php
-if (!empty($data['msg'])) {
-    $msg = $data['msg'];
-    $check = strtolower($msg);
-    // check từ khoá
-    if (str_contains($check, 'thành công')) {
-        echo "<script>notify('success', 'fa-duotone fa-user-check', 'bottom', '$msg');</script>";
-    } else if (str_contains($check, 'lỗi')) {
-        echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', '$msg');</script>";
-    }
+if (!empty($msg)) {
+    $type_msg = $msg['type'];
+    $icon_msg = $msg['icon'];
+    $pos_msg = $msg['position'];
+    $content_msg = $msg['content'];
+    echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
 }
 ?>
 <!-- Register Section Start -->
-<div  data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+<div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
     <div class="section section-margin">
         <div class="container">
             <div class="row">
@@ -25,61 +22,28 @@ if (!empty($data['msg'])) {
                         <!-- Register Title & Content End -->
 
                         <!-- Form Action Start -->
-                        <?php 
-                        HtmlHelper::formOpen('post', '/register/validate', 'registerForm', '');
-                        HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">'.form_error('fullname', '<div class="alert-danger">', '</div>'),
-                            'text',
-                            'fullname',
-                            'from-control',
-                            'fullname', //? id  
-                            'Họ và tên',
-                            oldValue('fullname'),
-                            '</div>'
-                        );
-                        HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">'.form_error('email', '<div class="alert-danger">', '</div>'),
-                            'email',
-                            'email',
-                            'from-control',
-                            'email', //? id
-                            'Email',
-                            oldValue('email'),
-                            '</div>'
-                        );
-                        HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">'.form_error('username', '<div class="alert-danger">', '</div>'),
-                            'text',
-                            'username',
-                            'from-control',
-                            'username', //? id
-                            'Tên đăng nhập',
-                            oldValue('username'),
-                            '</div>'
-                        );
-                        HtmlHelper::input(
-                            '<div class="single-input-item m-b-10">'.form_error('password', '<div class="alert-danger">', '</div>'),
-                            'password',
-                            'password',
-                            'from-control',
-                            'password', //? id
-                            'Mật khẩu',
-                            '', //? oldValue
-                            '</div>'
-                        );
-                        HtmlHelper::button(
-                            '<div class="single-input-item single-input-item m-b-15">
-                            <div class="login-reg-form-meta m-b-n15">',
-                            'button',
-                            'Đăng ký',
-                            'btn btn btn-gray-deep btn-hover-primary m-b-15',
-                            '</div></div>'
-                        );
-                        echo '<div>
-                        <a href="/login" class="hover-text-primary">Đăng Nhập</a>
-                    </div>';
-                        HtmlHelper::formClose();
-                        ?>
+                        <form id="registerForm" novalidate>
+                            <div class="single-input-item m-b-10">
+                                <input type="text" name="fullname" id="fullname" class="from-control" value="<?php oldValue('fullname') ?>" placeholder="Họ và Tên">
+                            </div>
+                            <div class="single-input-item m-b-10">
+                                <input type="email" name="email" id="email" class="form-control" value="<?php oldValue('email') ?>" placeholder="Email">
+                            </div>
+                            <div class="single-input-item m-b-10">
+                                <input type="text" name="username" id="username" class="form-control" value="<?php oldValue('username')?>" placeholder="Tài khoản">
+                            </div>
+                            <div class="single-input-item m-b-10">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Mật khẩu">
+                            </div>
+                            <div class="single-input-item single-input-item m-b-15">
+                            <div class="login-reg-form-meta m-b-n15">
+                                <button type="button" class="btn btn btn-gray-deep btn-hover-primary m-b-15">Đăng Ký</button>
+                            </div>
+                            </div>
+                        </form>
+                        <div>
+                            <a class="cursor-pointer hover-text-primary" onclick="loadContent('login')">Đăng Nhập</a>
+                        </div>
                         <!-- Form Action End -->
                     </div>
                 </div>
@@ -87,70 +51,3 @@ if (!empty($data['msg'])) {
         </div>
     </div>
 </div>
-
-<!-- Register Section End -->
-<!-- <script type="text/javascript">
-    $(document).ready(() => {
-        $('#registerForm').validate({
-            rules: {
-                fullname: {
-                    required: true,
-                    minlength: 5,
-                },
-                email: {
-                    required: true,
-                    email: true,
-                    remote: './backend/check_email.php'
-                },
-                username: {
-                    required: true,
-                    minlength: 5,
-                    maxlength: 50,
-                    remote: './backend/check_user.php'
-                },
-                password: {
-                    required: true,
-                    minlength: 5,
-                    maxlength: 50
-                }
-            },
-            messages: {
-                fullname: {
-                    required: "Vui lòng nhập họ và tên",
-                    minlength: "Họ và tên phải có ít nhất 5 ký tự"
-                },
-                email: {
-                    required: "Vui lòng nhập email",
-                    email: "Email không đúng định dạng",
-                    remote: jQuery.validator.format('{0} đã tồn tại')
-                },
-                username: {
-                    required: "Vui lòng nhập username",
-                    minlength: "Username phải có ít nhất 5 ký tự",
-                    maxlength: "Username không được vượt quá 50 ký tự",
-                    remote: jQuery.validator.format('{0} đã tồn tại')
-                },
-                password: {
-                    required: "Vui lòng nhập password",
-                    minlength: "Password phải có ít nhất 5 ký tự",
-                    maxlength: "Password không được vượt quá 50 ký tự"
-                }
-            },
-            errorElement: 'div',
-            errorPlacement: (error, element) => {
-                error.addClass('invalid-feedback');
-                if (element.prop('type') === 'checkbox') {
-                    error.insertAfter(element.siblings('label'));
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            highlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-invalid').removeClass('is-valid').show();
-            },
-            unhighlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-valid').removeClass('is-invalid').show();
-            }
-        })
-    });
-</script> -->

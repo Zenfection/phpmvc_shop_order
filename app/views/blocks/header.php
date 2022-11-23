@@ -5,7 +5,7 @@
                 <!-- Header Logo Start -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-in" data-aos-duration="1000">
                     <div class="header-logo">
-                        <a href="/"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/logo.png" alt="Site Logo" /></a>
+                        <a href="/"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/logo.png" alt="Site Logo" /></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->
@@ -15,10 +15,10 @@
                     <div class="main-menu">
                         <ul>
                             <!-- render session -->
-                            <li><a id="home" href="/">Trang Chủ</a></li>
-                            <li><a id="about" href="/about">Giới Thiệu</a></li>
-                            <li><a id="shop" href="/shop/page">Shop</a></li>
-                            <li><a id="contact" href="/contact">Liên Hệ</a></li>
+                            <li><a id="home" class="cursor-pointer" onclick="loadContent('home')">Trang Chủ</a></li>
+                            <li><a id="about" class="cursor-pointer" onclick="loadContent('about')">Giới Thiệu</a></li>
+                            <li><a id="shop" class="cursor-pointer" onclick="loadContent('shop')">Shop</a></li>
+                            <li><a id="contact" class="cursor-pointer" onclick="loadContent('contact')">Liên Hệ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -46,17 +46,17 @@
                         <!-- account login -->
                         <?php
                         if (!empty($user)) {
-                            ?>
-                            <a id='account' class='nav-content cursor-pointer header-action-btn header-action-btn-wishlist' href="/account">
-                                    <i class='fa-duotone fa-user-gear fa-xl'></i>
+                        ?>
+                            <a id='account' class='cursor-pointer header-action-btn header-action-btn-wishlist' onclick="loadContent('account')">
+                                <i class='fa-duotone fa-user-gear fa-xl'></i>
                             </a>
-                            <?php
+                        <?php
                         } else {
-                            ?>
-                            <a id='logged' class='nav-content cursor-pointer header-action-btn header-action-btn-wishlist' href="/login">
+                        ?>
+                            <a id='logged' class='cursor-pointer header-action-btn header-action-btn-wishlist' onclick="loadContent('login')">
                                 <i class='fa-duotone fa-user fa-xl'></i>
                             </a>
-                            <?php
+                        <?php
                         }
                         ?>
 
@@ -73,3 +73,4 @@
         </div>
     </div>
 </div>
+

@@ -5,17 +5,17 @@ class Account extends Controller {
         $user = Session::data('user');
         $title = 'Tài Khoản';
 
-        $account = $this->db->table('tb_user')->where('username', '=', $user)->get();
+        $account = $this->db->table('tb_user')->where('username', '=', $user)->first();
         $getOrder = $this->models('AccountModel')->getOrder($user);
     
         $this->data['page_title'] = $title;
         $this->data['sub_content']['user'] = $user;
 
         $this->data['content'] = 'account/index';
-        $this->data['sub_content']['fullname'] = $account[0]['fullname'];
-        $this->data['sub_content']['email'] = $account[0]['email'];
-        $this->data['sub_content']['phone'] = $account[0]['phone'];
-        $this->data['sub_content']['address'] = $account[0]['address'];
+        $this->data['sub_content']['fullname'] = $account['fullname'];
+        $this->data['sub_content']['email'] = $account['email'];
+        $this->data['sub_content']['phone'] = $account['phone'];
+        $this->data['sub_content']['address'] = $account['address'];
         $this->data['sub_content']['getOrder'] = $getOrder; 
         
         $this->data['sub_content']['msg'] = Session::flash('msg');
@@ -43,9 +43,19 @@ class Account extends Controller {
 
         $result = $this->models('AccountModel')->cancelOrder($user, $id);
         if($result){
-            Session::data('msg', 'Đã hủy đơn hàng thành công');
+            Session::data('msg', [
+                'type' => 'success',
+                'icon' => 'fa-duotone fa-check-double',
+                'position' => 'center',
+                'content' => 'Đã hủy đơn hàng thành công'
+            ]);
         } else {
-            Session::data('msg', 'Không Hủy đơn hàng được');
+            Session::data('msg', [
+                'type' => 'error',
+                'icon' => 'fa-duotone fa-shield-xmark',
+                'position' => 'center',
+                'content' => 'Không hủy đơn hàng được'
+            ]);
         }
         $response = new Response();
         $response->redirect('/account/order/'.$id);
@@ -53,106 +63,75 @@ class Account extends Controller {
 
     public function logout(){
         Session::delete('user');
-        Session::data('msg', 'Dăng xuất thành công');
+        Session::data('msg', [
+            'type' => 'success',
+            'icon' => 'fa-duotone fa-user-slash',
+            'position' => 'bottom',
+            'content' => 'Đã đăng xuất thành công'
+        ]);
 
         $response = new Response();
         $response->redirect('');
     }
 
-    public function validate_change_info(){
-        $request = new Request();
-        // set rule
-        $request->rules([
-            'fullname' => 'min:5|max:50',
-            'phone' => 'min:10|max:11',
-            'email' => 'email',
-            'address' => 'min:5|max:100'
-        ]);
-        $request->message([
-            'fullname.min' => 'Họ tên phải có ít nhất 5 ký tự',
-            'fullname.max' => 'Họ tên không được quá 50 ký tự',
-            'phone.min' => 'Số điện thoại phải có ít nhất 10 ký tự',
-            'phone.max' => 'Số điện thoại không được quá 11 ký tự',
-            'email.email' => 'Email không đúng định dạng',
-            'address.min' => 'Địa chỉ phải có ít nhất 5 ký tự',
-            'address.max' => 'Địa chỉ không được quá 100 ký tự'
-        ]);
-        // validate
-        $validate = $request->validate();
-        if(!$validate){
-            Session::flash('msg', 'Đã có lỗi xảy ra, vui lòng kiểm tra lại');
-            $response = new Response();
-            $response->redirect('account');
-        } else {
-            $this->change_info($_POST['fullname'], $_POST['phone'], $_POST['email'], $_POST['address']);
-        }
-    }
-    public function validate_change_password(){
-        $request = new Request();
-        // set rule
-        $request->rules([
-            'old_password' => 'min:6:callback_check_password',
-            'new_password' => 'min:6',
-            'confirm_password' => 'min:6'
-        ]);
-        $request->message([
-            'old_password.min' => 'Mật khẩu phải có ít nhất 6 ký tự',
-            'new_password.min' => 'Mật khẩu phải có ít nhất 6 ký tự',
-            'confirm_password.min' => 'Mật khẩu phải có ít nhất 6 ký tự',
-            'old_password.callback_check_password' => 'Mật khẩu cũ không đúng'
-        ]);
-        // validate
-        $validate = $request->validate();
-        if(!$validate){
-            Session::flash('msg', 'Đã có lỗi xảy ra, vui lòng kiểm tra lại');
-            $response = new Response();
-            $response->redirect('account');
-        } else {
-            $this->change_password($_POST['old_password'], $_POST['new_password'], $_POST['confirm_password']);
-        }
-    }
+    public function change_user_info(){
+        if(isset($_POST['fullname']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['address'])){
+            $fullname = $_POST['fullname'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            $address = $_POST['address'];
 
-    private function change_info($fullname, $phone, $email, $address){
-        $user = Session::data('user');
-        $data = [
-            'fullname' => $fullname,
-            'phone' => $phone,
-            'email' => $email,
-            'address' => $address
-        ];
-        $dataChange = [];
-        foreach($data as $key => $value){
-            $checkChange = $this->db->table('tb_user')->where('username', '=', $user)->where($key, '=', $value)->get();
-            if(!$checkChange){
-                $dataChange[$key] = $value;
+            $newData = [
+                'fullname' => $fullname,
+                'email' => $email,
+                'phone' => $phone,
+                'address' => $address
+            ];
+
+            $user = Session::data('user');
+            $userInfo = $this->models('AccountModel')->getAccount($user);
+            $oldData = [
+                'fullname' => $userInfo['fullname'],
+                'email' => $userInfo['email'],
+                'phone' => $userInfo['phone'],
+                'address' => $userInfo['address']
+            ];
+
+            $data = $this->checkDiff($oldData, $newData);
+            if(!$data){
+                $this->fetchNoChange('Bạn có thay đổi gì thông tin cá nhân đâu');
+            } else {
+                $this->models('AccountModel')->changeInfo($user, $data);
+                $this->fetchSuccess('Đã thay đổi thông tin thành công');
             }
-        }
-        if(empty($dataChange)){
-            Session::flash('msg', 'Không có gì thay đổi');
         } else {
-            $update = $this->db->table('tb_user')->where('username', '=', $user)->update($dataChange);
-            Session::flash('msg', 'Đã thay đổi thông tin');
+            $this->fetchServerError('Không nhận được dữ liệu');
         }
-        $response = new Response();
-        $response->redirect('account');
     }
 
-    private function check_password($password){
-        $user = Session::data('user');
-        $checkPassword = $this->db->table('tb_user')->where('username', '=', $user)->where('password', '=', md5($password))->get();
-        if(!$checkPassword){
-            return false;
+    public function change_user_password(){
+        if(isset($_POST['old_password']) && isset($_POST['new_password']) && isset($_POST['confirm_password'])){
+            $old_password = md5($_POST['old_password']);
+            $new_password = md5($_POST['new_password']);
+            $confirm_password = md5($_POST['confirm_password']);
+
+            if($new_password != $confirm_password){
+                $this->fetchError('Mật khẩu mới không khớp');
+            } else {
+                $user = Session::data('user');
+                $userInfo = $this->models('AccountModel')->getAccount($user);
+                if($userInfo['password'] === $old_password){
+                    $data = [
+                        'password' => $new_password
+                    ];
+                    $this->models('AccountModel')->changePassword($user, $old_password, $data);
+                    $this->fetchSuccess('Đã thay đổi mật khẩu thành công');
+                } else {
+                    $this->fetchError('Mật khẩu cũ không đúng');
+                }
+            }
         } else {
-            return true;
+            $this->fetchServerError('Không nhận được dữ liệu');
         }
-    }
-    public function change_password($user){
-        $user = Session::data('user');
-        $data = [
-            'password' => md5($_POST['password'])
-        ];
-        $update = $this->db->table('tb_user')->where('username', '=', $user)->update($data);
-        Session::flash('msg', 'Đã thay đổi mật khẩu');
     }
 }
-?>

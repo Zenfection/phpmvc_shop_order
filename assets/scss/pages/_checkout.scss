@@ -1,0 +1,359 @@
+/*=======================================
+    4.08 Checkout CSS
+=========================================*/
+.coupon-accordion {
+	& .title {
+		background-color: $gray-100;
+		font-size: 14px;
+		font-weight: 400;
+		list-style: outside none none;
+		margin: 0 0 30px;
+		padding: 16px 32px 16px 20px;
+		position: relative;
+		width: auto;
+		text-transform: none;
+		@media #{$extra-small-mobile}{
+			line-height: 24px;
+			padding: 10px;
+			font-size: 14px;
+		}
+
+        & span {
+            cursor: pointer;
+            transition: $transition-base;
+
+            &:hover {
+                color: $primary;
+            }
+        }
+	}
+	& span {
+		transition: .3s;
+		text-transform: none;
+        font-weight: 600;
+	}
+	& .coupon-content {
+		border: 1px solid $gray-100;
+		margin-bottom: 20px;
+		display: none;
+		padding: 20px;
+		& .coupon-info {
+			& p {
+				margin-bottom: 0;
+				&.form-row-first,
+				&.form-row-last {
+					& label {
+						display: block;
+						color: $dark;
+                        font-size: 15px;
+                        margin-bottom: 5px;
+						& span {
+							& .required {
+								color: $primary;
+							}
+						}
+					}
+					& input {
+						border: 1px solid $gray-100;
+						height: 36px;
+						margin: 0 0 14px;
+						border-radius: 0;
+						max-width: 100%;
+						padding: 0 10px 0 10px;
+						width: 370px;
+                        background-color: transparent;
+                        &:focus{
+                            border: 1px solid $primary;
+                        }
+					}
+				}
+				& .form-row {
+					& input[type="submit"] {
+						background: $dark none repeat scroll 0 0;
+						border: medium none;
+						border-radius: 0;
+						box-shadow: none;
+						color: $white;
+						cursor: pointer;
+						display: inline-block;
+						font-size: 12px;
+						height: 40px;
+						line-height: 40px;
+						margin-right: 15px;
+						padding: 0 30px;
+						text-shadow: none;
+						text-transform: uppercase;
+						transition: .3s;
+						width: inherit;
+					}
+					& input[type="checkbox"] {
+						height: inherit;
+						position: relative;
+						top: 2px;
+						width: inherit;
+					}
+					& label {
+						margin-top: 7px;
+					}
+				}
+			}
+			& .lost-password {
+				margin-top: 15px;
+				& a{
+					font-size: 14px;
+					&:hover {
+						color: $primary;
+					}
+				}
+			}
+			& .coupon-text {
+				font-size: 15px;
+			}
+		}
+	}
+}
+.coupon-checkout-content {
+	margin-bottom: 30px;
+	display: none;
+	& .coupon-info {
+		& .checkout-coupon {
+			margin-bottom: 0;
+			& input[type="text"] {
+				background-color: transparent;
+				border: 1px solid $gray-100;
+				border-radius: 0;
+				height: 46px;
+				padding-left: 10px;
+				padding-right: 10px;
+				width: 170px;
+				font-size: 14px;
+				@media #{$extra-small-mobile} {
+					width: 140px;
+				}
+				&:focus{
+					border: 1px solid $primary;
+				}
+			}
+			& input[type="submit"] {
+				margin-left: 6px;
+			}
+		}
+	}
+}
+.checkbox-form {
+	& .title {
+		border-bottom: 1px solid #e5e5e5;
+		font-size: 20px;
+		margin: 0 0 25px;
+		padding-bottom: 10px;
+		width: 100%;
+		font-weight: 600;
+		position: relative;
+		@media #{$extra-small-mobile} {
+			font-size: 18px;
+		}
+	}
+	& .country-select {
+		margin-bottom: 25px;
+		& .myniceselect {
+			&.nice-select {
+				& span {
+					height: 40px;
+					line-height: 40px;
+					display: inline-block;
+					width: 100%;
+				}
+			}
+		}
+	}
+	& .checkout-form-list {
+		margin-bottom: 30px;
+		input[type="text"],
+		input[type="password"],
+		input[type="email"] {
+			background: $white;
+			border: 1px solid $gray-100;
+			border-radius: 0;
+			height: 42px;
+			width: 100%;
+			padding: 0 10px 0 10px;
+			font-size: 14px;
+            &:focus{
+                border: 1px solid $primary;
+            }
+		}
+		&.create-acc {
+			margin-bottom: 15px;
+			& label {
+				display: inline-block;
+			}
+		}
+		& label {
+			color: $dark;
+			font-size: 14px;
+			margin-bottom: 5px;
+            font-weight: 500;
+		}
+	}
+	& .country-select,
+	&.checkout-form-list {
+		& label {
+			margin: 0 0 5px;
+			display: block;
+			color: $dark;
+			font-size: 15px;
+			& span {
+				&.required {
+					display: inline-block;
+					font-size: 24px;
+					line-height: 16px;
+					position: relative;
+					top: 5px;
+				}
+			}
+		}
+	}
+}
+.checkbox-label{
+	color: $dark;
+	font-weight: 500;
+	cursor: pointer;
+	&:hover {
+		color: $primary;
+        transition: .3s;
+	}
+}
+.create-account,
+#ship-box-info {
+	display: none;
+}
+.order-notes {
+	& .checkout-form-list-2 {
+		margin-bottom: 0;
+		@media #{$large-mobile, $tablet-device} {
+			margin-bottom: 30px;
+		}
+	}
+	& textarea {
+		background-color: transparent;
+		border: 1px solid $gray-100;
+		height: 90px;
+		padding: 15px;
+		width: 100%;
+		font-size: 14px;
+		&:focus {
+			border: 1px solid $primary;
+		}
+	}
+}
+.your-order-area {
+    padding: 30px 40px 30px;
+    @media #{$extra-small-mobile}{
+        padding: 30px 20px;
+    }
+	& .title {
+		border-bottom: 1px solid #e5e5e5;
+		font-size: 20px;
+		margin: 0 0 25px;
+		padding-bottom: 10px;
+		width: 100%;
+		font-weight: 600;
+		position: relative;
+		@media #{$extra-small-mobile} {
+			font-size: 20px;
+		}
+	}
+	& .your-order-table {
+		& .table {
+			background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+			border: medium none;
+			width: 100%;
+			& thead {
+				& tr {
+					& th {
+						border-top: medium none;
+						font-weight: normal;
+						vertical-align: middle;
+						min-width: 140px;
+                        font-weight: 400;
+					}
+					& th,
+					& td {
+						border-bottom: 1px solid;
+						border-right: medium none;
+						font-size: 14px;
+						padding: 15px 0;
+						font-weight: 400;
+						color: $dark;
+					}
+				}
+			}
+			& .order-total {
+				& td {
+					border-bottom: medium none;
+					color: $dark;
+					& span {
+						font-size: 20px;
+					}
+				}
+				& th {
+					border-bottom: medium none;
+					color: $dark;
+					font-size: 16px;
+                    font-weight: 500;
+				}
+			}
+			& .cart-subtotal {
+				& td {
+					color: $dark;
+				}
+				& th {
+					color: $dark;
+				}
+			}
+			& thead,
+			& tbody,
+			& tfoot {
+				& tr {
+					display: flex;
+					flex-direction: row;
+					width: 100%;
+					& th,
+					& td{
+						border-color: #b0b0b0 !important;
+						width: 50%;
+						display: block;
+						min-width: 200px;
+					}
+				}
+			}
+		}
+	}
+}
+.payment-accordion {
+	& .single-payment {
+		& .panel-title {
+			display: block;
+			& .collapse-off {
+				display: block;
+				padding: 10px;
+				font-size: 16px;
+				font-family: $headings-font-family;
+				color: $dark;
+				background: $gray-100;
+				&:hover{
+					background: $primary;
+					color: $white;
+				}
+			}
+		}
+		& .card-body {
+			margin-bottom: 30px;
+
+            & p {
+                font-size: 14px;
+                line-height: 1.9;
+            }
+		}
+	}
+}

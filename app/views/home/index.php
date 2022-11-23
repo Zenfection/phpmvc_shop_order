@@ -1,32 +1,23 @@
 <?php
-    if (!empty($data['msg'])) {
-        $msg = $data['msg'];
-        $check = strtolower($msg);
-        // check từ khoá
-        if (str_contains($check, 'thành công')) {
-            echo "<script>notify('success', 'fa-duotone fa-user-check', 'bottom', '$msg');</script>";
-        } else if (str_contains($check, 'lỗi')) {
-            echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', '$msg');</script>";
-        } else if (str_contains($check, 'đã huỷ đơn')) {
-            echo "<script>notify('success', 'fa-duotone fa-box-archive', 'center', $msg);</script>";
-        } else if (str_contains($check, 'không huỷ đơn')) {
-            echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', $msg);";
-        } else {
-            echo "<script>notify('warning', 'fa-duotone fa-user-xmark', 'center', $msg);</script>";
-        }
+    if (!empty($msg)) {
+        $type_msg = $msg['type'];
+        $icon_msg = $msg['icon'];
+        $pos_msg = $msg['position'];
+        $content_msg = $msg['content'];
+        echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg');</script>";
     }
 ?>
 <!-- start hero -->
 <section class="hero-1 bg-white position-relative d-flex align-items-center justify-content-center overflow-hidden">
     <div class="shapes">
-        <div class="shape-1"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-1.svg" alt="shape"></div>
-        <div class="shape-2"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-2.svg" alt="shape"></div>
-        <div class="shape-3"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-3.svg" alt="shape"></div>
-        <div class="shape-4"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-4.svg" alt="shape"></div>
-        <div class="shape-5"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-5.svg" alt="shape"></div>
-        <div class="shape-6"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-6.svg" alt="shape"></div>
-        <div class="shape-7"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-7.svg" alt="shape"></div>
-        <div class="shape-8"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/shapes/shape-8.svg" alt="shape"></div>
+        <div class="shape-1"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-1.svg" alt="shape"></div>
+        <div class="shape-2"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-2.svg" alt="shape"></div>
+        <div class="shape-3"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-3.svg" alt="shape"></div>
+        <div class="shape-4"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-4.svg" alt="shape"></div>
+        <div class="shape-5"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-5.svg" alt="shape"></div>
+        <div class="shape-6"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-6.svg" alt="shape"></div>
+        <div class="shape-7"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-7.svg" alt="shape"></div>
+        <div class="shape-8"><img src="<?php echo _GIT_SOURCE; ?>/assets/images/shapes/shape-8.svg" alt="shape"></div>
     </div>
 
     <div class="container">
@@ -45,17 +36,17 @@
                 </h1>
                 <h5 class="my-4 fw-hero"><i class="fa-duotone fa-phone-volume"></i> Liên hệ với tôi nếu bạn có ý tưởng</h5>
 
-                <p class="text-muted mb-2 fw-hero">Sản phẩm được phát triển cả nhân nên có rất nhiều lỗi <br> nếu bạn phát hiện hãy liên hệ với tôi bên trên.</p>
+                <p class="text-danger mb-2 fw-hero">Sản phẩm được phát triển cả nhân nên có rất nhiều lỗi <br> nếu bạn phát hiện hãy liên hệ với tôi bên trên.</p>
                 <?php
                 if (!empty($user)) {
                 ?>
-                    <a class="nav-content btn btn-primary mt-4" id="shop" href="/shop/page">Mua Hàng
+                    <a class="cursor-pointer btn btn-primary mt-4" onclick="loadContent('shop')">Mua Hàng
                         <i class="fa-duotone fa-cart-shopping-fast fa-xl"></i>
                     </a>
                 <?php
                 } else {
                 ?>
-                    <a class="nav-content btn btn-primary mt-4" id="login" href="/login">Đăng Nhập
+                    <a class="cursor-pointer btn btn-primary mt-4" onclick="loadContent('login')">Đăng Nhập
                         <i class="fa-duotone fa-arrow-right-to-bracket fa-xl"></i>
                     </a>
                 <?php
@@ -63,7 +54,7 @@
                 ?>
             </div>
             <div class="col-lg-6 mt-lg-4 pt-2 mt-5 d-lg-flex d-none" data-aos="fade-left">
-                <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/home.png">
+                <img class="fit-image" src="<?php echo _CDN_IMAGE_600 . '/home.png' ?>" alt="home Image">
             </div>
         </div>
     </div>
@@ -77,7 +68,7 @@
         <div class="row justify-content-center text-center">
             <div class="col-12 mb-4">
                 <h4 class="fw-semibold mb-3 fw-hero">Chức Năng Nổi Bật</h4>
-                <h5 class="text-muted fw-normal fw-hero">Liệt kê các nổi bật trong trang web </h5>
+                <h5 class="text-secondary fw-normal fw-hero">Liệt kê các nổi bật trong trang web </h5>
             </div>
         </div>
         <div class="row text-center">
@@ -90,7 +81,7 @@
                                     <i class="fa-duotone fa-rabbit-running fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Tốc độ ưu việt</h5>
-                                <a class="text-muted">Không cần phải <span class="fw-semibold fs-15 text-dark">refresh</span> lại trang khi sử dụng</a>
+                                <a class="text-secondary">Không cần phải <span class="fw-semibold fs-15 text-dark">refresh</span> lại trang khi sử dụng</a>
                             </div>
                         </div>
                     </div>
@@ -101,7 +92,7 @@
                                     <i class="fa-duotone fa-users-viewfinder fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Sử dụng đơn giản</h5>
-                                <a class="text-muted">Thiết kế sử dụng dựa trên<span class="fw-semibold fs-15 text-dark"> trải nghiệm thực tế</span></a>
+                                <a class="text-secondary">Thiết kế sử dụng dựa trên<span class="fw-semibold fs-15 text-dark"> trải nghiệm thực tế</span></a>
                             </div>
                         </div>
                     </div>
@@ -112,7 +103,7 @@
                                     <i class="fa-duotone fa-binary-lock fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Mã hóa mật khẩu</h5>
-                                <a class="text-muted">Sử dụng <span class="fw-semibold fs-15 text-dark"> SHA516</span> để mã hóa mật khẩu của người dùng</a>
+                                <a class="text-secondary">Sử dụng <span class="fw-semibold fs-15 text-dark"> SHA516</span> để mã hóa mật khẩu của người dùng</a>
                             </div>
                         </div>
                     </div>
@@ -123,7 +114,7 @@
                                     <i class="fa-duotone fa-fork-knife fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Hàng hóa đa dạng</h5>
-                                <a class="text-muted">Mua bán nhiều sản phẩm và có thể<span class="fw-semibold fs-15 text-dark"> thêm mới</span></a>
+                                <a class="text-secondary">Mua bán nhiều sản phẩm và có thể<span class="fw-semibold fs-15 text-dark"> thêm mới</span></a>
                             </div>
                         </div>
                     </div>
@@ -134,7 +125,7 @@
                                     <i class="fa-duotone fa-filters fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Bộ lọc thông minh</h5>
-                                <a class="text-muted">Bộ lọc sản phẩm do chính <span class="fw-semibold fs-15 text-dark"> Zen</span> phát triển</a>
+                                <a class="text-secondary">Bộ lọc sản phẩm do chính <span class="fw-semibold fs-15 text-dark"> Zen</span> phát triển</a>
                             </div>
                         </div>
                     </div>
@@ -145,7 +136,7 @@
                                     <i class="fa-duotone fa-box-circle-check fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Xem lại đơn hàng</h5>
-                                <a class="text-muted">Theo dõi <span class="fw-semibold fs-15 text-dark"> đơn hàng</span> cá nhân vừa đặt dễ dàng</a>
+                                <a class="text-secondary">Theo dõi <span class="fw-semibold fs-15 text-dark"> đơn hàng</span> cá nhân vừa đặt dễ dàng</a>
                             </div>
                         </div>
                     </div>
@@ -156,7 +147,7 @@
                                     <i class="fa-duotone fa-basket-shopping fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Giỏ hàng thông minh</h5>
-                                <a class="text-muted"><span class="fw-semibold fs-15 text-dark">Thêm, sửa, xóa</span> sản phẩm với hiệu suất nhanh chóng</a>
+                                <a class="text-secondary"><span class="fw-semibold fs-15 text-dark">Thêm, sửa, xóa</span> sản phẩm với hiệu suất nhanh chóng</a>
                             </div>
                         </div>
                     </div>
@@ -167,7 +158,7 @@
                                     <i class="fa-duotone fa-eye-low-vision fa-3x"></i>
                                 </div>
                                 <h5 class="lh-base fs-16 mb-2">Không lấy dữ diệu</h5>
-                                <a class="text-muted">Cam kết không lấy bất cứ<span class="fw-semibold fs-15 text-dark"> dữ liệu</span> của người dùng</a>
+                                <a class="text-secondary">Cam kết không lấy bất cứ<span class="fw-semibold fs-15 text-dark"> dữ liệu</span> của người dùng</a>
                             </div>
                         </div>
                     </div>
@@ -185,31 +176,21 @@
         <!-- Banners Start -->
         <div class="row row-cols-md-3 row-cols-sm-2 row-cols-1 m-b-n30">
             <?php
-            $limit = 3;
-            for ($i = 0; $limit > 0; $i++) {
-                $category = $data['category'][$i];
-                if ($category['active'] != 1) {
+            $countCategory = count($category);
+            foreach($category as $key => $value){
+                if($value['active'] != 1){
                     continue;
                 }
-                $id = $category['id_category'];
-                $title = $category['title'];
-                $image = $category['image'];
-                $limit--;
-            ?>
+                $id = $value['id_category'];
+                $title = $value['title'];
+                $image = $value['image'];
+                ?>
                 <div class="col m-b-30" data-aos="fade-in">
-                    <a href="/shop/category/<?php echo $id?>" class="banner hover-style">
-                        <?php
-                        if ($image == "") {
-                            echo "<div class='error'>Image not Available</div>";
-                        } else {
-                        ?>
-                            <img class="fit-image p-10" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/category/<?php echo $image; ?>" alt="Banner Image" />
-                        <?php
-                        }
-                        ?>
+                    <a class="cursor-pointer banner hover-style" onclick="loadContent('shop/<?php echo $id?>')">
+                        <img class="fit-image p-10" src="<?php echo _CDN_IMAGE_450 . '/category/' . $image ?>" alt="Banner Image">
                     </a>
                 </div>
-            <?php
+                <?php
             }
             ?>
         </div>
@@ -222,7 +203,7 @@
 <div class="section position-relative">
     <div class="container">
         <!-- Section Title & Tab Start -->
-        <div class="row" data-aos="fade-out">
+        <div class="row">
             <!-- Tab Start -->
             <div class="col-12">
                 <ul class="product-tab-nav nav justify-content-center m-b-n15 p-b-40 title-border-bottom">
@@ -242,21 +223,21 @@
                     <div class="tab-pane fade show active" id="top-product-ranking">
                         <div class="row m-b-n40">
                             <?php
-                            $this->render('products/list', $data['top_product_ranking'], false);
+                            $this->render('products/list', $top_product_ranking, false);
                             ?>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="top-product-discount">
                         <div class="row m-b-n40">
                             <?php
-                            $this->render('products/list', $data['top_product_discount'], false);
+                            $this->render('products/list', $top_product_discount, false);
                             ?>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="top-product-seller">
                         <div class="row m-b-n40">
                             <?php
-                            $this->render('products/list', $data['top_product_seller'], false);
+                            $this->render('products/list', $top_product_seller, false);
                             ?>
                         </div>
                     </div>
@@ -266,7 +247,7 @@
         <!-- Products Tab End -->
     </div>
 </div>
-
 <!-- Product Section End -->
 
-<script src="<?php echo _WEB_ROOT?>/public/assets/clients/js/custom/home.js"></script>
+
+<script src="<?php echo _WEB_ROOT; ?>/assets/js/custom/home.js"></script>

@@ -33,7 +33,7 @@
                     <div class="single-footer-widget">
                         <h2 class="widget-title">Tính Năng</h2>
                         <ul class="widget-list">
-                            <li><a class="cursor-pointer nav-content" id="shop">Mua Hàng</a></li>
+                            <li><a class="cursor-pointer" onclick="loadContent('shop')">Mua Hàng</a></li>
                             <li><a class="nav-content cursor-pointer" id="account">Dashboard</a></li>
                         </ul>
                     </div>
@@ -76,7 +76,7 @@
                 <div class="col-md-6 text-center text-md-end order-1 order-md-2 m-b-20">
                     <div class="payment">
                         <a href="#">
-                            <img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/payment/payment_large.png" alt="Payment">
+                            <img src="<?php echo _GIT_SOURCE; ?>/assets/images/payment/payment_large.png" alt="Payment">
                         </a>
                     </div>
                 </div>
@@ -88,8 +88,8 @@
 <!-- Footer Section End -->
 
 <!-- Scroll Top Start -->
-<a href="#" class="scroll-top show" id="scroll-top">
-    <i class="arrow-top ti-angle-double-up"></i>
+<!-- <a href="#" class="scroll-top show" id="scroll-top">
+    <i class="arrow-top fa-duotone fa-arrow-right"></i>
     <i class="arrow-bottom ti-angle-double-up"></i>
-</a>
+</a> -->
 <!-- Scroll Top End -->

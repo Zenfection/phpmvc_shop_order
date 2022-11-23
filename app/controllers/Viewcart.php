@@ -17,7 +17,12 @@ class Viewcart extends Controller{
         $user = Session::data('user');
         $cart = $this->models('CartModel')->getCartUser($user);
         if(!$cart){
-            Session::data('msg', 'Bạn chưa có sản phẩm nào trong giỏ hàng');
+            Session::data('msg', [
+                'type' => 'warning',
+                'icon' => 'fa-duotone fa-basket-shopping-simple',
+                'position' => 'top-right',
+                'content' => 'Giỏ hàng của bạn đang trống'
+            ]);
             $response = new Response();
             $response->redirect('');
             return;

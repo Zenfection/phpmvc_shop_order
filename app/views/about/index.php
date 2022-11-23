@@ -5,7 +5,7 @@
             <div class="col-md-6 pe-lg-5 p-r-15 m-b-30" data-aos="fade-right" data-aos-duration="1000">
                 <!-- About Thumb Start -->
                 <div class="about-thumb">
-                    <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/about.png">
+                    <img class="fit-image" src="<?php echo _CDN_IMAGE_550 . '/about.png' ?>" >
                 </div>
                 <!-- About Thumb End -->
             </div>
@@ -17,9 +17,9 @@
                     <ul class="about-content-list">
                         <li><span><i class="fa-brands fa-bootstrap fa-xl"></i></span> Bootstrap 5</li>
                         <li><span><i class="fa-brands fa-js fa-xl"></i></span> Jquery Ajax</li>
-                        <li><span><i class="fa-brands fa-php fa-xl"></i></span> PHP Composer</li>
+                        <li><span><i class="fa-brands fa-php fa-xl"></i></span> PHP MVC</li>
                     </ul>
-                    <a id="contact" class="nav-content btn btn-primary btn-hover-dark">Liên Hệ</a>
+                    <a class="cursor-pointer btn btn-primary btn-hover-dark" onclick="loadContent('contact')">Liên Hệ</a>
                 </div>
                 <!-- About Content End -->
             </div>
@@ -37,8 +37,8 @@
                 <!-- Single Team Wrapper Start -->
                 <div class="single-team-wrapper">
                     <div class="thumb">
-                        <a class="nav-content cursor-pointer" id="contact">
-                            <img class="fit-image" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/team/1.jpg" alt="Team Image" style="height: 270px;">
+                        <a class="cursor-pointer" onclick="loadContent('contact')">
+                            <img class="fit-image" src="<?php echo _GIT_SOURCE; ?>/assets/images/team/1.jpg" alt="Team Image" style="height: 270px;">
                         </a>
                         <!-- Social Shear Start -->
                         <div class="social-share">

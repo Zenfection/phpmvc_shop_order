@@ -1,25 +1,10 @@
 <?php
-$fullname = $data['fullname'];
-$email = $data['email'];
-$phone = $data['phone'];
-$address = $data['address'];
-if (!empty($data['getOrder'])) {
-    $getOrder = $data['getOrder'];
-}
-
-if (!empty($data['msg'])) {
-    $msg = $data['msg'];
-    $check = strtolower($msg);
-    // check từ khoá
-    if (str_contains($check, 'thành công')) {
-        echo "<script>notify('success', 'fa-duotone fa-user-check', 'bottom', '$msg');</script>";
-    } else if (str_contains($check, 'lỗi')) {
-        echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', '$msg');</script>";
-    } else if (str_contains($check, 'đã thay đổi')) {
-        echo "<script>notify('info', 'fa-duotone fa-user-check', 'center', '$msg');</script>";
-    } else if(str_contains($check, 'không có gì thay đổi')) {
-        echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', '$msg');;</script>";
-    }
+if (!empty($msg)) {
+    $type_msg = $msg['type'];
+    $icon_msg = $msg['icon'];
+    $pos_msg = $msg['position'];
+    $content_msg = $msg['content'];
+    echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
 }
 ?>
 <!-- My Account Section Start -->
@@ -91,14 +76,13 @@ if (!empty($data['msg'])) {
                                                                 $order_date = $getOrder[$i]['order_date'];
                                                                 $status = $getOrder[$i]['status'];
                                                                 $total_money = $getOrder[$i]['total_money'];
-
                                                     ?>
                                                                 <tr id="id_order<?php echo $id_order ?>">
                                                                     <td><?php echo $id_order ?></td>
                                                                     <td><?php echo $order_date ?></td>
                                                                     <td><?php echo $status ?></td>
-                                                                    <td><?php echo $total_money ?>$</td>
-                                                                    <td><a class="btn btn btn-dark btn-hover-primary btn-sm rounded" href="/account/order/<?php echo $id_order?>">Xem</a></td>
+                                                                    <td><?php echo number_price($total_money) ?></td>
+                                                                    <td><a class="btn btn btn-dark btn-hover-primary btn-sm rounded" href="/account/order/<?php echo $id_order ?>">Xem</a></td>
                                                                 </tr>
                                                     <?php
                                                             }
@@ -126,7 +110,7 @@ if (!empty($data['msg'])) {
                                     <div class="myaccount-content">
                                         <h3 class="title"> Chi Tiết Tài Khoản</h3>
                                         <div class="account-details-form">
-                                            <form id="changeInfoForm" method="post" action="/account/validate_change_info">
+                                            <form id="changeInfoForm" novalidate>
                                                 <div class="single-input-item m-b-15">
                                                     <div class="row">
                                                         <div class="col-lg-6">
@@ -153,7 +137,7 @@ if (!empty($data['msg'])) {
                                                 </div>
                                                 <div class="single-input-item m-b-15">
                                                     <label for="address" class="required m-b-5">Địa Chỉ</label>
-                                                    <input type="text" name="address" placeholder="Nhập địa chỉ" value="<?php echo $address ?>" class="form-control" />
+                                                    <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="<?php echo $address ?>" class="form-control" />
                                                 </div>
                                                 <div class="single-input-item single-item-button m-t-30">
                                                     <button type="button" class="btn btn btn-primary btn-hover-dark rounded-0">Lưu Thay Đổi</button>
@@ -168,29 +152,29 @@ if (!empty($data['msg'])) {
                                     <div class="myaccount-content">
                                         <h3 class="title"> Thay đổi mật khẩu</h3>
                                         <div class="account-details-form">
-                                            <form method="post" action="/account/validate_change_password" id="changePassForm">
+                                            <form id="changePassForm" novalidate>
                                                 <fieldset>
                                                     <div class="single-input-item m-b-15">
                                                         <label for="current_pwd" class="required m-b-10">Mật Khẩu Hiện tại</label>
-                                                        <input type="password" name="current_pwd" placeholder="Nhập Mật Khẩu" class="form-control" />
+                                                        <input type="password" name="current_pwd" id="current_pwd" placeholder="Nhập Mật Khẩu" class="form-control" />
                                                     </div>
                                                     <div class="row m-b-n15">
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item m-b-15">
                                                                 <label for="new_pwd" class="required m-b-10">Mật khẩu mới</label>
-                                                                <input type="password" name="new_pwd" placeholder="Nhập Mật Khẩu" class="form-control" />
+                                                                <input type="password" name="new_pwd" id="new_pwd" placeholder="Nhập Mật Khẩu" class="form-control" />
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item m-b-15">
                                                                 <label for="confirm_pwd" class="required m-b-10">Xác Nhận Mật Khẩu</label>
-                                                                <input type="password" name="confirm_pwd" placeholder="Nhập Mật Khẩu" class="form-control" />
+                                                                <input type="password" name="confirm_pwd" id="confirm_pwd" placeholder="Nhập Mật Khẩu" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </fieldset>
                                                 <div class="single-input-item single-item-button m-t-30">
-                                                    <button type="submit" class="btn btn btn-primary btn-hover-dark rounded-0">Lưu Thay Đổi</button>
+                                                    <button type="button" class="btn btn btn-primary btn-hover-dark rounded-0">Lưu Thay Đổi</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -208,110 +192,3 @@ if (!empty($data['msg'])) {
     </div>
 </div>
 <!-- My Account Section End -->
-
-<!-- <script>
-    $(document).ready(() => {
-        $('#changeInfoForm').validate({
-            rules: {
-                fullname: {
-                    required: true,
-                    minlength: 5,
-                    maxlength: 50
-                },
-                phone: {
-                    required: true,
-                    minlength: 10,
-                    maxlength: 11
-                },
-                email: {
-                    required: true,
-                    email: true
-                }
-            },
-            messages: {
-                fullname: {
-                    required: "Vui lòng nhập họ và tên",
-                    minlength: "Họ và tên phải có ít nhất 5 ký tự",
-                    maxlength: "Họ và tên phải có nhiều nhất 50 ký tự"
-                },
-                phone: {
-                    required: "Vui lòng nhập số điện thoại",
-                    minlength: "Số điện thoại phải có ít nhất 10 ký tự",
-                    maxlength: "Số điện thoại phải có nhiều nhất 11 ký tự"
-                },
-                email: {
-                    required: "Vui lòng nhập email",
-                    email: "Email không hợp lệ"
-                }
-            },
-            errorElement: 'div',
-            errorPlacement: (error, element) => {
-                error.addClass('invalid-feedback');
-                if (element.prop('type') === 'checkbox') {
-                    error.insertAfter(element.siblings('label'));
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            highlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-invalid').removeClass('is-valid').show();
-            },
-            unhighlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-valid').removeClass('is-invalid').show();
-            }
-        })
-        $('#changePassForm').validate({
-            rules: {
-                current_pwd: {
-                    required: true,
-                    minlength: 6,
-                    maxlength: 50
-                },
-                new_pwd: {
-                    required: true,
-                    minlength: 6,
-                    maxlength: 50
-                },
-                confirm_pwd: {
-                    required: true,
-                    minlength: 6,
-                    maxlength: 50,
-                    equalTo: "#new_pwd"
-                }
-            },
-            messages: {
-                current_pwd: {
-                    required: "Vui lòng nhập mật khẩu hiện tại",
-                    minlength: "Mật khẩu phải có ít nhất 6 ký tự",
-                    maxlength: "Mật khẩu phải có nhiều nhất 50 ký tự"
-                },
-                new_pwd: {
-                    required: "Vui lòng nhập mật khẩu mới",
-                    minlength: "Mật khẩu phải có ít nhất 6 ký tự",
-                    maxlength: "Mật khẩu phải có nhiều nhất 50 ký tự"
-                },
-                confirm_pwd: {
-                    required: "Vui lòng nhập lại mật khẩu mới",
-                    minlength: "Mật khẩu phải có ít nhất 6 ký tự",
-                    maxlength: "Mật khẩu phải có nhiều nhất 50 ký tự",
-                    equalTo: "Mật khẩu không trùng khớp"
-                }
-            },
-            errorElement: 'div',
-            errorPlacement: (error, element) => {
-                error.addClass('invalid-feedback');
-                if (element.prop('type') === 'checkbox') {
-                    error.insertAfter(element.siblings('label'));
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            highlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-invalid').removeClass('is-valid').show();
-            },
-            unhighlight: (element, errorClass, validClass) => {
-                $(element).addClass('is-valid').removeClass('is-invalid').show();
-            }
-        })
-    });
-</script> -->

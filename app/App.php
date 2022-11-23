@@ -33,8 +33,10 @@ class App{
     }
 
     public function getUrl(){
-        if(!empty($_SERVER["REQUEST_URI"])){
-            $url = $_SERVER["REQUEST_URI"];
+        //$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $uri = $_SERVER['REQUEST_URI'];
+        if(!empty($uri)){
+            $url = $uri;
         } else {
             $url = '/';
         }
@@ -116,16 +118,25 @@ class App{
         if(method_exists($this->__controller, $this->__action)){
             call_user_func_array(array($this->__controller, $this->__action), $this->__params);
         } else {
-            die('Method ' . $this->__action . ' không tồn tại');
+           // die('Method ' . $this->__action . ' không tồn tại');
         }
     }
 
     public function loadError($name = '404', $data = []){
-        extract($data);
-        require_once 'error/' . $name . '.php';
+        $data['page_title'] = 'Không tìm thấy file';
+        $data['content'] = 'error/index';
+        $data['sub_content']['number_error'] = $name;
+        
+        $tempController = new Controller();
+        $tempController->render($data['content'], $data['sub_content'], false);
+        // extract($data);
+        // require_once 'error/' . $name . '.php';
     }
     public function getCurrentController(){
         return $this->__controller;
+    }
+    public function setCurrentParams($params){
+        $this->__params = $params;
     }
 
     public function handleRouteMiddleWare($keyRoute, $db){
@@ -159,7 +170,10 @@ class App{
                         if(!empty($db)){
                             $middleWareObject->db = $db;
                         }
-                        $middleWareObject->handle();
+                        $params = $middleWareObject->handle();
+                        if(!empty($params)){
+                            $this->__params = $params;
+                        }
                     }
                 }
             }

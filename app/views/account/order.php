@@ -1,14 +1,11 @@
 <?php
 $statusVie = ["Đang xử lý", "Đang giao hàng", "Đã giao hàng", "Đã hủy"];
-if (!empty($data['msg'])) {
-    $msg = $data['msg'];
-    $check = strtolower($msg);
-    // check từ khoá
-    if (str_contains($check, 'đã huỷ đơn')) {
-        echo "<script>notify('success', 'fa-duotone fa-box-archive', 'center', $msg);</script>";
-    } else if (str_contains($check, 'không huỷ đơn')) {
-        echo "<script>notify('error', 'fa-duotone fa-user-xmark', 'center', $msg);";
-    }
+if (!empty($msg)) {
+    $type_msg = $msg['type'];
+    $icon_msg = $msg['icon'];
+    $pos_msg = $msg['position'];
+    $content_msg = $msg['content'];
+    echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
 }
 ?>
 
@@ -37,30 +34,34 @@ if (!empty($data['msg'])) {
                             <tbody>
                                 <?php
                                 foreach ($order_detail as $key => $value) {
-                                    $id_product = $value['id_product'];
+                                    $id = $value['id_product'];
                                     $name = $value['name'];
                                     $price = (float)$value['price'];
                                     $image = $value['image'];
                                     $amount = (int)$value['amount'];
-                                    $total_price = $price * $amount;
-                                    $total_money = (float)$value['total_money'];
                                     $order_date = $value['order_date'];
                                     $status = $value['status'];
+                                    $total_money = (float)$value['total_money'];
+                                    $disocunt = $value['discount'];
 
+                                    if($disocunt > 0){
+                                        $price = $price - ($price * $disocunt / 100);
+                                    }
+                                    $total_price = $price * $amount;
                                 ?>
                                     <tr>
                                         <td class="pro-thumbnail">
-                                            <a href="#">
-                                                <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>" alt="Product<?php echo $id_product ?>" style="width:70%" />
+                                            <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)">
+                                                <img class="fit-image rounded" src="<?php echo _CDN_IMAGE_150 . '/products/' . $image ?>" alt="Product<?php echo $id_product ?>" style="width:70%" />
                                             </a>
                                         </td>
                                         <td class="pro-title">
-                                            <a href="#"><?php echo $name ?></a>
+                                            <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)"><?php echo $name ?></a>
                                         </td>
                                         <td class="pro-price">
-                                            <span><?php echo $price ?>$ x <?php echo $amount ?></span>
+                                            <span><?php echo number_price($price) ?> x <?php echo $amount ?></span>
                                         </td>
-                                        <td class="pro-subtotal"><span><?php echo $total_price ?>$</span></td>
+                                        <td class="pro-subtotal"><span><?php echo number_price($total_price) ?></span></td>
                                     </tr>
                                 <?php
                                 }
@@ -105,7 +106,7 @@ if (!empty($data['msg'])) {
                                     </tr>
                                     <tr class="total">
                                         <td>Tổng tiền</td>
-                                        <td class="total-amount"><?php echo $total_money ?>$</td>
+                                        <td class="total-amount"><?php echo number_price($total_money) ?></td>
                                     </tr>
                                 </table>
                             </div>
@@ -114,7 +115,7 @@ if (!empty($data['msg'])) {
                         </div>
                         <?php if ($status == 'pending') {
                         ?>
-                            <a href="/account/cancel_order/<?php echo $id_order?>" class="btn btn btn-gray-deep btn-hover-primary m-t-30">Huỷ Hàng</a>
+                            <a href="/account/cancel_order/<?php echo $id_order ?>" class="btn btn btn-gray-deep btn-hover-primary m-t-30">Huỷ Hàng</a>
                         <?php
                         }
                         ?>

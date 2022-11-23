@@ -1,0 +1,59 @@
+/*=======================================
+    3.10 Breadcrumb CSS
+=========================================*/
+.breadcrumb-area {
+    padding: 50px 0;
+}
+.breadcrumb-wrapper {
+    & .breadcrumb-title {
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 30px;
+        margin: 0px 0 12px;
+        text-transform: uppercase;
+
+        @media #{$large-mobile} {
+            font-size: 24px;
+            line-height: 24px;
+        }
+    }
+
+    & ul {
+        display: flex;
+        justify-content: center;
+        line-height: 1;
+
+        & li {
+            position: relative;
+            margin-right: 20px;
+
+            & a {
+                font-weight: 500;
+
+                &:hover {
+                    color: $primary;
+                }
+            }
+
+            &::after {
+                position: absolute;
+                content: '';
+                background: $dark;
+                width: 5px;
+                height: 1px;
+                top: 50%;
+                transform: translateX(-50%);
+                right: -15px;
+            }
+
+            &:last-child {
+                margin-right: 0;
+                font-size: 14px;
+
+                &::after {
+                    display: none;
+                }
+            }
+        }
+    }
+}

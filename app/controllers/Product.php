@@ -25,8 +25,8 @@ class Product extends Controller{
 
     public function detail($id){
         $productDetail = $this->models('ProductModel')->getDetail($id);
-        $similarProduct = $this->models('ProductModel')->similarProduct($productDetail[0]['id_category']);
-
+        $similarProduct = $this->models('ProductModel')->similarProduct($productDetail['id_category']);
+        
         $title = 'Chi tiết ' . $productDetail[0]['name'];
 
         $user = Session::data('user');
@@ -36,11 +36,9 @@ class Product extends Controller{
 
         $this->data['page_title'] = $title;
         $this->data['sub_content']['title'] = $title;
-        $this->data['sub_content']['product_detail'] = $productDetail[0];
+        $this->data['sub_content']['product_detail'] = $productDetail;
         $this->data['sub_content']['similar_product'] = $similarProduct;
         $this->data['content'] = 'products/detail';
-
-        $this->data['sub_content']['msg'] = Session::data('msg');
 
         $this->render('layouts/client_layout', $this->data);
     }

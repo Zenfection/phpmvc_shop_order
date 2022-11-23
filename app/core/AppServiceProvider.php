@@ -5,7 +5,6 @@ class AppServiceProvider extends ServiceProvider {
     public function boot(){
         $dataUser = [];
         $user = Session::data('user');
-        
         if(!empty($user)){
             $dataCart = $this->getUserCart($user);
             $totalMoney = $this->totalMoneyCartUser($user);
@@ -15,6 +14,7 @@ class AppServiceProvider extends ServiceProvider {
                 'total_money' => $totalMoney
             ];
         }
+        
         View::share($dataUser);
     }
 

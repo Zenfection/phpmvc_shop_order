@@ -10,23 +10,25 @@
         ?>
         <div class="col-12 col-sm-6 col-lg-3 product-wrapper m-b-40 product">
     <div class="thumb">
-        <a href="/product/detail/<?php echo $id?>">
-            <img class="fit-image p-10" id="img-product<?php echo $id ?>" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>" alt="Product" />
+        <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)">
+            <img class="fit-image p-10" src="<?php echo _CDN_IMAGE_300 . '/products/' . $image ?>" alt="Product" />
         </a>
         <?php
         if ($discount > 0) {
             $discount_price = $price - ($price * $discount / 100);
-        ?>
+            ?>
             <span class="badges">
                 <span class="sale"><?php echo (int)$discount ?> %</span>
             </span>
-        <?php
+            <?php
         }
         ?>
         <div class="action-wrapper" id="wrapper<?php echo $id ?>">
-            <a class="action" id="plus_product" title="Thêm sản phẩm"><i class="fa-regular fa-plus-large"></i></a>
-            <a class="action wishlist" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
-            <a class="nav-content cursor-pointer action cart" id="viewcart" title="Cart"><i class="fa-regular fa-cart-circle-plus"></i></a>
+            <a class="action cursor-pointer" title="Thêm sản phẩm" onclick="addProductCart('<?php echo $id?>', 1)"><i class="fa-duotone fa-plus-large"></i></a>
+            <a class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
+            <a class="nav-content cursor-pointer action cart" onclick="loadContent('viewcart')">
+                <i class="fa-duotone fa-cart-circle-plus"></i>
+            </a>
         </div>
     </div>
     <div class="content">
@@ -49,12 +51,12 @@
             <?php
             if ($discount > 0) {
             ?>
-                <span class="new">$<?php echo $discount_price ?></span>
-                <span class="old">$<?php echo $price ?></span>
+                <span class="new"><?php echo number_price($discount_price) ?></span>
+                <span class="old"><?php echo number_price($price) ?></span>
             <?php
             } else {
             ?>
-                <span class='new'>$<?php echo $price ?></span>
+                <span class='new'><?php echo number_price($price) ?></span>
             <?php
             }
             ?>

@@ -1,0 +1,42 @@
+/*=======================================
+    3.09 Newsletter CSS
+=========================================*/
+.newsletter-content {
+    & .title {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1;
+    }
+
+    & p {
+        @media #{$tablet-device, $large-mobile} {
+            font-size: 14px;
+        }
+    }
+}
+.newsletter-form-wrap {
+    &.newsletter-inner {
+        & .mc-form {
+            & .form-control {
+                padding-right: 130px;
+                padding-left: 30px;
+                height: 50px;
+                font-size: 14px;
+                color: $dark;
+                @media #{$large-mobile} {
+                    padding-right: 120px;
+                    padding-left: 20px;
+                    font-size: 13px;
+                }
+            }
+
+            & .newsletter-btn {
+                padding: 8px 15px;
+                right: 0;
+                @media #{$large-mobile} {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}

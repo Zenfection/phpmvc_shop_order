@@ -1,0 +1,228 @@
+/*=======================================
+    3.02 Hero CSS
+=========================================*/
+.hero-slide-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 610px;
+
+    @media #{$laptop-device,
+    $desktop-device} {
+        height: 550px;
+    }
+    @media #{$tablet-device} {
+        height: 450px;
+    }
+    @media #{$large-mobile} {
+        height: 350px;
+    }
+    @media #{$extra-small-mobile} {
+        height: 300px;
+    }
+
+}
+.hero-slide-bg {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ebebeb;
+
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.hero-slide-content {
+    position: relative;
+    z-index: 9;
+
+    & .sub-title {
+        font-size: 26px;
+        font-weight: 400;
+        color: $dark;
+
+        @media #{$tablet-device} {
+            font-size: 20px;
+        }
+        @media #{$large-mobile} {
+            font-size: 18px;
+        }
+    }
+
+    & .title {
+        font-size: 46px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        line-height: 46px;
+        color: $dark;
+
+        @media #{$desktop-device} {
+            font-size: 40px;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+        @media #{$tablet-device} {
+            font-size: 30px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        @media #{$large-mobile} {
+            font-size: 30px;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+        @media #{$extra-small-mobile} {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+    }
+
+    & p {
+        line-height: 1.3;
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 0px;
+        margin-top: 20px;
+        color: $dark;
+        @media #{$large-mobile} {
+            font-size: 14px;
+            line-height: 1.4;
+            width: 270px;
+            margin: 10px auto 0;
+        }
+    }
+
+    & .btn {
+        margin-top: 40px;
+        padding: 20px 45px;
+        border-radius: 0px;
+        @media #{$tablet-device,
+        $large-mobile} {
+            font-size: 14px;
+            padding: 15px 25px;
+        }
+        @media #{$large-mobile} {
+            margin-top: 30px;
+        }
+        @media #{$extra-small-mobile} {
+            font-size: 12px;
+            padding: 10px 18px;
+            margin-top: 26px;
+        }
+    }
+}
+.hero-slider{
+    // Swiper Navigation
+    .main-slider-nav{
+        color: $dark;
+        opacity: 0;
+        visibility: hidden;
+        transition: $transition-base;
+        font-size: 16px;
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $white;
+        &::after{
+            display: none;
+        }
+        &:hover{
+            color: $white;
+            background: $primary;
+            transition: $transition-base;
+        }
+    }
+    .home-slider-prev{
+        left: 15px;        
+        @media #{$laptop-device, $desktop-device}{
+            left: 5px;
+        }
+    }
+    .home-slider-next{
+        right: 15px;
+        &::after{
+            display: none;
+        }
+        @media #{$laptop-device, $desktop-device}{
+            right: 5px;
+        }
+    }
+    &:hover{
+        & .main-slider-nav, & .swiper-pagination{
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .home-slider-prev, .home-slider-next {
+        margin-top: 0;
+        transform: translateY(-50%);
+
+        i {
+            transition: $transition-base;
+        }
+
+        &:hover {
+            i {
+                opacity: 1;
+                transition: $transition-base;
+            }
+        }
+
+        &::after {
+            display: none;
+        }
+    }
+
+    // Swiper Pagination
+
+    .swiper-pagination {
+        position: absolute;
+        bottom: 20px;
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+.hero-slide-content {
+    & > * {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: fadeOutUp;
+    }
+}
+.swiper-slide-active{
+    & .hero-slide-content {
+        // All Element Selector
+        & > * {
+            animation-name: fadeInUp;
+            
+            // Child Selector
+            &:nth-child(1) {
+                animation-delay: 0.5s;
+            }
+            &:nth-child(2) {
+                animation-delay: 1.2s;
+            }
+            &:nth-child(3) {
+                animation-delay: 1.5s;
+            }
+            &:nth-child(4) {
+                animation-delay: 2s;
+            }
+            &:nth-child(5) {
+                animation-delay: 2.5s;
+            }
+            &:nth-child(6) {
+                animation-delay: 3s;
+            }
+            
+        }
+    }
+}

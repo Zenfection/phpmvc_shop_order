@@ -1,10 +1,13 @@
 <?php
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
+$dotenv->load();
+
 $config['database'] = [
-    'host' => '127.0.0.1',
-    'user' => 'root',
-    'pass' => 'password',
-    'db' => 'shop_order',
-    'port' => '3306'
+    'host' => $_ENV['DB_HOST'],
+    'user' => $_ENV['DB_USER'],
+    'pass' => $_ENV['DB_PASS'],
+    'db' => $_ENV['DB_NAME'],
+    'port' => $_ENV['DB_PORT'],
 ]
 ?>

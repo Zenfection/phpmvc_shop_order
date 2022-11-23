@@ -38,28 +38,29 @@
                                 } else {
                                     $price = $value['price'];
                                 }
+                                $total_price = $price * $quantity;
                             ?>
                                 <tr id="view_cart_product<?php echo $id ?>">
                                     <td class="pro-thumbnail">
-                                        <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>" alt="Product" />
+                                        <img class="fit-image rounded" src="<?php echo _CDN_IMAGE_300 . '/products/' . $image ?>" alt="Product" />
                                     </td>
                                     <td class="pro-title">
                                         <a><?php echo $name ?></a>
                                     </td>
-                                    <td class="pro-price"><span><?php echo $price ?>$</span></td>
+                                    <td class="pro-price"><span><?php echo number_price($price) ?>s</span></td>
                                     <td class="pro-quantity">
                                         <div class="quantity">
                                             <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="<?php echo $quantity ?>" type="text">
-                                                <div class="dec qtybutton" id="decQtyProduct">-</div>
-                                                <div class="inc qtybutton" id="incQtyProduct">+</div>
+                                                <input class="cart-plus-minus-box" value="<?php echo $quantity ?>" type="text" disabled>
+                                                <div class="dec qtybutton" id="decQtyProduct" onclick="deleteProductCart('<?php echo $id?>', 1)">-</div>
+                                                <div class="inc qtybutton" id="incQtyProduct" onclick="addProductCart('<?php echo $id?>', 1)">+</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="pro-subtotal">
-                                        <span><?php echo $price * $quantity ?>$</span>
+                                        <span><?php echo number_price($total_price) ?></span>
                                     </td>
-                                    <td class="pro-remove" id="product<?php echo $id?>">
+                                    <td class="pro-remove" id="product<?php echo $id ?>" onclick="deleteProductCart('<?php echo $id ?>')">
                                         <a>
                                             <i class="fa-duotone fa-trash-xmark fa-2xl"></i>
                                         </a>
@@ -68,8 +69,6 @@
                             <?php
                             }
                             ?>
-
-
                         </tbody>
                         <!-- Table Body End -->
 
@@ -82,12 +81,12 @@
 
                     <!-- Cart Button left Side Start -->
                     <div class="cart-btn-lef-side m-b-20">
-                        <a class="btn btn btn-gray-deep btn-hover-primary" href="/shop/page/1">Tiếp tục mua</a>
+                        <a class="btn btn btn-gray-deep btn-hover-primary" href="/shop/cateogry">Tiếp tục mua</a>
                     </div>
                     <!-- Cart Button left Side End -->
 
                     <!-- Cart Button Right Side Start -->
-                    <div class="cart-btn-right-right m-b-20" id="clear-cart">
+                    <div class="cart-btn-right-right m-b-20 cursor-pointer" onclick="clearProductCart()">
                         <a class="btn btn btn-gray-deep btn-hover-primary">Xoá Hết Giỏ Hàng</a>
                     </div>
                     <!-- Cart Button Right Side End -->
@@ -116,15 +115,15 @@
                             <table class="table">
                                 <tr>
                                     <td>Tổng Tiền</td>
-                                    <td id="total-money"><?php echo $totalMoney ?>$</td>
+                                    <td id="total-money"><?php echo number_price($totalMoney) ?></td>
                                 </tr>
                                 <tr>
                                     <td>Phí Ship</td>
-                                    <td>0$</td>
+                                    <td>0đ</td>
                                 </tr>
                                 <tr class="total">
                                     <td>Tổng</td>
-                                    <td id="total-bill"><?php echo $totalMoney ?>$</td>
+                                    <td id="total-bill"><?php echo number_price($totalMoney) ?></td>
                                 </tr>
                             </table>
                         </div>

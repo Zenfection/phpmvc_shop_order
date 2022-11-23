@@ -1,6 +1,26 @@
 <?php
 
+require_once 'vendor/autoload.php';
+
 define('_DIR_ROOT', $_SERVER["DOCUMENT_ROOT"]);
+define('_GIT_SOURCE', 'https://raw.githubusercontent.com/Zenfection/phpmvc_shop_order/main');
+define('_CDN_JSDelivr', 'https://cdn.jsdelivr.net/gh/Zenfection/phpmvc_shop_order@main');
+
+// for($i = 50; $i < 600; $i += 50){
+//     define('_CDN_IMAGE_' . $i, 'https://ik.imagekit.io/zenfection/shoporder/tr:w-' . $i);
+// }
+define('_CDN_IMAGE_50', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-50');
+define('_CDN_IMAGE_100', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-100');
+define('_CDN_IMAGE_150', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-150');
+define('_CDN_IMAGE_200', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-200');
+define('_CDN_IMAGE_250', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-250');
+define('_CDN_IMAGE_300', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-300');
+define('_CDN_IMAGE_350', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-350');
+define('_CDN_IMAGE_400', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-400');
+define('_CDN_IMAGE_450', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-450');
+define('_CDN_IMAGE_500', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-500');
+define('_CDN_IMAGE_550', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-550');   
+define('_CDN_IMAGE_600', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-600');
 
 // Xử lý http root
 if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443){
@@ -9,10 +29,8 @@ if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_
     $web_root = 'http://' . $_SERVER['HTTP_HOST'];
 }
 
-// $dirRoot = str_replace('\\', '/', _DIR_ROOT);
-// $documentRoot = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
-
 define('_WEB_ROOT', $web_root);
+// define('_WEB_ROOT', $web_root);
 
 //* Tự động Load Config
 $config_dir = scandir('configs');
@@ -39,6 +57,7 @@ require_once 'core/Load.php'; //
 require_once 'core/MiddleWare.php'; // Load MiddleWare
 require_once 'core/Route.php'; // Xử lý route
 require_once 'core/Session.php'; // Xử lý session
+require_once 'core/Cookie.php'; //Xử lý Cookie
 
 //* Kiểm tra config và load database
 if(!empty($config['database'])){

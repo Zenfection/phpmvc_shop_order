@@ -1,4 +1,3 @@
-
 <!-- Single Product Section Start -->
 <div id="content">
     <div class="section section-margin">
@@ -20,9 +19,10 @@
                                 $description = $product_detail['description'];
                                 $quantity = $product_detail['quantity'];
                                 $id_category = $product_detail['id_category'];
+
                                 ?>
 
-                                <img class='w-100' id="img-product<?php echo $id ?>" src='<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>' alt='Product' style="padding-right: 25%;">
+                                <img class='w-100' src="<?php echo _CDN_IMAGE_500 . '/products/' . $image ?>" alt='Product' style="padding-right: 25%;">
                             </div>
                         </div>
                         <!-- Single Product Image End -->
@@ -48,7 +48,7 @@
                         <!-- Product Head Start -->
                         <div class="product-head m-b-15">
                             <?php
-                                echo "<h2 class='product-title'>$name</h2>";
+                            echo "<h2 class='product-title'>$name</h2>";
                             ?>
                         </div>
                         <!-- Product Head End -->
@@ -76,12 +76,12 @@
                             if ($discount > 0) {
                                 $discount_price = $price - ($price * $discount / 100);
                             ?>
-                                <span class="regular-price">$<?php echo $discount_price ?></span>
-                                <span class="old-price">$<?php echo $price ?></span>
+                                <span class="regular-price"><?php echo number_price($discount_price) ?></span>
+                                <span class="old-price"><?php echo number_price($price) ?></span>
                             <?php
                             } else {
                             ?>
-                                <span class='regular-price'>$<?php echo $price ?></span>
+                                <span class='regular-price'><?php echo number_price($price) ?></span>
                             <?php
                             }
                             ?>
@@ -99,7 +99,7 @@
 
                         <!-- Description Start -->
                         <?php
-                            echo "<p class='desc-content m-b-25'>$description.</p>";
+                        echo "<p class='desc-content m-b-25'>$description.</p>";
                         ?>
                         <!-- Description End -->
 
@@ -107,7 +107,7 @@
                         <div class="quantity d-flex align-items-center m-b-25">
                             <span class="m-r-10"><strong>Số lượng: </strong></span>
                             <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" value="1" type="text">
+                                <input class="cart-plus-minus-box" value="1" type="text" id="qty">
                                 <div class="dec qtybutton">-</div>
                                 <div class="inc qtybutton">+</div>
                             </div>
@@ -117,10 +117,10 @@
                         <!-- Cart Button Start -->
                         <div class="cart-btn action-btn m-b-30">
                             <div class="action-cart-btn-wrapper d-flex">
-                                <div class="add-to_cart" id="product<?php echo $id ?>">
+                                <div class="add-to-cart cursor-pointer" onclick="addProductCart('<?php echo $id?>', 'qty')">
                                     <a class="btn btn-primary btn-hover-dark rounded" style="width: 110%">Thêm Vào Giỏ</a>
                                 </div>
-                                <a href="#" title="Wishlist" class="action"><i class="fa-regular fa-heart"></i></a>
+                                <!-- <a href="#" title="Wishlist" class="heart"><i class="fa-duotone fa-heart fa-xl"></i></a> -->
                             </div>
                         </div>
                         <!-- Cart Button End -->
@@ -140,7 +140,7 @@
                         <div class="payment-option m-t-20 d-flex">
                             <span><strong>Thanh Toán: </strong></span>
                             <a href="#">
-                                <img class="fit-image m-l-5" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/payment/payment_large.png" alt="Payment Option Image">
+                                <img class="fit-image m-l-5" src="<?php echo _GIT_SOURCE; ?>/assets/images/payment/payment_large.png" alt="Payment Option Image">
                             </a>
                         </div>
                         <!-- Payment Option End -->
@@ -235,6 +235,10 @@
                             $discount = $row['discount'];
                             $ranking = $row['ranking'];
                             $image = $row['image'];
+
+                            if ($id == $product_detail['id_product']) {
+                                continue;
+                            }
                         ?>
                             <div class="mt-4 pt-2">
                                 <div class="solution border rounded position-relative px-4 py-5 ">
@@ -242,8 +246,8 @@
                                         <div class="product">
                                             <!-- Thumb Start  -->
                                             <div class="thumb product-inner" id="product<?php echo $id ?>">
-                                                <a class="image" href="/product/detail/<?php echo $id?>">
-                                                    <img class="fit-image rounded" src="<?php echo _WEB_ROOT; ?>/public/assets/clients/images/products/<?php echo $image ?>" />
+                                                <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)">
+                                                    <img class="fit-image rounded" src="<?php echo _CDN_IMAGE_250 . '/products/' . $image ?>" />
                                                 </a>
                                                 <?php
                                                 if ($discount > 0) {
@@ -256,9 +260,9 @@
                                                 }
                                                 ?>
                                                 <div class="action-wrapper" id="wrapper<?php echo $id ?>">
-                                                    <a class="action" id="plus_product" title="Thêm sản phẩm"><i class="fa-regular fa-plus-large"></i></a>
-                                                    <a class="action wishlist" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
-                                                    <a class="nav-content cursor-pointer action cart" id="viewcart" title="Cart"><i class="fa-regular fa-cart-circle-plus"></i></a>
+                                                    <a class="action cursor-pointer" title="Thêm sản phẩm"><i class="fa-duotone fa-plus-large" onclick="addProductCart('<?php echo $id?>', 1)"></i></a>
+                                                    <a class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
+                                                    <a class="nav-content cursor-pointer action cart" id="viewcart" title="Cart"><i class="fa-duotone fa-cart-circle-plus"></i></a>
                                                 </div>
                                             </div>
                                             <!-- Thumb End  -->
@@ -284,12 +288,12 @@
                                                     <?php
                                                     if ($discount > 0) {
                                                     ?>
-                                                        <span class="new">$<?php echo $discount_price ?></span>
-                                                        <span class="old">$<?php echo $price ?></span>
+                                                        <span class="new"><?php echo number_price($discount_price) ?></span>
+                                                        <span class="old"><?php echo number_price($price) ?></span>
                                                     <?php
                                                     } else {
                                                     ?>
-                                                        <span class='new'>$<?php echo $price ?></span>
+                                                        <span class='new'><?php echo number_price($price) ?></span>
                                                     <?php
                                                     }
                                                     ?>
@@ -312,37 +316,4 @@
 </div>
 <!-- Product Section End -->
 
-
-<script src="<?php echo _WEB_ROOT?>/public/assets/clients/js/plugins/tiny-slider.js"></script>
-<script>
-
-    // feature-slidier
-    if (document.getElementsByClassName('feature-slider')[0] != undefined) {
-        var slider = tns({
-            container: '.feature-slider',
-            loop: true,
-            navPosition: "bottom",
-            speed: 400,
-            mouseDrag: true,
-            controls: false,
-            autoplay: true,
-            autoplayButtonOutput: false,
-            responsive: {
-                640: {
-                    edgePadding: 20,
-                    gutter: 20,
-                    items: 1
-                },
-                700: {
-                    edgePadding: 20,
-                    gutter: 30,
-                    items: 2
-                },
-                900: {
-                    edgePadding: 20,
-                    items: 4
-                }
-            }
-        });
-    }
-</script>
+<script src="<?php echo _WEB_ROOT; ?>/assets/js/custom/product_detail.js"></script>

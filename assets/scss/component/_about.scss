@@ -1,0 +1,43 @@
+/*=======================================
+    3.06 About CSS
+=========================================*/
+.about-content {
+    & .title {
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 1;
+        margin-bottom: 30px;
+        @media #{$tablet-device, $large-mobile} {
+            margin-bottom: 15px;
+        }
+        @media #{$large-mobile} {
+            font-size: 24px;
+        }
+    }
+    & p {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    & .about-content-list {
+        & li {
+            font-weight: 500;
+            font-size: 15px;
+            margin-bottom: 10px;
+
+            & span {
+                margin-right: 5px;
+                vertical-align: middle;
+                font-size: 14px;
+                line-height: 14px;
+            }
+        }
+    }
+    & .btn {
+        margin-top: 40px;
+        border-radius: 50px;
+        @media #{$tablet-device, $large-mobile} {
+            margin-top: 20px;
+        }
+    }
+}
