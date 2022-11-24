@@ -83,9 +83,9 @@ class Product extends Controller {
         } else {
             $update = $this->models('ProductModel')->updateProduct($id, $data);
             if($update){
-                $this->fetchSuccess('Sửa thông tin' . $name . 'thành công');
+                $this->fetchSuccess('Sửa thông tin ' . $name . ' thành công');
             } else {
-                $this->fetchError('Sửa thông tin' . $name . 'thất bại');
+                $this->fetchError('Sửa thông tin ' . $name . ' thất bại');
             }
         }
     }

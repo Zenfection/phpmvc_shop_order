@@ -2,23 +2,23 @@
 <header>
     <div class="topbar d-flex align-items-center">
         <nav class="navbar navbar-expand">
-            <div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
+            <div class="mobile-toggle-menu"><i class='fa-duotone fa-bars'></i></div>
 
             <div class="search-bar flex-grow-1">
                 <div class="position-relative search-bar-box">
-                    <input type="text" class="form-control search-control" placeholder="Tìm Kiếm..."> <span class="position-absolute top-50 search-show translate-middle-y"><i class='bx bx-search'></i></span>
-                    <span class="position-absolute top-50 search-close translate-middle-y"><i class='bx bx-x'></i></span>
+                    <input type="text" class="form-control search-control" placeholder="Tìm Kiếm..."> <span class="position-absolute top-50 search-show translate-middle-y"><i class='fa-duotone fa-search'></i></span>
+                    <span class="position-absolute top-50 search-close translate-middle-y"><i class='fa-duotone fa-xmark'></i></span>
                 </div>
             </div>
             <div class="top-menu ms-auto">
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item mobile-search-icon">
-                        <a class="nav-link" href="#"> <i class='bx bx-search'></i>
+                        <a class="nav-link" href="#"> <i class='fa-duotone fa-search'></i>
                         </a>
                     </li>
                     <li class="nav-item dropdown dropdown-large">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">7</span>
-                            <i class='bx bx-bell'></i>
+                            <i class='fa-duotone fa-bell'></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a href="javascript:;">
@@ -29,7 +29,7 @@
                             <div class="header-notifications-list">
                                 <a class="dropdown-item" href="javascript:;">
                                     <div class="d-flex align-items-center">
-                                        <div class="notify bg-light-primary text-primary"><i class="bx bx-group"></i>
+                                        <div class="notify bg-light-primary text-primary"><i class="fa-duotone fa-user-group"></i>
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="msg-name">Khách hàng mới<span class="msg-time float-end">14 phút trước</span></h6>
@@ -39,7 +39,7 @@
                                 </a>
                                 <a class="dropdown-item" href="javascript:;">
                                     <div class="d-flex align-items-center">
-                                        <div class="notify bg-light-danger text-danger"><i class="bx bx-cart-alt"></i>
+                                        <div class="notify bg-light-danger text-danger"><i class="fa-duotone fa-cart-flatbed-boxes"></i>
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="msg-name">Thêm đơn hàng <span class="msg-time float-end">2
@@ -50,7 +50,7 @@
                                 </a>
                                 <a class="dropdown-item" href="javascript:;">
                                     <div class="d-flex align-items-center">
-                                        <div class="notify bg-light-success text-success"><i class='bx bx-check-square'></i>
+                                        <div class="notify bg-light-success text-success"><i class='fa-duotone fa-box-circle-check'></i>
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="msg-name">Đơn hàng đã giao <span class="msg-time float-end">5 giờ trước</span></h6>
@@ -80,7 +80,7 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="javascript:;"><i class='bx bx-log-out-circle'></i><span>Đăng Xuất</span></a>
+                    <li><a class="dropdown-item" href="javascript:;"><i class='fa-duotone fa-arrow-right-from-bracket'></i><span>Đăng Xuất</span></a>
                     </li>
                 </ul>
             </div>

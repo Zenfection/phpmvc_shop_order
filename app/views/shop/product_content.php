@@ -46,18 +46,7 @@
                         <a class="product-title cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)""><?php echo $name ?></a>
                     </h5>
                     <span class=" rating">
-                            <?php
-                            $temp = $ranking;
-                            for ($j = 0; $j < 5; $j++) {
-                                if ($temp > 2) {
-                                    echo "<i class='fa-solid fa-star' style='color: #ffad42'></i>";
-                                    $temp -= 2;
-                                } else if ($temp > 0) {
-                                    echo "<i class='fa-solid fa-star-half' style='color: #ffad42'></i>";
-                                    $temp = 0;
-                                }
-                            }
-                            ?>
+                    <?php rating($ranking, 'fa-solid fa-star text-warning', 'fa-duotone fa-star-half-stroke text-warning', 'fa-solid fa-star text-secondary') ?>
                             </span>
                             <span class="price">
                                 <?php

@@ -15,7 +15,7 @@
                                             <h6 class="font-weight-bold mb-0">Sản phẩm trong đơn hàng</h6>
                                         </div>
                                         <div class="dropdown ms-auto">
-                                            <div class="cursor-pointer text-dark font-24 dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded"></i>
+                                            <div class="cursor-pointer text-dark font-24 dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"><i class="fa-duotone fa-ellipsis"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -149,7 +149,7 @@
                                                             <p class="mb-0 text-secondary">Tổng Sản Phẩm</p>
                                                             <h4 class="my-1"><?php echo $countProduct ?> món hàng</h4>
                                                         </div>
-                                                        <div class="widgets-icons bg-light-warning text-warning ms-auto"><i class="bx bxs-shopping-bag"></i>
+                                                        <div class="widgets-icons bg-light-warning text-warning ms-auto"><i class="fa-duotone fa-bag-shopping"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -161,9 +161,9 @@
                                                     <div class="d-flex align-items-center">
                                                         <div>
                                                             <p class="mb-0 text-secondary">Tổng Tiền</p>
-                                                            <h4 class="my-1"><?php echo $totalMoney ?>$</h4>
+                                                            <h4 class="my-1"><?php echo number_price($totalMoney) ?></h4>
                                                         </div>
-                                                        <div class="widgets-icons bg-light-success text-success ms-auto"><i class="bx bxs-wallet"></i>
+                                                        <div class="widgets-icons bg-light-success text-success ms-auto"><i class="fa-duotone fa-coins"></i>
                                                         </div>
                                                     </div>
                                                 </div>

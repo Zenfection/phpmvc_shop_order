@@ -16,7 +16,7 @@ if (!empty($msg)) {
                     <div class="position-relative">
                         <input type="text" id="searchOrder" class="form-control ps-5 radius-30" placeholder="Tìm đơn hàng" value="<?php echo $_POST['search'] ?>">
                         <span class="position-absolute top-50 product-show translate-middle-y">
-                            <i class="bx bx-search"></i>
+                            <i class="fa-duotone fa-search"></i>
                         </span>
                     </div>
                 </div>

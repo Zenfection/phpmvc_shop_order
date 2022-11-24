@@ -32,20 +32,7 @@ if ((int)$total_product_order > 0) {
                         </div>
                         <div class="d-flex gap-3 py-3" data-aos="fade-down">
                             <div class="cursor-pointer">
-                                <?php
-                                $tempRank = $ranking;
-                                for ($i = 0; $i < 5; $i++) {
-                                    if ($tempRank > 2) {
-                                        echo "<i class='bx bxs-star text-warning bx-sm'></i>";
-                                        $tempRank -= 2;
-                                    } else if ($tempRank > 0) {
-                                        echo "<i class='bx bxs-star-half text-warning bx-sm'></i>";
-                                        $tempRank = 0;
-                                    } else {
-                                        echo "<i class='bx bxs-star text-secondary bx-sm'></i>";
-                                    }
-                                }
-                                ?>
+                            <?php rating($ranking, 'fa-solid fa-star text-warning fa-xl', 'fa-duotone fa-star-half-stroke text-warning fa-xl', 'fa-solid fa-star text-secondary fa-xl') ?>
                             </div>
                             <div class="text-success"><i class='bx bxs-cart-alt align-middle font-24'></i><?php echo $noti_total_order; ?></div>
                         </div>
@@ -55,7 +42,7 @@ if ((int)$total_product_order > 0) {
                                 <div class="col-md-4">
                                     <div class="input-group">
                                         <span class="input-group-text price">Giá Tiền</span>
-                                        <input type="text" class="form-control" id="price" name="price" value="<?php echo number_price($price) ?>">
+                                        <input type="text" class="form-control" id="price" name="price" value="<?php echo number_format($price, 0, ',', '.') ?>">
                                         <span class="input-group-text">đ</span>
                                     </div>
                                 </div>
@@ -134,20 +121,7 @@ if ((int)$total_product_order > 0) {
                                     <a class="card-title cursor-pointer fw-semibold" onclick="loadProductDetail(<?php echo $id ?>)"><?php echo $name ?></a>
                                     <!-- <h6 class="card-title cursor-pointer"><?php echo $name ?></h6> -->
                                     <div class="cursor-pointer my-2">
-                                        <?php
-                                        $tempRank = $ranking;
-                                        for ($j = 0; $j < 5; $j++) {
-                                            if ($tempRank > 2) {
-                                                echo "<i class='bx bxs-star text-warning'></i>";
-                                                $tempRank -= 2;
-                                            } else if ($tempRank > 0) {
-                                                echo "<i class='bx bxs-star-half text-warning'></i>";
-                                                $tempRank = 0;
-                                            } else {
-                                                echo "<i class='bx bxs-star text-secondary'></i>";
-                                            }
-                                        }
-                                        ?>
+                                        <?php rating($ranking, 'fa-solid fa-star text-warning', 'fa-duotone fa-star-half-stroke text-warning', 'fa-solid fa-star text-secondary') ?>
                                     </div>
                                     <div class="clearfix">
                                         <p class="mb-0 float-start fw-bold"><span class="me-2 text-decoration-line-through text-secondary"><?php echo number_price($price) ?></span><span><?php echo number_price($discount_price) ?></span></p>

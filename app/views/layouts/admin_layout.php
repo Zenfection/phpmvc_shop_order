@@ -25,10 +25,10 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/admin/css/bootstrap-extended.min.css">
 	<link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/admin/css/app.min.css">
-	<link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/admin/css/icons.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/css/lobibox.css">
 	<script src="<?php echo _WEB_ROOT; ?>/cdn/js/icon-zen.min.js"></script>
+	<!-- <link rel="stylesheet" href="<?php echo _WEB_ROOT; ?> assets/admin/css/icons.min.css"> -->
 
 	<!-- //? Theme Style CSS -->
 	<link rel="stylesheet" href="<?php echo _WEB_ROOT; ?>/assets/admin/css/dark-theme.min.css" />

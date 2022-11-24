@@ -23,7 +23,7 @@
                                     <div class="col-12">
                                         <label for="inputChoosePassword" class="form-label">Mật Khẩu</label>
                                         <div class="input-group" id="show_hide_password">
-                                            <input type="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+                                            <input type="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='fa-duotone fa-eye-slash'></i></a>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -36,7 +36,7 @@
                                         </div> -->
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Đăng Nhập</button>
+                                            <button type="submit" class="btn btn-primary"><i class="fa-duotone fa-arrow-right-to-bracket"></i>  Đăng Nhập</button>
                                         </div>
                                     </div>
                                 </form>
@@ -57,12 +57,12 @@
             event.preventDefault();
             if ($('#show_hide_password input').attr("type") == "text") {
                 $('#show_hide_password input').attr('type', 'password');
-                $('#show_hide_password i').addClass("bx-hide");
-                $('#show_hide_password i').removeClass("bx-show");
+                $('#show_hide_password i').removeClass("fa-eye");
+                $('#show_hide_password i').addClass("fa-eye-slash");
             } else if ($('#show_hide_password input').attr("type") == "password") {
                 $('#show_hide_password input').attr('type', 'text');
-                $('#show_hide_password i').removeClass("bx-hide");
-                $('#show_hide_password i').addClass("bx-show");
+                $('#show_hide_password i').removeClass("fa-eye");
+                $('#show_hide_password i').addClass("fa-eye-slash");
             }
         });
     });

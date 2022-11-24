@@ -16,7 +16,7 @@
                                 <p class="mb-0 text-white">Đơn Hàng</p>
                                 <h4 class="my-1 text-white"><?php echo $count_order ?></h4>
                             </div>
-                            <div class="text-white ms-auto font-35"><i class='bx bx-cart-alt'></i>
+                            <div class="text-white ms-auto font-35"><i class='fa-duotone fa-cart-flatbed-boxes'></i>
                             </div>
                         </div>
                     </div>
@@ -28,9 +28,10 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-white">Thu Nhập</p>
-                                <h4 class="my-1 text-white"><?php echo number_format($total_money_order) ?></h4>
+                                <h4 class="my-1 text-white"><?php echo number_price($total_money_order) ?></h4>
                             </div>
-                            <div class="text-white ms-auto font-35">đ
+                            <div class="text-white ms-auto font-35">
+                                <i class='fa-duotone fa-coins'></i>
                             </div>
                         </div>
                     </div>
@@ -44,7 +45,7 @@
                                 <p class="mb-0 text-dark">Sản phẩm</p>
                                 <h4 class="text-dark my-1"><?php echo $count_product ?></h4>
                             </div>
-                            <div class="text-dark ms-auto font-35"><i class='bx bx-food-menu'></i>
+                            <div class="text-dark ms-auto font-35"><i class='fa-duotone fa-burger-soda'></i>
                             </div>
                         </div>
                     </div>
@@ -58,7 +59,7 @@
                                 <p class="mb-0 text-dark">Khách Hàng</p>
                                 <h4 class="text-dark my-1"><?php echo $count_customer ?></h4>
                             </div>
-                            <div class="text-dark ms-auto font-35"><i class='bx bx-user-pin'></i>
+                            <div class="text-dark ms-auto font-35"><i class='fa-duotone fa-users'></i>
                             </div>
                         </div>
                     </div>
@@ -131,7 +132,7 @@
                                 <h6 class="font-weight-bold mb-0">Trạng thái đơn hàng</h6>
                             </div>
                             <div class="dropdown ms-auto">
-                                <div class="cursor-pointer text-dark font-24 dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded"></i>
+                                <div class="cursor-pointer text-dark font-24 dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"><i class="fa-duotone fa-ellipsis"></i>
                                 </div>
                             </div>
                         </div>

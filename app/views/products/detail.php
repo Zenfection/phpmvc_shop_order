@@ -55,18 +55,7 @@
 
                         <!-- Rating Start -->
                         <span class="rating justify-content-start m-b-10">
-                            <?php
-                            $temp = $ranking;
-                            for ($j = 0; $j < 5; $j++) {
-                                if ($temp > 2) {
-                                    echo "<i class='fa-solid fa-star' style='color: #ffad42'></i>";
-                                    $temp -= 2;
-                                } else if ($temp > 0) {
-                                    echo "<i class='fa-solid fa-star-half' style='color: #ffad42'></i>";
-                                    $temp = 0;
-                                }
-                            }
-                            ?>
+                            <?php rating($ranking, 'fa-solid fa-star text-warning', 'fa-duotone fa-star-half-stroke text-warning', 'fa-solid fa-star text-secondary') ?>
                         </span>
                         <!-- Rating End -->
 
@@ -117,7 +106,7 @@
                         <!-- Cart Button Start -->
                         <div class="cart-btn action-btn m-b-30">
                             <div class="action-cart-btn-wrapper d-flex">
-                                <div class="add-to-cart cursor-pointer" onclick="addProductCart('<?php echo $id?>', 'qty')">
+                                <div class="add-to-cart cursor-pointer" onclick="addProductCart('<?php echo $id ?>', 'qty')">
                                     <a class="btn btn-primary btn-hover-dark rounded" style="width: 110%">Thêm Vào Giỏ</a>
                                 </div>
                                 <!-- <a href="#" title="Wishlist" class="heart"><i class="fa-duotone fa-heart fa-xl"></i></a> -->
@@ -260,7 +249,7 @@
                                                 }
                                                 ?>
                                                 <div class="action-wrapper" id="wrapper<?php echo $id ?>">
-                                                    <a class="action cursor-pointer" title="Thêm sản phẩm"><i class="fa-duotone fa-plus-large" onclick="addProductCart('<?php echo $id?>', 1)"></i></a>
+                                                    <a class="action cursor-pointer" title="Thêm sản phẩm"><i class="fa-duotone fa-plus-large" onclick="addProductCart('<?php echo $id ?>', 1)"></i></a>
                                                     <a class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
                                                     <a class="nav-content cursor-pointer action cart" id="viewcart" title="Cart"><i class="fa-duotone fa-cart-circle-plus"></i></a>
                                                 </div>
@@ -271,18 +260,7 @@
                                             <div class="content">
                                                 <h5 class="title"><?php echo $name ?></a></h5>
                                                 <span class="rating">
-                                                    <?php
-                                                    $temp = $ranking;
-                                                    for ($j = 0; $j < 5; $j++) {
-                                                        if ($temp > 2) {
-                                                            echo "<i class='fa-solid fa-star' style='color: #ffad42'></i>";
-                                                            $temp -= 2;
-                                                        } else if ($temp > 0) {
-                                                            echo "<i class='fa-solid fa-star-half' style='color: #ffad42'></i>";
-                                                            $temp = 0;
-                                                        }
-                                                    }
-                                                    ?>
+                                                    <?php rating($ranking, 'fa-solid fa-star text-warning', 'fa-duotone fa-star-half-stroke text-warning', 'fa-solid fa-star text-secondary') ?>
                                                 </span>
                                                 <span class="price">
                                                     <?php

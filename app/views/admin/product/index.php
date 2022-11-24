@@ -24,7 +24,7 @@ if (!empty($msg)) {
                                         <div class="col-12">
                                             <div class="position-relative">
                                                 <input type="text" id="searchProduct" class="form-control ps-5" placeholder="Tìm Sản Phẩm..." value="<?php echo $keyword ?>">
-                                                <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                                                <span class="position-absolute top-50 product-show translate-middle-y"><i class="fa-duotone fa-search"></i></span>
                                             </div>
                                         </div>
                                     </div>
@@ -85,20 +85,7 @@ if (!empty($msg)) {
                             </div>
                             <div class="d-flex align-items-center mt-3 fs-6">
                                 <div class="cursor-pointer">
-                                    <?php
-                                    $tempRank = $ranking;
-                                    for ($i = 0; $i < 5; $i++) {
-                                        if ($tempRank > 2) {
-                                            echo "<i class='bx bxs-star text-warning'></i>";
-                                            $tempRank -= 2;
-                                        } else if ($tempRank > 0) {
-                                            echo "<i class='bx bxs-star-half text-warning'></i>";
-                                            $tempRank = 0;
-                                        } else {
-                                            echo "<i class='bx bxs-star text-secondary'></i>";
-                                        }
-                                    }
-                                    ?>
+                                <?php rating($ranking, 'fa-solid fa-star text-warning', 'fa-duotone fa-star-half-stroke text-warning', 'fa-solid fa-star text-secondary') ?>
                                 </div>
                                 <p class="mb-0 ms-auto"><?php echo $ranking / 2 ?></p>
                             </div>
