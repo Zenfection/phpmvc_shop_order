@@ -58,6 +58,15 @@ function checkEmail(content, text) {
     return true;
 }
 
+function checkEmpty(data = []) {
+    let length = data.length;
+    for (let i = 0; i < length; i++) {
+        if (data[i] === '' || data[i] === null || data[i] === undefined)
+            return false;
+    }
+    return true;
+}
+
 
 function editProduct(id) {
     //* Lấy dữ liệu từ form
@@ -75,8 +84,8 @@ function editProduct(id) {
     discount = parseInt(discount);
 
     //* Check input
-    if (name == '' || price == '' || quantity == '' || discount == '' || description == '') {
-        notify('error', 'fa-duotone fa-pen-field', 'center top', 'Vui lòng  nhập đầy đủ thông tin');
+    if (!checkEmpty([name, price, quantity, discount, description])) {
+        notify('warning', 'fa-duotone fa-input-text', 'center top', 'Vui lòng nhập đầy đủ thông tin');
         return;
     }
     if (!checkText("Tên sản phẩm", name, 5, 100)) return;
@@ -125,7 +134,7 @@ function editOrder(id) {
     let status = document.querySelector('#editOrderForm select[id=status]').value;
 
     //* Check dữ liệu
-    if (name_customer == '' || email_customer == '' || phone_customer == '' || province == '' || city == '' || ward == '' || address == '') {
+    if (!checkEmpty([name_customer, email_customer, phone_customer, province, city, ward, address, status])) {
         notify('error', 'fa-duotone fa-pen-field', 'center top', 'Vui lòng nhập đầy đủ thông tin');
         return;
     }
@@ -156,6 +165,78 @@ function editOrder(id) {
                 data = JSON.parse(data);
                 let msg = data.msg;
                 notify(msg['type'], msg['icon'], msg['position'], msg['content']);
+            } catch (e) {
+                notify('error', 'fa-duotone fa-server', 'center top', 'Đã xảy ra lỗi server');
+            }
+        })
+        .catch(err => {
+            notify('error', 'fa-duotone fa-server', 'center top', err);
+        })
+}
+
+function addNewProduct() {
+    let name = document.querySelector('#addNewProductForm input[id=name]').value;
+    let description = tinymce.get("mytextarea").getContent({
+        format: 'text'
+    });
+    let price = document.querySelector('#addNewProductForm input[id=price]').value;
+    let quantity = document.querySelector('#addNewProductForm input[id=quantity]').value;
+    let discount = document.querySelector('#addNewProductForm input[id=discount]').value;
+    let ranking = document.querySelector('#addNewProductForm input[id=ranking]').value;
+    let category = document.querySelector('#addNewProductForm select[id=category]').value;
+
+    // ! Lỗi không thể thả ảnh
+    let image = document.querySelector('#addNewProductForm input[id=image-uploadify]').files[0];
+
+
+    //* Format all number
+    price = parseInt(price.replace(/\./g, ''));
+    quantity = parseInt(quantity);
+    discount = parseInt(discount);
+    ranking = parseInt(ranking);
+
+    console.log(name, description, price, quantity, discount, ranking, category, image);
+
+    //* Check Valid Data
+    if (!checkEmpty([name, description, price, quantity, discount, ranking, category, image])) {
+        notify('warning', 'fa-duotone fa-pen-field', 'center top', 'Vui lòng nhập đầy đủ thông tin');
+        return;
+    }
+    
+    if (!checkText("Tên sản phẩm", name, 5, 100)) return;
+    if (!checkText("Mô tả sản phẩm", description, 5, 255)) return;
+    if (!checkNumber("Giá sản phẩm", price, 1000, 100000000)) return;
+    if (!checkNumber("Số lượng sản phẩm", quantity, 0, 1000)) return;
+    if (!checkNumber("Giảm giá sản phẩm", discount, 0, 100)) return;
+    if (!checkNumber("Số sao sản phẩm", ranking, 0, 10)) return;
+
+    //* Tạo data post
+    var data = new FormData();
+    data.append('name', name);
+    data.append('description', description);
+    data.append('price', price);
+    data.append('quantity', quantity);
+    data.append('discount', discount);
+    data.append('ranking', ranking);
+    data.append('category', category);
+    data.append('image', image);
+
+    //* fetch POST
+    fetch('/admin/product/add_new_product', {
+            method: 'POST',
+            body: data
+        })
+        .then(res => res.text())
+        .then(data => {
+            try {
+                data = JSON.parse(data);
+                let msg = data.msg;
+                notify(msg['type'], msg['icon'], msg['position'], msg['content']);
+                if(data['status'] == 'success'){
+                    setTimeout(() => {
+                        window.location.href = '/admin/dashboard/product';
+                    }, 1500);
+                }
             } catch (e) {
                 notify('error', 'fa-duotone fa-server', 'center top', 'Đã xảy ra lỗi server');
             }

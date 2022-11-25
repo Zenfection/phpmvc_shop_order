@@ -1,6 +1,26 @@
 <?php
 
 class Account extends Controller { 
+     /**
+     * @param TRANG_QUẢN_LÝ_TÀI_KHOẢN
+     * 
+     * ! PAGE: 
+     *   * index()                          => Trang quản lý tài khoản
+     *   * order()                          => Trang quản lý đơn hàng
+     * 
+     * 
+     * ! POST: 
+     *   * 1.edit($id)                      =>  sửa sản phẩm
+     *     ? success:   thành công
+     *     ? error:     thất bại
+     *     ? no_change: không có gì thay đổi
+     * 
+     *   * 2.add_new_product()              =>  thêm sản phẩm mới
+     *    
+    */
+
+
+    //! PAGE ------------------------------
     public function index(){
         $user = Session::data('user');
         $title = 'Tài Khoản';

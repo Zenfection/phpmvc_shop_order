@@ -1,6 +1,13 @@
 <?php 
 
 class Login extends Controller {
+    /**
+     * @param TRANG_ĐĂNG_NHẬP_ADMIN
+     * ! PAGE
+     * * 1. index()                         => Trang đăng nhập admin
+    */
+
+    //! PAGE ------------------------------
     public function index(){
         $this->data['page_title'] = 'Đăng nhập Admin';
         $this->data['content'] = 'admin/login/index';

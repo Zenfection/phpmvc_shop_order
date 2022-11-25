@@ -22,21 +22,21 @@ Với rất nhiều cải tiến cũng như tốc độ load, những cải ti�
 
 ### Các thư viện
 
-|              | File     | Version |     |
-| ------------ | -------- | ------- | --- |
-| Bootstrap    | css + js | 5       |     |
-| themify-icon |          |         |     |
-| fontAwesome  |          | 6.2     |     |
-| pace         |          |         |     |
-| animate      |          |         |     |
-| aos          | css + js |         |     |
-| nice-select  | css + js |         |     |
-| lolibox      | css + js |         |     |
-| tiny-slider  | css + js |         |     |
-| popper       | js       |         |     |
-| jquery       |          | 3.6     |     |
-| feather      |          |         |     |
-| anime        |          |         |     |
+|             | File     | Version |     |
+| ----------- | -------- | ------- | --- |
+| Bootstrap   | css + js | 5.2.3   |     |
+| fontAwesome |          | 6.2.1   |     |
+| pace        | css + js | 1.2.4   |     |
+| animate     |          | 4.1.1   |     |
+| aos         | css + js | 2.3.4   |     |
+| nice-select | css + js |         |     |
+| lolibox     | css + js |         |     |
+| tiny-slider | css + js |         |     |
+| popper      | js       |         |     |
+| jquery      | js       | 3.6.1   |     |
+| anime       |          | 3.2.1   |     |
+| lolibox     | ccs+js   | 1.2.7   |     |
+| tiny-slider | css+js   | 2.9.3   |     |
 
 ## Roadmap
 

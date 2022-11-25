@@ -3,7 +3,7 @@
 class Dashboard extends Controller {
     /**
      * @param TRANG_DASHBOARD
-     * 
+     * ! PAGE
      * * 1. index()                         => Trang dashboard
      * 
      * * 2. product($search = '')           => Trang quản lý sản phẩm

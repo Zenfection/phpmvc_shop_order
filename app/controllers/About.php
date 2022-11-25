@@ -1,6 +1,15 @@
 <?php
 
 class About extends Controller{
+    /**
+     * @param TRANG_GIỚI_THIỆU_WEB
+     * 
+     * ! PAGE: 
+     *   * index()                          => Trang giới thiệu web
+     *    
+    */
+
+    //! PAGE ------------------------------
     public function index(){
         $title = 'Giới Thiệu';
         $user = Session::data('user');

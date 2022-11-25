@@ -32,5 +32,5 @@ if (document.getElementsByClassName('feature-slider')[0] != undefined) {
 tinymce.remove();
 tinymce.init({
     selector: '#mytextarea',
-    height: "250"
+    height: "250",
 });

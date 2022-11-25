@@ -3,7 +3,7 @@
 class Content extends Controller{
     /**
      * @param TRANG_LOAD_CONTENT_KHÔNG_CẦN_TẢI_LẠI
-     * 
+     * ! POST 
      * * 1. dashboard()                 => Trang dashboard
      * 
      * * 2. product($search = '')       => Trang quản lý sản phẩm
