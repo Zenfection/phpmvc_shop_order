@@ -60,25 +60,25 @@ if (!empty($msg)) {
                                         if (($status == 'pending')) {
                                         ?>
                                             <div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3">
-                                                <i class="bx bxs-circle me-1"></i><?php echo $statusVie[0] ?>
+                                                <i class="fa-duotone fa-box-taped me-1 fa-lg"></i><?php echo $statusVie[0] ?>
                                             </div>
                                         <?php
                                         } else if (($status == 'shipping')) {
                                         ?>
                                             <div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3">
-                                                <i class="bx bxs-circle me-1"></i><?php echo $statusVie[1] ?>
+                                                <i class="fa-duotone fa-truck-fast me-1 fa-lg"></i><?php echo $statusVie[1] ?>
                                             </div>
                                         <?php
                                         } else if (($status == 'delivered')) {
                                         ?>
                                             <div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
-                                                <i class="bx bxs-circle me-1"></i><?php echo $statusVie[2] ?>
+                                                <i class="fa-duotone fa-person-carry-box me-1 fa-lg"></i><?php echo $statusVie[2] ?>
                                             </div>
                                         <?php
                                         } else if (($status == 'canceled')) {
                                         ?>
                                             <div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3">
-                                                <i class="bx bxs-circle me-1"></i><?php echo $statusVie[3] ?>
+                                                <i class="fa-duotone fa-ban me-1  fa-lg"></i><?php echo $statusVie[3] ?>
                                             </div>
                                         <?php
                                         }

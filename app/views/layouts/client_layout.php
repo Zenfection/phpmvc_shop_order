@@ -29,13 +29,13 @@
     <link rel="shortcut icon" href="<?php echo _GIT_SOURCE; ?>/assets/images/favicon.ico">
 
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css,npm/animate.css@4.1.1/animate.min.css,npm/aos@2.3.4/dist/aos.css,npm/nice-select2@2.0.0/dist/css/nice-select2.css,npm/lobibox@1.2.7/css/lobibox.css,npm/tiny-slider@2.9.3/dist/tiny-slider.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css,npm/animate.css@4.1.1/animate.min.css,npm/aos@2.3.4/dist/aos.min.css,npm/nice-select2@2.0.0/dist/css/nice-select2.min.css,npm/lobibox@1.2.7/css/lobibox.min.css,npm/tiny-slider@2.9.3/dist/tiny-slider.min.css">
 
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/css/nice-select2.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/css/lobibox.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/css/nice-select2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/css/lobibox.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.css"> -->
 
     <script src="<?php echo _WEB_ROOT; ?>/cdn/js/icon-zen.min.js"></script>

@@ -34,7 +34,7 @@ if ((int)$total_product_order > 0) {
                             <div class="cursor-pointer">
                             <?php rating($ranking, 'fa-solid fa-star text-warning fa-xl', 'fa-duotone fa-star-half-stroke text-warning fa-xl', 'fa-solid fa-star text-secondary fa-xl') ?>
                             </div>
-                            <div class="text-success"><i class='bx bxs-cart-alt align-middle font-24'></i><?php echo $noti_total_order; ?></div>
+                            <div class="text-success"><i class='fa-duotone fa-cart-flatbed-boxes align-middle font-24'></i><?php echo $noti_total_order; ?></div>
                         </div>
                         <div class="mb-3">
                             <!-- add input price -->
@@ -73,7 +73,7 @@ if ((int)$total_product_order > 0) {
                         <div class="row">
                             <div class="col-md-4 mx-auto">
                                 <button class="btn btn-primary px-5 hover-style" id="submitEditProduct" type="button" onclick="editProduct(<?php echo $id_product ?>)">
-                                    <i class='bx bxs-edit'></i>
+                                    <i class='fa-duotone fa-user-pen'></i>
                                     Cập Nhật
                                 </button>
                             </div>
