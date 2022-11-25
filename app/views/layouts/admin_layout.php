@@ -16,6 +16,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/css/lobibox.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/css/nice-select2.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.36.1/dist/apexcharts.min.css"></script>
 	<link href="<?php echo _WEB_ROOT; ?>/assets/admin/plugins/Drag-And-Drop/dist/imageuploadify.min.css" rel="stylesheet" />
 	<link href="<?php echo _WEB_ROOT; ?>/assets/admin/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 	
