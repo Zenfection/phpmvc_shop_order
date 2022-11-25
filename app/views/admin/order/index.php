@@ -12,16 +12,8 @@ if (!empty($msg)) {
     <div class="page-content">
         <div class="card">
             <div class="card-body">
-                <div class="d-lg-flex align-items-center mb-4 gap-3">
-                    <div class="position-relative">
-                        <input type="text" id="searchOrder" class="form-control ps-5 radius-30" placeholder="Tìm đơn hàng" value="<?php echo $_POST['search'] ?>">
-                        <span class="position-absolute top-50 product-show translate-middle-y">
-                            <i class="fa-duotone fa-search"></i>
-                        </span>
-                    </div>
-                </div>
                 <div class="table-responsive" data-aos="fade-zoom-in" data-aos-duration="1000">
-                    <table class="table mb-0">
+                    <table class="table mb-0" id="list_order">
                         <thead class="table-light">
                             <tr>
                                 <th>Mã Đơn#</th>
@@ -102,4 +94,5 @@ if (!empty($msg)) {
         </div>
     </div>
 </div>
-<!--end page wrapper -->
+
+<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/custom/order.js"></script>

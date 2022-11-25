@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li <?php echo ($current_sidebar == 'customer') ? 'class="mm-active"': ''?>>
-                <a id="sidebar-customer" class="cursor-pointer">
+                <a id="sidebar-customer" class="cursor-pointer" onclick="loadContent('customer')">
                     <div class="parent-icon"><i class='fa-duotone fa-users-gear'></i>
                     </div>
                     <div class="menu-title">Khách Hàng</div>

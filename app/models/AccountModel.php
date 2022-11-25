@@ -20,11 +20,12 @@ class AccountModel extends Model{
 *
 * //* 1. getAccount($username)                      =>  trả về thông tin tài khoản
 * *      getAllUser()                               =>  trả về tất cả thông tin tài khoản
+* *      countOrderByUser($username)                =>  trả về số lượng đơn hàng của tài khoản
 *       ? $username: tên tài khoản
 *
 * //* 2. getOrder($username)                        => trả về danh sách đơn hàng
 *   *    getDetailOrder($user, $id)                 => trả về chi tiết đơn hàng
-*   *    public function cancelOrder($user, $id)    => hủy đơn hàng
+*   *    cancelOrder($user, $id)                    => hủy đơn hàng
 *       ? $username: tên tài khoản
 *       ? $id: id của đơn hàng
 * 
@@ -41,6 +42,14 @@ class AccountModel extends Model{
     }
     public function getAllUser(){
         $data = $this->db->table($this->__user)->get();
+        return $data;
+    }
+    public function countOrderAllUser(){
+        $sql = "SELECT u.username, count(o.id_order) as count
+                FROM `tb_user` as u, `tb_order` as o
+                WHERE u.username = o.username
+                GROUP BY u.username";
+        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 

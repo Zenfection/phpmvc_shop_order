@@ -11,6 +11,9 @@ class Dashboard extends Controller {
      * 
      * * 3. order($search = '')             => Trang quản lý đơn hàng
      * ?        $search: từ khoá tìm kiếm
+     * 
+     * * 4. customer($search = '')          => Trang quản lý khách hàng
+     * ?        $search: từ khoá tìm kiếm
     */
 
     //! 1 ---------------------------------------- //
@@ -86,6 +89,34 @@ class Dashboard extends Controller {
         $this->data['sub_content']['current_sidebar'] = 'order';
         $this->data['sub_content']['msg'] = Session::flash('msg');
         $this->data['sub_content']['order'] = $dataOrder;
+
+        $this->render('layouts/admin_layout', $this->data);
+    }
+
+    //! 4 ---------------------------------------- //
+    public function customer($search = ''){
+        $keyword = urldecode($search);
+
+        $this->data['page_title'] = 'Quản lý khách hàng';
+        $this->data['content'] = 'admin/customer/index';
+
+        $userData = $this->models('AccountModel')->getAllUser();
+        $countOrderUser = $this->models('AccountModel')->countOrderAllUser();
+
+        $this->data['sub_content']['customer'] = $userData;
+        $this->data['sub_content']['count_order_user'] = $countOrderUser;
+
+        // if($keyword == ''){
+        //     $dataCustomer = $this->models('CustomerModel')->getCustomer();
+        // } else {
+        //     $dataCustomer = $this->models('CustomerModel')->searchCustomer($keyword);
+        // }
+        // if($keyword != ''){
+        //     $this->data['sub_content']['keyword'] = $keyword;
+        // }
+        $this->data['sub_content']['current_sidebar'] = 'customer';
+        $this->data['sub_content']['msg'] = Session::flash('msg');
+        // $this->data['sub_content']['customer'] = $dataCustomer;
 
         $this->render('layouts/admin_layout', $this->data);
     }

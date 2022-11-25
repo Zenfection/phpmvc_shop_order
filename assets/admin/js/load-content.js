@@ -11,23 +11,28 @@ var dataArr = [{
         'product': 'Quản lý sản phẩm',
         'order': 'Quản lý đơn hàng',
         'add-product': 'Thêm sản phẩm',
+        'customer': 'Quản lý khách hàng',
     },
     {
         'dashboard': '/admin/content/dashboard',
         'product': '/admin/content/product',
         'order': '/admin/content/order',
         'add-product': '/admin/content/add_product',
+        'customer': '/admin/content/customer',
     },
     {
         'dashboard': '/admin/dashboard',
         'product': '/admin/dashboard/product',
         'order': '/admin/dashboard/order',
         'add-product': '/admin/product/add',
+        'customer': '/admin/dashboard/customer',
     },
     {
         'dashboard': window.location.origin + '/assets/admin/js/custom/dashboard.js',
         'product': window.location.origin + '/assets/admin/js/custom/product.js',
         'add-product': window.location.origin + '/assets/admin/js/custom/add_product.js',
+        'order': window.location.origin + '/assets/admin/js/custom/order.js',
+        'customer': window.location.origin + '/assets/admin/js/custom/customer.js',
     }
 ];
 

@@ -1,0 +1,34 @@
+{
+    "decimal":        "",
+    "emptyTable":     "Không có dữ liệu trong bảng",
+    "info":           "Hiển thị _START_ tới _END_ trong _TOTAL_ mục",
+    "infoEmpty":      "Hiển thị 0 tới 0 trong 0 mục",
+    "infoFiltered":   "(filtered from _MAX_ total entries)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "Hiển thị _MENU_ mục",
+    "loadingRecords": "Loading...",
+    "processing":     "",
+    "search":         "Tìm Kiếm:",
+    "zeroRecords":    "Không tìm thấy dữ liệu",
+    "paginate": {
+        "first":      "First",
+        "last":       "Last",
+        "next":       "Tiếp Theo",
+        "previous":   "Trở Về"
+    },
+    "aria": {
+        "sortAscending":  ": activate to sort column ascending",
+        "sortDescending": ": activate to sort column descending"
+    },
+    "button": {
+        "copy": "Copy",
+        "copyTitle": "Copy to clipboard",
+        "copySuccess": {
+            "1": "Copied 1 row to clipboard",
+            "_": "Copied %d rows to clipboard"
+        },
+        "print": "Print"
+        
+    }
+}

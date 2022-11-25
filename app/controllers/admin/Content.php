@@ -15,6 +15,8 @@ class Content extends Controller{
      * *    order_detail($id)           => Trang chi tiết đơn hàng
      * ?        $search: từ khoá tìm kiếm
      * ?        $id của đơn hàng
+     * 
+     * * 4. customer($search = '')      => Trang quản lý khách hàng
     */
 
     public $data;
@@ -103,6 +105,16 @@ class Content extends Controller{
         $city_data = $this->models('AddressModel')->getCityInProvinceByName($order_detail['province_customer']);
 
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/admin/order/detail.php');
+        eval('?>' . $contentView . '<?php');
+    }
+    public function customer(){
+        $current_sidebar = 'customer';
+        $msg = Session::flash('msg');
+
+        $customer = $this->models('AccountModel')->getAllUser();
+        $count_order_user = $this->models('AccountModel')->countOrderAllUser();
+
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/admin/customer/index.php');
         eval('?>' . $contentView . '<?php');
     }
 }
