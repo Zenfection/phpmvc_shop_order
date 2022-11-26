@@ -99,17 +99,46 @@ function loadProductDetail(id){
         })
 }
 
+function loadUserInfo($user){
+    //fetch API
+    fetch(`/admin/content/user_info/${$user}`)
+        .then(response => response.text())
+        .then(data => {
+            document.title = 'Thông tin người dùng';
+            window.history.pushState(null, null, `/admin/customer/info/${$user}`);
+            document.getElementById('content').innerHTML = data;
+
+            let sciprt = document.createElement('script');
+            sciprt.src = window.location.origin + '/assets/admin/js/custom/user_info.js';
+            document.body.appendChild(sciprt);
+
+            AOS.init();
+        })
+}
+
 //* Listen back & forward button to load content
 window.addEventListener('popstate', function () {
     let url = new URL(window.location.href);
     let path = url.pathname;
-    let id = path.replace('/admin/dashboard', '');
 
+    if(path.includes('/admin/product/detail')){
+        let id = path.replace('/admin/product/detail/', '');
+        loadProductDetail(id);
+        return;
+    } else if(path.includes('/admin/order/detail')){
+        let id = path.replace('/admin/order/detail/', '');
+        loadOrderDetail(id);
+        return;
+    } else if(path.includes('/admin/customer/info')){
+        let id = path.replace('/admin/customer/info/', '');
+        loadUserInfo(id);
+        return; 
+    }
     // check onject pathArr have path or not
     for (let key in pathArr) {
         if (pathArr[key] == path) {
             loadContent(key);
-        }
+        } 
     }
 });
 

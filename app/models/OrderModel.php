@@ -20,6 +20,7 @@ class OrderModel extends Model{
      *  * 1. getOrder(keyword = '')                 =>  trả về danh sách order
      *  *    getOrderDetail($id)                    =>  trả về order theo id
      *  *    getOrderStatus($id_user)               =>  trả về order theo id_user
+     *  *    getOrderUser($user)                    =>  trả về order theo user
      *          ? keyword: từ khoá tìm kiếm
      *          ? $id: id của order
      *          ? $id_user: id của user
@@ -53,7 +54,10 @@ class OrderModel extends Model{
         $data = $this->db->table($this->__order)->where('username', '=', $user)->where('status', '=', $status)->get();
         return $data;
     }
-
+    public function getOrderUser($user){
+        $data = $this->db->table($this->__order)->where('username', '=', $user)->get();
+        return $data;
+    }
     //! 2 ---------------------------------------- //
     public function totalProductOrder($id_product){
         $sql = "SELECT SUM(amount) as total  

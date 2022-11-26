@@ -20,7 +20,9 @@ class AccountModel extends Model{
 *
 * //* 1. getAccount($username)                      =>  trả về thông tin tài khoản
 * *      getAllUser()                               =>  trả về tất cả thông tin tài khoản
-* *      countOrderByUser($username)                =>  trả về số lượng đơn hàng của tài khoản
+* *      countOrderAllUser()                        =>  trả về số lượng đơn hàng của tài khoản
+* *      countOrderUser($username)                  =>  trả về số lượng đơn hàng của tài khoản
+* *      sumMoneyOrder($username)                   =>  trả về tổng tiền đơn hàng của tài khoản
 *       ? $username: tên tài khoản
 *
 * //* 2. getOrder($username)                        => trả về danh sách đơn hàng
@@ -51,6 +53,17 @@ class AccountModel extends Model{
                 GROUP BY u.username";
         $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $data;
+    }
+    public function countOrderUser($username){  
+        $data = $this->db->table($this->__order)->where('username', '=', $username)->count();
+        return $data;
+    }
+    public function sumMoneyOrder($username){
+        $sql = "SELECT sum(total_money) as total 
+                FROM `tb_order`
+                WHERE username = '$username'";
+        $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        return $data['total'];
     }
 
     //! 2 ---------------------------------------- //

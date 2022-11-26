@@ -7,7 +7,7 @@
                 <hr />
                 <div class="form-body mt-4">
                     <div class="row">
-                        <div class="col-lg-4 d-flex">
+                        <div class="col-lg-4 d-flex" data-aos="zoom-in-right">
                             <div class="card radius-10 w-100">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-8">
+                        <div class="col-lg-8 d-flex" data-aos="zoom-in-left">
                             <form id="editOrderForm" novalidate>
                                 <div class="border border-3 p-4 rounded">
                                     <div class="row g-3">

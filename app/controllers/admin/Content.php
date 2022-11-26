@@ -117,5 +117,17 @@ class Content extends Controller{
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/admin/customer/index.php');
         eval('?>' . $contentView . '<?php');
     }
+    public function user_info($user){
+        $current_sidebar = 'customer';
+
+        $user_data = $this->models('AccountModel')->getAccount($user);
+        $count_ordered = $this->models('AccountModel')->countOrderUser($user);
+        $total_money_order = $this->models('AccountModel')->sumMoneyOrder($user);
+        $total_recent_product = $this->models('ProductModel')->countRecentViewProduct($user);
+        $order = $this->models('OrderModel')->getOrderUser($user);
+
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/admin/customer/info.php');
+        eval('?>' . $contentView . '<?php');
+    }
 }
 ?>

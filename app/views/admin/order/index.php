@@ -14,15 +14,15 @@ if (!empty($msg)) {
             <div class="card-body">
                 <div class="table-responsive" data-aos="fade-zoom-in" data-aos-duration="1000">
                     <table class="table mb-0" id="list_order">
-                        <thead class="table-light">
+                        <thead class="table-light" style="font-size: 1rem;">
                             <tr>
-                                <th>Mã Đơn#</th>
-                                <th>Tên Khách Hàng</th>
-                                <th>Số Điện Thoại</th>
-                                <th>Trạng Thái</th>
-                                <th>Tổng Tiền</th>
-                                <th>Ngày Đặt</th>
-                                <th>Xem Chi Tiết</th>
+                                <th><i class="fa-duotone fa-fingerprint me-1"></i>Mã Đơn#</th>
+                                <th><i class="fa-duotone fa-signature me-1"></i>Tên Khác Hàng</th>
+                                <th><i class="fa-duotone fa-phone-volume me-1"></i>Số điện thoại</th>
+                                <th><i class="fa-duotone fa-box-taped me-1"></i>Trạng Thái</th>
+                                <th><i class="fa-duotone fa-coins me-1"></i>Tổng Tiền</th>
+                                <th><i class="fa-duotone fa-calendar me-1"></i>Ngày Đặt</th>
+                                <th><i class="fa-duotone fa-eye me-1"></i>Chi Tiết</th>
                             </tr>
                         </thead>
                         <tbody>

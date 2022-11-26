@@ -202,7 +202,7 @@ function addNewProduct() {
         notify('warning', 'fa-duotone fa-pen-field', 'center top', 'Vui lòng nhập đầy đủ thông tin');
         return;
     }
-    
+
     if (!checkText("Tên sản phẩm", name, 5, 100)) return;
     if (!checkText("Mô tả sản phẩm", description, 5, 255)) return;
     if (!checkNumber("Giá sản phẩm", price, 1000, 100000000)) return;
@@ -232,10 +232,62 @@ function addNewProduct() {
                 data = JSON.parse(data);
                 let msg = data.msg;
                 notify(msg['type'], msg['icon'], msg['position'], msg['content']);
-                if(data['status'] == 'success'){
+                if (data['status'] == 'success') {
                     setTimeout(() => {
                         window.location.href = '/admin/dashboard/product';
                     }, 1500);
+                }
+            } catch (e) {
+                notify('error', 'fa-duotone fa-server', 'center top', 'Đã xảy ra lỗi server');
+            }
+        })
+        .catch(err => {
+            notify('error', 'fa-duotone fa-server', 'center top', err);
+        })
+}
+
+function changeUserInfo($username) {
+    // * Lấy dữ liệu
+    let fullname = document.querySelector('#changeUserInfoForm input[id=fullname]').value;
+    let email = document.querySelector('#changeUserInfoForm input[id=email]').value;
+    let phone = document.querySelector('#changeUserInfoForm input[id=phone]').value;
+    let address = document.querySelector('#changeUserInfoForm input[id=address]').value;
+
+    // * Kiểm tra dữ liệu
+    if (!checkEmpty([fullname, email, phone, address])) {
+        notify('warning', 'fa-duotone fa-pen-field', 'center top', 'Vui lòng nhập đầy đủ thông tin');
+        return;
+    }
+    if (!checkText("Họ và tên", fullname, 5, 100)) return;
+    if (!checkEmail("Email", email)) return;
+    if (!checkText("Số điện thoại khách hàng", phone, 10, 11)) return;
+    if (!checkText("Địa chỉ", address, 5, 255)) return;
+
+    // * Tạo data post
+    var data = new FormData();
+    data.append('username', $username);
+    data.append('fullname', fullname);
+    data.append('email', email);
+    data.append('phone', phone);
+    data.append('address', address);
+
+    // * fetch POST
+    fetch('/admin/customer/edit', {
+            method: 'POST',
+            body: data
+        })
+        .then(res => res.text())
+        .then(data => {
+            try {
+                data = JSON.parse(data);
+                let msg = data.msg;
+                notify(msg['type'], msg['icon'], msg['position'], msg['content']);
+                if(data['status'] == 'success'){
+                    let user_info = document.querySelector('#userThumbnail');
+                    user_info.childNodes[1].textContent = fullname;
+                    user_info.childNodes[3].textContent = email;
+                    user_info.childNodes[5].childNodes[3].textContent = phone;
+                    user_info.childNodes[7].textContent = address;
                 }
             } catch (e) {
                 notify('error', 'fa-duotone fa-server', 'center top', 'Đã xảy ra lỗi server');

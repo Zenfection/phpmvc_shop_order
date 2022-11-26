@@ -1,9 +1,7 @@
 <!--start page wrapper -->
 <div class="page-wrapper">
     <div class="page-content">
-        <h6 class="mb-0 text-uppercase">Danh sách người dùng</h6>
-        <hr />
-        <div class="card">
+        <div class="card" data-aos="fade-zoom-in" data-aos-duration="1000">
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="list_customer" class="table table-striped table-bordered">
@@ -73,7 +71,9 @@
                                     </td>
                                     <td>
                                         <div class="d-flex order-actions">
-                                            <a href="javascript:;" class="ms-3 text-primary bg-light-purple"><i class='fa-duotone fa-user-pen'></i></a>
+                                            <a href="javascript:;" class="ms-3 text-primary bg-light-purple" onclick="loadUserInfo('<?php echo $username?>')">
+                                                <i class='fa-duotone fa-user-pen'></i>
+                                            </a>
                                             <a href="javascript:;" class="ms-3 text-danger bg-light-danger"><i class='fa-duotone fa-trash-can'></i></a>
                                         </div>
                                     </td>

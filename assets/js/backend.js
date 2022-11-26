@@ -50,7 +50,7 @@ function checkEmail(content, text) {
 function checkData(array) {
     $check = true;
     for (let i = 0; i < array.length; i++) {
-        if (array[i] == '' || array[i] === undefined) {
+        if (array[i] == '' || data[i] === null || array[i] === undefined) {
             $check = false;
             break;
         }

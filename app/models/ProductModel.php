@@ -36,6 +36,7 @@ class ProductModel extends Model {
 *      ? $id_order: id đơn hàng
 *
 *  * 4. recentViewProduct($user, $limit)   => lấy sản phẩm đã xem gần đây
+*  *    countRecentViewProduct($user)      => đếm sản phẩm đã xem gần đây
 *  *    addRecent($user, $id_product)      => thêm sản phẩm đã xem     //! True & False
 *      ? $user: id người dùng
 *      ? $id_product: id sản phẩm
@@ -115,6 +116,10 @@ class ProductModel extends Model {
                 WHERE r.id_product = p.id_product 
                 AND r.username = '$user' ORDER BY r.id_recent DESC LIMIT $limit";
         $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+    public function countRecentViewProduct($user){
+        $data = $this->db->table($this->__review_product)->where('username', '=', $user)->count();
         return $data;
     }
     public function addRecent($user, $id){
