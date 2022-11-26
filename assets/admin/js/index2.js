@@ -1,8 +1,5 @@
 $(function () {
 	"use strict";
-	
-	
-	
 	// chart 1
 	var options = {
 		series: [{

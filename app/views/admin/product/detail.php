@@ -72,7 +72,7 @@ if ((int)$total_product_order > 0) {
                         <hr>
                         <div class="row">
                             <div class="col-md-4 mx-auto">
-                                <button class="btn btn-primary px-5 hover-style" id="submitEditProduct" type="button" onclick="editProduct(<?php echo $id_product ?>)">
+                                <button class="btn btn-primary px-5 hover-style" id="submitEditProduct" type="button" onclick="editProduct(<?php echo $id ?>)">
                                     <i class='fa-duotone fa-user-pen'></i>
                                     Cập Nhật
                                 </button>

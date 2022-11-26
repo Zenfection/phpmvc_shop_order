@@ -73,8 +73,8 @@
                                     </td>
                                     <td>
                                         <div class="d-flex order-actions">
-                                            <a href="javascript:;" class=""><i class='fa-duotone fa-user-pen'></i></a>
-                                            <a href="javascript:;" class="ms-3"><i class='fa-duotone fa-trash-can'></i></a>
+                                            <a href="javascript:;" class="ms-3 text-primary bg-light-purple"><i class='fa-duotone fa-user-pen'></i></a>
+                                            <a href="javascript:;" class="ms-3 text-danger bg-light-danger"><i class='fa-duotone fa-trash-can'></i></a>
                                         </div>
                                     </td>
                                 </tr>

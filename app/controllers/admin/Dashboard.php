@@ -105,15 +105,7 @@ class Dashboard extends Controller {
 
         $this->data['sub_content']['customer'] = $userData;
         $this->data['sub_content']['count_order_user'] = $countOrderUser;
-
-        // if($keyword == ''){
-        //     $dataCustomer = $this->models('CustomerModel')->getCustomer();
-        // } else {
-        //     $dataCustomer = $this->models('CustomerModel')->searchCustomer($keyword);
-        // }
-        // if($keyword != ''){
-        //     $this->data['sub_content']['keyword'] = $keyword;
-        // }
+        
         $this->data['sub_content']['current_sidebar'] = 'customer';
         $this->data['sub_content']['msg'] = Session::flash('msg');
         // $this->data['sub_content']['customer'] = $dataCustomer;
