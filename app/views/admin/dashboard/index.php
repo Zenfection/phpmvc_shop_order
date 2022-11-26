@@ -167,5 +167,4 @@
 </div>
 <!--end page wrapper -->
 
-
 <script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/custom/dashboard.js"></script>

@@ -13,7 +13,7 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li <?php echo ($current_sidebar == 'dashboard') ? 'class="mm-active"': ''?>>
-            <a id="sidebar-dashboard" class="cursor-pointer" onclick="loadContent('dashboard')">
+            <a id="sidebar-dashboard" href="javascript:;" onclick="loadContent('dashboard')">
                 <div class="parent-icon"><i class='fa-duotone fa-home'></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
@@ -21,21 +21,21 @@
         </li>
         <li class="menu-label">Quản lí Hàng</li>
             <li <?php echo ($current_sidebar == 'product') ? 'class="mm-active"': ''?>>
-                <a id="sidebar-product" class="cursor-pointer" onclick="loadContent('product')">
+                <a id="sidebar-product" href="javascript:;" onclick="loadContent('product')">
                     <div class="parent-icon"><i class='fa-duotone fa-burger-soda'></i>
                     </div>
                     <div class="menu-title">Sản Phẩm</div>
                 </a>
             </li>
             <li <?php echo ($current_sidebar == 'order') ? 'class="mm-active"': ''?>>
-                <a id="sidebar-order" class="cursor-pointer" onclick="loadContent('order')">
+                <a id="sidebar-order" href="javascript:;" onclick="loadContent('order')">
                     <div class="parent-icon"><i class='fa-duotone fa-basket-shopping-simple'></i>
                     </div>
                     <div class="menu-title">Đơn Hàng</div>
                 </a>
             </li>
             <li <?php echo ($current_sidebar == 'customer') ? 'class="mm-active"': ''?>>
-                <a id="sidebar-customer" class="cursor-pointer" onclick="loadContent('customer')">
+                <a id="sidebar-customer" href="javascript:;" onclick="loadContent('customer')">
                     <div class="parent-icon"><i class='fa-duotone fa-users-gear'></i>
                     </div>
                     <div class="menu-title">Khách Hàng</div>

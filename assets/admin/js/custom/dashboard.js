@@ -7,7 +7,7 @@ var count_delivered = count_order - count_processing - count_shipping - count_ca
 var order = Math.round(count_delivered / count_order * 100, 2);
 // chart4
 var options = {
-    series: [ order ],
+    series: [order],
     chart: {
         //foreColor: '#9a9797',
         height: 380,
@@ -44,7 +44,7 @@ var options = {
                     offsetY: 20,
                     fontSize: '30px',
                     color: '#212529',
-                    formatter: function(val) {
+                    formatter: function (val) {
                         return val + "%";
                     }
                 }

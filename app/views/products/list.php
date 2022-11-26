@@ -10,7 +10,7 @@ for ($i = 0; $i < $count; $i++) {
 ?>
     <div class="col-12 col-sm-6 col-lg-3 product-wrapper m-b-40 product">
         <div class="thumb">
-            <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)">
+            <a href="javascript:;" onclick="loadDetailProduct(<?php echo $id ?>)">
                 <img class="fit-image p-10" src="<?php echo _CDN_IMAGE_300 . '/products/' . $image ?>" alt="Product" />
             </a>
             <?php
@@ -24,9 +24,9 @@ for ($i = 0; $i < $count; $i++) {
             }
             ?>
             <div class="action-wrapper" id="wrapper<?php echo $id ?>">
-                <a class="action cursor-pointer" title="Thêm sản phẩm" onclick="addProductCart('<?php echo $id ?>', 1)"><i class="fa-duotone fa-plus-large"></i></a>
-                <a class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
-                <a class="nav-content cursor-pointer action cart" onclick="loadContent('viewcart')">
+                <a href="javascript:;" class="action" title="Thêm sản phẩm" onclick="addProductCart('<?php echo $id ?>', 1)"><i class="fa-duotone fa-plus-large"></i></a>
+                <a href="javascript:;" class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
+                <a href="javascript:;" class="action cart" onclick="loadContent('viewcart')">
                     <i class="fa-duotone fa-cart-circle-plus"></i>
                 </a>
             </div>

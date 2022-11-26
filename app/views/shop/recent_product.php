@@ -17,7 +17,7 @@ if (!empty($user)) {
                     <!-- Product List Thumb Start -->
                     <div class="product">
                         <div class="thumb">
-                            <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)">
+                            <a href="javascript:;" class="image" onclick="loadDetailProduct(<?php echo $id ?>)">
                                 <img class="fit-image first-image p-10" src="<?php echo _CDN_IMAGE_100 . '/products/' . $image ?>" </a>
                         </div>
                     </div>
@@ -25,7 +25,7 @@ if (!empty($user)) {
                     <!-- Product List Content Start -->
                     <div class="product-list-content">
                         <h6 class="product-name">
-                            <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)"><?php echo $name ?></a>
+                            <a href="javascript:;" onclick="loadDetailProduct(<?php echo $id ?>)"><?php echo $name ?></a>
                         </h6>
                         <span class="price">
                             <span class="new fw-semibold"><?php echo number_price($new_price) ?></span>

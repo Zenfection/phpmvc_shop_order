@@ -15,10 +15,10 @@
                     <div class="main-menu">
                         <ul>
                             <!-- render session -->
-                            <li><a id="home" class="cursor-pointer" onclick="loadContent('home')">Trang Chủ</a></li>
-                            <li><a id="about" class="cursor-pointer" onclick="loadContent('about')">Giới Thiệu</a></li>
-                            <li><a id="shop" class="cursor-pointer" onclick="loadContent('shop')">Shop</a></li>
-                            <li><a id="contact" class="cursor-pointer" onclick="loadContent('contact')">Liên Hệ</a></li>
+                            <li><a href="javascript:;" onclick="loadContent('home')">Trang Chủ</a></li>
+                            <li><a href="javascript:;" onclick="loadContent('about')">Giới Thiệu</a></li>
+                            <li><a href="javascript:;" onclick="loadContent('shop')">Shop</a></li>
+                            <li><a href="javascript:;" onclick="loadContent('contact')">Liên Hệ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -47,13 +47,13 @@
                         <?php
                         if (!empty($user)) {
                         ?>
-                            <a id='account' class='cursor-pointer header-action-btn header-action-btn-wishlist' onclick="loadContent('account')">
+                            <a id='account' href="javascript:;" class='header-action-btn header-action-btn-wishlist' onclick="loadContent('account')">
                                 <i class='fa-duotone fa-user-gear fa-xl'></i>
                             </a>
                         <?php
                         } else {
                         ?>
-                            <a id='logged' class='cursor-pointer header-action-btn header-action-btn-wishlist' onclick="loadContent('login')">
+                            <a id='logged' href="javascript:;" class='header-action-btn header-action-btn-wishlist' onclick="loadContent('login')">
                                 <i class='fa-duotone fa-user fa-xl'></i>
                             </a>
                         <?php

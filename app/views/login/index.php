@@ -35,7 +35,7 @@ if (!empty($msg)) {
                         </div>
                     </form>
                     <div class="register">
-                        <a class="cursor-pointer" id="register" onclick="loadContent('register')">Tạo tài khoản</a>
+                        <a href="javascript:;" id="register" onclick="loadContent('register')">Tạo tài khoản</a>
                     </div>
                 </div>
             </div>

@@ -79,7 +79,7 @@ if (!empty($msg)) {
                                     <td><?php echo number_price($total) ?></td>
                                     <td><?php echo $date ?></td>
                                     <td>
-                                        <a class="cursor-pointer" onclick="loadOrderDetail('<?php echo $id?>')">
+                                        <a href="javascript:;" onclick="loadOrderDetail('<?php echo $id?>')">
                                             <button type="button" class="btn btn-primary btn-sm radius-30 px-4">Xem</button>
                                         </a>
                                     </td>

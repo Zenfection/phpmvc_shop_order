@@ -69,7 +69,7 @@
                             <div class="sidebar-body justify-content-start">
                                 <ul class="sidebar-list product-tab-nav">
                                     <li>
-                                        <a onclick="filterShop('all', '<?php echo $current_sortby ?>', 1,'<?php echo $keyword ?>')" class="cursor-pointer <?php if ($current_category == 'all') echo 'active' ?>" id="all">
+                                        <a onclick="filterShop('all', '<?php echo $current_sortby ?>', 1,'<?php echo $keyword ?>')" href="javascript:;" class="<?php if ($current_category == 'all') echo 'active' ?>" id="all">
                                             <i class="fa-duotone fa-border-all fa-xl"></i> Tất cả sản phẩm</a>
                                     </li>
                                     <?php
@@ -78,7 +78,7 @@
                                         $nameCategory = $value['title'];
                                     ?>
                                         <li>
-                                            <a onclick="filterShop('<?php echo $categoryFilter ?>','<?php echo $current_sortby ?>',1,'<?php echo $keyword ?>')" class="cursor-pointer <?php echo ($current_category == $categoryFilter) ? 'active' : '' ?>" id="<?php echo $categoryFilter ?>">
+                                            <a onclick="filterShop('<?php echo $categoryFilter ?>','<?php echo $current_sortby ?>',1,'<?php echo $keyword ?>')" href="javascript:;" class="<?php echo ($current_category == $categoryFilter) ? 'active' : '' ?>" id="<?php echo $categoryFilter ?>">
                                                 <?php
                                                 if ($categoryFilter == 'cake')
                                                     echo '<i class="fa-duotone fa-cake-slice fa-xl"></i>';

@@ -22,7 +22,7 @@
     ?>
             <div class="col-lg-4 col-md-4 col-sm-6 product product-inner" id="product<?php echo $id ?>">
                 <div class="thumb">
-                    <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)">
+                    <a href="javascript:;" class="image" onclick="loadDetailProduct(<?php echo $id ?>)">
                         <img class="fit-image p-10" src="<?php echo _CDN_IMAGE_300 . '/products/' . $image ?>" alt="Product" />
                     </a>
                     <?php
@@ -38,12 +38,12 @@
                     <div class="action-wrapper" id="wrapper<?php echo $id ?>">
                         <a class="action" title="Thêm sản phẩm" onclick="addProductCart('<?php echo $id ?>', 1)"><i class="fa-duotone fa-plus-large"></i></a>
                         <a class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
-                        <a class="nav-content cursor-pointer action cart" title="Cart" onclick="loadContent('viewcart')"><i class="fa-duotone fa-cart-circle-plus"></i></a>
+                        <a href="javascript:;" class="action cart" title="Cart" onclick="loadContent('viewcart')"><i class="fa-duotone fa-cart-circle-plus"></i></a>
                     </div>
                 </div>
                 <div class="content">
                     <h5 class="title">
-                        <a class="product-title cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)""><?php echo $name ?></a>
+                        <a href="javascript:;" class="product-title" onclick="loadDetailProduct(<?php echo $id ?>)""><?php echo $name ?></a>
                     </h5>
                     <span class=" rating">
                     <?php rating($ranking, 'fa-solid fa-star text-warning', 'fa-duotone fa-star-half-stroke text-warning', 'fa-solid fa-star text-secondary') ?>
@@ -99,7 +99,7 @@
                 if ($page > 1) {
                 ?>
                     <li class="page-item">
-                        <a class="page-link rounded-0 cursor-pointer" name="page=<?php echo $page ?>" aria-label="Prev" onclick="choosePage(<?php echo $page - 1 ?>)">
+                        <a href="javascript:;" class="page-link rounded-0" name="page=<?php echo $page ?>" aria-label="Prev" onclick="choosePage(<?php echo $page - 1 ?>)">
                             <span aria-hidden="true">
                                 <i class="fa-duotone fa-arrow-left" style="padding-top: 5px"></i>
                             </span>
@@ -114,14 +114,14 @@
                     }
                 ?>
                     <li class='page-item'>
-                        <a class='page-link cursor-pointer' onclick="choosePage(<?php echo $i ?>)"><?php echo $i ?></a>
+                        <a href="javascript:;" class='page-link' onclick="choosePage(<?php echo $i ?>)"><?php echo $i ?></a>
                     </li>
                 <?php
                 }
                 if ($page < $numPage) {
                 ?>
                     <li class="page-item">
-                        <a class="page-link rounded-0 cursor-pointer" name="page=<?php echo $page ?>" aria-label="Next" onclick="choosePage(<?php echo $page + 1 ?>)">
+                        <a href="javascript:;" class="page-link rounded-0" name="page=<?php echo $page ?>" aria-label="Next" onclick="choosePage(<?php echo $page + 1 ?>)">
                             <span aria-hidden="true">
                                 <i class="fa-duotone fa-arrow-right" style="padding-top: 5px"></i>
                             </span>

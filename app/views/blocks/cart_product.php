@@ -2,13 +2,13 @@
     <!-- Single Cart Product Start -->
     <div class="single-cart-product">
         <div class="cart-product-thumb">
-            <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)">
+            <a href="javascript:;" onclick="loadDetailProduct(<?php echo $id ?>)">
                 <img src="<?php echo _CDN_IMAGE_100 . '/products/' . $image ?>" alt="Cart Product" class="rounded">
             </a>
         </div>
         <div class="cart-product-content">
             <h3 class="title">
-                <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)"></a>
+                <a href="javascript:;" onclick="loadDetailProduct(<?php echo $id ?>)"></a>
             </h3>
             <div class="product-quty-price">
                 <span class="cart-quantity" id="quantity<?php echo $id ?>">Số lượng: <strong> <?php echo $amount ?> </strong></span>
@@ -33,7 +33,7 @@
 
     <!-- Product Remove Start -->
     <div class="cart-product-remove">
-        <a class="remove-cart cursor-pointer" onclick="deleteProductCart('<?php echo $id?>')"><i class="fa-duotone fa-trash-can"></i></a>
+        <a href="javascript:;" class="remove-cart" onclick="deleteProductCart('<?php echo $id?>')"><i class="fa-duotone fa-trash-can"></i></a>
     </div>
     <!-- Product Remove End -->
 

@@ -44,24 +44,24 @@ var scriptArr = dataArr[3];
 function loadContent(content) {
     //fetch API
     fetch(contentArr[content])
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('content').innerHTML = data;
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('content').innerHTML = data;
 
-            document.title = titleArr[content];
-            if (window.location.pathname != pathArr[content]) {
-                window.history.pushState(null, null, pathArr[content]);
-            }
+        document.title = titleArr[content];
+        if (window.location.pathname != pathArr[content]) {
+            window.history.pushState(null, null, pathArr[content]);
+        }
 
-            //add script, check content in or not in scriptArr
-            if (content in scriptArr) {
-                let script = document.createElement('script');
-                script.src = scriptArr[content];
-                document.body.appendChild(script);
-            }
-            
-            AOS.init();
-        });
+        //add script, check content in or not in scriptArr
+        if (content in scriptArr) {
+            let script = document.createElement('script');
+            script.src = scriptArr[content];
+            document.body.appendChild(script);
+        }
+        
+        AOS.init();
+    }); 
 }
 
 

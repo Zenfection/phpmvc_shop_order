@@ -42,7 +42,7 @@ if (!empty($msg)) {
                             </div>
                         </form>
                         <div>
-                            <a class="cursor-pointer hover-text-primary" onclick="loadContent('login')">Đăng Nhập</a>
+                            <a href="javascript:;" class="hover-text-primary" onclick="loadContent('login')">Đăng Nhập</a>
                         </div>
                         <!-- Form Action End -->
                     </div>

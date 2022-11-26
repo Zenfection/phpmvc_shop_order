@@ -19,7 +19,7 @@
                         <li><span><i class="fa-brands fa-js fa-xl"></i></span> Jquery Ajax</li>
                         <li><span><i class="fa-brands fa-php fa-xl"></i></span> PHP MVC</li>
                     </ul>
-                    <a class="cursor-pointer btn btn-primary btn-hover-dark" onclick="loadContent('contact')">Liên Hệ</a>
+                    <a href="javascript:;" class="btn btn-primary btn-hover-dark" onclick="loadContent('contact')">Liên Hệ</a>
                 </div>
                 <!-- About Content End -->
             </div>
@@ -37,7 +37,7 @@
                 <!-- Single Team Wrapper Start -->
                 <div class="single-team-wrapper">
                     <div class="thumb">
-                        <a class="cursor-pointer" onclick="loadContent('contact')">
+                        <a href="javascript:;" onclick="loadContent('contact')">
                             <img class="fit-image" src="<?php echo _GIT_SOURCE; ?>/assets/images/team/1.jpg" alt="Team Image" style="height: 270px;">
                         </a>
                         <!-- Social Shear Start -->

@@ -51,12 +51,12 @@ if (!empty($msg)) {
                                 ?>
                                     <tr>
                                         <td class="pro-thumbnail">
-                                            <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)">
+                                            <a href="javascript:;" onclick="loadDetailProduct(<?php echo $id?>)">
                                                 <img class="fit-image rounded" src="<?php echo _CDN_IMAGE_150 . '/products/' . $image ?>" alt="Product<?php echo $id_product ?>" style="width:70%" />
                                             </a>
                                         </td>
                                         <td class="pro-title">
-                                            <a class="cursor-pointer" onclick="loadDetailProduct(<?php echo $id?>)"><?php echo $name ?></a>
+                                            <a href="javascript:;" onclick="loadDetailProduct(<?php echo $id?>)"><?php echo $name ?></a>
                                         </td>
                                         <td class="pro-price">
                                             <span><?php echo number_price($price) ?> x <?php echo $amount ?></span>

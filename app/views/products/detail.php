@@ -235,7 +235,7 @@
                                         <div class="product">
                                             <!-- Thumb Start  -->
                                             <div class="thumb product-inner" id="product<?php echo $id ?>">
-                                                <a class="image cursor-pointer" onclick="loadDetailProduct(<?php echo $id ?>)">
+                                                <a href="javascript:;" class="image" onclick="loadDetailProduct(<?php echo $id ?>)">
                                                     <img class="fit-image rounded" src="<?php echo _CDN_IMAGE_250 . '/products/' . $image ?>" />
                                                 </a>
                                                 <?php
@@ -249,9 +249,9 @@
                                                 }
                                                 ?>
                                                 <div class="action-wrapper" id="wrapper<?php echo $id ?>">
-                                                    <a class="action cursor-pointer" title="Thêm sản phẩm"><i class="fa-duotone fa-plus-large" onclick="addProductCart('<?php echo $id ?>', 1)"></i></a>
-                                                    <a class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
-                                                    <a class="nav-content cursor-pointer action cart" id="viewcart" title="Cart"><i class="fa-duotone fa-cart-circle-plus"></i></a>
+                                                    <a href="javascript:;" class="action" title="Thêm sản phẩm"><i class="fa-duotone fa-plus-large" onclick="addProductCart('<?php echo $id ?>', 1)"></i></a>
+                                                    <a href="javascript:;" class="action wishlist" title="Wishlist"><i class="fa-duotone fa-heart"></i></a>
+                                                    <a href="javascript:;" class="action cart" id="viewcart" title="Cart"><i class="fa-duotone fa-cart-circle-plus"></i></a>
                                                 </div>
                                             </div>
                                             <!-- Thumb End  -->

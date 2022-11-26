@@ -40,13 +40,13 @@
                 <?php
                 if (!empty($user)) {
                 ?>
-                    <a class="cursor-pointer btn btn-primary mt-4" onclick="loadContent('shop')">Mua Hàng
+                    <a href="javascript:;" class="btn btn-primary mt-4" onclick="loadContent('shop')">Mua Hàng
                         <i class="fa-duotone fa-cart-shopping-fast fa-xl"></i>
                     </a>
                 <?php
                 } else {
                 ?>
-                    <a class="cursor-pointer btn btn-primary mt-4" onclick="loadContent('login')">Đăng Nhập
+                    <a href="javascript:;" class="btn btn-primary mt-4" onclick="loadContent('login')">Đăng Nhập
                         <i class="fa-duotone fa-arrow-right-to-bracket fa-xl"></i>
                     </a>
                 <?php
@@ -186,7 +186,7 @@
                 $image = $value['image'];
                 ?>
                 <div class="col m-b-30" data-aos="fade-in">
-                    <a class="cursor-pointer banner hover-style" onclick="loadContent('shop/<?php echo $id?>')">
+                    <a href="javascript:;" class="banner hover-style" onclick="loadContent('shop/<?php echo $id?>')">
                         <img class="fit-image p-10" src="<?php echo _CDN_IMAGE_450 . '/category/' . $image ?>" alt="Banner Image">
                     </a>
                 </div>
