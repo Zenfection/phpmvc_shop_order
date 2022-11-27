@@ -20,7 +20,7 @@ class Viewcart extends Controller{
             Session::data('msg', [
                 'type' => 'warning',
                 'icon' => 'fa-duotone fa-basket-shopping-simple',
-                'position' => 'top-right',
+                'position' => 'top right',
                 'content' => 'Giỏ hàng của bạn đang trống'
             ]);
             $response = new Response();

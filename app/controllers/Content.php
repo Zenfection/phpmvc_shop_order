@@ -103,6 +103,11 @@ class Content extends Controller{
         $product_detail = $this->models('ProductModel')->getDetail($id);
         $similar_product = $this->models('ProductModel')->similarProduct($product_detail['id_category']);
 
+        $user = Session::data('user');
+        if(!empty($user)){
+            $addRecent = $this->models('ProductModel')->addRecent($user, $id);
+        }
+        
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/products/detail.php');
         eval('?>' . $contentView . '<?php');
     }
@@ -191,11 +196,11 @@ class Content extends Controller{
         $cart = $this->models('CartModel')->getCartUser($user);
         if(!$cart){
             echo json_encode([
-                'status' => 'false',
+                'status' => 'error',
                 'msg' => [
                     'type' => 'warning',
                     'icon' => 'fa-duotone fa-basket-shopping-simple',
-                    'position' => 'top',
+                    'position' => 'top right',
                     'content' => 'Giỏ hàng của bạn đang trống' 
                 ],
             ]);
@@ -217,7 +222,7 @@ class Content extends Controller{
                 'msg' => [
                     'type' => 'info',
                     'icon' => 'fa-duotone fa-user-xmark',
-                    'position' => 'top',
+                    'position' => 'top right',
                     'content' => 'Đăng nhập để sử dụng chức năng này' 
                 ],
             ]);
@@ -239,7 +244,7 @@ class Content extends Controller{
                 'msg' => [
                     'type' => 'warning',
                     'icon' => 'fa-duotone fa-basket-shopping-simple',
-                    'position' => 'top',
+                    'position' => 'top right',
                     'content' => 'Giỏ hàng của bạn đang trống' 
                 ],
             ]);

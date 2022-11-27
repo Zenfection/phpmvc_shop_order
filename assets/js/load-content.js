@@ -81,7 +81,8 @@ var scriptArr = dataArr[2];
 ----------------------*/
 
 
-function loadContent(content, check = false) {
+
+function loadContent(content, logged = true) {
     hideContent(); // hide content and footer
     let sucess = true;
     //use fetch API 
@@ -107,10 +108,9 @@ function loadContent(content, check = false) {
                 document.title = titleArr[content];
 
                 loadSript(content); // load script
-
-                showContent(); // show content and footer
-                AOS.init();
             }
+            showContent(); // show content and footer
+            AOS.init();
         });
 }
 
