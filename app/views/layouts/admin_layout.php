@@ -10,13 +10,12 @@
 
 	<!-- //? plugins  -->
 	<link href="https://cdn.jsdelivr.net/npm/simplebar@5.3.9/dist/simplebar.min.css" rel="stylesheet" />
-	<link href="https://cdn.jsdelivr.net/npm/metismenu@3.0.7/dist/metisMenu.min.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/metismenu/dist/metisMenu.min.css" rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/css/lobibox.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/css/nice-select2.min.css" rel="stylesheet">
-	<link href="https://cdn.jsdelivr.net/npm/apexcharts@3.36.1/dist/apexcharts.min.css" rel="stylesheet" >
 	<link href="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/Drag-And-Drop/dist/imageuploadify.min.css" rel="stylesheet" />
 	<link href="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 	
@@ -47,16 +46,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 	<!--plugins-->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/js/nice-select2.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.9/dist/simplebar.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/metismenu@3.0.7/dist/metisMenu.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.36.1/dist/apexcharts.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/tinymce@6.2.0/tinymce.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/lobibox.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/notifications.min.js"></script>
 	
 
 	<script src="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/Drag-And-Drop/dist/imageuploadify.min.js"></script>
@@ -105,6 +94,16 @@
 
 	<?php $this->render('admin/blocks/switcher') ?>
 
+	<script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/lobibox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/notifications.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/tinymce@6.2.0/tinymce.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.9/dist/simplebar.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/metismenu/dist/metisMenu.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<script src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/js/nice-select2.min.js"></script>
 	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/load-content.js"></script>
 
 	<script>

@@ -51,7 +51,7 @@ function hideContent() {
     // loader page 
     document.querySelector('.page-content').innerHTML = `
 	<div class="d-flex align-items-center justify-content-center">	
-        <i class="fa-duotone fa-loader fa-spin-pulse fa-10x" style="margin-top:15rem"></i>
+        <i class="fa-duotone fa-loader fa-spin-pulse fa-10x opacity-75" style="margin-top:15rem"></i>
     </div>`;
     document.getElementsByClassName('page-footer')[0].style.display = 'none';
 }
