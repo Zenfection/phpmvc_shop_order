@@ -204,14 +204,18 @@ function hideContent() {
     let scrollBarWidth = window.innerWidth - $(document).width();
     document.body.style.paddingRight = scrollBarWidth.toString() + 'px';
 
-    //* Hide content and footer
-    document.getElementById('content').style.display = 'none';
+    //* loader page 
+    document.querySelector('#content').innerHTML = `
+	<div class="d-flex align-items-center justify-content-center">	
+        <i class="fa-duotone fa-loader fa-spin-pulse fa-10x" style="margin-top:15rem"></i>
+    </div>`;
+
+    //* hide footer
     document.getElementsByTagName('footer')[0].style.display = 'none';
 }
 
 function showContent() {
-    //* Show content and footer
-    document.getElementById('content').style.display = 'block';
+    //* Show and footer
     document.getElementsByTagName('footer')[0].style.display = 'block';
 
     //* Remove padding right to body when scroll bar when reload

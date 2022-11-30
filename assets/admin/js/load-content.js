@@ -41,27 +41,50 @@ var contentArr = dataArr[1];
 var pathArr = dataArr[2];
 var scriptArr = dataArr[3];
 
+function hideContent() {
+    //* Add padding right to body when scroll bar when reload
+    let scrollBarWidth = window.innerWidth - $(document).width();
+    document.body.style.paddingRight = scrollBarWidth.toString() + 'px';
+
+    //* Hide content and footer
+
+    // loader page 
+    document.querySelector('.page-content').innerHTML = `
+	<div class="d-flex align-items-center justify-content-center">	
+        <i class="fa-duotone fa-loader fa-spin-pulse fa-10x" style="margin-top:15rem"></i>
+    </div>`;
+    document.getElementsByClassName('page-footer')[0].style.display = 'none';
+}
+
+function showContent() {
+    document.getElementsByClassName('page-footer')[0].style.display = 'block';
+
+    //* Remove padding right to body when scroll bar when reload
+    document.body.style.paddingRight = '0px';
+}
+
 function loadContent(content) {
+    hideContent();
     //fetch API
     fetch(contentArr[content])
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('content').innerHTML = data;
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('content').innerHTML = data;
 
-        document.title = titleArr[content];
-        if (window.location.pathname != pathArr[content]) {
-            window.history.pushState(null, null, pathArr[content]);
-        }
+            document.title = titleArr[content];
+            if (window.location.pathname != pathArr[content]) {
+                window.history.pushState(null, null, pathArr[content]);
+            }
 
-        //add script, check content in or not in scriptArr
-        if (content in scriptArr) {
-            let script = document.createElement('script');
-            script.src = scriptArr[content];
-            document.body.appendChild(script);
-        }
-        
-        AOS.init();
-    }); 
+            //add script, check content in or not in scriptArr
+            if (content in scriptArr) {
+                let script = document.createElement('script');
+                script.src = scriptArr[content];
+                document.body.appendChild(script);
+            }
+            showContent();
+            AOS.init();
+        });
 }
 
 
@@ -82,7 +105,7 @@ function loadOrderDetail(id) {
         })
 }
 
-function loadProductDetail(id){
+function loadProductDetail(id) {
     //fetch API
     fetch(`/admin/content/product_detail/${id}`)
         .then(response => response.text())
@@ -99,7 +122,7 @@ function loadProductDetail(id){
         })
 }
 
-function loadUserInfo($user){
+function loadUserInfo($user) {
     //fetch API
     fetch(`/admin/content/user_info/${$user}`)
         .then(response => response.text())
@@ -121,24 +144,24 @@ window.addEventListener('popstate', function () {
     let url = new URL(window.location.href);
     let path = url.pathname;
 
-    if(path.includes('/admin/product/detail')){
+    if (path.includes('/admin/product/detail')) {
         let id = path.replace('/admin/product/detail/', '');
         loadProductDetail(id);
         return;
-    } else if(path.includes('/admin/order/detail')){
+    } else if (path.includes('/admin/order/detail')) {
         let id = path.replace('/admin/order/detail/', '');
         loadOrderDetail(id);
         return;
-    } else if(path.includes('/admin/customer/info')){
+    } else if (path.includes('/admin/customer/info')) {
         let id = path.replace('/admin/customer/info/', '');
         loadUserInfo(id);
-        return; 
+        return;
     }
     // check onject pathArr have path or not
     for (let key in pathArr) {
         if (pathArr[key] == path) {
             loadContent(key);
-        } 
+        }
     }
 });
 
@@ -155,7 +178,9 @@ function loadCity() {
             document.getElementById('city').nextSibling.remove();
 
 
-            let options = { searchable: true };
+            let options = {
+                searchable: true
+            };
             NiceSelect.bind(city, options).update();
 
             //* Change text "Select as option" to "Chọn quận / huyện"
@@ -173,7 +198,9 @@ function loadWard() {
         .then(data => {
             document.getElementById('ward').innerHTML = data;
             document.querySelector('#ward').nextSibling.remove();
-            let options = { searchable: true };
+            let options = {
+                searchable: true
+            };
             NiceSelect.bind(ward, options).update();
 
             //* Change text "Select as option" to "Chọn phường / xã "
