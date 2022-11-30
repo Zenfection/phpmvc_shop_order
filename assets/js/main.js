@@ -1,8 +1,6 @@
-(function ($) {
-  "use strict";
-  // *Popup Notification
-  function notify(type, icon, position, msg) {
-    Lobibox.notify(type, {
+// *Popup Notification
+function notify(type, icon, position, msg) {
+  Lobibox.notify(type, {
       pauseDelayOnHover: true,
       size: 'mini',
       rounded: true,
@@ -10,8 +8,11 @@
       continueDelayOnInactiveTab: false,
       position: position,
       msg: msg
-    });
-  }
+  });
+}
+
+(function ($) {
+  "use strict";
   /*----------------------------------------
     Sticky Menu Activation
   ------------------------------------------*/

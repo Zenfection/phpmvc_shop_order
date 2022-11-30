@@ -80,7 +80,9 @@ var scriptArr = dataArr[2];
     HÀM CHÍNH XỬ LÝ LOAD CONTENT        
 ----------------------*/
 
+$(function () {
 
+})
 
 function loadContent(content, logged = true) {
     hideContent(); // hide content and footer

@@ -141,7 +141,7 @@
                                             <strong class="product-quantity"> × <?php echo $amount ?></strong>
                                         </td>
                                         <td class="cart-product-total text-end pe-0">
-                                            <span class="amount"><?php echo number_price($total) ?></span>
+                                            <span class="amount"><?php echo number_price($discout_price) ?></span>
                                         </td>
                                     </tr>
                                     <?php
