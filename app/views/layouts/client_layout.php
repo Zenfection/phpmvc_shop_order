@@ -43,7 +43,7 @@
     pace.min.css
     style.css
     custom.css
--->
+    -->
     <link rel="stylesheet" href="<?php echo _CDN_JSDelivr; ?>/cdn/css/style-v2.min.css">
 </head>
 
@@ -58,6 +58,11 @@
     <script defer src="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/js/nice-select2.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/lobibox.js"></script>
 
+    <!--  Zen Script -->
+    <script defer src="<?php echo _WEB_ROOT; ?>/assets/js/main.js"></script>
+    <script defer src="<?php echo _WEB_ROOT; ?>/assets/js/backend.js"></script>
+    <script defer src="<?php echo _WEB_ROOT; ?>/assets/js/load-content.js"></script>
+    <script defer src="<?php echo _WEB_ROOT; ?>/assets/js/custom.js"></script>
 
     <?php $this->render('blocks/header', $sub_content); ?>
 
@@ -70,12 +75,6 @@
     $this->render('blocks/footer');
     $this->render('blocks/mobile');
     ?>
-
-    <!--  Zen Script -->
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/main.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/backend.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/load-content.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/assets/js/custom.js"></script>
 
     <!-- <script src="<?php echo _WEB_ROOT; ?>/cdn/js/main.min.js"></script> -->
 </body>
