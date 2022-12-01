@@ -18,14 +18,14 @@
 	<link href="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/css/nice-select2.min.css" rel="stylesheet">
 	<link href="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/Drag-And-Drop/dist/imageuploadify.min.css" rel="stylesheet" />
 	<link href="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-	
+
 	<!-- //? loader -->
 	<link href="<?php echo _CDN_JSDelivr; ?>/assets/admin/css/pace.min.css" rel="stylesheet" />
 	<script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
 
 	<!-- //? Bootstrap CSS -->
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"/>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="<?php echo _CDN_JSDelivr; ?>/assets/admin/css/bootstrap-extended.min.css" rel="stylesheet" />
 	<link href="<?php echo _CDN_JSDelivr; ?>/assets/admin/css/app.min.css" rel="stylesheet" />
 	<script src="<?php echo _WEB_ROOT; ?>/cdn/js/icon-zen.min.js"></script>
@@ -42,19 +42,29 @@
 <html>
 
 <body>
-	<!-- Bootstrap JS -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-	<!--plugins-->
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-	
+	<!-- Async JS -->
+	<script async src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script async src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/lobibox.min.js"></script>
+	<script async src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
+	<script async src="https://cdn.jsdelivr.net/npm/tinymce@6.2.0/tinymce.min.js"></script>
+	<script async src="https://cdn.jsdelivr.net/npm/metismenu/dist/metisMenu.min.js"></script>
+	<script async src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
+	<script async src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<script async src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js"></script>
 
-	<script src="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/Drag-And-Drop/dist/imageuploadify.min.js"></script>
-	<script src="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/datatable/js/jquery.dataTables.min.js"></script>
-	<script src="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+	<!--Defer JS -->
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/js/nice-select2.min.js"></script>
+
+	<script defer src="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/Drag-And-Drop/dist/imageuploadify.min.js"></script>
+	<script defer src="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/datatable/js/jquery.dataTables.min.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.9/dist/simplebar.min.js"></script> -->
+
 	<!--app JS-->
-	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/main.js"></script>
-	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/app.js"></script>
-	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/backend.js"></script>
+	<script defer src="<?php echo _WEB_ROOT; ?>/assets/admin/js/main.js"></script>
+	<script defer src="<?php echo _WEB_ROOT; ?>/assets/admin/js/app.js"></script>
+	<script defer src="<?php echo _WEB_ROOT; ?>/assets/admin/js/backend.js"></script>
+	<script defer src="<?php echo _WEB_ROOT; ?>/assets/admin/js/load-content.js"></script>
 
 	<div class="wrapper">
 		<?php
@@ -94,17 +104,6 @@
 
 	<?php $this->render('admin/blocks/switcher') ?>
 
-	<script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/lobibox.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/notifications.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/tinymce@6.2.0/tinymce.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.9/dist/simplebar.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/metismenu/dist/metisMenu.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/js/nice-select2.min.js"></script>
-	<script src="<?php echo _WEB_ROOT; ?>/assets/admin/js/load-content.js"></script>
 
 	<script>
 		$(document).ready(function() {
