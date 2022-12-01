@@ -110,52 +110,17 @@ class Checkout extends Controller{
         }
     }
 
+    private function checkOrderExist($id_order){
+        $result = $this->db->table('tb_order')->where('id_order', '=', $id_order)->get();
+        return $result;
+    }
     private function randomOrder($length){
         $str = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
         $id_order = strtoupper(substr(str_shuffle($str), 0, $length));
-        return $id_order;
+        if($this->checkOrderExist($id_order)){
+            $this->randomOrder($length);
+        } else {
+            return $id_order;
+        }
     }
-    // public function validate(){
-    //     $request = new Request();
-    //     //set rule
-    //     $request->rules([
-    //         'fullname' => 'min:5|max:50',
-    //         'email' => 'email',
-    //         'phone' => 'min:10|max:11',
-    //         'address' => 'min:5|max:255',
-    //     ]);
-    //     //set message 
-    //     $request->message([
-    //         'fullname.min' => 'Họ tên phải có ít nhất 5 ký tự',
-    //         'fullname.max' => 'Họ tên không được quá 50 ký tự',
-    //         'email.email' => 'Email không đúng định dạng',
-    //         'phone.min' => 'Số điện thoại phải có ít nhất 10 ký tự',
-    //         'phone.max' => 'Số điện thoại không được quá 11 ký tự',
-    //         'address.min' => 'Địa chỉ phải có ít nhất 5 ký tự',
-    //         'address.max' => 'Địa chỉ không được quá 255 ký tự',
-    //     ]);
-
-    //     //validate
-    //     $validate = $request->validate();
-    //     $response = new Response();
-    //     if(!$validate){
-    //         Session::data('msg', [
-    //             'type' => 'error',
-    //             'icon' => 'fa-duotone fa-circle-exclamation',
-    //             'position' => 'center',
-    //             'content' => 'Đặt hàng lỗi, vui lòng kiểm tra lại'
-    //         ]);
-    //         $response->redirect('checkout');
-    //     } else {
-    //         $id_order = $this->checkoutOrder($_POST['fullname'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['province'], $_POST['city'], $_POST['ward']);
-
-    //         Session::data('msg', [
-    //             'type' => 'success',
-    //             'icon' => 'fa-duotone fa-cart-circle-check',
-    //             'position' => 'center',
-    //             'content' => 'Đặt hàng thành công'
-    //         ]);
-    //         $response->redirect('account/order/'.$id_order);
-    //     }
-    // }    
 }

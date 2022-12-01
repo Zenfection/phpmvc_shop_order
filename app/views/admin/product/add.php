@@ -61,7 +61,15 @@ if (!empty($msg)) {
                                         </div>
                                         <div class="col-md-6">
                                             <label for="ranking" class="form-label">Đánh Giá</label>
-                                            <input type="number" min=1 max=10 class="form-control" id="ranking" name="ranking" placeholder="Từ 1 tới 10">
+                                            <select class="star-rating">
+                                                <option value="">Chọn Đánh Giá</option>
+                                                <option value="10">Rất tốt</option>
+                                                <option value="8">Tốt</option>
+                                                <option value="6">Khá</option>
+                                                <option value="4">Tạm</option>
+                                                <option value="2">Không Ổn</option>
+                                            </select>
+                                            <!-- <input type="number" min=1 max=10 class="form-control" id="ranking" name="ranking" placeholder="Từ 1 tới 10"> -->
                                         </div>
                                         <div class="col-12">
                                             <label for="inputProductType" class="form-label">Kiểu Thức Ăn</label>

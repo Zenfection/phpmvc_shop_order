@@ -182,7 +182,7 @@ function addNewProduct() {
     let price = document.querySelector('#addNewProductForm input[id=price]').value;
     let quantity = document.querySelector('#addNewProductForm input[id=quantity]').value;
     let discount = document.querySelector('#addNewProductForm input[id=discount]').value;
-    let ranking = document.querySelector('#addNewProductForm input[id=ranking]').value;
+    let ranking = document.querySelector('.gl-selected').getAttribute('data-value');
     let category = document.querySelector('#addNewProductForm select[id=category]').value;
 
     // ! Lỗi không thể thả ảnh

@@ -69,23 +69,32 @@ var dataArr = [{
         'product/detail': '/assets/js/custom/product_detail.js',
         'shop': '/assets/js/custom/shop.js',
         'checkout': '/assets/js/custom/checkout.js',
+    },
+    {
+        'home': 'homeNav',
+        'about': 'aboutNav',
+        'contact': 'contactNav',
+        'shop': 'shopNav'
     }
 ];
 var titleArr = dataArr[0];
 var urlArr = dataArr[1];
 var scriptArr = dataArr[2];
-
+var navArr = dataArr[3];
 
 /* -------------------  
     HÀM CHÍNH XỬ LÝ LOAD CONTENT        
 ----------------------*/
 
-$(function () {
-
-})
-
 function loadContent(content, logged = true) {
     hideContent(); // hide content and footer
+
+    if(navArr[content] != undefined) {
+        chooseNav(navArr[content]); // choose nav
+    } else {
+        resetNav(); // reset nav
+    }
+
     let sucess = true;
     //use fetch API 
     fetch(`/content/${content}`)
@@ -117,6 +126,7 @@ function loadContent(content, logged = true) {
 }
 
 function loadDetailProduct(id) {
+    chooseNav('shopNav'); // choose nav
     hideContent();
     //fetch API
     fetch(`/content/product_detail/${id}`)
@@ -145,6 +155,7 @@ function urlShop(category, sortby, page, search) {
 }
 
 function filterShop(category = 'all', sortby = 'default', page = 1, search = '') {
+    chooseNav('shopNav');
     if (sortby == 'check') {
         element = document.querySelector('.nice-select');
         sortby = element.options[element.selectedIndex].value;
@@ -200,6 +211,18 @@ window.addEventListener('popstate', function () {
 /* -----------------------------
     CÁC HÀM BỔ TRỢ
 --------------------------------*/
+
+
+function resetNav() {
+    let navs = document.querySelectorAll('.main-menu li > a');
+    navs.forEach(nav => {
+        nav.classList.remove('active');
+    });
+}
+function chooseNav(id) {
+    resetNav();
+    document.getElementById(id).classList.add('active');
+}
 
 function hideContent() {
     //* Add padding right to body when scroll bar when reload

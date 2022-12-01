@@ -1,4 +1,5 @@
 $(function () {
+
     if (document.getElementsByClassName('feature-slider')[0] != undefined) {
         var slider = tns({
             container: '.feature-slider',

@@ -1,6 +1,7 @@
 $(function () {
     var table = $('#list_order').DataTable({
         select: true,
+        order: [[5, 'desc']],
         language: {
             url: window.location.origin + '/assets/admin/plugins/datatable/dataTables.vietnam.json'
         }

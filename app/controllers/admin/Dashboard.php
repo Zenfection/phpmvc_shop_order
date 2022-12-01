@@ -61,10 +61,10 @@ class Dashboard extends Controller {
             $dataProduct = $this->models('ProductModel')->getProduct();
         } else {
             $dataProduct = $this->models('ProductModel')->searchProduct($keyword);
-        }
-        if($keyword != ''){
             $this->data['sub_content']['keyword'] = $keyword;
         }
+
+        $dataProduct = array_reverse($dataProduct);
         $this->data['sub_content']['current_sidebar'] = 'product';
         $this->data['sub_content']['msg'] = Session::flash('msg');
         $this->data['sub_content']['product'] = $dataProduct;
@@ -80,10 +80,10 @@ class Dashboard extends Controller {
         $this->data['content'] = 'admin/order/index';
 
         if($keyword == ''){
-            $this->data['sub_content']['keyword'] = $keyword;
             $dataOrder = $this->models('OrderModel')->getOrder();
         } else {
             $dataOrder = $this->models('OrderModel')->getOrder($keyword);
+            $this->data['sub_content']['keyword'] = $keyword;
         }
 
         $this->data['sub_content']['current_sidebar'] = 'order';

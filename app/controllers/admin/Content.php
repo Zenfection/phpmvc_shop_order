@@ -54,7 +54,7 @@ class Content extends Controller{
         } else {
             $product = $this->models('ProductModel')->searchProduct($keyword);
         }
-
+        $product = array_reverse($product);
         $current_sidebar = 'product';
         $msg = Session::flash('msg');
         

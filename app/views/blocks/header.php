@@ -11,14 +11,23 @@
                 <!-- Header Logo End -->
 
                 <!-- Header Menu Start -->
-                <div class="col-lg-5 d-none d-lg-block" data-aos="fade-in" data-aos-duration="1000">
+                
+                <div class="col-lg-5 d-none d-lg-block navbar navbar-expand-lg" data-aos="fade-in" data-aos-duration="1000">
                     <div class="main-menu">
                         <ul>
                             <!-- render session -->
-                            <li><a href="javascript:;" onclick="loadContent('home')">Trang Chủ</a></li>
-                            <li><a href="javascript:;" onclick="loadContent('about')">Giới Thiệu</a></li>
-                            <li><a href="javascript:;" onclick="loadContent('shop')">Shop</a></li>
-                            <li><a href="javascript:;" onclick="loadContent('contact')">Liên Hệ</a></li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link" id="homeNav" onclick="loadContent('home')">Trang Chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link" id="aboutNav" onclick="loadContent('about')">Giới Thiệu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link" id="shopNav" onclick="loadContent('shop')">Shop</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link" id="contactNav" onclick="loadContent('contact')">Liên Hệ</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

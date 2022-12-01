@@ -35,12 +35,13 @@ class OrderModel extends Model{
     //! 1 ---------------------------------------- //
     public function getOrder($keyword = ''){
         if($keyword == ''){
-            $sql = "SELECT * FROM `tb_order`";
+            $sql = "SELECT * FROM `tb_order` ORDER BY `order_date` DESC";
         }else {
             $sql = "SELECT * FROM `tb_order` 
             WHERE LOWER(id_order) 
             COLLATE UTF8_GENERAL_CI 
-            LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%')";
+            LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%')
+            ORDER BY `order_date` DESC";
         }
 
         $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);

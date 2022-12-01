@@ -26,6 +26,7 @@
 	<!-- //? Bootstrap CSS -->
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/star-rating.js@4.3.0/dist/star-rating.min.css" rel="stylesheet">
 	<link href="<?php echo _CDN_JSDelivr; ?>/assets/admin/css/bootstrap-extended.min.css" rel="stylesheet" />
 	<link href="<?php echo _CDN_JSDelivr; ?>/assets/admin/css/app.min.css" rel="stylesheet" />
 	<script src="<?php echo _WEB_ROOT; ?>/cdn/js/icon-zen.min.js"></script>
@@ -55,11 +56,11 @@
 	<!--Defer JS -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 	<script defer src="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/js/nice-select2.min.js"></script>
-
 	<script defer src="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/Drag-And-Drop/dist/imageuploadify.min.js"></script>
 	<script defer src="<?php echo _CDN_JSDelivr; ?>/assets/admin/plugins/datatable/js/jquery.dataTables.min.js"></script>
 	<!-- <script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.9/dist/simplebar.min.js"></script> -->
-
+	
+	<script defer src="https://cdn.jsdelivr.net/npm/star-rating.js@4.3.0/dist/star-rating.cjs.min.js"></script>
 	<!--app JS-->
 	<script defer src="<?php echo _WEB_ROOT; ?>/assets/admin/js/main.js"></script>
 	<script defer src="<?php echo _WEB_ROOT; ?>/assets/admin/js/app.js"></script>
