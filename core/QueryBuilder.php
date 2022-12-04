@@ -1,5 +1,6 @@
 <?php
 trait QueryBuilder {
+    public $dataVar = [];
     public $tableName = '';
     public $where = '';
     public $selectField = '*';
@@ -9,6 +10,7 @@ trait QueryBuilder {
 
     // TODO Reset các biến trong class
     private function resetQuery(){
+        $this->dataVar = [];
         $this->tableName = '';
         $this->where = '';
         $this->selectField = '*';
@@ -37,27 +39,36 @@ trait QueryBuilder {
     * @param field: tên trường
     */
     public function where($field, $compare, $value){
-        if(empty($this->where)){
-            $this->where = " WHERE $field $compare '$value'";
-        }else{
-            $this->where .= " AND $field $compare '$value'";
+        $bind = explode('.', $field);
+        if(count($bind) > 1){
+            $bind = $bind[1];
+        } else {
+            $bind = $field;
         }
+        if(empty($this->where)){
+            $this->where = " WHERE $field $compare :$bind";
+        }else{
+            $this->where .= " AND $field $compare :$bind";
+        }
+        $this->dataVar[$bind] = $value;
         return $this;
     }
     public function orWhere($field, $compare, $value){
         if(empty($this->where)){
-            $this->where = " WHERE $field $compare '$value'";
+            $this->where = " WHERE $field $compare :$field";
         }else{
-            $this->where .= " OR $field $compare '$value'";
+            $this->where .= " OR $field $compare :$field";
         }
+        $this->dataVar[$field] = $value;
         return $this;
     }
     public function whereLike($field, $value){
         if(empty($this->where)){
-            $this->where = " WHERE $field LIKE '%$value%'";
+            $this->where = " WHERE $field LIKE :$field";
         }else{
-            $this->where .= " AND $field LIKE '%$value%'";
+            $this->where .= " AND $field LIKE :$field";
         }
+        $this->dataVar[$field] = '%'.$value.'%';
         return $this;
     }
 
@@ -185,7 +196,7 @@ trait QueryBuilder {
     public function get(){
         $sql = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->where $this->orderBy $this->limit";
         $sql = trim($sql);
-        $data = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $data = $this->query($sql, $this->dataVar)->fetchAll(PDO::FETCH_ASSOC);
 
         $this->resetQuery();
 
@@ -201,11 +212,27 @@ trait QueryBuilder {
     public function first(){
         $sql = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->where $this->orderBy $this->limit";
         $sql = trim($sql);
-        $data = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $data = $this->query($sql, $this->dataVar)->fetch(PDO::FETCH_ASSOC);
 
         $this->resetQuery();
 
         if($data) return $data;
+        return false;
+    }
+
+    /**
+     * TODO Sum dữ liệu
+     * ? $this->db->table($table)->sum($field)  
+     * @param field: tên trường 
+     */
+    public function sum($field){
+        $sql = "SELECT SUM($field) as sum FROM $this->tableName $this->innerJoin $this->where $this->orderBy $this->limit";
+        $sql = trim($sql);
+        $data = $this->query($sql, $this->dataVar)->fetch(PDO::FETCH_ASSOC);
+
+        $this->resetQuery();
+
+        if($data) return $data['sum'];
         return false;
     }
 }

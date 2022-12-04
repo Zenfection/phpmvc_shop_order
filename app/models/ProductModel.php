@@ -98,7 +98,7 @@ class ProductModel extends Model {
 
     //! 3 ---------------------------------------- //
     public function similarProduct($id_category){
-        $data = $this->db->table($this->__product)->where('id_category', '=', $id_category)->where('id_product', '!=', $id_category)->get();
+        $data = $this->db->table($this->__product)->where('id_category', '=', $id_category)->get();
         return $data;
     }
     public function getProductOrder($id_order){

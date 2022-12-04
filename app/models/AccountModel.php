@@ -59,11 +59,8 @@ class AccountModel extends Model{
         return $data;
     }
     public function sumMoneyOrder($username){
-        $sql = "SELECT sum(total_money) as total 
-                FROM `tb_order`
-                WHERE username = '$username'";
-        $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        return $data['total'];
+        $data = $this->db->table($this->__order)->where('username', '=', $username)->sum('total_money');
+        return $data;
     }
 
     //! 2 ---------------------------------------- //
@@ -73,14 +70,17 @@ class AccountModel extends Model{
     }
     public function getDetailOrder($user, $id){
         $sql = "SELECT p.id_product, p.name, p.price, p.image, od.amount, o.total_money, o.order_date, o.status
-                FROM `tb_user` as u, `tb_order` as o, `tb_order_details` as od, `tb_product` as p
-                WHERE u.username = o.username
-                AND o.id_order = od.id_order
-                AND od.id_product = p.id_product
-                AND u.username = '$user'
-                AND o.id_order = '$id'";
-        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
+        FROM `tb_user` as u, `tb_order` as o, `tb_order_details` as od, `tb_product` as p
+        WHERE u.username = o.username
+        AND o.id_order = od.id_order
+        AND od.id_product = p.id_product
+        AND u.username = :username
+        AND o.id_order = :id_order";
+        
+        $this->dataVar['username'] = $user;
+        $this->dataVar['id_order'] = $id;
+        $result = $this->db->query($sql, $this->dataVar)->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
     public function cancelOrder($user, $id){
         $data = $this->db->table($this->__order)->where('id_order', '=', $id)->where('username', '=',$user)->update(['status' => 'canceled']);

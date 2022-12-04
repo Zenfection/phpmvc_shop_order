@@ -16,19 +16,14 @@ class Database{
             $valueStr = '';
             foreach($data as $key => $value){
                 $fieldStr .= $key . ',';
-                // check string
-                if(is_string($value)){
-                    $valueStr .= "'" . $value . "',";
-                } else {
-                    $valueStr .= $value . ',';
-                }
+                $valueStr .= ':' . $key . ',';
+                $this->dataVar[$key] = $value;
             }
             $fieldStr = rtrim($fieldStr, ',');
             $valueStr = rtrim($valueStr, ',');
 
             $sql = "INSERT INTO $table ($fieldStr) VALUES ($valueStr)";
-
-            $status = $this->__conn->query($sql);
+            $status = $this->query($sql, $this->dataVar);
             if($status){
                 return true;
             }
@@ -40,12 +35,10 @@ class Database{
         if(!empty($data)){
             $updateStr = '';
             foreach($data as $key => $value){
-                if(is_string($value)){
-                    $updateStr .= $key . "='" . $value . "',";
-                } else {
-                    $updateStr .= $key . '=' . $value . ',';
-                }
+                $updateStr .= $key . '= :' . $key . ',';
+                $this->dataVar[$key] = $value;
             }
+            
             $updateStr = rtrim($updateStr, ',');
 
             if(!empty($condition)){
@@ -53,8 +46,8 @@ class Database{
             } else {
                 $sql = "UPDATE $table SET $updateStr";
             } 
-            
-            $status = $this->query($sql);
+            $sql = trim($sql);
+            $status = $this->query($sql, $this->dataVar);
             if($status){
                 return true;
             }
@@ -68,16 +61,21 @@ class Database{
         } else {
             $sql = "DELETE FROM $table";
         }
-        $status = $this->query($sql);
+        $status = $this->query($sql, $this->dataVar);
         if($status){
             return true;
         }
         return false;
     }
 
-    function query($sql){
+    function query($sql, $data = []){
         try {
             $stmt = $this->__conn->prepare($sql);
+            if(!empty($data)){
+                foreach($data as $key => $value){
+                    $stmt->bindValue(':'.$key, $value);
+                }
+            }
             $stmt->execute();
             return $stmt;
         } catch (Exception $e) {
@@ -92,7 +90,7 @@ class Database{
     function count(){
         $sql = "SELECT COUNT(*) FROM $this->tableName $this->innerJoin $this->where";
         $sql = trim($sql);
-        $data = $this->query($sql)->fetchColumn();
+        $data = $this->query($sql, $this->dataVar)->fetchColumn();
         return $data;
     }
     function lastInsertId(){

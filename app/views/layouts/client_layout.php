@@ -55,8 +55,8 @@
     <script async src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/js/nice-select2.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/lobibox.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/nice-select2@2.0.0/dist/js/nice-select2.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/lobibox@1.2.7/js/lobibox.js"></script>
 
     <!--  Zen Script -->
     <script defer src="<?php echo _WEB_ROOT; ?>/assets/js/main.js"></script>

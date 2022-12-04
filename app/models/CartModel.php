@@ -2,6 +2,7 @@
 class CartModel extends Model
 {
     private $__cart = 'tb_cart';
+    private $__product = 'tb_product';
 
     function __construct()
     {
@@ -109,19 +110,13 @@ class CartModel extends Model
     //! 3 ---------------------------------------- //
     public function countAmountProductCart($user, $id)
     {
-        $sql = "SELECT amount FROM `tb_cart` WHERE username = '$user' AND id_product = '$id'";
-        $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        if (!empty($data)) {
-            return $data['amount'];
-        }
-        return 0;
+        $data = $this->db->table($this->__cart)->where('username', '=', $user)->where('id_product', '=', $id)->first();
+        return $data['amount'];
     }
     public function totalMoneyCartUser($user)
     {
-        $sql = "SELECT * FROM `tb_cart` as c, `tb_product` as p
-                WHERE c.id_product = p.id_product
-                AND c.username = '$user'";
-        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $data = $this->db->table($this->__cart . ' as c')->join($this->__product . ' as p', 'c.id_product = p.id_product')->where('c.username', '=', $user)->get();
+
         $total = 0;
         foreach ($data as $item) {
             $price = (float)$item['price'];
@@ -134,10 +129,7 @@ class CartModel extends Model
     }
     public function getProductDetailCart($id)
     {
-        $sql = "SELECT * FROM `tb_cart` as c, `tb_product` as p
-                WHERE c.id_product = p.id_product
-                AND c.id_product = '$id'";
-        $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $data = $this->db->table($this->__product . ' as p')->join($this->__cart . ' as c', 'p.id_product = c.id_product')->where('p.id_product', '=', $id)->first();
         return $data;
     }
 }
