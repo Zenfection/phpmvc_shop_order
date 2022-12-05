@@ -154,16 +154,22 @@ class Content extends Controller{
 
     public function account(){
         $user = Session::data('user');
-        $account = $this->db->table('tb_user')->where('username', '=', $user)->first();
+        $account = $this->models('AccountModel')->getAccount($user);
         $getOrder = $this->models('AccountModel')->getOrder($user);
+
+        $province_data = $this->models('AddressModel')->getProvince();
+        $city_data = $this->models('AddressModel')->getCityInProvinceByName($account['province']);
+        $ward_data = $this->models('AddressModel')->getWardInCityByName($account['city']);
     
         $fullname = $account['fullname'];
         $email = $account['email'];
         $phone = $account['phone'];
         $address = $account['address'];
+        $province = $account['province'];
+        $city = $account['city'];
+        $ward = $account['ward'];
 
         $msg = Session::flash('msg');
-        $this->data['sub_content']['msg'] = Session::flash('msg');
 
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/account/index.php');
         eval('?>' . $contentView . '<?php');
@@ -228,11 +234,19 @@ class Content extends Controller{
             ]);
             exit();
         }
-        $account = $this->db->table('tb_user')->where('username', '=', $user)->get();
-        $fullname = $account[0]['fullname'];
-        $phone = $account[0]['phone'];
-        $email = $account[0]['email'];
-        $address = $account[0]['address'];
+
+        $account = $this->models('AccountModel')->getAccount($user);
+
+        $fullname = $account['fullname'];
+        $phone = $account['phone'];
+        $email = $account['email'];
+        $address = $account['address'];
+        $province = $account['province'];
+        $city = $account['city'];
+        $ward = $account['ward'];
+        $province_data = $this->models('AddressModel')->getProvince();
+        $city_data = $this->models('AddressModel')->getCityInProvinceByName($account['province']);
+        $ward_data = $this->models('AddressModel')->getWardInCityByName($account['city']);
 
         $dataShare = $this->getDataShare();
         $total_money = $dataShare['total_money'];

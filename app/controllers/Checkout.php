@@ -8,10 +8,12 @@ class Checkout extends Controller{
     public function index(){
         $title = 'Đặt Hàng';
         $user = Session::data('user');
-        $account = $this->db->table('tb_user')->where('username', '=', $user)->get();
+        $account = $this->models('AccountModel')->getAccount($user);
         $cart = $this->models('CartModel')->getCartUser($user);
 
         $provinceData = $this->models('AddressModel')->getProvince();
+        $cityData = $this->models('AddressModel')->getCityInProvinceByName($account['province']);
+        $wardData = $this->models('AddressModel')->getWardInCityByName($account['city']);
         
         if(!$cart){
             Session::data('msg', [
@@ -29,11 +31,17 @@ class Checkout extends Controller{
         $this->data['content'] = 'checkout/index';
 
         
-        $this->data['sub_content']['fullname'] = $account[0]['fullname'];
-        $this->data['sub_content']['email'] = $account[0]['email'];
-        $this->data['sub_content']['phone'] = $account[0]['phone'];
-        $this->data['sub_content']['address'] = $account[0]['address'];
+        $this->data['sub_content']['fullname'] = $account['fullname'];
+        $this->data['sub_content']['email'] = $account['email'];
+        $this->data['sub_content']['phone'] = $account['phone'];
+        $this->data['sub_content']['address'] = $account['address'];
+        $this->data['sub_content']['province'] = $account['province'];
+        $this->data['sub_content']['city'] = $account['city'];
+        $this->data['sub_content']['ward'] = $account['ward'];
+
         $this->data['sub_content']['province_data'] = $provinceData;
+        $this->data['sub_content']['city_data'] = $cityData;
+        $this->data['sub_content']['ward_data'] = $wardData;
 
         
         $this->render('layouts/client_layout', $this->data);
@@ -94,10 +102,15 @@ class Checkout extends Controller{
             //* thêm vào bảng tb_order_detail
             $cartProduct = $this->models('CartModel')->getCartUser($user);
             foreach($cartProduct as $item){
+                $product = $this->models('ProductModel')->getDetail($item['id_product']);
+                $price = (int)$product['price'];
+                $discount_price = $price - $price * (int)$item['discount'] / 100;
+                
                 $dataCart = [
                     'id_order' => $id_order,
                     'id_product' => (int)$item['id_product'],
                     'amount' => (int)$item['amount'],
+                    'price' => $discount_price,
                 ];
                 $this->db->table('tb_order_details')->insert($dataCart);
                 if(!$result){

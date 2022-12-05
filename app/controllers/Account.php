@@ -25,8 +25,12 @@ class Account extends Controller {
         $user = Session::data('user');
         $title = 'Tài Khoản';
 
-        $account = $this->db->table('tb_user')->where('username', '=', $user)->first();
+        $account = $this->models('AccountModel')->getAccount($user);
         $getOrder = $this->models('AccountModel')->getOrder($user);
+
+        $provinceData = $this->models('AddressModel')->getProvince();
+        $cityData = $this->models('AddressModel')->getCityInProvinceByName($account['province']);
+        $wardData = $this->models('AddressModel')->getWardInCityByName($account['city']);
     
         $this->data['page_title'] = $title;
         $this->data['sub_content']['user'] = $user;
@@ -36,7 +40,15 @@ class Account extends Controller {
         $this->data['sub_content']['email'] = $account['email'];
         $this->data['sub_content']['phone'] = $account['phone'];
         $this->data['sub_content']['address'] = $account['address'];
+
+        $this->data['sub_content']['province'] = $account['province'];
+        $this->data['sub_content']['city'] = $account['city'];
+        $this->data['sub_content']['ward'] = $account['ward'];
         $this->data['sub_content']['getOrder'] = $getOrder; 
+
+        $this->data['sub_content']['province_data'] = $provinceData;
+        $this->data['sub_content']['city_data'] = $cityData;
+        $this->data['sub_content']['ward_data'] = $wardData;
         
         $this->data['sub_content']['msg'] = Session::flash('msg');
         
@@ -95,17 +107,23 @@ class Account extends Controller {
     }
 
     public function change_user_info(){
-        if(isset($_POST['fullname']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['address'])){
+        if(isset($_POST['fullname'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['province'], $_POST['city'], $_POST['ward'])){
             $fullname = $_POST['fullname'];
             $email = $_POST['email'];
             $phone = $_POST['phone'];
             $address = $_POST['address'];
+            $province = $_POST['province'];
+            $city = $_POST['city'];
+            $ward = $_POST['ward'];
 
             $newData = [
                 'fullname' => $fullname,
                 'email' => $email,
                 'phone' => $phone,
-                'address' => $address
+                'address' => $address,
+                'province' => $province,
+                'city' => $city,
+                'ward' => $ward
             ];
 
             $user = Session::data('user');
@@ -114,7 +132,10 @@ class Account extends Controller {
                 'fullname' => $userInfo['fullname'],
                 'email' => $userInfo['email'],
                 'phone' => $userInfo['phone'],
-                'address' => $userInfo['address']
+                'address' => $userInfo['address'],
+                'province' => $userInfo['province'],
+                'city' => $userInfo['city'],
+                'ward' => $userInfo['ward']
             ];
 
             $data = $this->checkDiff($oldData, $newData);

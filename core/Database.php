@@ -77,6 +77,7 @@ class Database{
                 }
             }
             $stmt->execute();
+            $this->resetQuery();
             return $stmt;
         } catch (Exception $e) {
             $data = array(

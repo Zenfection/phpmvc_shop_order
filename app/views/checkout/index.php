@@ -1,11 +1,11 @@
 <?php
-    if (!empty($msg)) {
-        $type_msg = $msg['type'];
-        $icon_msg = $msg['icon'];
-        $pos_msg = $msg['position'];
-        $content_msg = $msg['content'];
-        echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
-    }
+if (!empty($msg)) {
+    $type_msg = $msg['type'];
+    $icon_msg = $msg['icon'];
+    $pos_msg = $msg['position'];
+    $content_msg = $msg['content'];
+    echo "<script>notify('$type_msg', '$icon_msg', '$pos_msg', '$content_msg')</script>";
+}
 ?>
 <!-- Checkout Section Start -->
 <div class="section section-margin">
@@ -47,45 +47,58 @@
                             </div>
                             <!-- Address Input End -->
 
-                            <!-- State or Country Input Start -->
                             <div class="col-md-4">
                                 <div class="checkout-form-list">
-                                    <label for="province">Tỉnh <span class="required">*</span></label>
+                                    <label for="province" class="form-label">Tỉnh Thành</label>
                                     <select class="nice-select" id="province" name="province" onchange="loadCity()">
-                                                <?php
-                                                foreach ($province_data as $key => $value) {
-                                                    if ($value['name'] != $city) {
-                                                        echo "<option value='" . $value['name'] . "'>" . $value['name'] . "</option>";
-                                                    }
-                                                }
-                                                ?>
+                                        <?php
+                                        if($province != ""){
+                                            echo "<option value='" . $province . "' selected>" . $province . "</option>";
+                                        }
+                                        foreach ($province_data as $key => $value) {
+                                            if ($value['name'] != $province) {
+                                                echo "<option value='" . $value['name'] . "'>" . $value['name'] . "</option>";
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
-                            <!-- State or Country Input End -->
 
-                            <!-- Town or City Name Input Start -->
                             <div class="col-md-4">
                                 <div class="checkout-form-list">
-                                    <label for="city">Thành Phố 
-                                        <span class="required">*</span>
-                                    </label>
+                                    <label for="city" class="form-label">Thành phố/Quận/Huyện</label>
                                     <select class="nice-select" id="city" name="city" onchange="loadWard()">
-                                        
+                                        <?php
+                                        if($city != ""){
+                                            echo "<option value='" . $city . "' selected>" . $city . "</option>";
+                                        }
+                                        foreach ($city_data as $key => $value) {
+                                            if ($value['full_name'] != $city) {
+                                                echo "<option value='" . $value['name'] . "'>" . $value['full_name'] . "</option>";
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="checkout-form-list">
-                                    <label for="ward">Phường Xã 
-                                        <span class="required">*</span>
-                                    </label>
-                                    <select class="nice-select" name="ward" id="ward">
-
+                                    <label for="ward" class="form-label">Phường/Xã</label>
+                                    <select class="nice-select" id="ward" name="ward">
+                                        <?php
+                                        if($ward != ""){
+                                            echo "<option value='" . $ward . "' selected>" . $ward . "</option>";
+                                        }
+                                        foreach ($ward_data as $key => $value) {
+                                            if ($value['name'] != $city) {
+                                                echo "<option value='" . $value['name'] . "'>" . $value['full_name'] . "</option>";
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
-                            <!-- Town or City Name Input End -->
 
                             <!-- Email Address Input Start -->
                             <div class="col-md-12">
@@ -129,13 +142,13 @@
                             <tbody>
                                 <?php
                                 $totalMoney = $total_money;
-                                foreach($cart as $key => $value){
+                                foreach ($cart as $key => $value) {
                                     $name = $value['name'];
                                     $price = (float)$value['price'];
                                     $amount = (int)$value['amount'];
                                     $discout_price = $price * (100 - (int)$value['discount']) / 100;
 
-                                    ?>
+                                ?>
                                     <tr class="cart_item">
                                         <td class="cart-product-name text-start ps-0"> <?php echo $name ?>
                                             <strong class="product-quantity"> × <?php echo $amount ?></strong>
@@ -144,7 +157,7 @@
                                             <span class="amount"><?php echo number_price($discout_price) ?></span>
                                         </td>
                                     </tr>
-                                    <?php
+                                <?php
                                 }
                                 ?>
                             </tbody>
@@ -193,11 +206,11 @@
 <script src="<?php echo _WEB_ROOT; ?>/assets/js/custom/checkout.js"></script>
 
 <style>
-    
-    select.nice-select{
+    select.nice-select {
         display: none !important;
     }
-    .nice-select{
+
+    .nice-select {
         display: block !important;
         width: 100% !important;
         padding: 0.375rem 2.25rem 0.375rem 0.75rem !important;
@@ -207,9 +220,9 @@
         color: #212529 !important;
         border: 1px solid #ced4da !important;
         background-color: #fff !important;
-        border-radius: 0.375rem !important;
     }
-    .nice-select:focus{
+
+    .nice-select:focus {
         border-color: #80bdff !important;
         outline: 0 !important;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;

@@ -69,6 +69,7 @@ var dataArr = [{
         'product/detail': '/assets/js/custom/product_detail.js',
         'shop': '/assets/js/custom/shop.js',
         'checkout': '/assets/js/custom/checkout.js',
+        'account': '/assets/js/custom/account.js',
     },
     {
         'home': 'homeNav',
@@ -208,6 +209,52 @@ window.addEventListener('popstate', function () {
 });
 
 
+function loadCity() {
+    let element = document.getElementById('province');
+    let province = element.options[element.selectedIndex].text;
+
+    fetch(`/address/get_city/${province}`)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('city').innerHTML = data;
+            document.getElementById('city').nextSibling.remove();
+
+
+            let options = {
+                searchable: true
+            };
+            NiceSelect.bind(city, options).update();
+
+            //* Change text "Select as option" to "Chọn quận / huyện"
+            document.getElementById('city').nextElementSibling.childNodes[1].textContent = 'Chọn Thành phố';
+
+            changeTextNiceSelectSearch('Tìm kiếm...');
+        })
+}
+
+function loadWard() {
+    let element = document.getElementById('city');
+    let city = element.options[element.selectedIndex].text;
+
+    console.log(city);
+    fetch(`/address/get_ward/${city}`)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('ward').innerHTML = data;
+            document.querySelector('#ward').nextSibling.remove();
+            let options = {
+                searchable: true
+            };
+            NiceSelect.bind(ward, options).update();
+
+            //* Change text "Select as option" to "Chọn phường / xã "
+            document.querySelector('#ward').nextElementSibling.childNodes[1].textContent = 'Chọn phường';
+
+            changeTextNiceSelectSearch('Tìm kiếm...');
+        });
+}
+
+
 /* -----------------------------
     CÁC HÀM BỔ TRỢ
 --------------------------------*/
@@ -236,7 +283,9 @@ function hideContent() {
     </div>`;
 
     //* hide footer
-    document.getElementsByTagName('footer')[0].style.display = 'none';
+    try {
+        document.getElementsByTagName('footer')[0].style.display = 'none';
+    } catch (error) {}
 }
 
 function showContent() {

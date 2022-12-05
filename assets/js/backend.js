@@ -161,13 +161,19 @@ var callChangeInfo = function () {
     let phone = document.querySelector('#changeInfoForm input[id=phone]').value;
     let email = document.querySelector('#changeInfoForm input[id=email]').value;
     let address = document.querySelector('#changeInfoForm input[id=address]').value;
+    let province = document.querySelector('#changeInfoForm select[id=province]').value;
+    let city = document.querySelector('#changeInfoForm select[id=city]').value;
+    let ward = document.querySelector('#changeInfoForm select[id=ward]').value;
 
     //* Kiểm tra dữ liệu
-    if (!checkData([fullname, phone, email, address])) return;
+    if(!checkData([fullname, phone, email, address, province, city, ward])) return;
     if (!checkText('Họ tên', fullname, 4, 32)) return;
     if (!checkText('Số điện thoại', phone, 10, 11)) return;
     if (!checkEmail('Email', email)) return;
     if (!checkText('Địa chỉ', address, 4, 255)) return;
+    if (!checkText('Tỉnh/Thành phố', province, 4, 255)) return;
+    if (!checkText('Quận/Huyện', city, 4, 255)) return;
+    if (!checkText('Phường/Xã', ward, 4, 255)) return;
 
 
     //* Tạo data post
@@ -176,6 +182,9 @@ var callChangeInfo = function () {
     data.append('phone', phone);
     data.append('email', email);
     data.append('address', address);
+    data.append('province', province);
+    data.append('city', city);
+    data.append('ward', ward);
 
     //* Fetch post
     fetch('/account/change_user_info', {

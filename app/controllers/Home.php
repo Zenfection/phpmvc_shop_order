@@ -13,7 +13,7 @@ class Home extends Controller {
         $topProductDiscount = $this->models('ProductModel')->topProductDiscount(8);
         $topProductSeller = $this->models('ProductModel')->topProductSeller(8);
 
-        $category = $this->db->table('tb_category')->get();
+        $category = $this->db->table('tb_category')->where('active', '=', 1)->get();
         $title = 'Trang Chủ';
         
         $this->data['sub_content']['product'] = $product;
