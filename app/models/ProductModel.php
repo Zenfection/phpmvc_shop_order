@@ -2,7 +2,9 @@
 
 class ProductModel extends Model {
     private $__product = 'tb_product';
+    private $__category = 'tb_category';
     private $__review_product = 'tb_recent_product';
+    private $__order_details = 'tb_order_details';
     
     function __construct(){
         parent::__construct();
@@ -64,13 +66,8 @@ class ProductModel extends Model {
         return $data;
     }
     public function topProductSeller($limit){
-        $sql = "SELECT p.*, COUNT(od.amount) as total_amount
-                FROM `tb_order_details` as od, `tb_product` as p
-                WHERE od.id_product = p.id_product
-                GROUP BY p.id_product
-                ORDER BY total_amount DESC
-                LIMIT $limit";
-        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $data = $this->db->table($this->__product.' as p')->select('p.*, COUNT(od.amount) as total_amount')->join($this->__order_details, 'od', 'p.id_product = od.id_product')->groupBy('p.id_product')->orderBy('total_amount', 'DESC')->limit($limit)->get();
+
         return $data;
     }
 
@@ -102,20 +99,13 @@ class ProductModel extends Model {
         return $data;
     }
     public function getProductOrder($id_order){
-        $sql = "SELECT * FROM `tb_order_details` as od, `tb_product` as p
-                WHERE od.id_product = p.id_product
-                AND od.id_order = '$id_order'";
-        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $data = $this->db->table($this->__product . ' as p')->join($this->__order_details, 'od', 'p.id_product = od.id_product')->where('od.id_order', '=', $id_order)->get();
         return $data;
     }
 
     //! 4 ---------------------------------------- //
     public function recentViewProduct($user, $limit){
-        $sql = "SELECT * 
-                FROM `tb_recent_product` as r, `tb_product` as p
-                WHERE r.id_product = p.id_product 
-                AND r.username = '$user' ORDER BY r.id_recent DESC LIMIT $limit";
-        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $data = $this->db->table($this->__product . ' as p')->join($this->__review_product, 'r', 'p.id_product = r.id_product')->where('r.username', '=', $user)->limit($limit)->get();
         return $data;
     }
     public function countRecentViewProduct($user){
@@ -137,18 +127,12 @@ class ProductModel extends Model {
 
     //! 5 ---------------------------------------- //
     public function searchProduct($keyword){
-        $sql = "SELECT * FROM `tb_product` 
-                WHERE LOWER(name) 
-                COLLATE UTF8_GENERAL_CI 
-                LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%')";
-        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $data = $this->db->table($this->__product)->where('LOWER(name)', '', '')->search($keyword);
         return $data;
     }
     public function getProductCategory($category, $keyword = ''){
         if($keyword == ''){
-            $sql = "SELECT * FROM `tb_category` as c, `tb_product` as p
-                    WHERE c.id_category = p.id_category
-                    AND c.id_category = '$category'";
+            $data = $this->db->table($this->__product, 'p')->select('p.*')->join($this->__category, 'c', 'p.id_category = c.id_category')->where('c.id_category', '=', $category)->get();
         } else {
             $sql = "SELECT * FROM 
                         (SELECT p.* FROM `tb_category` as c, `tb_product` as p
@@ -157,8 +141,8 @@ class ProductModel extends Model {
                     WHERE LOWER(temp.name)
                     COLLATE UTF8_GENERAL_CI
                     LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%')";
+            $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         }
-        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
     public function sellingFilterProduct($category, $keyword = '', $limit = 'all'){

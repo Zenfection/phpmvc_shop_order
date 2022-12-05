@@ -24,8 +24,12 @@ trait QueryBuilder {
     * ? $this->db->table($table)
     * @param table: tên bảng
     */
-    public function table($tableName){
-        $this->tableName = $tableName;
+    public function table($tableName, $alias = ''){
+        if(!empty($alias)){
+            $this->tableName = $tableName . ' as ' . $alias;
+        } else {
+            $this->tableName = $tableName;
+        }
         return $this;
     }
 
@@ -39,6 +43,10 @@ trait QueryBuilder {
     * @param field: tên trường
     */
     public function where($field, $compare, $value){
+        if(empty($compare) && empty($value)){
+            $this->where = " WHERE $field";
+            return $this;
+        }
         $bind = explode('.', $field);
         if(count($bind) > 1){
             $bind = $bind[1];
@@ -110,6 +118,16 @@ trait QueryBuilder {
     }
 
     /**
+     * TODO group by
+     * ? $this->db->table($table)->groupBy($field)
+     * @param field: tên trường
+     */
+    public function groupBy($field){
+        $this->groupBy = "GROUP BY $field";
+        return $this;
+    }
+    
+    /**
     * TODO nối bảng
     * TODO nối bảng bên trái
     * TODO nối bảng bên phải
@@ -117,16 +135,28 @@ trait QueryBuilder {
     * @param table: tên bảng
     * @param relationship: quan hệ bảng
     */
-    public function join($tableName, $relationship){
-        $this->innerJoin .= " INNER JOIN $tableName ON $relationship";
+    public function join($tableName, $alias = '',  $relationship){
+        if(!empty($alias)){
+            $this->innerJoin .= " INNER JOIN $tableName as $alias ON $relationship";
+        } else {
+            $this->innerJoin .= " INNER JOIN $tableName ON $relationship";
+        }
         return $this;
     }
-    public function leftJoin($tableName, $relationship){
-        $this->innerJoin .= " LEFT JOIN $tableName ON $relationship";
+    public function leftJoin($tableName, $alias = '', $relationship){
+        if(!empty($alias)){
+            $this->innerJoin .= " LEFT JOIN $tableName as $alias ON $relationship";
+        } else {
+            $this->innerJoin .= " LEFT JOIN $tableName ON $relationship";
+        }
         return $this;
     }
-    public function rightJoin($tableName, $relationship){
-        $this->innerJoin .= " RIGHT JOIN $tableName ON $relationship";
+    public function rightJoin($tableName, $alias = '', $relationship){
+        if(!empty($alias)){
+            $this->innerJoin .= " RIGHT JOIN $tableName as $alias ON $relationship";
+        } else {
+            $this->innerJoin .= " RIGHT JOIN $tableName ON $relationship";
+        }
         return $this;
     }
     
@@ -194,7 +224,7 @@ trait QueryBuilder {
     * @return array/false
     */
     public function get(){
-        $sql = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->where $this->orderBy $this->limit";
+        $sql = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->where $this->groupBy $this->orderBy $this->limit";
         $sql = trim($sql);
         $data = $this->query($sql, $this->dataVar)->fetchAll(PDO::FETCH_ASSOC);
 
@@ -210,7 +240,7 @@ trait QueryBuilder {
     * @return array/false
     */
     public function first(){
-        $sql = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->where $this->orderBy $this->limit";
+        $sql = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->where $this->groupBy $this->orderBy $this->limit";
         $sql = trim($sql);
         $data = $this->query($sql, $this->dataVar)->fetch(PDO::FETCH_ASSOC);
 
@@ -226,13 +256,30 @@ trait QueryBuilder {
      * @param field: tên trường 
      */
     public function sum($field){
-        $sql = "SELECT SUM($field) as sum FROM $this->tableName $this->innerJoin $this->where $this->orderBy $this->limit";
+        $sql = "SELECT SUM($field) as sum FROM $this->tableName $this->innerJoin $this->where $this->groupBy $this->orderBy $this->limit";
         $sql = trim($sql);
         $data = $this->query($sql, $this->dataVar)->fetch(PDO::FETCH_ASSOC);
 
         $this->resetQuery();
 
         if($data) return $data['sum'];
+        return false;
+    }
+
+    /**
+     * TODO Tìm kiểm dữ liệu
+     * ? $this->db->table($table)->search($field, $keyword)
+     * @param field: tên trường
+    */
+
+    public function search($keyword){
+        $sql = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->where COLLATE UTF8_GENERAL_CI LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%') $this->groupBy $this->orderBy $this->limit";
+        $sql = trim($sql);
+        $data = $this->query($sql, $this->dataVar)->fetchAll(PDO::FETCH_ASSOC);
+
+        $this->resetQuery();
+
+        if($data) return $data;
         return false;
     }
 }

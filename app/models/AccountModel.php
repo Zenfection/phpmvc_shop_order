@@ -47,11 +47,7 @@ class AccountModel extends Model{
         return $data;
     }
     public function countOrderAllUser(){
-        $sql = "SELECT u.username, count(o.id_order) as count
-                FROM `tb_user` as u, `tb_order` as o
-                WHERE u.username = o.username
-                GROUP BY u.username";
-        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $data = $this->db->table($this->__user, 'u')->select('u.username, count(o.id_order) as count')->join($this->__order, 'o', 'u.username = o.username')->groupBy('u.username')->get();
         return $data;
     }
     public function countOrderUser($username){  

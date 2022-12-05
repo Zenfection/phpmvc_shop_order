@@ -36,12 +36,11 @@ class DashboardModel extends Model{
     }
     public function getSumMoneyOrder(){
         //* chỉ lấy status = 'delivered' thôi
-        $sql = "SELECT ROUND(SUM(total_money),2) as totalMoney FROM `tb_order` WHERE status = 'delivered'";
-        $result = $this->db->query($sql)->fetch();
-        if($result['totalMoney'] == null){
-            return 0;
+        $data = $this->db->table($this->__order)->where('status', '=', 'delivered')->sum('total_money');
+        if($data == null){
+            $data = 0;
         } else {
-            return $result['totalMoney'];
+            return round($data, 2);
         }
     }
     public function getSumProduct(){

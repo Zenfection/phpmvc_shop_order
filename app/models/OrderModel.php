@@ -2,6 +2,7 @@
 
 class OrderModel extends Model{
     private $__order = 'tb_order';
+    private $__order_details = 'tb_order_details';
 
     function __construct(){
         parent::__construct();
@@ -35,16 +36,10 @@ class OrderModel extends Model{
     //! 1 ---------------------------------------- //
     public function getOrder($keyword = ''){
         if($keyword == ''){
-            $sql = "SELECT * FROM `tb_order` ORDER BY `order_date` DESC";
+            $data = $this->db->table($this->__order)->orderBy('id_order', 'DESC')->get();
         }else {
-            $sql = "SELECT * FROM `tb_order` 
-            WHERE LOWER(id_order) 
-            COLLATE UTF8_GENERAL_CI 
-            LIKE CONCAT('%', LOWER(CONVERT('$keyword', BINARY)), '%')
-            ORDER BY `order_date` DESC";
+            $data = $this->db->table($this->__order)->where('LOWER(id_order)', '', '')->orderBy('id_order', 'DESC')->search($keyword);
         }
-
-        $data = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
     public function getOrderDetail($id_order){
@@ -61,11 +56,8 @@ class OrderModel extends Model{
     }
     //! 2 ---------------------------------------- //
     public function totalProductOrder($id_product){
-        $sql = "SELECT SUM(amount) as total  
-                FROM `tb_order_details` 
-                WHERE id_product = $id_product";
-        $data = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        return $data['total'];
+        $data = $this->db->table($this->__order_details)->where('id_product', '=', $id_product)->sum('amount');
+        return $data;
     }
 
     //! 3 ---------------------------------------- //

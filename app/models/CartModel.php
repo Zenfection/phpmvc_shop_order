@@ -115,7 +115,7 @@ class CartModel extends Model
     }
     public function totalMoneyCartUser($user)
     {
-        $data = $this->db->table($this->__cart . ' as c')->join($this->__product . ' as p', 'c.id_product = p.id_product')->where('c.username', '=', $user)->get();
+        $data = $this->db->table($this->__cart, 'c')->join($this->__product, 'p', 'c.id_product = p.id_product')->where('c.username', '=', $user)->get();
 
         $total = 0;
         foreach ($data as $item) {
@@ -129,7 +129,7 @@ class CartModel extends Model
     }
     public function getProductDetailCart($id)
     {
-        $data = $this->db->table($this->__product . ' as p')->join($this->__cart . ' as c', 'p.id_product = c.id_product')->where('p.id_product', '=', $id)->first();
+        $data = $this->db->table($this->__product, 'p')->join($this->__cart, 'c', 'p.id_product = c.id_product')->where('p.id_product', '=', $id)->first();
         return $data;
     }
 }
