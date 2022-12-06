@@ -11,8 +11,8 @@ class Content extends Controller{
     }
     
     private function dataShop(){
-        $this->data['product'] = $this->db->table('tb_product')->get();
-        $this->data['category'] = $this->db->table('tb_category')->get();
+        $this->data['product'] = $this->models('ProductModel')->getProduct();
+        $this->data['category'] = $this->models('ProductModel')->getCategory();
 
         //* count product category
         $count_category = [];
@@ -43,7 +43,7 @@ class Content extends Controller{
     }
 
     public function home(){
-        $category = $this->db->table('tb_category')->get();
+        $category = $this->models('ProductModel')->getCategory();
         $user = Session::data('user');
 
         $top_product_ranking = $this->models('ProductModel')->topProductRanking(8);

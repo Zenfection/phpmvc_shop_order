@@ -2,15 +2,10 @@
 
 class Product extends Controller{
     public $data = [];
-    function __construct(){
-        $product = $this->models('ProductModel');
-    }
-    public function index(){
-        
-    }   
+    function __construct(){} 
     
     public function lists(){
-        $product = $this->models('ProductModel');
+        $product = $this->models('ProductModel')->getProduct();
         $dataProduct = $product->getProductList();
 
         $title = 'Danh sách sản phẩm';

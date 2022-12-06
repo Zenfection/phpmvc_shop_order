@@ -13,11 +13,18 @@ class Customer extends Controller {
         $totalRecentProduct = $this->models('ProductModel')->countRecentViewProduct($user);
         $orderData = $this->models('OrderModel')->getOrderUser($user);
 
+        $provinceData = $this->models('AddressModel')->getProvince();
+        $cityData = $this->models('AddressModel')->getCityInProvinceByName($userData['province']);
+        $wardData = $this->models('AddressModel')->getWardInCityByName($userData['city']);
+
         $this->data['sub_content']['user_data'] = $userData;
         $this->data['sub_content']['count_ordered'] = $countOrdered;
         $this->data['sub_content']['total_money_order'] = $totalMoneyOrder;
         $this->data['sub_content']['total_recent_product'] = $totalRecentProduct;
         $this->data['sub_content']['order'] = $orderData;
+        $this->data['sub_content']['province_data'] = $provinceData;
+        $this->data['sub_content']['city_data'] = $cityData;
+        $this->data['sub_content']['ward_data'] = $wardData;
 
 
         $this->render('layouts/admin_layout', $this->data);
@@ -25,18 +32,24 @@ class Customer extends Controller {
 
     //! POST
     public function edit(){
-        if(isset($_POST['username'], $_POST['fullname'], $_POST['email'], $_POST['phone'], $_POST['address'])){
+        if(isset($_POST['username'], $_POST['fullname'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['province'], $_POST['city'], $_POST['ward'])){
             $username = $_POST['username'];
             $fullname = $_POST['fullname'];
             $email = $_POST['email'];
             $phone = $_POST['phone'];
             $address = $_POST['address'];
+            $province = $_POST['province'];
+            $city = $_POST['city'];
+            $ward = $_POST['ward'];
 
             $newData = [
                 'fullname' => $fullname,
                 'email' => $email,
                 'phone' => $phone,
-                'address' => $address
+                'address' => $address,
+                'province' => $province,
+                'city' => $city,
+                'ward' => $ward
             ];
 
             $temp = $this->models('AccountModel')->getAccount($username);
@@ -44,7 +57,10 @@ class Customer extends Controller {
                 'fullname' => $temp['fullname'],
                 'email' => $temp['email'],
                 'phone' => $temp['phone'],
-                'address' => $temp['address']
+                'address' => $temp['address'],
+                'province' => $temp['province'],
+                'city' => $temp['city'],
+                'ward' => $temp['ward']
             ];
 
             $data = $this->checkDiff($oldData, $newData);

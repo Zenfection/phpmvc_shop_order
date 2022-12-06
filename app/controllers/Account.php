@@ -151,7 +151,7 @@ class Account extends Controller {
     }
 
     public function change_user_password(){
-        if(isset($_POST['old_password']) && isset($_POST['new_password']) && isset($_POST['confirm_password'])){
+        if(isset($_POST['old_password'], $_POST['new_password'], $_POST['confirm_password'])){
             $old_password = md5($_POST['old_password']);
             $new_password = md5($_POST['new_password']);
             $confirm_password = md5($_POST['confirm_password']);

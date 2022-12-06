@@ -25,6 +25,7 @@ class ProductModel extends Model {
 *      ? $limit: số lượng sản phẩm cần lấy
 *
 *  * 2. getProduct()                       => lấy tất cả sản phẩm
+*  *    getCategory()                      => lấy tất cả danh mục
 *  *    getDetail($id)                     => lấy sản phẩm theo id
 *  *    insertProduct($data)               => thêm sản phẩm            //! True & False
 *  *    updateProduct($id, $data)          => cập nhật sản phẩm        //! True & False
@@ -74,6 +75,10 @@ class ProductModel extends Model {
     //! 2 ---------------------------------------- //
     public function getProduct(){
         $data = $this->db->table($this->__product)->get();
+        return $data;
+    }
+    public function getCategory(){
+        $data = $this->db->table($this->__category)->get();
         return $data;
     }
     public function getDetail($id){

@@ -8,7 +8,7 @@ class Home extends Controller {
     }
 
     public function index(){
-        $product = $this->db->table('tb_product')->get();
+        $product = $this->models('ProductModel')->getProduct();
         $topProductRanking = $this->models('ProductModel')->topProductRanking(8);
         $topProductDiscount = $this->models('ProductModel')->topProductDiscount(8);
         $topProductSeller = $this->models('ProductModel')->topProductSeller(8);

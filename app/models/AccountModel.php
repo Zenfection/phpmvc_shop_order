@@ -20,6 +20,7 @@ class AccountModel extends Model{
 *
 * //* 1. getAccount($username)                      =>  trả về thông tin tài khoản
 * *      getAllUser()                               =>  trả về tất cả thông tin tài khoản
+* *      checkExistUser($username, $password)       =>  kiểm tra tài khoản có tồn tại hay không
 * *      countOrderAllUser()                        =>  trả về số lượng đơn hàng của tài khoản
 * *      countOrderUser($username)                  =>  trả về số lượng đơn hàng của tài khoản
 * *      sumMoneyOrder($username)                   =>  trả về tổng tiền đơn hàng của tài khoản
@@ -44,6 +45,11 @@ class AccountModel extends Model{
     }
     public function getAllUser(){
         $data = $this->db->table($this->__user)->get();
+        return $data;
+    }
+    public function checkExistUser($username, $password){
+        $data = $this->db->table($this->__user)->where('username', '=', $username)->where('password', '=', $password)->first();
+        ($data) ? $data = true : $data = false;
         return $data;
     }
     public function countOrderAllUser(){

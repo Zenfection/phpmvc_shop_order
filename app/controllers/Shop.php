@@ -8,8 +8,8 @@ class Shop extends Controller {
     }
 
     private function runFrist(){
-        $product = $this->db->table('tb_product')->get();
-        $category = $this->db->table('tb_category')->get();
+        $product = $this->models('ProductModel')->getProduct();
+        $category = $this->models('ProductModel')->getCategory();
 
         //* count product category
         $countCategory = [];

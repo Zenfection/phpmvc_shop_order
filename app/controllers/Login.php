@@ -19,10 +19,9 @@ class Login extends Controller
             $username = $_POST['username'];
             $password = md5($_POST['password']);
 
-            $db = new Database();
-            $check = $db->table('tb_user')->where('username', '=', $username)->where('password', '=', $password)->count();
+            $check = $this->models('AccountModel')->checkExistUser($username, $password);
 
-            if ($check > 0) {
+            if ($check) {
                 Session::data('user', $username);
                 $this->fetchSuccess('Đăng nhập thành công');
             } else {

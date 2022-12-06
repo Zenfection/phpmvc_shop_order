@@ -6,7 +6,7 @@ class Cart extends Controller
 
     public function add_product()
     {
-        if (isset($_POST['id']) && isset($_POST['qty'])) {
+        if (isset($_POST['id'], $_POST['qty'])) {
             $id = (int)$_POST['id'];
             $qty = (int)$_POST['qty'];
             $product_info = $this->models('ProductModel')->getDetail($id);

@@ -252,9 +252,12 @@ function changeUserInfo($username) {
     let email = document.querySelector('#changeUserInfoForm input[id=email]').value;
     let phone = document.querySelector('#changeUserInfoForm input[id=phone]').value;
     let address = document.querySelector('#changeUserInfoForm input[id=address]').value;
+    let province = document.querySelector('#changeUserInfoForm select[id=province]').value;
+    let city = document.querySelector('#changeUserInfoForm select[id=city]').value;
+    let ward = document.querySelector('#changeUserInfoForm select[id=ward]').value;
 
     // * Kiểm tra dữ liệu
-    if (!checkEmpty([fullname, email, phone, address])) {
+    if (!checkEmpty([fullname, email, phone, address, province, city, ward])) {
         notify('warning', 'fa-duotone fa-pen-field', 'center top', 'Vui lòng nhập đầy đủ thông tin');
         return;
     }
@@ -270,6 +273,9 @@ function changeUserInfo($username) {
     data.append('email', email);
     data.append('phone', phone);
     data.append('address', address);
+    data.append('province', province);
+    data.append('city', city);
+    data.append('ward', ward);
 
     // * fetch POST
     fetch('/admin/customer/edit', {

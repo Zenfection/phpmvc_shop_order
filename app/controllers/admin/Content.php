@@ -126,6 +126,11 @@ class Content extends Controller{
         $total_recent_product = $this->models('ProductModel')->countRecentViewProduct($user);
         $order = $this->models('OrderModel')->getOrderUser($user);
 
+        $province_data = $this->models('AddressModel')->getProvince();
+        $city_data = $this->models('AddressModel')->getCityInProvinceByName($user_data['province']);
+        $ward_data = $this->models('AddressModel')->getWardInCityByName($user_data['city']);
+
+
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/admin/customer/info.php');
         eval('?>' . $contentView . '<?php');
     }

@@ -60,7 +60,7 @@ class Api extends Controller
     public function login()
     {
         $response = new Response();
-        if (isset($_POST['username']) && isset($_POST['password'])) {
+        if (isset($_POST['username'], $_POST['password'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
             $db = new Database();
@@ -78,7 +78,7 @@ class Api extends Controller
     public function register()
     {
         $response = new Response();
-        if (isset($_POST['email']) && isset($_POST['fullname']) && isset($_POST['username']) && isset($_POST['phone']) && isset($_POST['password'])) {
+        if (isset($_POST['email'], $_POST['fullname'], $_POST['username'], $_POST['phone'], $_POST['password'])) {
             $email = $_POST['email'];
             $fullname = $_POST['fullname'];
             $username = $_POST['username'];
@@ -111,7 +111,7 @@ class Api extends Controller
     public function get_user_info()
     {
         $response = new Response();
-        if (isset($_POST['username']) && isset($_POST['password'])) {
+        if (isset($_POST['username'], $_POST['password'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
             unset($_POST['password']);
@@ -130,7 +130,7 @@ class Api extends Controller
     public function get_cart_product()
     {
         $response = new Response();
-        if (isset($_POST['username']) && isset($_POST['password'])) {
+        if (isset($_POST['username'], $_POST['password'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
             unset($_POST['password']);

@@ -104,7 +104,7 @@
                                                 echo "<option value='" . $city . "' selected>" . $city . "</option>";
                                                 foreach ($city_data as $key => $value) {
                                                     if ($value['full_name'] != $city) {
-                                                        echo "<option value='" . $value['name'] . "'>" . $value['full_name'] . "</option>";
+                                                        echo "<option value='" . $value['full_name'] . "'>" . $value['full_name'] . "</option>";
                                                     }
                                                 }
                                                 ?>
@@ -117,7 +117,7 @@
                                                 echo "<option value='" . $ward . "' selected>" . $ward . "</option>";
                                                 foreach ($ward_data as $key => $value) {
                                                     if ($value['name'] != $city) {
-                                                        echo "<option value='" . $value['name'] . "'>" . $value['full_name'] . "</option>";
+                                                        echo "<option value='" . $value['full_name'] . "'>" . $value['full_name'] . "</option>";
                                                     }
                                                 }
                                                 ?>
