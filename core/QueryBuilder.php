@@ -1,10 +1,17 @@
 <?php
+
+namespace Core;
+
+use PDO;
+use Core\Database;
+
 trait QueryBuilder {
     public $dataVar = [];
     public $tableName = '';
     public $where = '';
     public $selectField = '*';
     public $limit = '';
+    public $groupBy = '';
     public $orderBy = '';
     public $innerJoin = '';
 
@@ -15,6 +22,7 @@ trait QueryBuilder {
         $this->where = '';
         $this->selectField = '*';
         $this->limit = '';
+        $this->groupBy = '';
         $this->orderBy = '';
         $this->innerJoin = '';
     }
@@ -48,11 +56,8 @@ trait QueryBuilder {
             return $this;
         }
         $bind = explode('.', $field);
-        if(count($bind) > 1){
-            $bind = $bind[1];
-        } else {
-            $bind = $field;
-        }
+        (count($bind) > 1) ? $bind = $bind[1] : $bind = $field;
+
         if(empty($this->where)){
             $this->where = " WHERE $field $compare :$bind";
         }else{
@@ -62,10 +67,13 @@ trait QueryBuilder {
         return $this;
     }
     public function orWhere($field, $compare, $value){
+        $bind = explode('.', $field);
+        (count($bind) > 1) ? $bind = $bind[1] : $bind = $field;
+
         if(empty($this->where)){
-            $this->where = " WHERE $field $compare :$field";
+            $this->where = " WHERE $field $compare :$bind";
         }else{
-            $this->where .= " OR $field $compare :$field";
+            $this->where .= " OR $field $compare :$bind";
         }
         $this->dataVar[$field] = $value;
         return $this;
@@ -135,24 +143,24 @@ trait QueryBuilder {
     * @param table: tên bảng
     * @param relationship: quan hệ bảng
     */
-    public function join($tableName, $alias = '',  $relationship){
-        if(!empty($alias)){
+    public function join($tableName, $alias,  $relationship){
+        if($alias != ''){
             $this->innerJoin .= " INNER JOIN $tableName as $alias ON $relationship";
         } else {
             $this->innerJoin .= " INNER JOIN $tableName ON $relationship";
         }
         return $this;
     }
-    public function leftJoin($tableName, $alias = '', $relationship){
-        if(!empty($alias)){
+    public function leftJoin($tableName, $alias, $relationship){
+        if($alias != ''){
             $this->innerJoin .= " LEFT JOIN $tableName as $alias ON $relationship";
         } else {
             $this->innerJoin .= " LEFT JOIN $tableName ON $relationship";
         }
         return $this;
     }
-    public function rightJoin($tableName, $alias = '', $relationship){
-        if(!empty($alias)){
+    public function rightJoin($tableName, $alias, $relationship){
+        if($alias != ''){
             $this->innerJoin .= " RIGHT JOIN $tableName as $alias ON $relationship";
         } else {
             $this->innerJoin .= " RIGHT JOIN $tableName ON $relationship";

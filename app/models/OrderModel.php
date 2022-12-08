@@ -1,5 +1,8 @@
 <?php
 
+namespace App\models;
+use Core\Model;
+
 class OrderModel extends Model{
     private $__order = 'tb_order';
     private $__order_details = 'tb_order_details';

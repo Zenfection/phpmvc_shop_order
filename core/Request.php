@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use App\App;
+
 class Request {
     private $__rules = array();
     private $__message = array();

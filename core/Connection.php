@@ -1,5 +1,11 @@
 <?php
 
+namespace Core;
+
+use App\App;
+use PDO;
+use Exception;
+
 class Connection{
     private static $instance = null;
     private static $conn = null;

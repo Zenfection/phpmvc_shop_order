@@ -1,5 +1,7 @@
 <?php
 
+namespace App\core;
+
 class HtmlHelper {
     static function formOpen($method = 'GET', $action = '', $id = '', $class = ''){
         echo '<form method="' . $method . '" action="' . $action . '" id="' . $id . '" class="' . $class . '">';

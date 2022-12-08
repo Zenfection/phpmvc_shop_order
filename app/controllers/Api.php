@@ -1,5 +1,12 @@
 <?php
 
+namespace App\controllers;
+
+use PDO;
+use Core\Controller;
+use Core\Response;
+use Core\Database;
+
 class Api extends Controller
 {
     /** @param API_RIÊNG_CHO_APP_MOBILE

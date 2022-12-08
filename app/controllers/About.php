@@ -1,5 +1,10 @@
 <?php
 
+namespace App\controllers;
+
+use Core\Controller;
+use Core\Session;
+
 class About extends Controller{
     /**
      * @param TRANG_GIỚI_THIỆU_WEB

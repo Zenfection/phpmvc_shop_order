@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use Core\Session;
+
 $sessionKey = Session::isValid();
 $errors = Session::flash($sessionKey . '_errors');
 $old = Session::flash($sessionKey . '_old');

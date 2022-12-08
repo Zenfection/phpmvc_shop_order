@@ -24,13 +24,13 @@ if (!empty($msg)) {
                         <!-- Form Action Start -->
                         <form id="registerForm" novalidate>
                             <div class="single-input-item m-b-10">
-                                <input type="text" name="fullname" id="fullname" class="from-control" value="<?php oldValue('fullname') ?>" placeholder="Họ và Tên">
+                                <input type="text" name="fullname" id="fullname" class="from-control" placeholder="Họ và Tên">
                             </div>
                             <div class="single-input-item m-b-10">
-                                <input type="email" name="email" id="email" class="form-control" value="<?php oldValue('email') ?>" placeholder="Email">
+                                <input type="email" name="email" id="email" class="form-control"  placeholder="Email">
                             </div>
                             <div class="single-input-item m-b-10">
-                                <input type="text" name="username" id="username" class="form-control" value="<?php oldValue('username')?>" placeholder="Tài khoản">
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Tài khoản">
                             </div>
                             <div class="single-input-item m-b-10">
                                 <input type="password" name="password" id="password" class="form-control" placeholder="Mật khẩu">

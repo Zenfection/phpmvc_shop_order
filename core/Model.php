@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 /* Base Model */
 abstract class Model extends Database{
     protected $db;

@@ -1,4 +1,8 @@
 <?php
+namespace App\controllers\admin;
+
+use Core\Controller;
+use Core\Session;
 
 class Product extends Controller {
     /**

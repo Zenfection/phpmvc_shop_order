@@ -1,5 +1,10 @@
 <?php
 
+namespace App\controllers;
+
+use Core\Controller;
+use Core\Session;
+
 class Login extends Controller
 {
     public function index()

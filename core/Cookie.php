@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use App\App;
+
 class Cookie {
     public function __construct(){
 

@@ -1,5 +1,11 @@
 <?php
 
+namespace Core;
+
+use Exception;
+use Core\QueryBuilder;
+use App\App;
+
 class Database{
     private $__conn;
 

@@ -1,5 +1,10 @@
 <?php 
 
+namespace App\controllers;
+
+use Core\Controller;
+use Core\Session;
+
 class Register extends Controller {
     public function index(){
         $title = 'Đăng ký thành viên';

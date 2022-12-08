@@ -21,12 +21,12 @@ if (!empty($msg)) {
                     <form id="loginForm" novalidate>
                         <div class="single-input-item m-b-10">
                             <label for="description" class="form-label">Tài Khoản</label>
-                            <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?php echo oldValue('username')?>">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Username">
                         </div>
                         
                         <div class="single-input-item m-b-10">
                             <label for="description" class="form-label">Mật khẩu</label>
-                            <input type="password" name="password" class="form-control" id="password" placeholder="Nhập mật khẩu..." value="<?php echo oldValue('password')?>">
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Nhập mật khẩu...">
                         </div>
                         <div class="single-input-item m-b-15">
                             <div class="login-reg-form-meta m-b-n15">

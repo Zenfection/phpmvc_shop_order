@@ -1,5 +1,8 @@
 <?php 
+namespace App\controllers\admin;
 
+use Core\Controller;
+use Core\Session;
 class Login extends Controller {
     /**
      * @param TRANG_ĐĂNG_NHẬP_ADMIN

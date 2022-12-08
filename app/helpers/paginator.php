@@ -1,4 +1,9 @@
 <?php
+
+namespace App\helpers;
+
+use stdClass;
+
 class Paginator {
     private $_conn;
     private $_limit;

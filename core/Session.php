@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use App\App;
+
 class Session {
     public function __construct(){
         session_start();

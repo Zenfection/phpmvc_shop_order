@@ -1,5 +1,10 @@
 <?php
 
+namespace App\models;
+
+use Core\Model;
+use PDO;
+
 class AccountModel extends Model{
     private $__user = 'tb_user';
     private $__order = 'tb_order';

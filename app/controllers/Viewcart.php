@@ -1,5 +1,11 @@
 <?php 
 
+namespace App\controllers;
+
+use Core\Controller;
+use Core\Session;
+use Core\Response;
+
 class Viewcart extends Controller{
     public $data;
     

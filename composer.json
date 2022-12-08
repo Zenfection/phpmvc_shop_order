@@ -5,8 +5,11 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "Core\\": "core/"
-        }
+            "App\\": ["app/"],
+            "Core\\": ["core/"]
+        },
+        "files": [
+            "app/helpers/functions.php"
+        ]
     }
 }

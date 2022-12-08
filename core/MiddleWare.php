@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 abstract class MiddleWare {
     public $db; 
     

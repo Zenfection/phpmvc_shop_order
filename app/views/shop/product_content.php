@@ -1,5 +1,7 @@
 <div class="row shop_wrapper grid_3">
     <?php
+    use App\helpers\Paginator;
+    
     $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 9;
     $page = (!empty($page)) ? (int)$page : 1;
     $links = (isset($_GET['links'])) ? $_GET['links'] : 7;

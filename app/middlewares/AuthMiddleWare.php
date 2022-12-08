@@ -1,5 +1,11 @@
 <?php
 
+namespace App\middlewares;
+
+use Core\MiddleWare;
+use Core\Response;
+use Core\Session;
+
 class AuthMiddleWare extends MiddleWare {
     public function handle(){
         if(Session::data('user') == null){

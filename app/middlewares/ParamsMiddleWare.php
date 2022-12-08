@@ -1,5 +1,11 @@
 <?php
 
+namespace App\middlewares;
+
+use Core\MiddleWare;
+use Core\Response;
+use Core\Route;
+
 class ParamsMiddleWare extends MiddleWare {
     public function handle(){
         if(!empty($_SERVER['QUERY_STRING'])){

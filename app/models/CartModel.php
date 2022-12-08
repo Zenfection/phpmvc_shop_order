@@ -1,4 +1,8 @@
 <?php
+
+namespace App\models;
+use Core\Model;
+
 class CartModel extends Model
 {
     private $__cart = 'tb_cart';
@@ -21,13 +25,13 @@ class CartModel extends Model
     
     /** @param XỬ_LÝ_VỀ_TRANG_CART
      *
-     * //* 1. getCartUser($user)                    => lấy thông tin giỏ hàng của user
-     *   * 2. countCart($user)                      => đếm số lượng sản phẩm trong giỏ hàng
+     * //* 1. getCartUser($user)                        => lấy thông tin giỏ hàng của user
+     *   * 2. countCart($user)                          => đếm số lượng sản phẩm trong giỏ hàng
      *   ?      - $user: tên user
-     * //* 3. deleteProductCart($user, $id)         => xóa sản phẩm khỏi giỏ hàng
-     *   *    updateProductCart($user, $id, $amount)   => cập nhật số lượng sản phẩm trong giỏ hàng
-     *   *    addProductCart($user, $id, $qty)      => thêm sản phẩm vào giỏ hàng
-     *   *    clearCart($user)                      => xoá toàn bộ giỏ hàng
+     * //* 3. deleteProductCart($user, $id)             => xóa sản phẩm khỏi giỏ hàng
+     *   *    updateProductCart($user, $id, $amount)    => cập nhật số lượng sản phẩm trong giỏ hàng
+     *   *    addProductCart($user, $id, $qty)          => thêm sản phẩm vào giỏ hàng
+     *   *    clearCart($user)                          => xoá toàn bộ giỏ hàng
      *   ?      - $user: tên user
      *   ?      - $id: id sản phẩm
      * 
@@ -40,7 +44,7 @@ class CartModel extends Model
     //! 1 ---------------------------------------- //
     public function getCartUser($user)
     {
-        $data = $this->db->table($this->__cart)->where('username', '=', $user)->get();
+        $data = $this->db->table($this->__cart, 'c')->join($this->__product, 'p', 'c.id_product = p.id_product')->where('c.username', '=', $user)->get();
         return $data;
     }
     public function countCart($user)

@@ -1,5 +1,6 @@
 <?php
 
+namespace Core;
 class View{
     static public $dataShare = array();
 

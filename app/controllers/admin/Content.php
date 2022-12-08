@@ -1,5 +1,10 @@
 <?php
 
+namespace App\controllers\admin;
+
+use Core\Controller;
+use Core\Session;
+
 class Content extends Controller{
     /**
      * @param TRANG_LOAD_CONTENT_KHÔNG_CẦN_TẢI_LẠI

@@ -1,5 +1,10 @@
 <?php
 
+namespace App\controllers;
+
+use Core\Controller;
+use Core\Session;
+
 class Home extends Controller {
     public $data;
 

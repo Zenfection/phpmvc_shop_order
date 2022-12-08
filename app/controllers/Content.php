@@ -1,5 +1,10 @@
 <?php
 
+namespace App\controllers;
+
+use Core\Controller;
+use Core\Session;
+
 class Content extends Controller{
     public $data;
 
@@ -49,10 +54,6 @@ class Content extends Controller{
         $top_product_ranking = $this->models('ProductModel')->topProductRanking(8);
         $top_product_discount = $this->models('ProductModel')->topProductDiscount(8);
         $top_product_seller = $this->models('ProductModel')->topProductSeller(8);
-
-        if($this->data['msg']){
-            $msg = $this->data['msg'];
-        }
 
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/home/index.php');
         eval('?>' . $contentView . '<?php');

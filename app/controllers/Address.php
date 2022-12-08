@@ -1,5 +1,9 @@
 <?php 
 
+namespace App\controllers;
+
+use Core\Controller;
+
 class Address extends Controller{
     public function get_city($province){
         $province = urldecode($province);

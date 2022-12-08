@@ -1,5 +1,10 @@
 <?php 
 
+namespace App\controllers;
+
+use Core\Controller;
+use Core\Session;
+
 class Shop extends Controller {
     public $data;
     

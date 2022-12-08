@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use App\App;
+
 class Route{
     private $__keyRoute = '';
 

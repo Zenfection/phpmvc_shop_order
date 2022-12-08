@@ -1,5 +1,10 @@
 <?php
 
+namespace App\models;
+
+use Core\Model;
+use PDO;
+
 class ProductModel extends Model {
     private $__product = 'tb_product';
     private $__category = 'tb_category';

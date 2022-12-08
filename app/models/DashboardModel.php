@@ -1,5 +1,8 @@
 <?php
 
+namespace App\models;
+use Core\Model;
+
 class DashboardModel extends Model{
     private $__user = 'tb_user';
     private $__product = 'tb_product';

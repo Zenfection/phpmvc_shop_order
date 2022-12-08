@@ -1,5 +1,8 @@
 <?php
 
+namespace App\models;
+use Core\Model;
+
 class AddressModel extends Model{
     private $__province = 'provinces';
     private $__district = 'districts';

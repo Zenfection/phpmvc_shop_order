@@ -1,5 +1,11 @@
 <?php
 
+namespace App\controllers;
+
+use Core\Controller;
+use Core\Session;
+use Core\Response;
+
 class Account extends Controller { 
      /**
      * @param TRANG_QUẢN_LÝ_TÀI_KHOẢN

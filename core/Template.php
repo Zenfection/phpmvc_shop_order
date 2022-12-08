@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Template {
     private $__content = null;
     public function run($content, $data = []){
