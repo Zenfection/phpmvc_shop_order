@@ -63,7 +63,7 @@ class Content extends Controller{
             $product =  $this->data['sub_content']['product'];
         }
         $total = count($product);
-        $paginator = new Paginator($product);
+        $paginator = new paginator($product);
         $results = $paginator->getData($limit, $page);
         
         $current_category = $categoryFilter;

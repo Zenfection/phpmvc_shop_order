@@ -5,7 +5,7 @@ namespace App\controllers;
 use Core\Controller;
 use Core\Session;
 
-use App\helpers\Paginator;
+use App\helpers\paginator;
 
 class Shop extends Controller
 {
@@ -40,33 +40,6 @@ class Shop extends Controller
         $this->data['sub_content']['msg'] = Session::flash('msg');
     }
 
-    public function index(){
-        // $this->runFrist();
-        // $this->data['content'] = 'shop/index';
-
-        // $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 9;
-        // $links = (isset($_GET['links'])) ? $_GET['links'] : 7;
-        // $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
-        // $this->data['sub_content']['limit'] = $limit;
-        // $this->data['sub_content']['page'] = $page;
-        // $this->data['sub_content']['links'] = $links;
-        $product = $this->models('ProductModel')->getProduct();
-
-        //$paginator = new Paginator($product);
-        echo "<pre>";
-        print_r($product);
-        echo "</pre>";
-        // $results = $paginator->getData($limit, $page);
-        // $this->data['sub_content']['results'] = $results;
-
-        // $this->data['sub_content']['current_category'] = 'all';
-        // $this->data['sub_content']['current_sortby'] = 'default';
-        // $this->data['sub_content']['keyword'] = '';
-
-        // $this->data['page_title'] = 'Cửa Hàng';
-        // $this->render('layouts/client_layout', $this->data);
-    }
-
     public function category($categoryFilter = 'all', $sortby = 'default', $page = 1, $search = '')
     {
         $this->runFrist();
@@ -86,7 +59,7 @@ class Shop extends Controller
             $data['title'] = 'Cửa Hàng';
             $this->data['page_title'] = $data['title'];
         }
-        $paginator = new Paginator($this->data['sub_content']['product']);
+        $paginator = new paginator($this->data['sub_content']['product']);
         $results = $paginator->getData($limit, $page);
 
         $this->data['sub_content']['results'] = $results;
@@ -162,7 +135,7 @@ class Shop extends Controller
         $links = (isset($_GET['links'])) ? $_GET['links'] : 7;
         $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 
-        $paginator = new Paginator($product);
+        $paginator = new paginator($product);
         $results = $paginator->getData($limit, $page);
 
         $count_category = $this->data['sub_content']['count_category'];
