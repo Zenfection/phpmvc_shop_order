@@ -5,6 +5,8 @@ namespace App\controllers;
 use Core\Controller;
 use Core\Session;
 
+use App\helpers\Paginator;
+
 class Content extends Controller{
     public $data;
 
@@ -74,7 +76,12 @@ class Content extends Controller{
         $current_category = $categoryFilter;
         $current_sortby = 'default';
         $keyword = '';
-        $page = 1;
+        $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 9;
+        $links = (isset($_GET['links'])) ? $_GET['links'] : 7;
+        $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+
+        $paginator = new Paginator($this->data['sub_content']['product']);
+        $results = $paginator->getData($limit, $page);
 
         $count_category = $this->data['count_category'];
         $recent_product = $this->data['recent_product'];
@@ -116,6 +123,9 @@ class Content extends Controller{
     public function filter_shop($categoryFilter, $sortby = 'default', $page = 1, $keyword = ''){
         $this->dataShop();
 
+        $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 9;
+        $links = (isset($_GET['links'])) ? $_GET['links'] : 7;
+
         $keyword = urldecode($keyword);
         $category = $this->data['category'];
         $product = $this->data['product'];
@@ -125,6 +135,8 @@ class Content extends Controller{
             $product =  $this->data['sub_content']['product'];
         }
         $total = count($product);
+        $paginator = new Paginator($this->data['sub_content']['product']);
+        $results = $paginator->getData($limit, $page);
         
         $current_category = $categoryFilter;
         $current_sortby = $sortby;

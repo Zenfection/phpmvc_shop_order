@@ -22,7 +22,7 @@ define('_CDN_IMAGE_500', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-500')
 define('_CDN_IMAGE_550', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-550');   
 define('_CDN_IMAGE_600', 'https://ik.imagekit.io/zenfection/shoporder/tr:w-600');
 
-// Xử lý http root
+//* Xử lý http root
 if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443){
     $web_root = 'https://' . $_SERVER['HTTP_HOST'];
 }else{

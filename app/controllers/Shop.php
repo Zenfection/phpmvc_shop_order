@@ -1,24 +1,28 @@
-<?php 
+<?php
 
 namespace App\controllers;
 
 use Core\Controller;
 use Core\Session;
 
-class Shop extends Controller {
+use App\helpers\Paginator;
+
+class Shop extends Controller
+{
     public $data;
-    
-    public function __construct(){
-        
+
+    public function __construct()
+    {
     }
 
-    private function runFrist(){
+    private function runFrist()
+    {
         $product = $this->models('ProductModel')->getProduct();
         $category = $this->models('ProductModel')->getCategory();
 
         //* count product category
         $countCategory = [];
-        foreach($category as $key => $value){
+        foreach ($category as $key => $value) {
             $productFilter = $this->models('ProductModel')->getProductCategory($value['id_category']);
             $count = count($productFilter);
             $countCategory = array_merge($countCategory, [$value['id_category'] => $count]);
@@ -26,7 +30,7 @@ class Shop extends Controller {
 
         //* recent view product
         $user = Session::data('user');
-        if(!empty($user)){
+        if (!empty($user)) {
             $recentProduct = $this->models('ProductModel')->recentViewProduct($user, 5);
             $this->data['sub_content']['recent_product'] = $recentProduct;
         }
@@ -40,17 +44,29 @@ class Shop extends Controller {
         $this->data['sub_content']['msg'] = Session::flash('msg');
     }
 
-    public function category($categoryFilter = 'all', $sortby = 'default', $page = 1, $search = ''){
+    public function category($categoryFilter = 'all', $sortby = 'default', $page = 1, $search = '')
+    {
         $this->runFrist();
+
+        $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 9;
+        $links = (isset($_GET['links'])) ? $_GET['links'] : 7;
+        $this->data['sub_content']['limit'] = $limit;
+        $this->data['sub_content']['page'] = $page;
+        $this->data['sub_content']['links'] = $links;
+
         $keyword = urldecode($search);
 
         $data['title'] = 'Sản phẩm ' . ucfirst($categoryFilter);
-        
+
         $handle = $this->runHandle($categoryFilter, $sortby, $keyword);
-        if(!$handle){
+        if (!$handle) {
             $data['title'] = 'Cửa Hàng';
             $this->data['page_title'] = $data['title'];
         }
+        $paginator = new Paginator($this->data['sub_content']['product']);
+        $results = $paginator->getData($limit, $page);
+
+        $this->data['sub_content']['results'] = $results;
 
         $this->data['sub_content']['current_category'] = $categoryFilter;
         $this->data['sub_content']['current_sortby'] = $sortby;
@@ -61,10 +77,11 @@ class Shop extends Controller {
         $this->render('layouts/client_layout', $this->data);
     }
 
-    private function runHandle($category, $sortby, $keyword){
-        if($sortby == 'default'){
-            if($category == 'all'){
-                if($keyword == ''){
+    private function runHandle($category, $sortby, $keyword)
+    {
+        if ($sortby == 'default') {
+            if ($category == 'all') {
+                if ($keyword == '') {
                     //? category = all, sortby = default, keyword = ''
                     return false;
                 } else {
@@ -81,22 +98,19 @@ class Shop extends Controller {
             }
         } else {
             //? category = '...', sortby = '...', keyword = '...' or ''
-            if ($sortby == 'selling'){
+            if ($sortby == 'selling') {
                 $this->data['page_title'] = 'Sản phẩm bán chạy';
                 $dataProduct = $this->models('ProductModel')->sellingFilterProduct($category, $keyword);
                 $this->data['sub_content']['product'] = $dataProduct;
-    
-            } else if($sortby == 'price_asc'){
+            } else if ($sortby == 'price_asc') {
                 $this->data['page_title'] = 'Sản phẩm giá tăng dần';
                 $dataProduct = $this->models('ProductModel')->priceFilterProduct($category, 'ASC', $keyword);
                 $this->data['sub_content']['product'] = $dataProduct;
-    
-            } else if($sortby == 'price_desc'){
+            } else if ($sortby == 'price_desc') {
                 $this->data['page_title'] = 'Sản phẩm giá giảm dần';
                 $dataProduct = $this->models('ProductModel')->priceFilterProduct($category, 'DESC', $keyword);
                 $this->data['sub_content']['product'] = $dataProduct;
-    
-            } else if($sortby == 'best_discount'){
+            } else if ($sortby == 'best_discount') {
                 $this->data['page_title'] = 'Sản phẩm giảm giá nhiều nhất';
                 $dataProduct = $this->models('ProductModel')->discountFilterProduct($category, $keyword);
                 $this->data['sub_content']['product'] = $dataProduct;
@@ -105,4 +119,3 @@ class Shop extends Controller {
         return true;
     }
 }
-?>

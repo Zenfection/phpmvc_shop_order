@@ -23,7 +23,7 @@ class Paginator {
         $results = [];
         $start = ($this->_page - 1) * $this->_limit;
         $end = $start + $this->_limit;
-        $data = $this->_data['product'];
+        $data = $this->_data;
         for ($i = $start; $i < $end; $i++) {
             if (isset($data[$i])) {
                 $results[] = $data[$i];
@@ -36,7 +36,7 @@ class Paginator {
         $result->total  = $this->_total;
         $result->data   = $results;
 
-        return $result;
+        return get_object_vars($result);
     }
     public function createLinks( $links, $list_class ) {
         if ( $this->_limit == 'all' ) {

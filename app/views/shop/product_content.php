@@ -1,26 +1,18 @@
 <div class="row shop_wrapper grid_3">
     <?php
-    use App\helpers\Paginator;
     
-    $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 9;
-    $page = (!empty($page)) ? (int)$page : 1;
-    $links = (isset($_GET['links'])) ? $_GET['links'] : 7;
-    $paginator = new Paginator($data);
-    $results = $paginator->getData($limit, $page);
-
-    //$limit > $total ? $limit = $total : $limit;
     $check = $total - ($limit * ($page - 1));
     $limit > $check ? $limit = $check : $limit;
     if ($check > 0) {
         for ($i = 0; $i < $limit; $i++) {
-            $id = $results->data[$i]['id_product'];
-            $name = $results->data[$i]['name'];
-            $description = $results->data[$i]['description'];
-            $price = $results->data[$i]['price'];
-            $image = $results->data[$i]['image'];
-            $discount = $results->data[$i]['discount'];
-            $ranking = (int)$results->data[$i]['ranking'];
-            $quantity = (int)$results->data[$i]['quantity'];
+            $id = $data[$i]['id_product'];
+            $name = $data[$i]['name'];
+            $description = $data[$i]['description'];
+            $price = $data[$i]['price'];
+            $image = $data[$i]['image'];
+            $discount = $data[$i]['discount'];
+            $ranking = (int)$data[$i]['ranking'];
+            $quantity = (int)$data[$i]['quantity'];
     ?>
             <div class="col-lg-4 col-md-4 col-sm-6 product product-inner" id="product<?php echo $id ?>">
                 <div class="thumb">

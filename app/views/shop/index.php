@@ -44,8 +44,8 @@
                 <div id="product-content">
                     <?php
                     // merge $total into $data array
-                    $data = array_merge($data, ['total' => $total]);
-                    $this->render('shop/product_content', $data)
+                    $results = array_merge($results, ['total' => $total]);
+                    $this->render('shop/product_content', $results)
                     ?>
                 </div>
                 <!-- Shop Wrapper End -->
