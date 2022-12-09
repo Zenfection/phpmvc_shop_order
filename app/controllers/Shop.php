@@ -51,16 +51,19 @@ class Shop extends Controller
         $this->data['sub_content']['page'] = $page;
         $this->data['sub_content']['links'] = $links;
 
-        // $paginator = new Paginator($this->data['sub_content']['product']);
+        $paginator = new Paginator($this->data['sub_content']['product']);
+        echo "<pre>";
+        print_r($paginator);
+        echo "</pre>";
         // $results = $paginator->getData($limit, $page);
         // $this->data['sub_content']['results'] = $results;
 
-        $this->data['sub_content']['current_category'] = 'all';
-        $this->data['sub_content']['current_sortby'] = 'default';
-        $this->data['sub_content']['keyword'] = '';
+        // $this->data['sub_content']['current_category'] = 'all';
+        // $this->data['sub_content']['current_sortby'] = 'default';
+        // $this->data['sub_content']['keyword'] = '';
 
-        $this->data['page_title'] = 'Cửa Hàng';
-        $this->render('layouts/client_layout', $this->data);
+        // $this->data['page_title'] = 'Cửa Hàng';
+        // $this->render('layouts/client_layout', $this->data);
     }
 
     public function category($categoryFilter = 'all', $sortby = 'default', $page = 1, $search = '')
