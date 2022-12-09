@@ -50,8 +50,9 @@ class Shop extends Controller
         // $this->data['sub_content']['limit'] = $limit;
         // $this->data['sub_content']['page'] = $page;
         // $this->data['sub_content']['links'] = $links;
+        $product = $this->models('ProductModel')->getProduct();
 
-        $paginator = new Paginator($this->data['sub_content']['product']);
+        $paginator = new Paginator($product);
         echo "<pre>";
         print_r($paginator);
         echo "</pre>";
