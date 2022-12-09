@@ -18,7 +18,6 @@ class Contact extends Controller {
     }
 
     public function content(){
-        $page_title = 'Liên Hệ';
         $contentView = file_get_contents(_DIR_ROOT . '/app/views/contact/index.php');
         eval('?>' . $contentView . '<?php');
     }

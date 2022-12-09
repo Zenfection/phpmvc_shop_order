@@ -116,14 +116,17 @@ class ProductModel extends Model {
     }
     public function insertProduct($data){
         $data = $this->db->table($this->__product)->insert($data);
+        $this->mc->delete('getProduct');
         return $data;
     }  
     public function updateProduct($id, $data){
         $data = $this->db->table($this->__product)->where('id_product','=', $id)->update($data);
+        $this->mc->delete('getDetail'.$id);
         return $data;
     }
     public function deleteProduct($id){
         $data = $this->db->table($this->__product)->where('id_product', '=', $id)->delete();
+        $this->mc->delete('getProduct');
         return $data;
     }
 

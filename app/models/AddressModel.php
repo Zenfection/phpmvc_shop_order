@@ -40,11 +40,15 @@ class AddressModel extends Model{
 
     //! 1 ---------------------------------------- //
     public function getProvince(){
-        $data = $this->db->table($this->__province)->get();
+        $data = $this->mc->get('province');
+        if(!$data){
+            $data = $this->db->table($this->__province)->get();
+            $this->mc->set('province', $data);
+        }
         return $data;
     }
     public function getCity(){
-        $data = $this->db->table($this->__district)->get();
+        $data = $this->mc->get('city');
         return $data;
     }
 
@@ -60,13 +64,22 @@ class AddressModel extends Model{
 
     //! 3 ---------------------------------------- //
     public function getCityInProvinceByName($province_name){
+        // Tỉnh Cao Bằng -> caobang
         $province_code = $this->getCodeProvince($province_name);
-        $data = $this->getCityInProvince($province_code);
+        $data = $this->mc->get('city_'.$province_code);
+        if(!$data){
+            $data = $this->getCityInProvince($province_code);
+            $this->mc->set('city_'.$province_code, $data);
+        }
         return $data;
     }
     public function getWardInCityByName($city_name){
         $city_code = $this->getCodeCity($city_name);
-        $data = $this->getWardInCity($city_code);
+        $data = $this->mc->get('ward_'.$city_code);
+        if(!$data){
+            $data = $this->getWardInCity($city_code);
+            $this->mc->set('ward_'.$city_code, $data);
+        }
         return $data;
     }
 

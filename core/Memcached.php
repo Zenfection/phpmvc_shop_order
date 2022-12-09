@@ -10,8 +10,8 @@ class Memcached {
         $this->__conn = ConnectMem::getInstance($mcconfig);
     }
 
-    function set($key, $var){
-        return $this->__conn->set($key, $var);
+    function set($key, $value, $time = 0){
+        return $this->__conn->set($key, $value, $time);
     }
 
     function get($key){
