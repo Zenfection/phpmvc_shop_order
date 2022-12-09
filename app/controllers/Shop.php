@@ -52,9 +52,9 @@ class Shop extends Controller
         // $this->data['sub_content']['links'] = $links;
         $product = $this->models('ProductModel')->getProduct();
 
-        $paginator = new Paginator($product);
+        //$paginator = new Paginator($product);
         echo "<pre>";
-        print_r($paginator);
+        print_r($product);
         echo "</pre>";
         // $results = $paginator->getData($limit, $page);
         // $this->data['sub_content']['results'] = $results;
