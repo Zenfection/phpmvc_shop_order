@@ -9,5 +9,10 @@ $config['database'] = [
     'pass' => $_ENV['DB_PASS'],
     'db' => $_ENV['DB_NAME'],
     'port' => $_ENV['DB_PORT'],
+];
+
+$config['memcached'] = [
+    'host' => $_ENV['MEMCACHED_HOST'],
+    'port' => $_ENV['MEMCACHED_PORT'],
 ]
 ?>

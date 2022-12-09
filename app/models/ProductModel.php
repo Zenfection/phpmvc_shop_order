@@ -3,6 +3,7 @@
 namespace App\models;
 
 use Core\Model;
+use Core\Memcached;
 use PDO;
 
 class ProductModel extends Model {
@@ -64,30 +65,53 @@ class ProductModel extends Model {
     
     //! 1 ---------------------------------------- //
     public function topProductRanking($limit){
-        $data = $this->db->table($this->__product)->orderBy('ranking', 'DESC')->limit($limit)->get();
+        $data = $this->mc->get('topProductRanking');
+        if(!$data){
+            $data = $this->db->table($this->__product)->orderBy('ranking', 'DESC')->limit($limit)->get();
+            $this->mc->set('topProductRanking', $data, 3600);
+        }
         return $data;
     }
     public function topProductDiscount($limit){
-        $data = $this->db->table($this->__product)->orderBy('discount', 'DESC')->limit($limit)->get();
+        $data = $this->mc->get('topProductDiscount');
+        if(!$data){
+            $data = $this->db->table($this->__product)->orderBy('discount', 'DESC')->limit($limit)->get();
+            $this->mc->set('topProductDiscount', $data, 3600);
+        }
         return $data;
     }
     public function topProductSeller($limit){
-        $data = $this->db->table($this->__product.' as p')->select('p.*, COUNT(od.amount) as total_amount')->join($this->__order_details, 'od', 'p.id_product = od.id_product')->groupBy('p.id_product')->orderBy('total_amount', 'DESC')->limit($limit)->get();
-
+        $data = $this->mc->get('topProductSeller');
+        if(!$data){
+            $data = $this->db->table($this->__product.' as p')->select('p.*, COUNT(od.amount) as total_amount')->join($this->__order_details, 'od', 'p.id_product = od.id_product')->groupBy('p.id_product')->orderBy('total_amount', 'DESC')->limit($limit)->get();
+            $this->mc->set('topProductSeller', $data, 3600);
+        }
         return $data;
     }
 
     //! 2 ---------------------------------------- //
     public function getProduct(){
-        $data = $this->db->table($this->__product)->get();
+        $data = $this->mc->get('getProduct');
+        if(!$data){
+            $data = $this->db->table($this->__product)->get();
+            $this->mc->set('getProduct', $data, 3600);
+        }
         return $data;
     }
     public function getCategory(){
-        $data = $this->db->table($this->__category)->get();
+        $data = $this->mc->get('getCategory');
+        if(!$data){
+            $data = $this->db->table($this->__category)->get();
+            $this->mc->set('getCategory', $data, 3600);
+        }
         return $data;
     }
     public function getDetail($id){
-        $data = $this->db->table($this->__product)->where('id_product', '=', $id)->first();
+        $data = $this->mc->get('getDetail'.$id);
+        if(!$data){
+            $data = $this->db->table($this->__product)->where('id_product', '=', $id)->first();
+            $this->mc->set('getDetail'.$id, $data, 3600);
+        }
         return $data;
     }
     public function insertProduct($data){
@@ -105,11 +129,19 @@ class ProductModel extends Model {
 
     //! 3 ---------------------------------------- //
     public function similarProduct($id_category){
-        $data = $this->db->table($this->__product)->where('id_category', '=', $id_category)->get();
+        $data = $this->mc->get('similarProduct'.$id_category);
+        if(!$data){
+            $data = $this->db->table($this->__product)->where('id_category', '=', $id_category)->get();
+            $this->mc->set('similarProduct'.$id_category, $data, 3600);
+        }
         return $data;
     }
     public function getProductOrder($id_order){
-        $data = $this->db->table($this->__product . ' as p')->join($this->__order_details, 'od', 'p.id_product = od.id_product')->where('od.id_order', '=', $id_order)->get();
+        $data = $this->mc->get('getProductOrder'.$id_order);
+        if(!$data){
+            $data = $this->db->table($this->__product . ' as p')->join($this->__order_details, 'od', 'p.id_product = od.id_product')->where('od.id_order', '=', $id_order)->get();
+            $this->mc->set('getProductOrder'.$id_order, $data, 3600);
+        }
         return $data;
     }
 

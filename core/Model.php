@@ -5,9 +5,11 @@ namespace Core;
 /* Base Model */
 abstract class Model extends Database{
     protected $db;
+    protected $mc;
 
     function __construct(){
         $this->db = new Database();
+        $this->mc = new Memcached();
     }
 
     abstract function tableFill();

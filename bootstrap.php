@@ -51,6 +51,7 @@ if(!empty($config['app']['service'])){
 }
 
 $dbconfig = array_filter($config['database']);
+$mcconfig = array_filter($config['memcached']);
 
 
 //* Load all helpers

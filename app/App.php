@@ -5,6 +5,7 @@ namespace App;
 use Core\Route;
 use Core\Database;
 use Core\Controller;
+use Core\Memcached;
 
 use App\core\AppServiceProvider;
 
@@ -15,6 +16,7 @@ class App
     private $__params;
     private $__routes;
     private $__db;
+    private $__mc;
 
     public static $app;
 
@@ -35,6 +37,7 @@ class App
         $this->__params = array();
 
         $this->__db = new Database();
+        $this->__mc = new Memcached();
         $this->handleUrl();
     }
 

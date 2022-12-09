@@ -13,7 +13,7 @@ class Database{
 
     function __construct(){
         global $dbconfig;
-        $this->__conn = Connection::getInstance($dbconfig);
+        $this->__conn = ConnectDB::getInstance($dbconfig);
     }
 
     function insertData($table, $data){

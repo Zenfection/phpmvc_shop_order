@@ -6,7 +6,7 @@ use App\App;
 use PDO;
 use Exception;
 
-class Connection{
+class ConnectDB{
     private static $instance = null;
     private static $conn = null;
 
@@ -30,7 +30,7 @@ class Connection{
 
     public static function getInstance($config){
         if(!self::$instance){
-            $connection = new Connection($config);
+            $connection = new ConnectDB($config);
             self::$instance = self::$conn;
         }
         return self::$instance;
