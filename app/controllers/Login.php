@@ -36,4 +36,12 @@ class Login extends Controller
             $this->fetchServerError('Không nhận được dữ liệu');
         }
     }
+
+    public function content(){
+        $page_title = 'Đăng nhập';
+        $msg = Session::flash('msg');
+
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/login/index.php');
+        eval('?>' . $contentView . '<?php');
+    }
 }

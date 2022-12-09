@@ -13,6 +13,8 @@ class AppServiceProvider extends ServiceProvider {
         $user = Session::data('user');
         if(!empty($user)){      
             $dataCart = $this->getUserCart($user);
+            (!$dataCart) ? $dataCart = [] : $dataCart;
+
             $totalMoney = $this->totalMoneyCartUser($dataCart);
             $dataUser = [
                 'user' => $user,

@@ -12,6 +12,8 @@ class About extends Controller{
      * ! PAGE: 
      *   * index()                          => Trang giới thiệu web
      *    
+     * ! CONTENT:
+     * 
     */
 
     //! PAGE ------------------------------
@@ -26,10 +28,8 @@ class About extends Controller{
     }
 
     public function content(){
-        $page_tittle = 'Giới thiệu';
-
-        $contentView = file_get_contents(_WEB_ROOT . '/app/views/' . 'about' . '.php');
-        echo $contentView;
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/about/index.php');
+        eval('?>' . $contentView . '<?php');
     }
 }
 ?>

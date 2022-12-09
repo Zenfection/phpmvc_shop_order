@@ -98,7 +98,7 @@ function loadContent(content, logged = true) {
 
     let sucess = true;
     //use fetch API 
-    fetch(`/content/${content}`)
+    fetch(`/${content}/content`)
         .then(response => response.text())
         .then(data => {
             try {

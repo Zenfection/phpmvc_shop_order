@@ -36,5 +36,37 @@ class Viewcart extends Controller{
 
         $this->render('layouts/client_layout', $this->data);
     }
+
+    public function content(){
+        $user = Session::data('user');
+        if(!$user){
+            echo json_encode([
+                'msg' => [
+                    'type' => 'info',
+                    'icon' => 'fa-duotone fa-user-xmark',
+                    'position' => 'top right',
+                    'content' => 'Đăng nhập để sử dụng chức năng này' 
+                ],
+            ]);
+            exit();
+        }
+        $cart = $this->models('CartModel')->getCartUser($user);
+        $total_money = $this->models('CartModel')->totalMoneyCartUser($user);
+        if(!$cart){
+            echo json_encode([
+                'status' => 'error',
+                'msg' => [
+                    'type' => 'warning',
+                    'icon' => 'fa-duotone fa-basket-shopping-simple',
+                    'position' => 'top right',
+                    'content' => 'Giỏ hàng của bạn đang trống' 
+                ],
+            ]);
+            exit();
+        }
+        
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/viewcart/index.php');
+        eval('?>' . $contentView . '<?php');
+    }
 }
 ?>

@@ -11,9 +11,7 @@ class Shop extends Controller
 {
     public $data;
 
-    public function __construct()
-    {
-    }
+    public function __construct(){}
 
     private function runFrist()
     {
@@ -36,11 +34,9 @@ class Shop extends Controller
         }
 
         $this->data['sub_content']['show_type_product'] = 'list';
-
         $this->data['sub_content']['product'] = $product;
         $this->data['sub_content']['category'] = $category;
         $this->data['sub_content']['count_category'] = $countCategory;
-
         $this->data['sub_content']['msg'] = Session::flash('msg');
     }
 
@@ -117,5 +113,52 @@ class Shop extends Controller
             }
         }
         return true;
+    }
+
+    public function content($current_category = 'all'){
+        $this->runFrist();
+
+        $page_title = "Cửa Hàng";
+        $show_type_product = $this->data['sub_content']['show_type_product'];
+
+        $category = $this->data['sub_content']['category'];
+
+        if($current_category == 'all'){
+            $product = $this->data['sub_content']['product'];
+        } else {
+            $product = $this->models('ProductModel')->getProductCategory($current_category);
+        }
+
+        $current_sortby = 'default';
+        $keyword = '';
+        $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 9;
+        $links = (isset($_GET['links'])) ? $_GET['links'] : 7;
+        $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+
+        $paginator = new Paginator($product);
+        $results = $paginator->getData($limit, $page);
+
+        $count_category = $this->data['sub_content']['count_category'];
+        $recent_product = $this->data['sub_content']['recent_product'];
+
+
+        $data = [
+            'category' => $category,
+            'product' => $product,
+            'count_category' => $count_category,
+            'current_category' => $current_category,
+            'current_sortby' => $current_sortby,
+            'keyword' => $keyword,
+            'page' => $page,
+            'recent_product' => $recent_product
+        ];
+        
+        $dataShare = $this->getDataShare();
+        if(!empty($dataShare)){
+            $data = array_merge($data, $dataShare);
+        }
+
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/shop/index.php');
+        eval('?>' . $contentView . '<?php');
     }
 }

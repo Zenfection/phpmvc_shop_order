@@ -50,9 +50,11 @@ function notify(type, icon, position, msg) {
       if (headerCart.classList.contains('animate__fadeIn')) {
         headerCart.classList.remove('animate__fadeIn');
         headerCart.classList.add('animate__fadeOut');
+        headerCart.style.display = 'none';
       } else {
         headerCart.classList.remove('animate__fadeOut');
         headerCart.classList.add('animate__fadeIn');
+        headerCart.style.display = 'block';
       }
     });
   });

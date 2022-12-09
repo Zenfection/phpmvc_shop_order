@@ -142,4 +142,50 @@ class Checkout extends Controller{
             return $id_order;
         }
     }
+
+
+    public function content(){
+        $user = Session::data('user');
+        if(!$user){
+            echo json_encode([
+                'msg' => [
+                    'type' => 'info',
+                    'icon' => 'fa-duotone fa-user-xmark',
+                    'position' => 'top right',
+                    'content' => 'Đăng nhập để sử dụng chức năng này' 
+                ],
+            ]);
+            exit();
+        }
+
+        $cart = $this->models('CartModel')->getCartUser($user);
+        if(!$cart){
+            echo json_encode([
+                'msg' => [
+                    'type' => 'warning',
+                    'icon' => 'fa-duotone fa-basket-shopping-simple',
+                    'position' => 'top right',
+                    'content' => 'Giỏ hàng của bạn đang trống' 
+                ],
+            ]);
+            exit();
+        }
+        $total_money = $this->models('CartModel')->totalMoneyCartUser($user);
+
+        $account = $this->models('AccountModel')->getAccount($user);
+
+        $fullname = $account['fullname'];
+        $phone = $account['phone'];
+        $email = $account['email'];
+        $address = $account['address'];
+        $province = $account['province'];
+        $city = $account['city'];
+        $ward = $account['ward'];
+        $province_data = $this->models('AddressModel')->getProvince();
+        $city_data = $this->models('AddressModel')->getCityInProvinceByName($account['province']);
+        $ward_data = $this->models('AddressModel')->getWardInCityByName($account['city']);
+        
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/checkout/index.php');
+        eval('?>' . $contentView . '<?php');
+    }
 }

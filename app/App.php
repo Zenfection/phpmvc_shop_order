@@ -58,7 +58,6 @@ class App
         $urlArr = array_filter(explode('/', $url));
         $urlArr = array_values($urlArr);
 
-
         // MiddleWare App
         $this->handleGlobalMiddleWare($this->__db);
         $this->handleRouteMiddleWare($this->__routes->getUri(), $this->__db);
@@ -99,6 +98,7 @@ class App
         }
 
         if (file_exists('app/controllers/' . $fileCheck . '.php')) {
+            $fileCheck = str_replace('/', '\\', $fileCheck);
             $this->__controller = 'App\\controllers\\' . $fileCheck;
             if (class_exists($this->__controller)) {
                 $this->__controller = new $this->__controller();

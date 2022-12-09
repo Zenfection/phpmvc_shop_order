@@ -8,9 +8,7 @@ use Core\Session;
 class Home extends Controller {
     public $data;
 
-    public function __construct(){
-        
-    }
+    public function __construct(){}
 
     public function index(){
         $product = $this->models('ProductModel')->getProduct();
@@ -32,5 +30,17 @@ class Home extends Controller {
         $this->data['sub_content']['msg'] = Session::flash('msg');
 
         $this->render('layouts/client_layout', $this->data);
+    }
+
+    public function content(){
+        $category = $this->models('ProductModel')->getCategory();
+        $user = Session::data('user');
+
+        $top_product_ranking = $this->models('ProductModel')->topProductRanking(8);
+        $top_product_discount = $this->models('ProductModel')->topProductDiscount(8);
+        $top_product_seller = $this->models('ProductModel')->topProductSeller(8);
+
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/home/index.php');
+        eval('?>' . $contentView . '<?php');
     }
 }
