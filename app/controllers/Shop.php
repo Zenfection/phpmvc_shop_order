@@ -42,9 +42,25 @@ class Shop extends Controller
 
     public function index(){
         $this->runFrist();
-        $this->data['page_title'] = 'Cửa Hàng';
         $this->data['content'] = 'shop/index';
-        $this->data['sub_content']['page_title'] = 'Cửa Hàng';
+
+        $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 9;
+        $links = (isset($_GET['links'])) ? $_GET['links'] : 7;
+        $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+        $this->data['sub_content']['limit'] = $limit;
+        $this->data['sub_content']['page'] = $page;
+        $this->data['sub_content']['links'] = $links;
+
+
+        $paginator = new Paginator($this->data['sub_content']['product']);
+        $results = $paginator->getData($limit, $page);
+        $this->data['sub_content']['results'] = $results;
+
+        $this->data['sub_content']['current_category'] = 'all';
+        $this->data['sub_content']['current_sortby'] = 'default';
+        $this->data['sub_content']['keyword'] = '';
+
+        $this->data['page_title'] = 'Cửa Hàng';
         $this->render('layouts/client_layout', $this->data);
     }
 
