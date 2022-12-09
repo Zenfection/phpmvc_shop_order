@@ -5,7 +5,7 @@ namespace App\controllers;
 use Core\Controller;
 use Core\Session;
 
-use App\helpers\Paginator;
+use App\helpers\paginator;
 
 class Content extends Controller{
     public $data;
