@@ -51,10 +51,9 @@ class Shop extends Controller
         $this->data['sub_content']['page'] = $page;
         $this->data['sub_content']['links'] = $links;
 
-
-        $paginator = new Paginator($this->data['sub_content']['product']);
-        $results = $paginator->getData($limit, $page);
-        $this->data['sub_content']['results'] = $results;
+        // $paginator = new Paginator($this->data['sub_content']['product']);
+        // $results = $paginator->getData($limit, $page);
+        // $this->data['sub_content']['results'] = $results;
 
         $this->data['sub_content']['current_category'] = 'all';
         $this->data['sub_content']['current_sortby'] = 'default';
