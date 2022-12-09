@@ -80,7 +80,7 @@ class Content extends Controller{
         $links = (isset($_GET['links'])) ? $_GET['links'] : 7;
         $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 
-        $paginator = new Paginator($this->data['sub_content']['product']);
+        $paginator = new Paginator($product);
         $results = $paginator->getData($limit, $page);
 
         $count_category = $this->data['count_category'];
