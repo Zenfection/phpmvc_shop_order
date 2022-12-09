@@ -1,18 +1,17 @@
-<div class="row shop_wrapper grid_3">
+<div class="row shop_wrapper grid_3" name="<?php echo $total?>">
     <?php
-    
     $check = $total - ($limit * ($page - 1));
     $limit > $check ? $limit = $check : $limit;
     if ($check > 0) {
         for ($i = 0; $i < $limit; $i++) {
-            $id = $data[$i]['id_product'];
-            $name = $data[$i]['name'];
-            $description = $data[$i]['description'];
-            $price = $data[$i]['price'];
-            $image = $data[$i]['image'];
-            $discount = $data[$i]['discount'];
-            $ranking = (int)$data[$i]['ranking'];
-            $quantity = (int)$data[$i]['quantity'];
+            $id = $product[$i]['id_product'];
+            $name = $product[$i]['name'];
+            $description = $product[$i]['description'];
+            $price = $product[$i]['price'];
+            $image = $product[$i]['image'];
+            $discount = $product[$i]['discount'];
+            $ranking = (int)$product[$i]['ranking'];
+            $quantity = (int)$product[$i]['quantity'];
     ?>
             <div class="col-lg-4 col-md-4 col-sm-6 product product-inner" id="product<?php echo $id ?>">
                 <div class="thumb">

@@ -161,7 +161,7 @@ function filterShop(category = 'all', sortby = 'default', page = 1, search = '')
         element = document.querySelector('.nice-select');
         sortby = element.options[element.selectedIndex].value;
     }
-    hideContent();
+    hideProduct();
     //fetch API
     fetch('/content/filter_shop/' + category + '/' + sortby + '/' + page + '/' + search)
         .then(response => response.text())
@@ -169,14 +169,23 @@ function filterShop(category = 'all', sortby = 'default', page = 1, search = '')
             document.title = titleArr['shop'];
             changeURL(urlShop(category, sortby, page, search));
 
-            document.getElementById('content').innerHTML = data;
+            document.getElementById('product-content').innerHTML = data;
+
+            // Thay đổi current_category, current_sortby, current_page, current_search
+            document.querySelector('.product-tab-nav li a.active').classList.remove('active');
+            document.querySelector(`.product-tab-nav li a[id="${category}"]`).classList.add('active');
+
+
+            let total = document.querySelector('.shop_wrapper').getAttribute('name');
+            document.getElementsByClassName('shop-top-show')[0].innerHTML = `<span>Tổng cộng có ${total} sản phẩm</span>`
+
+            document.querySelector('.search-box input').value = search;
 
             loadSript('shop');
-
-            showContent();
             AOS.init();
         });
 }
+
 
 //* Listen back & forward button to load content
 window.addEventListener('popstate', function () {
@@ -271,6 +280,13 @@ function chooseNav(id) {
     document.getElementById(id).classList.add('active');
 }
 
+function hideProduct() {
+    document.querySelector('#product-content').innerHTML = `
+	<div class="d-flex align-items-center justify-content-center">	
+        <i class="fa-duotone fa-loader fa-spin-pulse fa-10x opacity-75" style="margin-top:15rem"></i>
+    </div>`;
+}
+
 function hideContent() {
     //* Add padding right to body when scroll bar when reload
     let scrollBarWidth = window.innerWidth - $(document).width();
@@ -290,7 +306,9 @@ function hideContent() {
 
 function showContent() {
     //* Show and footer
-    document.getElementsByTagName('footer')[0].style.display = 'block';
+    try {
+        document.getElementsByTagName('footer')[0].style.display = 'block';
+    } catch (error) {}
 
     //* Remove padding right to body when scroll bar when reload
     document.body.style.paddingRight = '0px';

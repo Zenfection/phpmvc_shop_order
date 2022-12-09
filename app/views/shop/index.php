@@ -44,7 +44,7 @@
                 <div id="product-content">
                     <?php
                     // merge $total into $data array
-                    $results = array_merge($results, ['total' => $total]);
+                    $results = array_merge(['product' =>  $results['data']], ['page' => $results['page']], ['limit' => $results['limit']], ['total' => $results['total']], ['total' => $total]);
                     $this->render('shop/product_content', $results)
                     ?>
                 </div>

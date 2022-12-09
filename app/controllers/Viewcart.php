@@ -9,9 +9,7 @@ use Core\Response;
 class Viewcart extends Controller{
     public $data;
     
-    public function __construct(){
-        
-    }
+    public function __construct(){}
 
     public function index(){
         $data['title'] = 'Xem Giỏ Hàng';

@@ -49,47 +49,45 @@ class Content extends Controller{
     }
     
     public function filter_shop($categoryFilter, $sortby = 'default', $page = 1, $keyword = ''){
-        $this->dataShop();
-
         $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 9;
         $links = (isset($_GET['links'])) ? $_GET['links'] : 7;
+        $page = (int) $page;
 
         $keyword = urldecode($keyword);
+
         $category = $this->data['category'];
         $product = $this->data['product'];
         
         $handle = $this->runHandle($categoryFilter, $sortby, $keyword);
         if($handle){
             $product =  $this->data['sub_content']['product'];
+        } else {
+            $product = $this->models('ProductModel')->getProduct();
         }
+
         $total = count($product);
         $paginator = new paginator($product);
         $results = $paginator->getData($limit, $page);
         
-        $current_category = $categoryFilter;
-        $current_sortby = $sortby;
-
-        $count_category = $this->data['count_category'];
-        $recent_product = $this->data['recent_product'];
 
         
-        $data = [
-            'category' => $category,
-            'product' => $product,
-            'count_category' => $count_category,
-            'current_category' => $current_category,
-            'current_sortby' => $current_sortby,
-            'keyword' => $keyword,
-            'page' => $page,
-            'recent_product' => $recent_product
-        ];
+        // $data = [
+        //     'category' => $category,
+        //     'product' => $product,
+        //     'count_category' => $count_category,
+        //     'current_category' => $current_category,
+        //     'current_sortby' => $current_sortby,
+        //     'keyword' => $keyword,
+        //     'page' => $page,
+        //     'recent_product' => $recent_product
+        // ];
 
-        $dataShare = $this->getDataShare();
-        if(!empty($dataShare)){
-            $data = array_merge($data, $dataShare);
-        }
+        // $dataShare = $this->getDataShare();
+        // if(!empty($dataShare)){
+        //     $data = array_merge($data, $dataShare);
+        // }
         
-        $contentView = file_get_contents(_DIR_ROOT . '/app/views/shop/index.php');
+        $contentView = file_get_contents(_DIR_ROOT . '/app/views/shop/product_content.php');
         eval('?>' . $contentView . '<?php');
     }
 
