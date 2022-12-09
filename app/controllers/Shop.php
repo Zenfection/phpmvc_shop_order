@@ -40,6 +40,14 @@ class Shop extends Controller
         $this->data['sub_content']['msg'] = Session::flash('msg');
     }
 
+    public function index(){
+        $this->runFrist();
+        $this->data['page_title'] = 'Cửa Hàng';
+        $this->data['content'] = 'shop/index';
+        $this->data['sub_content']['page_title'] = 'Cửa Hàng';
+        $this->render('layouts/client_layout', $this->data);
+    }
+
     public function category($categoryFilter = 'all', $sortby = 'default', $page = 1, $search = '')
     {
         $this->runFrist();
